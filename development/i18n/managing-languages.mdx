@@ -1,0 +1,297 @@
+---
+title: "Managing Languages"
+description: "Learn how to add and manage multiple languages in your BuildWithAI+ application"
+---
+
+# Managing Languages
+
+The BuildWithAI+ boilerplate comes with a comprehensive internationalization (i18n) system built using [i18next](https://www.i18next.com/) and [react-i18next](https://react.i18next.com/). This guide will walk you through how to manage languages in your application.
+
+## Internationalization Architecture
+
+The i18n system in the boilerplate consists of the following components:
+
+- **i18n Configuration**: Sets up the i18n instance with supported languages and fallbacks
+- **Translation Files**: JSON files containing all text content in different languages
+- **Language Context**: React context to manage the current language throughout the app
+- **Translation Hooks**: Hooks for accessing translations in your components
+
+## Directory Structure
+
+The internationalization files are organized as follows:
+
+```
+src/
+└── i18n/
+    ├── index.ts            // Main configuration
+    ├── languageDetector.ts // Device language detection
+    └── translations/
+        ├── en.json         // English translations
+        ├── es.json         // Spanish translations
+        └── fr.json         // French translations
+```
+
+## Setting Up Translations
+
+The boilerplate comes with English as the default language, but you can easily add more languages.
+
+### Translation File Structure
+
+Translation files are structured as nested objects, with keys organized by feature or section:
+
+```json
+{
+  "common": {
+    "buttons": {
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "errors": {
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Sign In",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "forgotPassword": "Forgot Password?",
+      "noAccount": "Don't have an account?"
+    },
+    "signUp": {
+      "title": "Create Account"
+      // More translations...
+    }
+  },
+  "screens": {
+    "home": {
+      "title": "Home",
+      "welcome": "Welcome to BuildWithAI+"
+    }
+    // More screens...
+  }
+}
+```
+
+### Adding a New Language
+
+To add a new language, follow these steps:
+
+1. Create a new translation file in `src/i18n/translations/` (e.g., `de.json` for German)
+2. Copy the structure from an existing language file (like `en.json`)
+3. Translate all the strings into the new language
+4. Update the i18n configuration to include the new language:
+
+```typescript
+// src/i18n/index.ts
+import en from './translations/en.json';
+import es from './translations/es.json';
+import fr from './translations/fr.json';
+import de from './translations/de.json'; // New German translations
+
+const resources = {
+  en: { translation: en },
+  es: { translation: es },
+  fr: { translation: fr },
+  de: { translation: de }, // Add German resources
+};
+
+// Update supported languages array
+export const supportedLanguages = [
+  { code: 'en', name: 'English' },
+  { code: 'es', name: 'Español' },
+  { code: 'fr', name: 'Français' },
+  { code: 'de', name: 'Deutsch' }, // Add German to the list
+];
+```
+
+## Using Translations in Your App
+
+The boilerplate provides convenient hooks and components for accessing translations.
+
+### Basic Translation
+
+Use the `useTranslation` hook to access translations:
+
+```jsx
+import { useTranslation } from 'react-i18next';
+
+function WelcomeMessage() {
+  const { t } = useTranslation();
+  
+  return <Text>{t('screens.home.welcome')}</Text>;
+}
+```
+
+### Translation with Variables
+
+You can use variables in your translations:
+
+```json
+{
+  "greetings": {
+    "welcome": "Welcome, {{name}}!"
+  }
+}
+```
+
+```jsx
+<Text>{t('greetings.welcome', { name: user.firstName })}</Text>
+```
+
+### Pluralization
+
+i18next supports pluralization out of the box:
+
+```json
+{
+  "items": {
+    "count": "{{count}} item",
+    "count_plural": "{{count}} items"
+  }
+}
+```
+
+```jsx
+<Text>{t('items.count', { count: items.length })}</Text>
+```
+
+## Language Detection
+
+The boilerplate automatically detects the user's preferred language from their device settings. The detection logic is implemented in `src/i18n/languageDetector.ts`:
+
+```typescript
+import { NativeModules, Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { supportedLanguages } from './index';
+
+const getDeviceLocale = () => {
+  // Implementation to get device locale...
+};
+
+export const languageDetector = {
+  type: 'languageDetector',
+  async: true,
+  detect: async (callback: (lng: string) => void) => {
+    try {
+      // Try to get language from storage first
+      const storedLanguage = await AsyncStorage.getItem('@language');
+      
+      if (storedLanguage) {
+        return callback(storedLanguage);
+      }
+      
+      // Fall back to device locale
+      const deviceLocale = getDeviceLocale();
+      const languageCode = deviceLocale.split('-')[0];
+      
+      // Check if device language is supported
+      const isSupported = supportedLanguages.some(lang => lang.code === languageCode);
+      
+      callback(isSupported ? languageCode : 'en');
+    } catch (error) {
+      callback('en');
+    }
+  },
+  cacheUserLanguage: (lng: string) => {
+    AsyncStorage.setItem('@language', lng);
+  }
+};
+```
+
+## Managing Language State
+
+The boilerplate includes a language context that makes it easy to manage the current language state throughout your app:
+
+```jsx
+// src/contexts/LanguageContext.tsx
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import i18n from '@/i18n';
+import { supportedLanguages } from '@/i18n';
+
+export const LanguageContext = createContext({
+  language: 'en',
+  setLanguage: (code: string) => {},
+  supportedLanguages,
+});
+
+export const LanguageProvider = ({ children }) => {
+  const [language, setLanguageState] = useState('en');
+  
+  useEffect(() => {
+    // Load saved language on mount
+    AsyncStorage.getItem('@language').then(savedLanguage => {
+      if (savedLanguage) {
+        setLanguageState(savedLanguage);
+      }
+    });
+  }, []);
+  
+  const setLanguage = async (code: string) => {
+    await AsyncStorage.setItem('@language', code);
+    await i18n.changeLanguage(code);
+    setLanguageState(code);
+  };
+  
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, supportedLanguages }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+export const useLanguage = () => useContext(LanguageContext);
+```
+
+## RTL (Right-to-Left) Language Support
+
+The boilerplate includes support for RTL languages like Arabic and Hebrew:
+
+```jsx
+import { I18nManager } from 'react-native';
+
+// In your language switching logic
+const setLanguage = async (code: string) => {
+  const isRTL = code === 'ar' || code === 'he';
+  
+  if (I18nManager.isRTL !== isRTL) {
+    I18nManager.forceRTL(isRTL);
+    // Restart the app to apply RTL changes
+  }
+  
+  // Rest of your language change logic...
+};
+```
+
+## Best Practices
+
+Here are some best practices for managing translations in your BuildWithAI+ app:
+
+1. **Use Namespaces**: Organize translations by feature or module
+2. **Avoid String Concatenation**: Use variables instead of concatenating strings
+3. **Extract All UI Text**: Don't leave hardcoded strings in your components
+4. **Maintain Consistent Keys**: Follow a consistent naming pattern for translation keys
+5. **Document Special Formats**: If a translation requires special formatting, add comments
+6. **Test with Pseudo-Localization**: Test UI expansion with longer text strings
+7. **Consider Context**: Provide context for translators for ambiguous terms
+
+## Translation Management Tools
+
+For larger projects, consider using translation management tools:
+
+- [Locize](https://locize.com/): Commercial solution by the creator of i18next
+- [Lokalise](https://lokalise.com/): Translation management platform
+- [POEditor](https://poeditor.com/): Collaborative translation platform
+
+These tools can help manage translation workflows and keep translations in sync between your code and translators.
+
+## Next Steps
+
+- Learn how to implement a [Language Switcher](/development/i18n/switching-languages) in your app
+- Add additional languages to your application
+- Set up automated translation verification in your CI/CD pipeline
+
+With the BuildWithAI+ internationalization system, your app can reach users worldwide with a localized experience that feels native to them.

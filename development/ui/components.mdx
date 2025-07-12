@@ -1,0 +1,304 @@
+---
+title: "React Native Reusables"
+description: "Explore and use the pre-built UI component library in BuildWithAI+"
+---
+
+## React Native Reusables
+
+BuildWithAI+ comes with an extensive collection of pre-built, customizable UI components designed to accelerate your development process. These components follow consistent styling patterns and are built with NativeWind for easy customization.
+
+### Component Library Overview
+
+The component library is organized in the `src/components` directory and includes:
+
+- **Basic UI elements**: Buttons, inputs, cards, etc.
+- **Form components**: Input fields, select menus, checkboxes, etc.
+- **Navigation components**: Headers, tab bars, etc.
+- **Feedback components**: Modals, alerts, toasts, etc.
+- **Layout components**: Containers, grids, etc.
+
+### Using the Components
+
+All components are designed to be simple to use while providing powerful customization options. Here's how you can use them in your application:
+
+#### Importing Components
+
+```jsx
+import { Button, Card, TextField } from '@/components';
+
+// For specific imports from subdirectories
+import { Modal } from '@/components/feedback';
+import { TabBar } from '@/components/navigation';
+```
+
+### Core Components
+
+#### Button
+
+Buttons come in multiple variants, sizes, and states:
+
+```jsx
+<Button 
+  variant="primary" // primary, secondary, outline, ghost
+  size="md" // sm, md, lg
+  onPress={() => console.log('Button pressed')}
+  leftIcon="rocket"
+  isLoading={false}
+>
+  Get Started
+</Button>
+```
+
+#### TextField
+
+Input fields with built-in validation, icons, and helper text:
+
+```jsx
+<TextField
+  label="Email Address"
+  placeholder="example@email.com"
+  value={email}
+  onChangeText={setEmail}
+  leftIcon="envelope"
+  error={emailError}
+  helperText="We'll never share your email."
+  keyboardType="email-address"
+  autoCapitalize="none"
+/>
+```
+
+#### Card
+
+Flexible card component for displaying content:
+
+```jsx
+<Card
+  title="Feature Highlight"
+  subtitle="Learn more about this feature"
+  onPress={() => navigation.navigate('FeatureDetails')}
+  image={require('@/assets/images/feature.png')}
+  footer={<Text className="text-gray-500">Tap to explore</Text>}
+>
+  <Text className="text-base text-gray-700">
+    This feature helps you accomplish amazing things with minimal effort.
+  </Text>
+</Card>
+```
+
+### Feedback Components
+
+#### Toast
+
+Display temporary feedback messages:
+
+```jsx
+import { useToast } from '@/components/feedback';
+
+function MyComponent() {
+  const toast = useToast();
+  
+  const handleSuccess = () => {
+    toast.show({
+      type: 'success',
+      title: 'Success!',
+      message: 'Your changes have been saved.',
+      duration: 3000,
+    });
+  };
+  
+  return (
+    <Button onPress={handleSuccess}>Save Changes</Button>
+  );
+}
+```
+
+#### Modal
+
+Show modal dialogs for important actions:
+
+```jsx
+import { Modal } from '@/components/feedback';
+
+function MyComponent() {
+  const [isVisible, setIsVisible] = useState(false);
+  
+  return (
+    <>
+      <Button onPress={() => setIsVisible(true)}>Open Modal</Button>
+      
+      <Modal
+        isVisible={isVisible}
+        onClose={() => setIsVisible(false)}
+        title="Confirm Action"
+        footer={
+          <View className="flex-row justify-end space-x-2">
+            <Button 
+              variant="outline" 
+              onPress={() => setIsVisible(false)}
+            >
+              Cancel
+            </Button>
+            <Button onPress={handleConfirm}>Confirm</Button>
+          </View>
+        }
+      >
+        <Text className="text-gray-700">
+          Are you sure you want to perform this action?
+        </Text>
+      </Modal>
+    </>
+  );
+}
+```
+
+### Navigation Components
+
+#### Header
+
+Custom navigation header with back button, title, and actions:
+
+```jsx
+import { Header } from '@/components/navigation';
+
+<Header
+  title="Profile Settings"
+  showBackButton
+  onBackPress={() => navigation.goBack()}
+  rightElement={
+    <Button variant="ghost" size="sm" leftIcon="gear">
+      Options
+    </Button>
+  }
+/>
+```
+
+### Form Components
+
+#### Form
+
+Complete form with validation and submission handling:
+
+```jsx
+import { Form, TextField, Button } from '@/components';
+
+function LoginForm() {
+  const handleSubmit = (values) => {
+    // Handle form submission
+    console.log(values);
+  };
+  
+  return (
+    <Form
+      initialValues={{ email: '', password: '' }}
+      validationSchema={Yup.object({
+        email: Yup.string().email('Invalid email').required('Required'),
+        password: Yup.string().required('Required'),
+      })}
+      onSubmit={handleSubmit}
+    >
+      {({ handleSubmit, isSubmitting }) => (
+        <>
+          <TextField 
+            name="email" 
+            label="Email"
+            autoCapitalize="none"
+          />
+          <TextField 
+            name="password" 
+            label="Password"
+            secureTextEntry
+          />
+          <Button 
+            onPress={handleSubmit}
+            isLoading={isSubmitting}
+          >
+            Sign In
+          </Button>
+        </>
+      )}
+    </Form>
+  );
+}
+```
+
+### Icon System
+
+The boilerplate includes a comprehensive icon system that uses [Phosphor Icons](https://phosphoricons.com/):
+
+```jsx
+import { Icon } from '@/components';
+
+<Icon 
+  name="rocket"  // icon name from Phosphor Icons
+  size={24}
+  color="primary"  // uses theme colors
+  weight="fill"    // regular, bold, fill, duotone
+/>
+```
+
+### Extending the Component Library
+
+#### Creating a New Component
+
+To create a new reusable component:
+
+1. Create a new file in the appropriate directory under `src/components`
+2. Follow the styling conventions used in other components
+3. Use NativeWind for styling
+4. Export your component from the appropriate index.ts file
+
+Example of a new component:
+
+```jsx
+// src/components/data-display/Badge.tsx
+import { View, Text } from 'react-native';
+
+export type BadgeProps = {
+  label: string;
+  variant?: 'default' | 'success' | 'warning' | 'error';
+};
+
+export function Badge({ label, variant = 'default' }: BadgeProps) {
+  const variantClasses = {
+    default: 'bg-gray-100 text-gray-800',
+    success: 'bg-green-100 text-green-800',
+    warning: 'bg-yellow-100 text-yellow-800',
+    error: 'bg-red-100 text-red-800',
+  };
+  
+  return (
+    <View className={`px-2 py-1 rounded-full ${variantClasses[variant]}`}>
+      <Text className="text-xs font-medium">{label}</Text>
+    </View>
+  );
+}
+```
+
+Then export it from an index file:
+
+```jsx
+// src/components/data-display/index.ts
+export * from './Badge';
+```
+
+#### Modifying Existing Components
+
+You can extend or modify existing components by:
+
+1. Creating a wrapper component that adds new functionality
+2. Directly modifying the component file (be careful with updates)
+3. Using component props to customize behavior and appearance
+
+### Component Best Practices
+
+1. **Composition over Configuration**: Build complex UIs by composing simple components
+2. **Consistent Props**: Maintain consistent prop names across similar components
+3. **Accessibility**: Ensure all components are accessible with proper labels and roles
+4. **Responsive Design**: Use NativeWind's responsive utilities for adaptive layouts
+5. **Theme Consistency**: Use theme colors and spacing values rather than hardcoded values
+
+### Next Steps
+
+- Check out [Styling Conventions](/development/ui/styling-conventions) for best practices when using these components
+- Explore [Mobbin Integration](/development/ui/mobbin) for design inspiration and patterns
+- Learn about [Routing & Navigation](/development/routing/setup) to organize your screens and flows

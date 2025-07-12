@@ -1,55 +1,138 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
+  "theme": "maple",
+  "name": "BuildWithAI+ Boilerplate",
+  "description": "Production-ready React Native boilerplate for creating powerful mobile applications with AI features",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#2563eb",
+    "light": "#3b82f6",
+    "dark": "#1d4ed8"
   },
   "favicon": "/favicon.svg",
+
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Getting Started",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Introduction",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "introduction/what-is-buildwithai",
+              "introduction/whats-included",
+              "introduction/who-is-this-for"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Quick Start",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "quickstart/project-setup",
+              "quickstart/development-build"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "Features & Setup",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Authentication",
             "pages": [
-              "api-reference/introduction"
+              "features/auth/supabase-setup",
+              "features/auth/social-auth",
+              "features/auth/testing-auth"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Push Notifications",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "features/push/setup",
+              "features/push/testing"
+            ]
+          },
+          {
+            "group": "In-App Purchases",
+            "pages": [
+              "features/iap/setup",
+              "features/iap/testing"
+            ]
+          },
+          {
+            "group": "Analytics",
+            "pages": [
+              "features/analytics/posthog-setup",
+              "features/analytics/tracking"
+            ]
+          },
+          {
+            "group": "Ads",
+            "pages": [
+              "features/ads/admob-setup",
+              "features/ads/store-requirements"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Development",
+        "groups": [
+          {
+            "group": "UI & Styling",
+            "pages": [
+              "development/ui/nativewind",
+              "development/ui/components",
+              "development/ui/styling-conventions",
+              "development/ui/mobbin"
+            ]
+          },
+          {
+            "group": "Routing & Navigation",
+            "pages": [
+              "development/routing/setup",
+              "development/routing/adding-screens",
+              "development/routing/deep-linking"
+            ]
+          },
+          {
+            "group": "Internationalization",
+            "pages": [
+              "development/i18n/managing-languages",
+              "development/i18n/switching-languages"
+            ]
+          },
+          {
+            "group": "EAS Workflows",
+            "pages": [
+              "development/eas/development-builds",
+              "development/eas/testing",
+              "development/eas/production-builds",
+              "development/eas/extras"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Resources",
+        "groups": [
+          {
+            "group": "Additional Features",
+            "pages": [
+              "resources/additional-features/overview",
+              "resources/additional-features/extensions"
+            ]
+          },
+          {
+            "group": "Help",
+            "pages": [
+              "resources/troubleshooting",
+              "resources/faq"
+            ]
+          },
+          {
+            "group": "References",
+            "pages": [
+              "resources/references"
             ]
           }
         ]
@@ -58,45 +141,38 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "GitHub",
+          "href": "https://github.com/buildwithai/boilerplate",
+          "icon": "github"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Demo App",
+          "href": "https://demo.buildwithai.io",
+          "icon": "mobile"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/light.webp",
+    "dark": "/logo/dark.webp"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:steffen@buildwithai.io"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Get Started",
+      "href": "https://buildwithai.mintlify.app/quickstart/project-setup"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/solgrenk"
     }
   }
 }

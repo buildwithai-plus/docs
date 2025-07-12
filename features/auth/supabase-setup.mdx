@@ -1,0 +1,132 @@
+---
+title: "Supabase Auth Setup"
+description: "Configure authentication for your mobile app using Supabase"
+---
+
+## Setting up Supabase Authentication
+
+The BuildWithAI+ boilerplate uses [Supabase](https://supabase.com/) as its authentication provider, giving you access to multiple authentication methods, user management, and secure session handling. This guide will walk you through setting up Supabase authentication for your mobile app.
+
+### Creating a Supabase Project
+
+1. **Create a Supabase account**:
+   - Go to [supabase.com](https://supabase.com/) and sign up for an account if you don't have one
+   - Log in to your account
+
+2. **Create a new project**:
+   - Click "New Project" in the Supabase dashboard
+   - Fill in your project details:
+     - Name: Choose a name for your project
+     - Database Password: Generate a strong password (save this securely)
+     - Region: Choose a region closest to your target users
+   - Click "Create project"
+
+3. **Wait for project initialization**:
+   - This may take a few minutes while Supabase provisions your database and authentication services
+
+### Configuring Your Project
+
+Once your Supabase project is created, you'll need to get your project credentials:
+
+1. **Get your project URL and anon key**:
+   - In your Supabase dashboard, go to Project Settings → API
+   - Copy the "URL" and "anon/public" key
+
+2. **Add credentials to your app**:
+   - In your local project, open or create the `.env` file in the project root
+   - Add your Supabase credentials:
+
+```
+SUPABASE_URL=https://your-project-id.supabase.co
+SUPABASE_ANON_KEY=your-anon-key
+```
+
+3. **Configure EAS secrets** for deployment builds:
+
+```bash
+npx eas secret:create --scope project --name SUPABASE_URL --value "https://your-project-id.supabase.co"
+npx eas secret:create --scope project --name SUPABASE_ANON_KEY --value "your-anon-key"
+```
+
+### Setting Up Auth Provider
+
+The boilerplate already includes an authentication provider set up in `src/providers/AuthProvider.tsx`. This provider initializes the Supabase client and provides authentication context throughout your app.
+
+The provider handles:
+- User session state management
+- Login, signup, and logout functions
+- Session refresh and recovery
+- Authentication persistence
+
+### Configuring Auth Redirect URLs
+
+For social authentication to work correctly, you need to set up redirect URLs in Supabase:
+
+1. **Go to Authentication settings**:
+   - In your Supabase dashboard, navigate to Authentication → URL Configuration
+   
+2. **Configure site URL**:
+   - Set the Site URL to match your app's production URL or to `https://auth.expo.io/@your-username/your-app-slug` for development
+
+3. **Add redirect URLs**:
+   - Add the following URLs to the "Redirect URLs" section:
+     - `myapp://auth-callback` (replace `myapp` with your app's URL scheme from app.json)
+     - `https://auth.expo.io/@your-username/your-app-slug` (for Expo development)
+
+### Customizing Authentication Options
+
+You can customize various authentication settings in the Supabase dashboard:
+
+1. **Email templates**:
+   - Navigate to Authentication → Email Templates
+   - Customize the magic link, confirmation, and invitation email templates
+
+2. **Password policies**:
+   - Go to Authentication → Policies
+   - Set password strength requirements
+
+3. **Session settings**:
+   - Configure session timeouts and refresh periods in Authentication → Settings
+
+### Testing Authentication Setup
+
+After completing the setup:
+
+1. **Run your app** in development mode
+2. **Navigate to the login screen**
+3. **Try signing up** with email/password to ensure authentication is working correctly
+
+If the authentication flow works successfully, you'll be able to sign up, log in, and access protected routes in your app.
+
+### Troubleshooting Common Issues
+
+<AccordionGroup>
+  <Accordion icon="triangle-exclamation" title="Network Errors">
+    If you're getting network errors when trying to connect to Supabase:
+    - Double check your Supabase URL and anon key
+    - Ensure you're using the correct environment variables
+    - Check if your device/emulator has internet access
+  </Accordion>
+  
+  <Accordion icon="lock" title="Authentication Failures">
+    If authentication attempts are failing:
+    - Check the Supabase dashboard logs for specific error messages
+    - Verify that email confirmations are properly configured
+    - Ensure your redirect URLs are correctly set up
+  </Accordion>
+  
+  <Accordion icon="mobile" title="Mobile-Specific Issues">
+    For mobile-specific authentication issues:
+    - Ensure deep linking is properly configured in your app.json
+    - Check that your URL scheme matches what's in your auth configuration
+    - Verify that Expo's authentication proxy is working (for development builds)
+  </Accordion>
+</AccordionGroup>
+
+### Next Steps
+
+Now that you have Supabase authentication set up, you can:
+
+- Configure [social authentication providers](/features/auth/social-auth) like Google and Apple
+- Learn how to [test different authentication flows](/features/auth/testing-auth)
+- Implement additional security features like two-factor authentication

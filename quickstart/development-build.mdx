@@ -1,0 +1,149 @@
+---
+title: "Development Build"
+description: "Create and use development builds for efficient app development"
+---
+
+## Development Build with EAS
+
+After setting up your project, you'll need a development build to efficiently test and develop your app on real devices or simulators. This guide explains why development builds are important and how to create them using EAS (Expo Application Services).
+
+### Why Use Development Builds?
+
+<AccordionGroup>
+  <Accordion icon="gears" title="Access to Native Modules">
+    Development builds give you access to native modules and APIs that aren't available in Expo Go, allowing you to test all of your app's features.
+  </Accordion>
+  <Accordion icon="bolt" title="Faster Refresh Cycles">
+    Development builds offer faster refresh cycles and more efficient development compared to production builds.
+  </Accordion>
+  <Accordion icon="puzzle-piece" title="Custom Native Code">
+    If you need custom native code or specific native modules, dev builds are essential as they include these components.
+  </Accordion>
+  <Accordion icon="code" title="Debug Native Issues">
+    Development builds allow you to debug native issues and test native functionality that might not be available in the Expo Go client.
+  </Accordion>
+</AccordionGroup>
+
+### Creating a Development Build
+
+#### For iOS (requires macOS)
+
+1. **Configure your Apple Developer account in EAS**:
+
+   ```bash
+   npx eas credentials
+   ```
+
+   Follow the prompts to set up your iOS credentials.
+
+2. **Build the development client**:
+
+   ```bash
+   npx eas build --profile development --platform ios
+   ```
+
+3. **Install on your device**:
+   
+   When the build completes, EAS will provide a URL to download the build. You can install it on your device by:
+   
+   - Opening the URL on your iOS device
+   - Using Apple TestFlight (if you configured it during the build process)
+   - Installing directly from Xcode if using a simulator
+
+#### For Android
+
+1. **Configure your Android credentials** (if you haven't already):
+
+   ```bash
+   npx eas credentials
+   ```
+
+2. **Build the development client**:
+
+   ```bash
+   npx eas build --profile development --platform android
+   ```
+
+3. **Install on your device**:
+   
+   - Download the APK from the URL provided after the build completes
+   - Install it on your Android device or emulator
+
+<Note>
+  If you're using an Android emulator, you can drag and drop the APK file onto the emulator window to install it.
+</Note>
+
+### Running Your Development Build
+
+Once you have installed your development build, follow these steps to start developing:
+
+1. **Start the development server**:
+
+   ```bash
+   npx expo start --dev-client
+   ```
+
+2. **Connect to the development server**:
+   
+   - Open your newly installed app on your device/simulator
+   - If prompted, scan the QR code shown in your terminal
+   - Or tap "Enter URL manually" and enter the development server URL
+
+3. **Development workflow**:
+   
+   Now, as you make changes to your code, you can:
+   
+   - Press 'r' in the terminal to reload the app
+   - Shake your device (or press 'Cmd+D' on iOS simulator, 'Ctrl+M' on Android emulator) to open the developer menu
+   - Use the developer menu to enable Fast Refresh, inspect elements, and more
+
+### Updating Your Development Build
+
+You'll need to create a new development build when:
+
+1. You add new native dependencies
+2. You modify native code
+3. You upgrade Expo SDK versions
+
+To create a new development build, run the same build command as before:
+
+```bash
+npx eas build --profile development --platform [ios|android]
+```
+
+### Troubleshooting Development Builds
+
+<AccordionGroup>
+  <Accordion icon="triangle-exclamation" title="Connection Issues">
+    If your app can't connect to the development server:
+    - Make sure your device and computer are on the same network
+    - Try using the "Enter URL manually" option with your computer's local IP address
+    - Check if there's a firewall blocking the connection
+  </Accordion>
+  
+  <Accordion icon="bug" title="Build Failures">
+    Common causes of build failures:
+    - Invalid credentials configuration
+    - Incompatible native module versions
+    - Incorrect project configuration
+    
+    Check the EAS build logs for specific error messages and consult the [Expo documentation](https://docs.expo.dev/build-reference/troubleshooting/) for solutions.
+  </Accordion>
+  
+  <Accordion icon="refresh" title="Metro Bundler Issues">
+    If the Metro bundler crashes or hangs:
+    - Clear Metro cache with `npx expo start -c`
+    - Ensure you're using compatible Node.js and npm versions
+    - Check for memory issues if your app is very large
+  </Accordion>
+</AccordionGroup>
+
+### Next Steps
+
+Now that you have your development build up and running, you're ready to start working on your app! 
+
+Next, you might want to:
+
+- Set up [Supabase Authentication](/features/auth/supabase-setup) for user login
+- Configure [Push Notifications](/features/push/setup) for user engagement
+- Learn about [UI and Styling](/development/ui/nativewind) in the boilerplate

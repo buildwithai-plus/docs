@@ -1,0 +1,210 @@
+---
+title: "Frequently Asked Questions"
+description: "Common questions about using the BuildWithAI+ boilerplate"
+---
+
+# Frequently Asked Questions
+
+## General Questions
+
+<AccordionGroup>
+  <Accordion icon="circle-question" title="What is BuildWithAI+ boilerplate?">
+    BuildWithAI+ is a comprehensive React Native and Expo boilerplate that provides a production-ready foundation for building mobile applications. It includes pre-configured authentication, UI components, push notifications, in-app purchases, analytics, and many other features that would typically take weeks to set up from scratch.
+  </Accordion>
+  
+  <Accordion icon="money-bill" title="Is BuildWithAI+ free to use?">
+    Yes, the core BuildWithAI+ boilerplate is open source and free to use. However, some integrated services (like Supabase, RevenueCat, etc.) may have their own pricing plans for production use beyond their free tiers.
+  </Accordion>
+  
+  <Accordion icon="laptop-code" title="Do I need to be an experienced developer to use this boilerplate?">
+    While having React Native experience is helpful, the boilerplate is designed to be accessible to developers with React knowledge. The documentation provides step-by-step guides for all features, making it suitable for developers of varying experience levels.
+  </Accordion>
+  
+  <Accordion icon="code-branch" title="Can I contribute to the boilerplate?">
+    Absolutely! We welcome contributions from the community. Check out our GitHub repository's contribution guidelines for more information on how to submit bug fixes, feature additions, or improvements.
+  </Accordion>
+</AccordionGroup>
+
+## Technical Questions
+
+<AccordionGroup>
+  <Accordion icon="mobile" title="Which platforms does BuildWithAI+ support?">
+    BuildWithAI+ supports both iOS and Android platforms. Since it's built with Expo, you could potentially extend it to support web as well, though the primary focus is on native mobile apps.
+  </Accordion>
+  
+  <Accordion icon="code" title="Which React Native / Expo version does BuildWithAI+ use?">
+    The boilerplate currently uses Expo SDK 49 and React Native 0.72.x. We regularly update the dependencies to keep up with the latest stable versions. Check the package.json file for the most current version information.
+  </Accordion>
+  
+  <Accordion icon="puzzle-piece" title="Can I use this with existing projects?">
+    While it's primarily designed as a starting point for new projects, you can selectively adopt components and patterns from BuildWithAI+ into existing projects. However, full integration with an existing project would require careful merging and may be challenging depending on your current architecture.
+  </Accordion>
+  
+  <Accordion icon="layer-group" title="Which state management solution does the boilerplate use?">
+    The boilerplate uses React Context API for global state management, combined with React Query for server state management. This combination provides a clean, efficient approach without adding unnecessary complexity. For more complex applications, you can easily integrate other solutions like Redux if needed.
+  </Accordion>
+</AccordionGroup>
+
+## Features & Integration
+
+<AccordionGroup>
+  <Accordion icon="lock" title="Can I use a different authentication provider instead of Supabase?">
+    Yes, the authentication layer is designed to be replaceable. While Supabase is pre-configured, the AuthProvider component can be modified to work with any authentication provider (Firebase, Auth0, etc.). The documentation includes guides on how to adapt the authentication layer.
+  </Accordion>
+  
+  <Accordion icon="bell" title="How do push notifications work across different platforms?">
+    Push notifications are implemented using Expo's notification system, which abstracts away the platform-specific details. Under the hood, it uses Firebase Cloud Messaging (FCM) for Android and Apple Push Notification Service (APNS) for iOS. The boilerplate includes setup instructions for both platforms.
+  </Accordion>
+  
+  <Accordion icon="credit-card" title="Does the in-app purchase integration work with both App Store and Google Play?">
+    Yes, the RevenueCat integration in the boilerplate works with both Apple's App Store and Google Play Store. It provides a unified API for managing subscriptions, one-time purchases, and entitlements across both platforms.
+  </Accordion>
+  
+  <Accordion icon="chart-line" title="Can I use a different analytics provider?">
+    While the boilerplate comes pre-configured with PostHog analytics, the analytics provider is designed to be swappable. You can replace it with any other analytics solution (Google Analytics, Amplitude, Mixpanel, etc.) by modifying the analytics provider component.
+  </Accordion>
+</AccordionGroup>
+
+## Development & Deployment
+
+<AccordionGroup>
+  <Accordion icon="rocket" title="How do I deploy updates after my app is live?">
+    The boilerplate includes configuration for EAS Update, Expo's over-the-air update system. This allows you to push JavaScript and asset updates directly to users without going through the app stores' review process (for changes that don't require native code updates).
+  </Accordion>
+  
+  <Accordion icon="gear" title="How do I manage environment variables for different environments?">
+    The boilerplate includes a structured approach to environment management with:
+    
+    1. Local development: Using `.env` files
+    2. EAS Build: Using EAS secrets and build profiles
+    3. Production: Using EAS secrets and environment variables
+    
+    This ensures your sensitive keys remain secure while maintaining flexibility across environments.
+  </Accordion>
+  
+  <Accordion icon="arrow-up-right-from-square" title="How do I submit my app to the app stores?">
+    The boilerplate includes EAS Submit configuration, which streamlines the submission process:
+    
+    1. For App Store: `eas submit -p ios`
+    2. For Play Store: `eas submit -p android`
+    
+    You'll need to set up the appropriate store listings and metadata first. The documentation includes detailed guides on preparing your app for submission.
+  </Accordion>
+  
+  <Accordion icon="table-cells" title="How do I generate app icons and splash screens?">
+    The boilerplate uses the standard Expo approach for app icons and splash screens. Place your icon at `assets/icon.png` and splash screen at `assets/splash.png`, then Expo will automatically generate all required sizes and variants during the build process.
+  </Accordion>
+</AccordionGroup>
+
+## Customization & Extending
+
+<AccordionGroup>
+  <Accordion icon="paintbrush" title="How do I customize the app theme and branding?">
+    The app's theme is controlled through the NativeWind configuration in `tailwind.config.js`. To change your app's branding:
+    
+    1. Update color palettes in the Tailwind config
+    2. Replace logo and icon assets in the assets directory
+    3. Update app name and other metadata in app.json
+    
+    The changes will automatically propagate throughout the app due to the consistent use of theme variables.
+  </Accordion>
+  
+  <Accordion icon="language" title="How do I add support for additional languages?">
+    The boilerplate includes i18n support with:
+    
+    1. Translation files in `src/i18n/translations/`
+    2. Add a new language by creating a new translation file
+    3. Update the language selector to include your new language
+    
+    The system automatically handles RTL languages and persists language preferences.
+  </Accordion>
+  
+  <Accordion icon="code-compare" title="Can I use this boilerplate with TypeScript and JavaScript?">
+    The boilerplate is built with TypeScript by default for better developer experience and type safety. While you can write JavaScript files within the project, we recommend sticking with TypeScript to benefit from type checking and better IDE integration.
+  </Accordion>
+  
+  <Accordion icon="laptop-mobile" title="How do I handle responsive designs for different screen sizes?">
+    The boilerplate uses NativeWind's responsive utilities, which allow you to apply different styles based on screen size breakpoints (similar to Tailwind CSS on the web). For example:
+    
+    ```jsx
+    <View className="flex-col md:flex-row">
+      {/* This will be a column layout on small screens and a row on medium screens and above */}
+    </View>
+    ```
+    
+    The responsive system makes it easy to create layouts that work well across different device sizes.
+  </Accordion>
+</AccordionGroup>
+
+## Support & Troubleshooting
+
+<AccordionGroup>
+  <Accordion icon="life-ring" title="Where can I get help if I'm stuck?">
+    If you encounter issues not covered in the documentation:
+    
+    1. Check the [Troubleshooting](/resources/troubleshooting) guide
+    2. Join our community Discord server for peer support
+    3. Search or ask questions on Stack Overflow with the `buildwithai-boilerplate` tag
+    4. Open an issue on our GitHub repository
+    
+    For enterprise users, we also offer priority support plans.
+  </Accordion>
+  
+  <Accordion icon="bug" title="I found a bug in the boilerplate. How do I report it?">
+    Please report bugs by opening an issue on our GitHub repository. Include:
+    
+    1. A clear description of the issue
+    2. Steps to reproduce the bug
+    3. Expected vs. actual behavior
+    4. Version information (Expo SDK, React Native, etc.)
+    5. Screenshots or videos if applicable
+    
+    This helps us address the issue more quickly and effectively.
+  </Accordion>
+  
+  <Accordion icon="lightbulb" title="Can I request new features for the boilerplate?">
+    Yes! We welcome feature requests through our GitHub repository. When requesting features:
+    
+    1. Check if a similar request already exists
+    2. Clearly describe the feature and its use case
+    3. Explain why it would be valuable to include in the core boilerplate
+    
+    You can also contribute implementations of features yourself through pull requests.
+  </Accordion>
+</AccordionGroup>
+
+## Advanced Topics
+
+<AccordionGroup>
+  <Accordion icon="server" title="Can I use a different backend service instead of Supabase?">
+    Absolutely. While Supabase is pre-configured, the boilerplate's architecture makes it straightforward to use different backend services:
+    
+    1. Firebase/Firestore
+    2. AWS Amplify
+    3. Custom REST or GraphQL APIs
+    
+    The API layer is centralized in the services directory, making it easy to replace with your preferred solution.
+  </Accordion>
+  
+  <Accordion icon="database" title="How do I handle local data persistence?">
+    The boilerplate includes several options for local data storage:
+    
+    1. Async Storage for non-sensitive data
+    2. Secure Storage for sensitive information
+    3. SQLite for more complex local database needs
+    
+    Each solution is wrapped in a consistent API interface, making it easy to use throughout your app.
+  </Accordion>
+  
+  <Accordion icon="flask" title="Is there a testing strategy included?">
+    Yes, the boilerplate includes a testing setup with:
+    
+    1. Jest for unit and integration tests
+    2. React Native Testing Library for component testing
+    3. Detox for end-to-end testing
+    
+    Sample tests are included to demonstrate best practices for testing different parts of your application.
+  </Accordion>
+</AccordionGroup>
+
+If you have additional questions not covered here, please reach out to our community or support team!

@@ -1,0 +1,305 @@
+---
+title: "Google Authentication"
+description: "Set up Google OAuth for your BuildWithAI+ mobile app on iOS and Android"
+---
+
+# Setting Up Google Authentication
+
+This guide will walk you through the process of configuring Google OAuth authentication for your BuildWithAI+ mobile app. We'll cover the setup for web (Expo Go), iOS, and Android platforms.
+
+## Overview
+
+Setting up Google authentication involves several steps:
+
+1. Creating a Google Cloud project
+2. Configuring OAuth consent screen
+3. Creating OAuth client IDs for each platform (Web, Android, iOS)
+4. Configuring Supabase to use Google as an authentication provider
+5. Setting up environment variables in your app
+
+## Step 1: Create a Google Cloud Project
+
+First, you need to create a project in the Google Cloud Console.
+
+<Steps>
+  <Step title="Access Google Cloud Console">
+    Visit [Google Cloud Console](https://console.cloud.google.com/projectcreate)
+  </Step>
+
+  <Step title="Create a new project">
+    1. Click **New Project** if you don't already have one
+    2. Enter a descriptive name for your project (e.g., "MyApp Authentication")
+    3. Select your organization (if applicable)
+    4. Click **Create**
+    
+    <Frame>
+      ![Creating a new Google Cloud project](/images/auth/google/create-project.png)
+    </Frame>
+  </Step>
+
+  <Step title="Wait for project creation">
+    Wait for the project to be created. This might take a few seconds.
+  </Step>
+</Steps>
+
+## Step 2: Configure OAuth Consent Screen
+
+Before creating OAuth credentials, you need to configure the consent screen that users will see when they authenticate.
+
+<Steps>
+  <Step title="Access OAuth consent screen">
+    1. Select your newly created project
+    2. In the left navigation menu, go to **APIs & Services** > **OAuth consent screen**
+    3. Click **Get Started**
+  </Step>
+
+  <Step title="Configure user type">
+    1. Select **External** as the user type (unless you have a Google Workspace organization)
+    2. Click **Create**
+    
+    <Frame>
+      ![Setting up OAuth consent screen](/images/auth/google/oauth-consent-type.png)
+    </Frame>
+  </Step>
+
+  <Step title="Fill app information">
+    1. Enter your **App name**
+    2. Select your **User support email**
+    3. Enter **Developer contact information** (email addresses that Google can use to notify you about changes)
+    4. Click **Save and Continue**
+    
+    <Frame>
+      ![App information form](/images/auth/google/oauth-app-info.png)
+    </Frame>
+  </Step>
+
+  <Step title="Complete setup">
+    1. Skip through the **Scopes** section (the default scopes are sufficient for authentication)
+    2. Review your settings in the **Summary** page
+    3. Click **Back to Dashboard**
+  </Step>
+</Steps>
+
+## Step 3: Set Up Web OAuth Client ID
+
+The web OAuth client ID is required for authentication in development and for the Expo Go app.
+
+<Steps>
+  <Step title="Create Web OAuth credentials">
+    1. In the Google Cloud Console, go to **APIs & Services** > **Credentials**
+    2. Click **Create Credentials** > **OAuth client ID**
+    3. For Application type, select **Web application**
+    4. Enter a descriptive name (e.g., "MyApp Web Client")
+  </Step>
+
+  <Step title="Configure authorized URIs">
+    1. Under **Authorized JavaScript origins**, click **Add URI**
+    2. Enter your Supabase URL: `https://[YOUR_PROJECT_REF].supabase.co`
+    3. Under **Authorized redirect URIs**, click **Add URI**
+    4. Enter your Supabase callback URL: `https://[YOUR_PROJECT_REF].supabase.co/auth/v1/callback`
+    
+    <Frame>
+      ![Web OAuth configuration](/images/auth/google/web-oauth-config.png)
+    </Frame>
+  </Step>
+
+  <Step title="Save your credentials">
+    1. Click **Create**
+    2. A popup will appear with your **Client ID** and **Client Secret**
+    3. Note these values—you'll need them for Supabase configuration
+    
+    <Frame>
+      ![OAuth credentials created](/images/auth/google/credentials-created.png)
+    </Frame>
+  </Step>
+</Steps>
+
+## Step 4: Set Up Android OAuth Client ID
+
+To enable Google Sign-In on Android devices, you need to create an Android-specific OAuth client ID.
+
+<Steps>
+  <Step title="Obtain SHA-1 fingerprint">
+    1. Go to the [Expo Dashboard](https://expo.dev)
+    2. Select your project
+    3. Navigate to the **Build** section
+    4. Select the **Credentials** tab
+    5. Find your Android app using the package name from your `app.json`
+    6. Copy the SHA-1 certificate fingerprint
+    
+    <Info>
+      If you haven't created a build yet, you'll need to create one or use EAS build credentials to obtain the SHA-1 fingerprint.
+    </Info>
+  </Step>
+
+  <Step title="Create Android OAuth client ID">
+    1. In the Google Cloud Console, go to **APIs & Services** > **Credentials**
+    2. Click **Create Credentials** > **OAuth client ID**
+    3. For Application type, select **Android**
+    4. Enter a descriptive name (e.g., "MyApp Android Client")
+  </Step>
+
+  <Step title="Configure Android settings">
+    1. In the **Package name** field, enter your app's package name (from `app.json`)
+    2. In the **SHA-1 certificate fingerprint** field, paste the fingerprint you obtained from Expo
+    3. Click **Create**
+    4. Note the generated **Client ID**—you'll need it for your environment variables
+  </Step>
+</Steps>
+
+## Step 5: Set Up iOS OAuth Client ID
+
+For iOS devices, you need to create an iOS-specific OAuth client ID.
+
+<Steps>
+  <Step title="Create iOS OAuth client ID">
+    1. In the Google Cloud Console, go to **APIs & Services** > **Credentials**
+    2. Click **Create Credentials** > **OAuth client ID**
+    3. For Application type, select **iOS**
+    4. Enter a descriptive name (e.g., "MyApp iOS Client")
+  </Step>
+
+  <Step title="Configure iOS settings">
+    1. In the **Bundle ID** field, enter your app's bundle identifier (from `app.json`)
+    2. Click **Create**
+    3. Note the generated **Client ID**—you'll need it for your environment variables
+  </Step>
+
+  <Step title="Configure URL Scheme">
+    1. In the client details, locate and copy the **iOS URL Scheme** value
+    2. Open your `app.json` file
+    3. Add or update the Google Sign-In configuration:
+    
+    ```json
+    {
+      "expo": {
+        "plugins": [
+          [
+            "@react-native-google-signin/google-signin",
+            {
+              "iosUrlScheme": "com.googleusercontent.apps.YOUR_IOS_CLIENT_ID"
+            }
+          ]
+        ]
+      }
+    }
+    ```
+    
+    Replace `YOUR_IOS_CLIENT_ID` with the actual client ID you received.
+  </Step>
+</Steps>
+
+## Step 6: Configure Supabase Google Provider
+
+Now that you have all the necessary OAuth client IDs, you need to configure the Google provider in Supabase.
+
+<Steps>
+  <Step title="Access Supabase authentication settings">
+    1. Go to your [Supabase Dashboard](https://app.supabase.com)
+    2. Select your project
+    3. Navigate to **Authentication** in the left sidebar
+    4. Select **Providers** tab
+  </Step>
+
+  <Step title="Configure Google provider">
+    1. Locate and click on the **Google** provider in the list
+    2. Toggle the switch to **Enable** the Google provider
+    
+    <Frame>
+      ![Enable Google Provider](/images/auth/google/supabase-enable-google.png)
+    </Frame>
+  </Step>
+
+  <Step title="Add OAuth credentials">
+    1. In the **Client ID** field, enter your Web OAuth client ID
+    2. In the **Client Secret** field, enter your Web OAuth client secret
+    3. In the **Authorized Client IDs** field, add your mobile client IDs (iOS and Android) 
+       - Enter each client ID on a new line
+    
+    <Frame>
+      ![Supabase Google Provider Settings](/images/auth/google/supabase-google-config.png)
+    </Frame>
+  </Step>
+
+  <Step title="Verify redirect URL">
+    1. Ensure the **Redirect URL** shown matches exactly what you entered in the Google Cloud Console:
+       ```
+       https://[YOUR_PROJECT_REF].supabase.co/auth/v1/callback
+       ```
+    2. Click **Save** to apply your changes
+  </Step>
+</Steps>
+
+## Step 7: Set Up Environment Variables
+
+Finally, add all your Google OAuth client IDs to your environment variables.
+
+<Steps>
+  <Step title="Update .env file">
+    Open your `.env` file and add the following variables:
+    
+    ```plaintext
+    # Google OAuth Client IDs
+    EXPO_PUBLIC_GOOGLE_OAUTH_CLIENT_ID=YOUR_WEB_CLIENT_ID
+    EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID=YOUR_ANDROID_CLIENT_ID
+    EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID=YOUR_IOS_CLIENT_ID
+    ```
+    
+    Replace the placeholders with your actual client IDs.
+  </Step>
+
+  <Step title="Set up EAS secrets (for builds)">
+    If you're using EAS for builds, add these variables as secrets:
+    
+    ```bash
+    eas secret:create --scope project --name EXPO_PUBLIC_GOOGLE_OAUTH_CLIENT_ID --value "YOUR_WEB_CLIENT_ID"
+    eas secret:create --scope project --name EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID --value "YOUR_ANDROID_CLIENT_ID"
+    eas secret:create --scope project --name EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID --value "YOUR_IOS_CLIENT_ID"
+    ```
+  </Step>
+</Steps>
+
+## Using Google Authentication in Your App
+
+The BuildWithAI+ boilerplate includes ready-to-use Google Sign-In functionality. Once you've completed the setup above, the Google Sign-In button in the authentication screens will work automatically.
+
+### Testing Your Configuration
+
+1. Make sure your environment variables are set correctly
+2. Run your app on a device (not an emulator, as emulators can't handle Google Sign-In properly)
+3. Navigate to the Sign In screen
+4. Tap the Google Sign-In button
+5. You should see the Google account picker and be able to complete the authentication
+
+### Troubleshooting
+
+<AccordionGroup>
+  <Accordion icon="exclamation-triangle" title="Error: Invalid client ID">
+    - Verify that you've correctly set up the environment variables
+    - Check that you're using the right client ID for each platform
+    - Make sure you've added the mobile client IDs to the Authorized Client IDs list in Supabase
+  </Accordion>
+  
+  <Accordion icon="mobile-screen" title="Authentication fails on physical devices">
+    - Ensure your SHA-1 fingerprint is correct for Android
+    - Verify the Bundle ID for iOS matches exactly what's in your app.json
+    - Check that the URL scheme is properly configured in app.json for iOS
+  </Accordion>
+  
+  <Accordion icon="browser" title="Redirect issues">
+    - Verify that the redirect URL in Supabase exactly matches what you've configured in Google Cloud Console
+    - Check for any typos or missing characters in the URL
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+- [Test Authentication](/features/auth/testing-auth) to verify your setup is working correctly
+- Learn about [Custom Authentication UI](/features/auth/custom-ui) to customize the appearance of the auth screens
+- Set up [Apple Sign-In](/features/auth/apple-signin) for a complete social auth experience
+
+## Additional Resources
+
+- [Google Identity Services Documentation](https://developers.google.com/identity)
+- [Supabase Auth Documentation](https://supabase.com/docs/guides/auth/social-login/auth-google)
+- [Expo Authentication Documentation](https://docs.expo.dev/guides/authentication/)
