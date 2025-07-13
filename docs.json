@@ -40,7 +40,8 @@
             "group": "Authentication",
             "pages": [
               "features/auth/supabase-setup",
-              "features/auth/social-auth",
+              "features/auth/google-auth",
+              "features/auth/apple-auth",
               "features/auth/testing-auth"
             ]
           },

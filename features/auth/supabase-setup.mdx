@@ -10,14 +10,14 @@ The BuildWithAI+ boilerplate uses [Supabase](https://supabase.com/) as its authe
 ### Creating a Supabase Project
 
 1. **Create a Supabase account**:
-   - Go to [supabase.com](https://supabase.com/) and sign up for an account if you don't have one
+   - Go to [supabase.com](https://database.new) and sign up for an account if you don't have one
    - Log in to your account
 
 2. **Create a new project**:
    - Click "New Project" in the Supabase dashboard
    - Fill in your project details:
      - Name: Choose a name for your project
-     - Database Password: Generate a strong password (save this securely)
+     - Database Password: Just use the existing one (DON'T share it)
      - Region: Choose a region closest to your target users
    - Click "Create project"
 
@@ -33,45 +33,63 @@ Once your Supabase project is created, you'll need to get your project credentia
    - Copy the "URL" and "anon/public" key
 
 2. **Add credentials to your app**:
-   - In your local project, open or create the `.env` file in the project root
-   - Add your Supabase credentials:
+   - Open the `.env` file you created earlier from `.env.example`
+   - Update your Supabase credentials:
 
 ```
-SUPABASE_URL=https://your-project-id.supabase.co
-SUPABASE_ANON_KEY=your-anon-key
+EXPO_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+EXPO_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
 
 3. **Configure EAS secrets** for deployment builds:
 
 ```bash
-eas secret:create --scope project --name SUPABASE_URL --value "https://your-project-id.supabase.co"
-eas secret:create --scope project --name SUPABASE_ANON_KEY --value "your-anon-key"
+eas secret:create --scope project --name EXPO_PUBLIC_SUPABASE_URL --value "https://your-project-id.supabase.co"
+eas secret:create --scope project --name EXPO_PUBLIC_SUPABASE_ANON_KEY --value "your-anon-key"
 ```
 
-### Setting Up Auth Provider
+### URL Configuration for Authentication
 
-The boilerplate already includes an authentication provider set up in `src/providers/AuthProvider.tsx`. This provider initializes the Supabase client and provides authentication context throughout your app.
+1. **Configure authentication settings**:
+   - In your Supabase dashboard, navigate to **Authentication** → **URL Configuration**
+   - Configure the following settings:
 
-The provider handles:
-- User session state management
-- Login, signup, and logout functions
-- Session refresh and recovery
-- Authentication persistence
+#### Site URL
 
-### Configuring Auth Redirect URLs
+- Set your site URL to your app's scheme that you configured in `app.json` (e.g., `your-scheme://`)
+  - This MUST match the `scheme` value in your `app.json`
+- For Expo Go development, use `exp://localhost:8081` 
 
-For social authentication to work correctly, you need to set up redirect URLs in Supabase:
+#### Redirect URLs
 
-1. **Go to Authentication settings**:
-   - In your Supabase dashboard, navigate to Authentication → URL Configuration
-   
-2. **Configure site URL**:
-   - Set the Site URL to match your app's production URL or to `https://auth.expo.io/@your-username/your-app-slug` for development
+Add the following redirect URLs:
 
-3. **Add redirect URLs**:
-   - Add the following URLs to the "Redirect URLs" section:
-     - `myapp://auth-callback` (replace `myapp` with your app's URL scheme from app.json)
-     - `https://auth.expo.io/@your-username/your-app-slug` (for Expo development)
+- Your app scheme followed by `**` (e.g., `your-scheme://**`)
+- For Expo Go, use `exp://localhost:8081/**`
+
+<Tip>
+  The scheme is used when your app runs as a standalone build (development build, production app), while the Expo Go URLs are used during development with Expo Go.
+</Tip>
+
+### Testing Authentication
+
+Once your Supabase project is set up with the correct URL configuration, you can test basic authentication functionality:
+
+1. Run your app in development mode
+2. Navigate to the sign-in screen
+3. Test the authentication flow
+
+### Next Steps
+
+After basic Supabase setup, you can configure social authentication providers:
+
+- [Google Sign-In Setup](/features/auth/google-auth)
+- [Apple Sign-In Setup](/features/auth/apple-auth)
+
+### Additional Resources
+
+- [Supabase Auth Documentation](https://supabase.com/docs/guides/auth)
+- [Supabase JavaScript Client Reference](https://supabase.com/docs/reference/javascript/)
 
 ### Customizing Authentication Options
 
@@ -92,7 +110,7 @@ You can customize various authentication settings in the Supabase dashboard:
 
 After completing the setup:
 
-1. **Run your app** in development mode
+1. **Run your app**
 2. **Navigate to the login screen**
 3. **Try signing up** with email/password to ensure authentication is working correctly
 
@@ -127,6 +145,6 @@ If the authentication flow works successfully, you'll be able to sign up, log in
 
 Now that you have Supabase authentication set up, you can:
 
-- Configure [social authentication providers](/features/auth/social-auth) like Google and Apple
+- Configure [Google Sign In](/features/auth/google-auth)
+- Configure [Apple Sign In](/features/auth/apple-auth)
 - Learn how to [test different authentication flows](/features/auth/testing-auth)
-- Implement additional security features like two-factor authentication

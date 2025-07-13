@@ -1,0 +1,129 @@
+---
+title: "Apple Sign-In"
+description: "Setup Apple Sign-In for your BuildWithAI+ app"
+---
+
+# Apple Sign-In Setup
+
+This guide walks you through setting up Apple Sign-In for your BuildWithAI+ app using Supabase as the authentication provider.
+
+## Prerequisites
+
+Before setting up Apple Sign-In, make sure you have:
+
+- [Set up your Supabase project](/features/auth/supabase-setup) with basic configuration
+- An Apple Developer account (requires paid enrollment in the Apple Developer Program)
+- Access to the Apple Developer Portal
+
+## Setting Up Apple Sign-In
+
+<Steps>
+  <Step title="Create an App ID in the Apple Developer Portal">
+    1. Go to the [Apple Developer Portal](https://developer.apple.com/account/)
+    2. Navigate to "Certificates, IDs & Profiles"
+    3. Click on "Identifiers" in the sidebar
+    4. Click the "+" button to create a new identifier
+    5. Select "App IDs" and click "Continue"
+    6. Choose "App" as the type and click "Continue"
+    7. Fill in a description (e.g., "My App") 
+    8. Enter your Bundle Identifier that matches your app.json (e.g., `com.yourcompany.yourapp`)
+    9. Scroll down to "Capabilities" and enable "Sign In with Apple"
+    10. Click "Continue" then "Register"
+  </Step>
+
+  <Step title="Create a Service ID">
+    1. In the Apple Developer Portal, go to "Certificates, IDs & Profiles"
+    2. Click on "Identifiers" in the sidebar
+    3. Click the "+" button to create a new identifier
+    4. Select "Service IDs" and click "Continue"
+    5. Fill in a description (e.g., "My App Web Auth Service")
+    6. Enter a unique identifier (e.g., `com.yourcompany.yourapp.service`)
+    7. Click "Continue" then "Register"
+    
+    After registration:
+    
+    8. Click on your newly created Service ID from the list
+    9. Check "Sign In with Apple" and click "Configure"
+    10. Add your Supabase domain as a Website URL (e.g., `https://your-project-ref.supabase.co`)
+    11. Add your return URL (e.g., `https://your-project-ref.supabase.co/auth/v1/callback`)
+    12. Click "Save", then "Continue", and "Save" again
+  </Step>
+
+  <Step title="Create a Private Key">
+    1. In the Apple Developer Portal, go to "Certificates, IDs & Profiles"
+    2. Click on "Keys" in the sidebar
+    3. Click the "+" button to create a new key
+    4. Enter a name for your key (e.g., "My App Sign In Key")
+    5. Check "Sign In with Apple" and click "Configure"
+    6. Select your primary App ID and click "Save"
+    7. Click "Continue" then "Register"
+    8. **Download your private key** file (.p8) - this can only be downloaded once
+    9. Note your "Key ID" for later use
+  </Step>
+
+  <Step title="Configure Supabase Auth Provider">
+    1. In your Supabase dashboard, go to "Authentication" > "Providers"
+    2. Find "Apple" in the list of providers and click "Enable"
+    3. Fill in the required fields:
+       - **Service ID**: The Service ID you created (e.g., `com.yourcompany.yourapp.service`)
+       - **Team ID**: Your Apple Developer Team ID (found in the Developer Portal under "Membership")
+       - **Key ID**: The ID of the private key you created
+       - **Private Key**: The content of the .p8 file you downloaded (open it in a text editor)
+    4. Click "Save"
+  </Step>
+</Steps>
+
+## Using Apple Sign-In in Your App
+
+The BuildWithAI+ boilerplate includes ready-to-use Apple Sign-In functionality. Once you've completed the setup above, the Apple Sign-In button in the authentication screens will work automatically.
+
+### Testing Your Configuration
+
+To test your Apple Sign-In configuration:
+
+1. Build and run your app using a development build (Apple Sign-In doesn't work in Expo Go)
+2. Navigate to the sign-in screen
+3. Tap the "Sign in with Apple" button
+4. Complete the Apple authentication flow
+5. Verify that you are successfully signed in to your app
+
+### Troubleshooting
+
+If you encounter issues with Apple Sign-In:
+
+<AccordionGroup>
+  <Accordion title="Sign-in button doesn't work">
+    - Make sure you're testing in a development build, not Expo Go
+    - Check your app's logs for any error messages
+    - Verify the button isn't disabled due to platform restrictions
+  </Accordion>
+  
+  <Accordion title="Authentication fails">
+    - Verify that all credentials in Supabase are correctly configured
+    - Ensure your Bundle ID matches the one in your App ID in the Apple Developer Portal
+    - Check that your Service ID is properly configured with the correct URLs
+  </Accordion>
+  
+  <Accordion title="Issues with Android">
+    - Apple Sign-In is primarily for iOS users. On Android, consider providing alternative sign-in methods
+    - The boilerplate includes a web-based fallback for Android devices, but iOS native experience will be better
+  </Accordion>
+  
+  <Accordion title="Redirect issues">
+    - Verify that your Supabase project URL is correctly added as a return URL in the Apple Developer Portal
+    - Make sure the callback URL format is correct (`https://your-project-ref.supabase.co/auth/v1/callback`)
+  </Accordion>
+</AccordionGroup>
+
+### Development vs. Production
+
+Apple Sign-In has different behaviors in development and production environments:
+
+- **Development**: When testing, you might be asked to sign in repeatedly as testing tokens expire quickly
+- **Production**: In production, sign-ins persist longer and the user experience is smoother
+
+## Additional Resources
+
+- [Supabase Apple Auth Documentation](https://supabase.com/docs/guides/auth/social-login/auth-apple)
+- [Apple Sign In Documentation](https://developer.apple.com/sign-in-with-apple/)
+- [Expo Authentication Guide](https://docs.expo.dev/guides/authentication/)
