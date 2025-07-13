@@ -1,0 +1,170 @@
+---
+title: "App Icons & Splash Screens"
+description: "Customize your app's visual identity with custom icons and splash screens"
+---
+
+# App Icons & Splash Screens
+
+Customizing your app's icons and splash screens helps create a professional, branded experience for your users. This guide explains how to create and configure these assets for your BuildWithAI+ app.
+
+## Asset Requirements
+
+### App Icons
+
+For the best results across all devices, prepare the following images:
+
+| Asset | Size (pixels) | Description |
+|-------|--------------|-------------|
+| App Icon | 1024×1024 | The primary app icon, will be resized for various platforms |
+| iOS Icon (Light Mode) | 1024×1024 | Optional icon variant for iOS light mode |
+| iOS Icon (Dark Mode) | 1024×1024 | Optional icon variant for iOS dark mode |
+| Adaptive Icon Foreground | 1024×1024 | Android foreground layer (should have transparent background) |
+| Adaptive Icon Monochrome | 1024×1024 | Android monochrome version (single color with transparency) |
+
+### Splash Screens
+
+| Asset | Size (pixels) | Description |
+|-------|--------------|-------------|
+| Splash Image | 1242×2436 | Image shown during app loading (transparent background recommended) |
+| Dark Mode Splash | 1242×2436 | Optional variant for dark mode |
+
+## File Organization
+
+Place your assets in the following directory structure:
+
+```
+assets/
+  └── images/
+      ├── icon.png
+      ├── splash.png
+      ├── ios-icon-light.png
+      ├── ios-icon-dark.png
+      ├── ios-icon-tinted.png
+      ├── adaptive-icon.png
+      └── adaptive-icon-monochrome.png
+```
+
+## Configuration in app.json
+
+Update your `app.json` file with paths to your custom assets:
+
+### Basic Icon & Splash
+
+```json
+{
+  "expo": {
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    }
+  }
+}
+```
+
+### iOS-Specific Icons
+
+```json
+{
+  "expo": {
+    "ios": {
+      "icon": {
+        "light": "./assets/images/ios-icon-light.png",
+        "dark": "./assets/images/ios-icon-dark.png",
+        "tinted": "./assets/images/ios-icon-tinted.png"
+      }
+    }
+  }
+}
+```
+
+### Android Adaptive Icons
+
+```json
+{
+  "expo": {
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "monochromeImage": "./assets/images/adaptive-icon-monochrome.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    }
+  }
+}
+```
+
+### Dark Mode Splash Screen
+
+```json
+{
+  "expo": {
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FFFFFF",
+          "resizeMode": "contain",
+          "image": "./assets/images/splash.png",
+          "dark": {
+            "image": "./assets/images/splash.png",
+            "backgroundColor": "#181A20",
+            "resizeMode": "contain"
+          },
+          "imageWidth": 200
+        }
+      ]
+    ]
+  }
+}
+```
+
+## Creating App Icons
+
+You can create professional app icons using several approaches:
+
+### Using AI Tools
+
+1. **ChatGPT with DALL-E**: Describe your app and the icon style you want
+2. **Midjourney**: Generate detailed, high-quality app icons with specific prompts
+3. **Leonardo.ai**: Create icon sets with consistent styling
+
+<Tip>
+When using AI tools, request a transparent background for adaptive icons and specify 1024×1024px dimensions for optimal results.
+</Tip>
+
+### Using Design Tools
+
+- **Figma**: Create vector-based icons that scale beautifully
+- **Canva**: Use templates and simple editing tools for quick icon creation
+- **Adobe Express**: Create professional icons with pre-made templates
+
+## Testing Your Icons
+
+After updating your app icons and splash screens, test how they look on different devices:
+
+1. Build a development client with your new assets:
+
+```bash
+eas build --profile development --platform ios
+eas build --profile development --platform android
+```
+
+2. Install on your test devices and check for:
+   - Proper scaling and cropping
+   - Color accuracy in different modes
+   - Animation smoothness of splash screens
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Icons appear blurry | Ensure source images are high resolution (1024×1024px) |
+| Icons are cropped incorrectly | For Android, ensure important content is in the center 70% of the adaptive icon |
+| Splash screen flickers | Make sure the backgroundColor matches your app's initial screen |
+| Dark mode assets not showing | Verify the dark mode paths are correct in app.json |
+
+<Warning>
+Always test your icons on multiple device sizes and in both light and dark mode to ensure they look good across all scenarios.
+</Warning>

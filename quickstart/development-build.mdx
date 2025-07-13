@@ -31,7 +31,7 @@ After setting up your project, you'll need a development build to efficiently te
 1. **Configure your Apple Developer account in EAS**:
 
    ```bash
-   npx eas credentials
+  eas credentials -p ios
    ```
 
    Follow the prompts to set up your iOS credentials.
@@ -39,7 +39,7 @@ After setting up your project, you'll need a development build to efficiently te
 2. **Build the development client**:
 
    ```bash
-   npx eas build --profile development --platform ios
+   eas build --profile development --platform ios
    ```
 
 3. **Install on your device**:
@@ -55,13 +55,13 @@ After setting up your project, you'll need a development build to efficiently te
 1. **Configure your Android credentials** (if you haven't already):
 
    ```bash
-   npx eas credentials
+  eas credentials -p android
    ```
 
 2. **Build the development client**:
 
    ```bash
-   npx eas build --profile development --platform android
+   eas build --profile development --platform android
    ```
 
 3. **Install on your device**:
@@ -108,7 +108,7 @@ You'll need to create a new development build when:
 To create a new development build, run the same build command as before:
 
 ```bash
-npx eas build --profile development --platform [ios|android]
+eas build --profile development --platform [ios|android]
 ```
 
 ### Troubleshooting Development Builds

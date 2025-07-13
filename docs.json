@@ -1,12 +1,12 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "maple",
+  "theme": "willow",
   "name": "BuildWithAI+ Boilerplate",
   "description": "Production-ready React Native boilerplate for creating powerful mobile applications with AI features",
   "colors": {
-    "primary": "#2563eb",
-    "light": "#3b82f6",
-    "dark": "#1d4ed8"
+    "primary": "#10b981",
+    "light": "#34d399",
+    "dark": "#059669"
   },
   "favicon": "/favicon.svg",
 

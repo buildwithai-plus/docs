@@ -11,20 +11,16 @@ This guide will walk you through the process of setting up your BuildWithAI+ pro
 
 Before you begin, make sure you have the following installed:
 
-- [Node.js](https://nodejs.org/) (v16 or later)
-- [Git](https://git-scm.com/)
-- [Expo CLI](https://docs.expo.dev/workflow/expo-cli/) (`npm install -g expo-cli`)
-- Code editor (we recommend [Visual Studio Code](https://code.visualstudio.com/))
-- iOS/Android development environment:
-  - For iOS: macOS with Xcode installed
-  - For Android: Android Studio with SDK tools
+- [Node.js](https://nodejs.org/en/download) (v16 or later)
+- [Git](https://git-scm.com/downloads)
+- [Windsurf IDE](https://windsurf.com/download/editor)
 
 ### Step 1: Clone the Repository
 
 Clone the BuildWithAI+ repository from GitHub:
 
 ```bash
-git clone https://github.com/buildwithai/boilerplate.git your-app-name
+git clone https://github.com/buildwithai-plus/boilerplate.git your-app-name
 cd your-app-name
 ```
 
@@ -36,37 +32,51 @@ Install all required dependencies:
 npm install
 ```
 
-<Note>
-  If you encounter any issues during installation, try clearing your npm cache with `npm cache clean --force` and then run the install command again.
-</Note>
-
 ### Step 3: Configure Your App
 
-Update the app configuration in the `app.json` file with your project details:
+The boilerplate comes with an example configuration file. Start by renaming it to `app.json`:
+
+```bash
+cp app.json.example app.json
+```
+
+Now, open the `app.json` file and update the following essential fields to customize your app:
 
 ```json
 {
   "expo": {
     "name": "Your App Name",
     "slug": "your-app-slug",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+    "scheme": "your-app-scheme",
+    "ios": {
+      "bundleIdentifier": "com.yourcompany.yourapp"
     },
-    // Additional configuration...
+    "android": {
+      "package": "com.yourcompany.yourapp"
+    }
   }
 }
 ```
 
-Key fields to update:
-- `name`: The display name of your app
-- `slug`: A unique identifier for your project (use lowercase, no spaces)
-- `version`: Your app's version number
-- `icon` and `splash`: Paths to your app icons and splash screen images
+<Tip>
+  The boilerplate includes many more configuration options, but these are the essential fields you need to update before starting development.
+</Tip>
+
+#### Essential fields to update:
+
+- **name**: The display name of your app as it will appear on users' devices
+- **slug**: A unique identifier for your project (use lowercase, no spaces, and hyphens) - this is used in URLs and other places
+- **scheme**: A URL scheme for deep linking (use something unique to your app, e.g., "myawesomeapp")
+- **bundleIdentifier** (iOS): Your app's unique identifier in reverse domain format (e.g., "com.yourcompany.yourapp")
+- **package** (Android): Your app's unique identifier in reverse domain format (should match your iOS bundleIdentifier)
+
+#### App Icons and Splash Screens
+
+The boilerplate includes custom branded icons and splash screens in the `assets/images/` directory.
+
+<Info>
+  Replace these with your own assets before publishing. For detailed instructions, see our [App Icons Guide](/features/customization/app-icons).
+</Info>
 
 ### Step 4: Log in to Expo
 
@@ -75,38 +85,36 @@ You'll need an Expo account to use EAS Build. If you don't have one, you can sig
 Log in to your Expo account through the CLI:
 
 ```bash
-npx expo login
+eas login
 ```
+
+Check if you are logged in:
+```bash
+eas whoami
+```
+
 
 ### Step 5: Initialize EAS Project
 
 Initialize your project with EAS (Expo Application Services):
 
 ```bash
-npx eas init
+eas init
 ```
 
 This will connect your local project to Expo's cloud services and prepare it for building.
 
-### Step 6: Configure Environment Variables
+### Step 6: Configure Basic Environment
 
-The boilerplate uses environment variables for sensitive information. Create an `.env` file in your project root:
-
-```
-# Supabase
-SUPABASE_URL=your_supabase_url
-SUPABASE_ANON_KEY=your_supabase_anon_key
-
-# Additional variables as needed
-```
-
-Then set up your EAS secrets for secure deployment:
+The boilerplate includes an example environment file with placeholders for various services:
 
 ```bash
-npx eas secret:create --scope project --name SUPABASE_URL --value your_supabase_url
-npx eas secret:create --scope project --name SUPABASE_ANON_KEY --value your_supabase_anon_key
-# Add other secrets as needed
+cp .env.example .env
 ```
+
+<Info>
+  You'll configure specific environment variables as you set up various features. For authentication setup, see the [Supabase Setup Guide](/features/auth/supabase-setup).
+</Info>
 
 ### Step 7: Configure EAS Build Profiles
 
@@ -141,6 +149,14 @@ For example:
 
 ### Next Steps
 
-Now that your project is set up, you'll need to create a development build to start working with the app on your physical device or simulator.
+**1. Set up Authentication with Supabase**
 
-Continue to the [Development Build](/quickstart/development-build) guide to learn how to build and run your app in development mode.
+Before creating development builds, you'll need to set up authentication with Supabase:
+
+- Continue to the [Supabase Setup Guide](/features/auth/supabase-setup) to configure your authentication backend.
+
+**2. Create a Development Build**
+
+After setting up Supabase, create a development build to start working with the app on your device:
+
+- Follow the [Development Build](/quickstart/development-build) guide to build and run your app in development mode.

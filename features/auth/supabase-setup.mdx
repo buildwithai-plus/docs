@@ -44,8 +44,8 @@ SUPABASE_ANON_KEY=your-anon-key
 3. **Configure EAS secrets** for deployment builds:
 
 ```bash
-npx eas secret:create --scope project --name SUPABASE_URL --value "https://your-project-id.supabase.co"
-npx eas secret:create --scope project --name SUPABASE_ANON_KEY --value "your-anon-key"
+eas secret:create --scope project --name SUPABASE_URL --value "https://your-project-id.supabase.co"
+eas secret:create --scope project --name SUPABASE_ANON_KEY --value "your-anon-key"
 ```
 
 ### Setting Up Auth Provider
