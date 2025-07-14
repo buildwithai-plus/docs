@@ -1,0 +1,48 @@
+---
+title: 'PostHog Analytics Setup'
+description: 'Setting up PostHog analytics in your BuildWithAI+ application'
+---
+
+# PostHog Analytics Setup
+
+This guide walks you through setting up PostHog analytics in your BuildWithAI+ application.
+
+## Prerequisites
+
+- PostHog account
+- BuildWithAI+ application
+
+## Installation & Configuration
+
+### 1. Create a PostHog Project
+
+Create a new project in your PostHog dashboard.
+
+### 2. Get Your API Key
+
+Locate your project API key in the PostHog dashboard.
+
+### 3. Configure PostHog in Your App
+
+```typescript
+// Example implementation
+import { PostHogProvider } from 'posthog-react-native';
+import { POSTHOG_API_KEY } from '@env';
+
+export default function App() {
+  return (
+    <PostHogProvider
+      apiKey={POSTHOG_API_KEY}
+      options={{
+        host: 'https://app.posthog.com',
+      }}
+    >
+      {/* Your app components */}
+    </PostHogProvider>
+  );
+}
+```
+
+## Next Steps
+
+After setting up PostHog, see [Tracking Analytics Events](/features/analytics/tracking) for implementing event tracking.

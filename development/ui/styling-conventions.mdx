@@ -1,0 +1,52 @@
+---
+title: 'Styling Conventions'
+description: 'Best practices and conventions for styling in BuildWithAI+ applications'
+---
+
+# Styling Conventions
+
+This guide outlines the styling conventions used in BuildWithAI+ applications.
+
+## NativeWind Integration
+
+BuildWithAI+ uses NativeWind (Tailwind CSS for React Native) as the primary styling solution.
+
+## Organization
+
+### Component-Specific Styles
+
+```tsx
+// Example of component-specific styling
+export function Button({ children, variant = 'primary' }) {
+  return (
+    <Pressable
+      className={cn(
+        "py-3 px-4 rounded-lg",
+        variant === 'primary' && "bg-primary text-white",
+        variant === 'secondary' && "bg-gray-200 text-gray-800"
+      )}
+    >
+      <Text className="text-center font-medium">{children}</Text>
+    </Pressable>
+  );
+}
+```
+
+### Theme Variables
+
+Guidelines for using theme variables for consistent styling.
+
+## Best Practices
+
+- Use semantic class names
+- Maintain responsive design principles
+- Follow accessibility guidelines
+- Implement dark mode support
+
+## Style Structure
+
+Recommended file structure for organizing styles in your application.
+
+## Next Steps
+
+See [Mobbin Design References](/development/ui/mobbin) for UI inspiration.

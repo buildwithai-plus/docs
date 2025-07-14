@@ -9,7 +9,6 @@
     "dark": "#059669"
   },
   "favicon": "/favicon.svg",
-
   "navigation": {
     "tabs": [
       {
@@ -20,29 +19,29 @@
             "pages": [
               "index",
               "introduction/what-is-buildwithai",
-              "introduction/whats-included",
-              "introduction/who-is-this-for"
+              "introduction/whats-included"
             ]
           },
           {
             "group": "Quick Start",
             "pages": [
               "quickstart/project-setup",
+              "quickstart/supabase-setup",
+              "quickstart/app-configuration",
               "quickstart/development-build"
             ]
           }
         ]
       },
       {
-        "tab": "Features & Setup",
+        "tab": "Features",
         "groups": [
           {
             "group": "Authentication",
             "pages": [
               "features/auth/supabase-setup",
               "features/auth/google-auth",
-              "features/auth/apple-auth",
-              "features/auth/testing-auth"
+              "features/auth/apple-auth"
             ]
           },
           {
@@ -109,31 +108,6 @@
               "development/eas/testing",
               "development/eas/production-builds",
               "development/eas/extras"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Resources",
-        "groups": [
-          {
-            "group": "Additional Features",
-            "pages": [
-              "resources/additional-features/overview",
-              "resources/additional-features/extensions"
-            ]
-          },
-          {
-            "group": "Help",
-            "pages": [
-              "resources/troubleshooting",
-              "resources/faq"
-            ]
-          },
-          {
-            "group": "References",
-            "pages": [
-              "resources/references"
             ]
           }
         ]

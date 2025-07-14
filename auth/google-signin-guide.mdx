@@ -6,6 +6,7 @@ description: "Set up Google Sign-In authentication for your mobile app"
 import { Steps, Step } from 'nextra/components'
 import { Tabs, Tab } from 'nextra/components'
 import { Tip, Info } from 'nextra/components'
+import Image from 'next/image'
 
 # Google Sign-In Authentication Guide
 
@@ -19,51 +20,42 @@ import { Tip, Info } from 'nextra/components'
 
 Visit: https://console.cloud.google.com/projectcreate
 
+<Image src="/images/auth/google-signin/B1176F4B-9FD7-4F12-9062-C7091F4E58EF.png" width={600} height={400} alt="Google Cloud Project Creation" />
 
 
-- Give it the name of your app
-- Select the organization you want to use
-- Click Create
-- Wait for the project to be created 
-
-
+a. Give it the name of your app
+b. Select the organization you want to use
+c. Click Create
+d. Wait for the project to be created 
+<Image src="/images/auth/google-signin/67B8074D-6539-4133-A9B0-D29EF2D78CB0.png" width={600} height={400} alt="Project Created" />
 
 Official docs: https://developers.google.com/workspace/guides/create-project
 
 
 2. Enable the Google Sign-In API
 
-- Select your new project
-- Click on APIs & Services in the left menu
-
-
+a. Select your new project
+b. Click on APIs & Services in the left menu<Image src="/images/auth/google-signin/FDB700A2-9C6A-4AFD-8E85-709B59AEE72B.png" width={600} height={400} alt="APIs & Services Menu" />
 
 3. Configure the consent screen
 
-Pick the OAuth Consent Screen option in the left menu, and click "Get started".
+Pick the OAuth Consent Screen option in the left menu, and click "Get started". <Image src="/images/auth/google-signin/7A882026-6DA0-416C-B472-5A6B52A573BB.png" width={600} height={400} alt="OAuth Consent Screen" />
 
-
-
-- App Information: Fill it out the form with App Name and User support email:
-
-
-
-- Audience: pick "External"
-- Contact Information: These email addresses are for Google to notify you about any changes to your project.
-- Finish: Agree to the Google API Services: User Data Policy.
-- Press "Create"
+a. App Information: Fill it out the form form with App Name and User support email: <Image src="/images/auth/google-signin/12D85658-8CFD-451B-9D77-2956DFD54CA3-1.png" width={600} height={400} alt="App Information Form" />
+b. Audience: pick "External"
+c. Contact Information: These email addresses are for Google to notify you about any changes to your project.
+d. Finish: Agree to the Google API Services: User Data Policy. 
+e. Press "Create"
 
 Official docs: https://developers.google.com/workspace/guides/configure-oauth-consent
 
 
 4. Create OAuth client ID credentials
 
-Pick the "Clients" option in the left menu
+Pick the "Clients" option in the left menu<Image src="/images/auth/google-signin/7A882026-6DA0-416C-B472-5A6B52A573BB.png" width={600} height={400} alt="OAuth Consent Screen" />
 
-
-
-- Application type: Pick "Web Application"
-- Name: Choose a name for your web client
+a. Application type: Pick "Web Application"
+b. Name: Choose a name for your web client ()
 
 Official docs: https://developers.google.com/workspace/guides/create-credentials#oauth-client-id
 
@@ -75,7 +67,7 @@ You need to create a Web OAuth Client ID for Supabase authentication to work pro
   <Step title="Access the Google Cloud Console">
     In the Google Cloud console, navigate to **Menu** > **Google Auth platform** > **Clients**
     
-    
+    <Image src="/images/auth/google-signin/7A882026-6DA0-416C-B472-5A6B52A573BB.png" width={600} height={400} alt="Client option in menu" />
   </Step>
 
   <Step title="Create OAuth Client">
@@ -97,7 +89,7 @@ You need to create a Web OAuth Client ID for Supabase authentication to work pro
   <Step title="Generate and Save Credentials">
     1. Click **Create** to generate your OAuth client ID
     2. Your new credentials will appear after they are created: 
-       
+       <Image src="/images/auth/google-signin/3C12DAD3-96B0-4A64-A513-271CED20740C.png" width={600} height={400} alt="OAuth Credentials" />
     3. Save your **Client ID** and **Client Secret** - you'll need these to configure Supabase
   </Step>
 </Steps>

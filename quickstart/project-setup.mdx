@@ -22,6 +22,7 @@ Clone the BuildWithAI+ repository from GitHub:
 ```bash
 git clone https://github.com/buildwithai-plus/boilerplate.git your-app-name
 cd your-app-name
+git remote remove origin
 ```
 
 ### Step 2: Install Dependencies
@@ -32,79 +33,7 @@ Install all required dependencies:
 npm install
 ```
 
-### Step 3: Configure Your App
-
-The boilerplate comes with an example configuration file. Start by renaming it to `app.json`:
-
-```bash
-cp app.json.example app.json
-```
-
-Now, open the `app.json` file and update the following essential fields to customize your app:
-
-```json
-{
-  "expo": {
-    "name": "Your App Name",
-    "slug": "your-app-slug",
-    "scheme": "your-app-scheme",
-    "ios": {
-      "bundleIdentifier": "com.yourcompany.yourapp"
-    },
-    "android": {
-      "package": "com.yourcompany.yourapp"
-    }
-  }
-}
-```
-
-<Tip>
-  The boilerplate includes many more configuration options, but these are the essential fields you need to update before starting development.
-</Tip>
-
-#### Essential fields to update:
-
-- **name**: The display name of your app as it will appear on users' devices
-- **slug**: A unique identifier for your project (use lowercase, no spaces, and hyphens) - this is used in URLs and other places
-- **scheme**: A URL scheme for deep linking (use something unique to your app, e.g., "myawesomeapp")
-- **bundleIdentifier** (iOS): Your app's unique identifier in reverse domain format (e.g., "com.yourcompany.yourapp")
-- **package** (Android): Your app's unique identifier in reverse domain format (should match your iOS bundleIdentifier)
-
-#### App Icons and Splash Screens
-
-The boilerplate includes custom branded icons and splash screens in the `assets/images/` directory.
-
-<Info>
-  Replace these with your own assets before publishing. For detailed instructions, see our [App Icons Guide](/features/customization/app-icons).
-</Info>
-
-### Step 4: Log in to Expo
-
-You'll need an Expo account to use EAS Build. If you don't have one, you can sign up at [expo.dev](https://expo.dev/).
-
-Log in to your Expo account through the CLI:
-
-```bash
-eas login
-```
-
-Check if you are logged in:
-```bash
-eas whoami
-```
-
-
-### Step 5: Initialize EAS Project
-
-Initialize your project with EAS (Expo Application Services):
-
-```bash
-eas init
-```
-
-This will connect your local project to Expo's cloud services and prepare it for building.
-
-### Step 6: Configure Basic Environment
+### Step 3: Create Environment Variables File
 
 The boilerplate includes an example environment file with placeholders for various services:
 
@@ -113,50 +42,9 @@ cp .env.example .env
 ```
 
 <Info>
-  You'll configure specific environment variables as you set up various features. For authentication setup, see the [Supabase Setup Guide](/features/auth/supabase-setup).
+  You'll configure specific environment variables as you set up various features in the following guides.
 </Info>
 
-### Step 7: Configure EAS Build Profiles
+### Next
 
-The boilerplate includes pre-configured EAS build profiles in the `eas.json` file. Review and modify them as needed for your specific requirements.
-
-For example:
-
-```json
-{
-  "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "env": {
-        "APP_ENV": "development"
-      }
-    },
-    "preview": {
-      "distribution": "internal",
-      "env": {
-        "APP_ENV": "staging"
-      }
-    },
-    "production": {
-      "env": {
-        "APP_ENV": "production"
-      }
-    }
-  }
-}
-```
-
-### Next Steps
-
-**1. Set up Authentication with Supabase**
-
-Before creating development builds, you'll need to set up authentication with Supabase:
-
-- Continue to the [Supabase Setup Guide](/features/auth/supabase-setup) to configure your authentication backend.
-
-**2. Create a Development Build**
-
-After setting up Supabase, create a development build to start working with the app on your device:
-
-- Follow the [Development Build](/quickstart/development-build) guide to build and run your app in development mode.
+After setting up your project, the next step in your development process is to set up authentication with Supabase. 

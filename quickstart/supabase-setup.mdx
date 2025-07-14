@@ -3,6 +3,9 @@ title: "Supabase Auth Setup"
 description: "Configure authentication for your mobile app using Supabase"
 ---
 
+import { Tip } from 'nextra/components'
+import { Card, CardGroup } from 'nextra/components'
+
 ## Setting up Supabase Authentication
 
 The BuildWithAI+ boilerplate uses [Supabase](https://supabase.com/) as its authentication provider, giving you access to multiple authentication methods, user management, and secure session handling. This guide will walk you through setting up Supabase authentication for your mobile app.
@@ -36,7 +39,7 @@ Once your Supabase project is created, you'll need to get your project credentia
    - Open the `.env` file you created earlier from `.env.example`
    - Update your Supabase credentials:
 
-```
+```env
 EXPO_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
 EXPO_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
@@ -47,18 +50,20 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
    - In your Supabase dashboard, navigate to **Authentication** → **URL Configuration**
    - Configure the following settings:
 
-#### URL Configuration for Expo Go
+#### Site URL
 
-When testing with Expo Go during initial development:
+- Set your site URL to your app's scheme that you configured in `app.json` with `://` at the end (e.g., `your-scheme://`)
+- For Expo Go development, use `exp://localhost:8081` 
 
-1. **Site URL**: 
-   - Set to `exp://127.0.0.1:8081`
+#### Redirect URLs
 
-2. **Redirect URLs**:
-   - Add `exp://127.0.0.1:8081/**`
+Add the following redirect URLs:
+
+- Your app scheme followed by `://**` (e.g., `your-scheme://**`)
+- For Expo Go, use `exp://localhost:8081/**`
 
 <Tip>
-  This configuration is only for development with Expo Go. When you create a development build later, you'll need to update these URLs with your app's scheme as explained in the [Development Build guide](/quickstart/development-build).
+  The scheme is used when your app runs as a standalone build (development build, production app), while the Expo Go URLs are used during development with Expo Go.
 </Tip>
 
 ### Testing Authentication
@@ -74,14 +79,9 @@ Once your Supabase project is set up with the correct URL configuration, you can
 
 If the authentication flow works successfully, you'll be automatically signed in and able to access protected routes in your app. You can then test signing out and signing back in with your credentials.
 
-### Next Steps
+### What's Next
 
-Now that you have set up authentication with Supabase for Expo Go testing, you can test the authentication flow in the Expo Go environment. When you're ready to test on a real device with a development build, follow the [Development Build guide](/quickstart/development-build) which includes instructions for updating your Supabase URL configuration for your app scheme.
-
-After creating your development build, you can then configure additional social authentication providers:
-
-- [Google Sign-In Setup](/docs/auth/google-signin-guide)
-- [Apple Sign-In Setup](/features/auth/apple-auth)
+Now that you have set up authentication with Supabase, the next step is to configure your app settings before creating a development build.
 
 ### Additional Resources
 

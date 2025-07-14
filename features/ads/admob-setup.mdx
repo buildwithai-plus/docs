@@ -1,0 +1,65 @@
+---
+title: 'AdMob Setup'
+description: 'Setting up Google AdMob in your BuildWithAI+ application'
+---
+
+# AdMob Setup
+
+This guide walks you through setting up Google AdMob in your BuildWithAI+ application.
+
+## Prerequisites
+
+- Google AdMob account
+- Firebase project (optional, for advanced features)
+
+## Registration and Setup
+
+### 1. Create an AdMob Account
+
+Instructions for creating and configuring your AdMob account.
+
+### 2. Add Your App to AdMob
+
+Steps for registering your app with AdMob.
+
+### 3. Configure Ad Units
+
+How to create and configure different ad unit types.
+
+## Integration with React Native
+
+```typescript
+// Example implementation using @react-native-firebase/admob
+import { InterstitialAd, AdEventType, TestIds } from '@react-native-firebase/admob';
+
+const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-xxxxxxxxxxxxxxxx/yyyyyyyyyy';
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitId);
+
+// Load and show the ad
+export const showInterstitialAd = async () => {
+  // Load the ad first
+  interstitial.load();
+  
+  // Set up event listener
+  return new Promise((resolve) => {
+    interstitial.onAdEvent((type) => {
+      if (type === AdEventType.LOADED) {
+        // Once ad is loaded, show it
+        interstitial.show();
+      } else if (type === AdEventType.CLOSED) {
+        // Resolve when ad is closed
+        resolve(true);
+      }
+    });
+  });
+};
+```
+
+## Testing Ads
+
+Information about using test ads during development.
+
+## Next Steps
+
+See [Store Requirements](/features/ads/store-requirements) for compliance information.

@@ -3,147 +3,178 @@ title: "Development Build"
 description: "Create and use development builds for efficient app development"
 ---
 
-## Development Build with EAS
+import { Tip, Info, Note } from 'nextra/components'
+import { Tabs, Tab } from 'nextra/components'
+import { Steps, Step } from 'nextra/components'
+import { Accordion, AccordionGroup } from 'nextra/components'
 
-After setting up your project, you'll need a development build to efficiently test and develop your app on real devices or simulators. This guide explains why development builds are important and how to create them using EAS (Expo Application Services).
+## Development Builds
 
-### Why Use Development Builds?
+<Steps>
+  <Step title="Set Up EAS CLI">
+    Install and configure the EAS CLI tools:
 
-<AccordionGroup>
-  <Accordion icon="gears" title="Access to Native Modules">
-    Development builds give you access to native modules and APIs that aren't available in Expo Go, allowing you to test all of your app's features.
-  </Accordion>
-  <Accordion icon="bolt" title="Faster Refresh Cycles">
-    Development builds offer faster refresh cycles and more efficient development compared to production builds.
-  </Accordion>
-  <Accordion icon="puzzle-piece" title="Custom Native Code">
-    If you need custom native code or specific native modules, dev builds are essential as they include these components.
-  </Accordion>
-  <Accordion icon="code" title="Debug Native Issues">
-    Development builds allow you to debug native issues and test native functionality that might not be available in the Expo Go client.
-  </Accordion>
-</AccordionGroup>
+    ```bash
+    # Install EAS CLI globally
+    npm install -g eas-cli
 
-### Creating a Development Build
+    # Log in to your Expo account
+    eas login
 
-#### For iOS (requires macOS)
+    # Initialize EAS in your project
+    eas init
+    > Would you like to create a project for @/expo-username/your-slug? ... yes
 
-1. **Configure your Apple Developer account in EAS**:
+    # Configure build profiles
+    eas build:configure
+    ```
+  </Step>
 
-   ```bash
-  eas credentials -p ios
-   ```
+  <Step title="Platform-Specific Setup">
+    <Tabs>
+      <Tab title="iOS">
+        <Steps>
+          <Step title="Enroll in Apple Developer Program">
+            An active [Apple Developer Program](https://developer.apple.com/programs/) subscription is required (costs $99 per year).
+          </Step>
 
-   Follow the prompts to set up your iOS credentials.
+          <Step title="Register Your Device & Install Provisioning Profile">
+            ```bash
+            eas device:create
+            ```
 
-2. **Build the development client**:
+            Follow the prompts:
+            - Log in to your Apple account when prompted
+            - Select "Website that generates a registration URL" when asked how to register
 
-   ```bash
-   eas build --profile development --platform ios
-   ```
+            On your iOS device:
+            - Scan the QR code from the terminal
+            - Open the provided URL in your device's browser
+            - Tap "Download Profile"
+            - Go to Settings app and install the profile when prompted
+            - You'll see a success message after installation
 
-3. **Install on your device**:
-   
-   When the build completes, EAS will provide a URL to download the build. You can install it on your device by:
-   
-   - Opening the URL on your iOS device
-   - Using Apple TestFlight (if you configured it during the build process)
-   - Installing directly from Xcode if using a simulator
+            <Info>
+              For more detailed instructions, see [Expo's guide for registering your device](https://docs.expo.dev/tutorial/eas/ios-development-build-for-devices/)
+            </Info>
+          </Step>
 
-#### For Android
+          <Step title="Create iOS Development Build">
+            ```bash
+            eas build --platform ios --profile development
+            ```
 
-1. **Configure your Android credentials** (if you haven't already):
+            When prompted:
+            - Confirm or enter iOS bundle identifier
+            - Log in to Apple account
+            - Select "Yes" when asked about push notifications
+            - Select your registered device(s) for ad hoc build (choose the device you registered earlier)
+            - For encryption question, select Yes (default) for standard apps
 
-   ```bash
-  eas credentials -p android
-   ```
+            The build will begin in the cloud and you can monitor progress via the EAS dashboard.
+          </Step>
 
-2. **Build the development client**:
+          <Step title="Install the Development Build">
+            After the build completes:
+            - Scan the QR code from the EAS dashboard or terminal
+            - Tap "Open with iTunes" when it appears in the Camera app
+            - Confirm installation when prompted
+          </Step>
 
-   ```bash
-   eas build --profile development --platform android
-   ```
+          <Step title="Enable Developer Mode on your iPhone">
+            - Go to the Settings App > Privacy & Security > Developer Mode
+            - Toggle the switch to enable
+            - Tap "Restart" when prompted
+            - After restart, tap "Turn On" and enter your passcode
+          </Step>
+        </Steps>
 
-3. **Install on your device**:
-   
-   - Download the APK from the URL provided after the build completes
-   - Install it on your Android device or emulator
+        <Tip>
+          For additional help, see [Expo's iOS Setup Guide](https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build&platform=ios&device=physical) and [Expo's EAS iOS Development Build Guide](https://docs.expo.dev/tutorial/eas/ios-development-build-for-devices/)
+        </Tip>
+      </Tab>
 
-<Note>
-  If you're using an Android emulator, you can drag and drop the APK file onto the emulator window to install it.
-</Note>
+      <Tab title="Android">
+        <Steps>
+          <Step title="Create Android Development Build">
+            ```bash
+            eas build --platform android --profile development
+            ```
 
-### Running Your Development Build
+            When prompted:
+            - Confirm your Android package name
+            - For keystore generation questions, accept the defaults
+            - The build will begin in the cloud and you can monitor progress via the EAS dashboard
+          </Step>
 
-Once you have installed your development build, follow these steps to start developing:
+          <Step title="Install the Development Build">
+            - Scan the QR code shown in the terminal or on EAS dashboard
+            - Download and install the app on your Android device
+            - Enable installation from unknown sources if prompted
+          </Step>
+        </Steps>
 
-1. **Start the development server**:
+        <Tip>
+          For additional help, see [Expo's Android Setup Guide](https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build&platform=android&device=physical) and [Expo's EAS Android Development Build Guide](https://docs.expo.dev/tutorial/eas/android-development-build/)
+        </Tip>
+      </Tab>
+    </Tabs>
+  </Step>
 
-   ```bash
-   npx expo start --dev-client
-   ```
+  <Step title="Start the Development Server">
+    Once you have installed the development build on your device, start the development server:
 
-2. **Connect to the development server**:
-   
-   - Open your newly installed app on your device/simulator
-   - If prompted, scan the QR code shown in your terminal
-   - Or tap "Enter URL manually" and enter the development server URL
+    ```bash
+    npx expo start -c  # -c clears the cache
+    ```
 
-3. **Development workflow**:
-   
-   Now, as you make changes to your code, you can:
-   
-   - Press 'r' in the terminal to reload the app
-   - Shake your device (or press 'Cmd+D' on iOS simulator, 'Ctrl+M' on Android emulator) to open the developer menu
-   - Use the developer menu to enable Fast Refresh, inspect elements, and more
+    Then connect your device to the development server:
 
-### Updating Your Development Build
+    1. Open the app on your device
+    2. Log in to your Expo account by pressing the profile icon in the top right.
+    3. Tap "Fetch development servers" and select your server from the list
+    4. Or just scan the QR code from the terminal
 
-You'll need to create a new development build when:
+    <Accordion title="Different Network? Use Tunnel Mode">
+      If your phone isn't on the same WiFi as your computer (or the QR code doesn't work):
 
-1. You add new native dependencies
-2. You modify native code
-3. You upgrade Expo SDK versions
+      1. Run this command instead: 
+      ```bash
+      npx expo start -c --tunnel
+      ```
+      2. When prompted to install the ngrok package, type `y` and press Enter
+      3. A new QR code will appear - scan it with your phone
 
-To create a new development build, run the same build command as before:
+      <Tip>
+        You can pre-install ngrok to avoid permission issues:
+        ```bash
+        # Install ngrok globally beforehand
+        npm install -g @expo/ngrok
+        ```
 
-```bash
-eas build --profile development --platform [ios|android]
-```
+        If you still see permission errors:
+        - **Windows:** Right-click on Command Prompt/PowerShell and select "Run as administrator"
+        - **Mac:** Run `sudo npm install -g @expo/ngrok` and then try the tunnel command again
+      </Tip>
+    </Accordion>
+  </Step>
+  <Step title="Update Supabase URL Configuration">
+    After successfully creating your development build, you need to update your Supabase authentication URL configuration to work with your app scheme:
 
-### Troubleshooting Development Builds
+    1. **Go to your Supabase dashboard**
+    2. **Navigate to Authentication → URL Configuration**
+    3. **Update the following settings**:
 
-<AccordionGroup>
-  <Accordion icon="triangle-exclamation" title="Connection Issues">
-    If your app can't connect to the development server:
-    - Make sure your device and computer are on the same network
-    - Try using the "Enter URL manually" option with your computer's local IP address
-    - Check if there's a firewall blocking the connection
-  </Accordion>
-  
-  <Accordion icon="bug" title="Build Failures">
-    Common causes of build failures:
-    - Invalid credentials configuration
-    - Incompatible native module versions
-    - Incorrect project configuration
-    
-    Check the EAS build logs for specific error messages and consult the [Expo documentation](https://docs.expo.dev/build-reference/troubleshooting/) for solutions.
-  </Accordion>
-  
-  <Accordion icon="refresh" title="Metro Bundler Issues">
-    If the Metro bundler crashes or hangs:
-    - Clear Metro cache with `npx expo start -c`
-    - Ensure you're using compatible Node.js and npm versions
-    - Check for memory issues if your app is very large
-  </Accordion>
-</AccordionGroup>
+    #### Site URL
+    - Set your site URL to your app's scheme that you configured in `app.json` with `://` at the end
+    - Example: if your scheme is `myapp`, set it to `myapp://`
 
-### Next Steps
+    #### Redirect URLs
+    - Add your app scheme followed by `://**`
+    - Example: `myapp://**`
 
-Now that you have your development build up and running, you're ready to start working on your app! 
+    These scheme-based URLs are essential for proper authentication flow when using your development build, as they enable your app to handle authentication redirects correctly.
+  </Step>
+</Steps>
 
-Next, you might want to:
 
-- Set up [Supabase Authentication](/features/auth/supabase-setup) for user login
-- Configure [Push Notifications](/features/push/setup) for user engagement
-- Learn about [UI and Styling](/development/ui/nativewind) in the boilerplate
