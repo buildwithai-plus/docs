@@ -1,0 +1,46 @@
+---
+title: "EAS Setup"
+description: "Set up Expo Application Services (EAS) for building your app"
+---
+
+import { Tip, Info } from 'nextra/components'
+
+## Setting up EAS
+
+[Expo Application Services (EAS)](https://expo.dev/eas) is a cloud service for building and deploying your app. This guide covers the initial EAS setup required before creating development builds.
+
+### Step 1: Install EAS CLI
+
+Install the EAS CLI globally on your development machine:
+
+```bash
+npm install -g eas-cli
+```
+
+### Step 2: Log in to Expo
+
+You'll need an Expo account to use EAS. If you don't have one, sign up at [expo.dev](https://expo.dev/signup).
+
+Log in through the CLI:
+
+```bash
+eas login
+```
+
+### Step 3: Configure Build Profiles
+
+Run the build configuration command:
+
+```bash
+eas build:configure
+```
+
+This creates an `eas.json` file with standard EAS build profiles. For now, we'll use the `development` profile which is designed for testing on real devices.
+
+<Tip>
+  The `eas.json` file is automatically generated. You don't need to edit it for basic development.
+</Tip>
+
+### Next Steps
+
+Now that EAS is configured, you're ready to [create a development build](/quickstart/development-build) to test your app on real devices.

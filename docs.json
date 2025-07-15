@@ -10,144 +10,99 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Getting Started",
-        "groups": [
-          {
-            "group": "Introduction",
-            "pages": [
-              "index",
-              "introduction/what-is-buildwithai",
-              "introduction/whats-included"
-            ]
-          },
-          {
-            "group": "Quick Start",
-            "pages": [
-              "quickstart/project-setup",
-              "quickstart/supabase-setup",
-              "quickstart/app-configuration",
-              "quickstart/development-build"
-            ]
-          }
+        "group": "Introduction",
+        "pages": [
+          "index",
+          "introduction/what-is-buildwithai"
         ]
       },
       {
-        "tab": "Features",
-        "groups": [
-          {
-            "group": "Authentication",
-            "pages": [
-              "features/auth/supabase-setup",
-              "features/auth/google-auth",
-              "features/auth/apple-auth"
-            ]
-          },
-          {
-            "group": "Push Notifications",
-            "pages": [
-              "features/push/setup",
-              "features/push/testing"
-            ]
-          },
-          {
-            "group": "In-App Purchases",
-            "pages": [
-              "features/iap/setup",
-              "features/iap/testing"
-            ]
-          },
-          {
-            "group": "Analytics",
-            "pages": [
-              "features/analytics/posthog-setup",
-              "features/analytics/tracking"
-            ]
-          },
-          {
-            "group": "Ads",
-            "pages": [
-              "features/ads/admob-setup",
-              "features/ads/store-requirements"
-            ]
-          }
+        "group": "Quick Start",
+        "pages": [
+          "quickstart/project-setup",
+          "quickstart/supabase-setup",
+          "quickstart/app-configuration",
+          "quickstart/eas-setup",
+          "quickstart/development-build"
         ]
       },
       {
-        "tab": "Development",
-        "groups": [
-          {
-            "group": "UI & Styling",
-            "pages": [
-              "development/ui/nativewind",
-              "development/ui/components",
-              "development/ui/styling-conventions",
-              "development/ui/mobbin"
-            ]
-          },
-          {
-            "group": "Routing & Navigation",
-            "pages": [
-              "development/routing/setup",
-              "development/routing/adding-screens",
-              "development/routing/deep-linking"
-            ]
-          },
-          {
-            "group": "Internationalization",
-            "pages": [
-              "development/i18n/managing-languages",
-              "development/i18n/switching-languages"
-            ]
-          },
-          {
-            "group": "EAS Workflows",
-            "pages": [
-              "development/eas/development-builds",
-              "development/eas/testing",
-              "development/eas/production-builds",
-              "development/eas/extras"
-            ]
-          }
+        "group": "Authentication",
+        "pages": [
+          "features/auth/social-auth",
+          "features/auth/google-auth",
+          "features/auth/apple-auth"
+        ]
+      },
+      {
+        "group": "Push Notifications",
+        "pages": [
+          "push/credentials-setup",
+          "push/implementation"
+        ]
+      },
+      {
+        "group": "Analytics",
+        "pages": [
+          "analytics/posthog-setup",
+          "analytics/event-tracking"
+        ]
+      },
+      {
+        "group": "In-App Purchases",
+        "pages": [
+          "iap/app-store-setup",
+          "iap/revenuecat-setup",
+          "iap/superwall-integration",
+          "iap/testing"
+        ]
+      },
+      {
+        "group": "Advertising",
+        "pages": [
+          "ads/admob-setup",
+          "ads/implementation"
+        ]
+      },
+      {
+        "group": "Development",
+        "pages": [
+          "development/ci-cd",
+          "development/app-signing"
+        ]
+      },
+      {
+        "group": "Core Features",
+        "pages": [
+          "features/project-structure",
+          "features/navigation",
+          "features/i18n-setup",
+          "features/ui-system",
+          "features/themes",
+          "features/nativewind",
+          "features/reusables",
+          "features/icons"
+        ]
+      },
+      {
+        "group": "EAS Workflow",
+        "pages": [
+          "eas/development-builds",
+          "eas/production-builds",
+          "eas/updates",
+          "eas/best-practices"
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "GitHub",
-          "href": "https://github.com/buildwithai/boilerplate",
-          "icon": "github"
-        },
-        {
-          "anchor": "Demo App",
-          "href": "https://demo.buildwithai.io",
-          "icon": "mobile"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.webp",
-    "dark": "/logo/dark.webp"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:steffen@buildwithai.io"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Get Started",
-      "href": "https://buildwithai.mintlify.app/quickstart/project-setup"
-    }
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/solgrenk"
+      "github": "https://github.com/buildwithai-templates/boilerplate",
+      "youtube": "https://www.youtube.com/@BuildWithAIChannel",
+      "website": "https://www.buildwithai.io",
+      "x-twitter": "https://x.com/solgrenk"
     }
   }
 }

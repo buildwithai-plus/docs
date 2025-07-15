@@ -94,62 +94,31 @@ You'll need to modify these settings in your project's `app.json` file:
   Replace the default icons and splash screens in `assets/images/` with your own. See the [App Icons Guide](/features/customization/app-icons) for creating custom assets with AI.
 </Info>
 
-### Step 3: Log in to Expo
+### Step 3: Set Up Environment Variables
 
-You'll need an Expo account to use EAS Build. If you don't have one, you can sign up at [expo.dev](https://expo.dev/).
-
-Log in to your Expo account through the CLI:
+Create your environment file from the example:
 
 ```bash
-eas login
+cp .env.example .env
 ```
 
-Check if you are logged in:
-```bash
-eas whoami
+Update the variables in `.env` with your configuration:
+
+```env
+# App Environment
+APP_ENV=development
+
+# Supabase Configuration
+# (You'll get these after setting up Supabase)
+EXPO_PUBLIC_SUPABASE_URL=
+EXPO_PUBLIC_SUPABASE_ANON_KEY=
+
+# Optional: Analytics Configuration
+EXPO_PUBLIC_GOOGLE_ANALYTICS_ID=
 ```
 
-### Step 4: Initialize EAS Project
+### Next Steps
 
-Initialize your project with EAS (Expo Application Services):
-
-```bash
-eas init
-```
-
-This will connect your local project to Expo's cloud services and prepare it for building.
-
-### Step 5: Configure EAS Build Profiles
-
-The boilerplate includes pre-configured EAS build profiles in the `eas.json` file. Review and modify them as needed for your specific requirements.
-
-For example:
-
-```json
-{
-  "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "env": {
-        "APP_ENV": "development"
-      }
-    },
-    "preview": {
-      "distribution": "internal",
-      "env": {
-        "APP_ENV": "staging"
-      }
-    },
-    "production": {
-      "env": {
-        "APP_ENV": "production"
-      }
-    }
-  }
-}
-```
-
-### Next
-
-After configuring your app, you're ready to create a development build to test on real devices.
+Now that you've configured your app:
+1. [Set up Supabase](/quickstart/supabase-setup) for authentication
+2. [Create a development build](/quickstart/development-build) to test on real devices

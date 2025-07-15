@@ -11,23 +11,11 @@ import { Accordion, AccordionGroup } from 'nextra/components'
 ## Development Builds
 
 <Steps>
-  <Step title="Set Up EAS CLI">
-    Install and configure the EAS CLI tools:
-
-    ```bash
-    # Install EAS CLI globally
-    npm install -g eas-cli
-
-    # Log in to your Expo account
-    eas login
-
-    # Initialize EAS in your project
-    eas init
-    > Would you like to create a project for @/expo-username/your-slug? ... yes
-
-    # Configure build profiles
-    eas build:configure
-    ```
+  <Step title="Set Up EAS">
+    Before creating a development build, make sure you've completed the [EAS Setup](/quickstart/eas-setup) guide which covers:
+    - Installing the EAS CLI
+    - Logging in to Expo
+    - Initializing your EAS project
   </Step>
 
   <Step title="Platform-Specific Setup">
@@ -35,7 +23,7 @@ import { Accordion, AccordionGroup } from 'nextra/components'
       <Tab title="iOS">
         <Steps>
           <Step title="Enroll in Apple Developer Program">
-            An active [Apple Developer Program](https://developer.apple.com/programs/) subscription is required (costs $99 per year).
+            An active [Apple Developer Program](https://developer.apple.com/programs/enroll) subscription is required (costs $99 per year).
           </Step>
 
           <Step title="Register Your Device & Install Provisioning Profile">
@@ -43,16 +31,36 @@ import { Accordion, AccordionGroup } from 'nextra/components'
             eas device:create
             ```
 
-            Follow the prompts:
-            - Log in to your Apple account when prompted
-            - Select "Website that generates a registration URL" when asked how to register
+            The command will walk you through these steps:
+
+            1. **Confirm Expo Account**
+               ```bash
+               You're inside the project directory. Would you like to use the [your-expo-account-name] account? » (Y/n)
+               ```
+               Just press `Y` to continue with your current account
+
+            2. **Sign in to Apple Developer**
+               ```bash
+               ? Apple ID: >> [your-apple-id] (if correct hit `Enter`)
+               ```
+               ```bash
+               ? Password: >> (copy and paste your password)
+               ```
+            3. **Choose Registration Method**
+               ```bash
+               ? How would you like to register your devices?
+               > Website - generates a registration URL ...
+               ```
+               Press `Enter` to use the website method (recommended)
 
             On your iOS device:
+            - Open your camera app
             - Scan the QR code from the terminal
             - Open the provided URL in your device's browser
-            - Tap "Download Profile"
-            - Go to Settings app and install the profile when prompted
-            - You'll see a success message after installation
+            - Tap "Download Profile" button, and press "Continue" or "Allow" when prompted. 
+            - Go to Settings app > Tap "Profile downloaded" > Tap "Install" and allow the installation.
+            - After the device is registered, you'll be redirected to the browser, and see a success message.
+            - Done!
 
             <Info>
               For more detailed instructions, see [Expo's guide for registering your device](https://docs.expo.dev/tutorial/eas/ios-development-build-for-devices/)
@@ -60,18 +68,47 @@ import { Accordion, AccordionGroup } from 'nextra/components'
           </Step>
 
           <Step title="Create iOS Development Build">
+            <Tip>
+              Before running the build command, check that `developmentClient` is set to `true` in your `eas.json` under the development profile.
+            </Tip>
+
+            Run the build command:
             ```bash
             eas build --platform ios --profile development
+            # Or use the shorter version:
+            eas build -p ios --profile development
             ```
 
-            When prompted:
-            - Confirm or enter iOS bundle identifier
-            - Log in to Apple account
-            - Select "Yes" when asked about push notifications
-            - Select your registered device(s) for ad hoc build (choose the device you registered earlier)
-            - For encryption question, select Yes (default) for standard apps
+            You'll be guided through several prompts:
 
-            The build will begin in the cloud and you can monitor progress via the EAS dashboard.
+            1. **iOS Bundle Identifier**
+               ```bash
+               What would you like your iOS bundle identifier to be?
+               ```
+               Press `Enter` to use the bundle identifier you defined in `app.json`.
+
+            2. **Apple Account Login**
+               ```bash
+               Do you want to log in to your Apple account? (Y/n)
+               ```
+               Press `Y` to proceed (required for first-time builds).
+
+            3. **Distribution Certificate**
+               ```bash
+               Generate new Apple Distribution Certificate? (Y/n)
+               ```
+               Press `Y` to generate a new certificate.
+
+            4. **Device Selection**
+               Choose from the devices you just registered in the previous step using the provisioning profile.
+
+            5. **Encryption Compliance**
+               ```bash
+               iOS app only uses standard/exempt encryption? (Y/n)
+               ```
+               Press `Y` (this is the default value, don't worry about this setting).
+
+            The build will begin in the cloud. You can monitor progress in the terminal or via the EAS dashboard.
           </Step>
 
           <Step title="Install the Development Build">
@@ -79,13 +116,25 @@ import { Accordion, AccordionGroup } from 'nextra/components'
             - Scan the QR code from the EAS dashboard or terminal
             - Tap "Open with iTunes" when it appears in the Camera app
             - Confirm installation when prompted
+            
+            The app will appear in your device's app library.
           </Step>
 
           <Step title="Enable Developer Mode on your iPhone">
-            - Go to the Settings App > Privacy & Security > Developer Mode
-            - Toggle the switch to enable
-            - Tap "Restart" when prompted
-            - After restart, tap "Turn On" and enter your passcode
+            <Info>
+              If you're using iOS 16 or newer, you'll need to enable Developer Mode on your iPhone to run development builds.
+            </Info>
+
+            1. Open Settings > Privacy & Security and scroll down to Developer Mode
+
+            2. Tap the switch to enable Developer Mode
+               - You'll see a security warning alert
+               - Tap Restart to continue
+
+            3. After your device restarts:
+               - Unlock your device
+               - Tap Turn On in the confirmation alert
+               - Enter your device passcode when prompted
           </Step>
         </Steps>
 
@@ -97,20 +146,44 @@ import { Accordion, AccordionGroup } from 'nextra/components'
       <Tab title="Android">
         <Steps>
           <Step title="Create Android Development Build">
+            <Tip>
+              Before running the build command, check that `developmentClient` is set to `true` in your `eas.json` under the development profile.
+            </Tip>
+
+            Run the build command:
             ```bash
             eas build --platform android --profile development
+            # Or use the shorter version:
+            eas build -p android --profile development
             ```
 
-            When prompted:
-            - Confirm your Android package name
-            - For keystore generation questions, accept the defaults
-            - The build will begin in the cloud and you can monitor progress via the EAS dashboard
+            You'll be guided through these prompts:
+
+            1. **Android Application ID**
+               ```bash
+               What would you like your Android application id to be?
+               ```
+               Press `Enter` to use the package name you defined in `app.json`.
+
+            2. **Android Keystore**
+               ```bash
+               Generate a new Android Keystore? (Y/n)
+               ```
+               Press `Y` to generate a new keystore (required for signing your app).
+            
+            The build will begin in the cloud. You can monitor progress in the terminal or via the EAS dashboard.
           </Step>
 
           <Step title="Install the Development Build">
-            - Scan the QR code shown in the terminal or on EAS dashboard
-            - Download and install the app on your Android device
-            - Enable installation from unknown sources if prompted
+            After the build completes:
+            1. Scan the QR code shown in the terminal or EAS dashboard
+            2. Download the APK file when prompted
+            3. When your browser asks to install the APK:
+               - If prompted about "Install unknown apps", tap Settings
+               - Enable installation permission for your browser
+               - Go back and tap "Install"
+            
+            The app will appear in your device's app library.
           </Step>
         </Steps>
 
@@ -125,7 +198,7 @@ import { Accordion, AccordionGroup } from 'nextra/components'
     Once you have installed the development build on your device, start the development server:
 
     ```bash
-    npx expo start -c  # -c clears the cache
+    npx expo start
     ```
 
     Then connect your device to the development server:
@@ -135,46 +208,69 @@ import { Accordion, AccordionGroup } from 'nextra/components'
     3. Tap "Fetch development servers" and select your server from the list
     4. Or just scan the QR code from the terminal
 
-    <Accordion title="Different Network? Use Tunnel Mode">
-      If your phone isn't on the same WiFi as your computer (or the QR code doesn't work):
+    <Info>
+      Make sure your computer and device are on the same Wi-Fi network for the best development experience.
+    </Info>
 
-      1. Run this command instead: 
+    <Accordion title="QR Code Not Working?">
+      First, check your network setup:
+
+      1. **Check Network Connection**
+         - Make sure your computer and phone are using the same network
+         - This could be the same Wi-Fi, or a hotspot connection
+         - Check that you're not accidentally using different networks
+
+      2. **Check Network Type** (if at home)
+         - Your home network might be set as "Public" in your system settings
+         - Try changing it to "Private" in your Wi-Fi settings
+
+      If you still can't connect, or if you're on a public network (like at cafes, schools or libraries), you'll need to use tunnel mode:
+
+      1. Install ngrok with admin privileges:
+      <Tabs>
+        <Tab title="Windows">
+          ```bash
+          # Run PowerShell as Administrator
+          npm install --global @expo/ngrok
+          ```
+        </Tab>
+        <Tab title="macOS/Linux">
+          ```bash
+          sudo npm install --global @expo/ngrok
+          ```
+        </Tab>
+      </Tabs>
+
+      2. Start the tunnel:
       ```bash
-      npx expo start -c --tunnel
+      npx expo start --tunnel
       ```
-      2. When prompted to install the ngrok package, type `y` and press Enter
-      3. A new QR code will appear - scan it with your phone
 
-      <Tip>
-        You can pre-install ngrok to avoid permission issues:
-        ```bash
-        # Install ngrok globally beforehand
-        npm install -g @expo/ngrok
-        ```
+      3. Scan the new QR code that appears
 
-        If you still see permission errors:
-        - **Windows:** Right-click on Command Prompt/PowerShell and select "Run as administrator"
-        - **Mac:** Run `sudo npm install -g @expo/ngrok` and then try the tunnel command again
-      </Tip>
+      <Info>
+        Note: Tunnel mode is slower than a direct connection, so try to use the same network when possible.
+      </Info>
     </Accordion>
   </Step>
-  <Step title="Update Supabase URL Configuration">
-    After successfully creating your development build, you need to update your Supabase authentication URL configuration to work with your app scheme:
-
-    1. **Go to your Supabase dashboard**
-    2. **Navigate to Authentication → URL Configuration**
-    3. **Update the following settings**:
-
-    #### Site URL
-    - Set your site URL to your app's scheme that you configured in `app.json` with `://` at the end
-    - Example: if your scheme is `myapp`, set it to `myapp://`
-
-    #### Redirect URLs
-    - Add your app scheme followed by `://**`
-    - Example: `myapp://**`
-
-    These scheme-based URLs are essential for proper authentication flow when using your development build, as they enable your app to handle authentication redirects correctly.
-  </Step>
 </Steps>
+
+## Update Supabase URL Configuration
+
+After successfully creating your development build, you need to update your Supabase authentication URL configuration to work with your app scheme:
+
+1. **Go to your Supabase dashboard**
+2. **Navigate to Authentication → URL Configuration**
+3. **Update the following settings**:
+
+### Site URL
+- Set your site URL to your app's scheme that you configured in `app.json` with `://` at the end
+- Example: if your scheme is `myapp`, set it to `myapp://`
+
+### Redirect URLs
+- Add your app scheme followed by `://**`
+- Example: `myapp://**`
+
+These scheme-based URLs are essential for proper authentication flow when using your development build, as they enable your app to handle authentication redirects correctly.
 
 
