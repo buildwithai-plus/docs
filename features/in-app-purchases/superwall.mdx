@@ -1,0 +1,57 @@
+1. Create a user at [Superwall](https://superwall.com/) if you don't have one already
+2. Create a new project:
+    - Platform: React Native
+    - App Name: Your app name
+    - iOS Bundle ID: Your app's bundle ID from `app.json`
+    - Android Bundle ID: Your app's package name from `app.json`
+    Click **Create App**
+
+    Superwall will create a new Project, with apps for both iOS and Android.
+
+    You will be taken to the **Dashboard** page.
+
+3. Integrate with RevenueCat:
+    - Go to **Settings** (bottom of left sidebar) > **Revenue Tracking**
+    - Pick **RevenueCat** and click **Get Integration Token** and copy it
+
+    - Go to [RevenueCat](https://app.revenuecat.com/)
+    - Select your project
+    - Go to **Integrations** > **Superwall**
+    - Paste the **Integration Token** in the **Superwall Server Secret** field
+    - Click **Save**
+
+4. Finish setting up Settings
+
+    We will need to set up the Revenue Cat Public API Key for both iOS and Android.
+    Go to [RevenueCat](https://app.revenuecat.com/)
+    Select your project
+
+    Find your API keys under **API keys** tab in the left sidebar.
+    Click **Show key** for the **Public API Key** for both iOS and Android.
+    - For iOS:
+        - Go to **Settings** > **General**
+            - Revenue Cat Public API Key: The `appl_...` key from RevenueCat
+            - Apple App ID: Your app's ID from App Store Connect
+            - Team ID: Your Team ID from App Store Connect
+            Click **Update Application**
+
+    - For Android:
+        - Go to **Settings** > **General**
+            - Revenue Cat Public API Key: `goog_...` key from RevenueCat
+            Click **Update Application**
+
+5. Create an Entitlement
+    - Go to **Products** in the left sidebar 
+    - Select **Entitlements** in the top menu
+    - Click **+ Add Entitlement**
+        - Identifier: Give it the same name as the entitlement you created in RevenueCat (e.g. `premium`)
+
+5. Add Products to Superwall
+    - Go to **Products** in the left sidebar
+    - Select **Products** in the top menu
+    - Click **+ Add Product**
+        They should appear in the list when you try to add something in a field
+        Fill in the fields not already filled
+        - Entitlements: Select the entitlement you created in the previous step
+
+    Do this for all products you want to add to Superwall (both iOS and Android)

@@ -1,0 +1,193 @@
+---
+title: Closed Testing
+slug: closed-testing
+excerpt: Testing purchases in Play Store Sandbox
+hidden: false
+---
+
+## Create your app in Google Play Console
+
+Open [Google Play Console](https://play.google.com/console/).
+Select **All apps** > **Create app**.
+
+Under **App Details** section:
+- Select a default language and add the name of your app as you want it to appear on Google Play. You can change this later.
+- Specify whether your application is an app or a game. You can change this later.
+- Specify whether your application is free or paid.
+- Add an email address that Play Store users can use to contact you about this application.
+
+Under **Declarations** section:
+- Acknowledge the “Developer Program Policies” and “US export laws” declarations.
+- Accept the Play App Signing Terms of Service.
+
+Click **Create app**.
+
+## Finish setting up your app
+
+When the app is created you will be taken to the app's **Dashboard** page.
+
+On the page you will see a **Finish setting up your app** section. 
+Click **View tasks**. 
+
+Do all tasks in the checklist:
+
+Let us know about the content of your app
+- Set privacy policy
+- App access
+- Ads
+- Content rating
+- Target audience
+- Data safety
+- Government apps
+- Financial features
+- Health
+
+Manage how your app is organized and presented
+- Select an app category and provide contact details
+- Set up your store listing
+
+Once they are all done, you can move on to **Closed testing**.
+
+## Closed testing
+
+Once you are done with **Finish setting up your app** you will be able to access **Closed testing** on your app's **Dashboard** page.
+
+You can also access **Closed testing** from the **Test and release** > **Testing** > **Closed testing** in the left sidebar.
+
+Here are the steps we will follow to set up the closed testing track:
+
+1. Set up your closed test track
+    - Select countries and regions
+    - Select testers
+
+2. Create and roll out a release
+    - Create a new release
+    - Preview and confirm the release
+    - Send the release to Google for review
+
+### Enable billing for your project
+To enable billing functionality in your Expo/React Native project:
+
+- Run:
+```bash
+npx expo install expo-superwall react-native-purchases expo-build-properties
+```
+
+- In `app.json`: add expo plugin
+```json
+[
+    "expo-build-properties",
+    {
+      "ios": {
+        "deploymentTarget": "16.0"
+      },
+      "android": {
+        "minSdkVersion": 26
+      }
+    }
+]
+```
+
+This will install the necessary packages and configure your project with the minimum SDK versions required for in-app purchases. These packages will automatically add the necessary `BILLING` permission to your Android app.
+
+### Create an EAS production build
+
+```bash
+eas build -p android --profile production
+```
+
+The build will queue and start building. You will updates on the progress in the terminal. When it's done:
+
+- Open the URL that was printed in the terminal to track the build progress
+or
+- Open the [EAS dashboard](https://expo.dev/accounts/[YOUR_ACCOUNT]/projects/[YOUR_PROJECT]/builds).
+- Pick the newly added production build
+
+When the build is done:
+- Under **Build artifacts** click on **Download** to get the **.aab** file.
+
+This is the file we will use to upload to Google Play Console.
+
+### Create a closed test track
+
+Make sure you are in the **Closed testing** section. 
+You will already have a closed test track created when you created your app (Closed testing - Alpha).
+
+On this **Closed testing - Alpha** track: Click **Manage track**
+
+You will now see the **Set up closed testing track** checklist.
+
+1. **Select countries**
+    - Click the checkbox next to the countries you want to 
+    - Make sure you select the country where you are testing from
+    - You also just pick all countries
+      - Click the checkbox next to **Country / region** at the top, to check all countries
+    - Click **Save**
+
+2. **Select testers**
+    - Click **Create email list**
+      - List name: Name it whatever you'd like (e.g. "Testers")
+      - Add email addresses: Add your testing email address (the one you are signed in with on your testing device)
+        - Add any other email addresses you want to test with too
+      - Click **Save changes**
+    - Enable the list you just created
+    - Feedback URL or email address: Add your email address for feedback
+    - Click **Save**
+
+<Accordion title="How testers join your closed test">
+
+### Let testers join
+
+You can find the Opt-in URL in the closed track you created under Testers > How testers join your test:
+- Join on Android
+- Join on the web
+
+Copy the url you want to use and open it in your testing device (or any browser that's logged in with that testing user) to make the user a tester. 
+
+Opening the link in the browser will show a Google Play page with a **BECOME A TESTER** button. Press that button and your user will be able to make testing purchases on your testing device.
+
+They will also be added as a tester in the closed testing track. You need 12 users testing your app for 14 days to be able to publish your app to the Play Store.
+</Accordion>
+
+
+3. **Create a new release**
+    - App bundles: Click **Upload**, and select the Android App Bundle (file ending with .aab) we just built and downloaded in the previous step.
+    - Release name: Name it whatever you'd like (e.g. "First Test release")
+    - Release notes: (optional) Add any release notes you'd like, INSIDE of the `<en-US></en-US>` tags
+    - Click **Next**
+
+4. **Preview and confirm the release**
+    - You will see a preview of the release, before you send it to Google for review.
+    - If all looks good: Click **Save**
+    - Then an **Go to Publishing Overview** alert will pop up. 
+      - Click **Got to overview**
+
+5. **Send the release to Google for review**
+    - Some automatic quick checks for commonlly found issues will run.
+      - You will get notified on any issues with your release.
+    - If there are issues: View issues and fix them. Then go back to **Overview**
+    - If there are no issues: Click **Send X change(s) for review**
+        - Confirm by clicking **Send changes for review**
+    - It says reviews are typically completed within 7 days, but may take longer.
+    - However, these small releases are usually approved within a day.
+
+  Now, you just wait for the review to be completed.
+
+### Configure licensing testing
+
+In order to be able to test in-app purchases in the next steps of the development you are going to need to use a test user. This test user will be the user that you logged in first in your Android testing device. Note that the only way to changing the primary account on a device is to do a factory reset.
+
+Open [Google Play Console](https://play.google.com/console/). 
+In the sidebar, click on **Settings**.
+Scroll down to find **License testing** under **Monetization**. Press the arrow on the right to open it.
+
+Choose license testers from the email lists: Just use the testers list you created in the closed testing track.
+
+- Make sure the account you are using in your real Android testing device (the account you are logged in with) is added to the testers list.
+
+License response: Pick **RESPOND_NORMALLY** 
+
+Press **Save changes**.
+
+## What now?
+You can now add real subscription products to your Android app. 

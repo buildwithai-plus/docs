@@ -52,10 +52,12 @@
       {
         "group": "In-App Purchases",
         "pages": [
-          "iap/app-store-setup",
-          "iap/revenuecat-setup",
-          "iap/superwall-integration",
-          "iap/testing"
+          "features/in-app-purchases/closed-testing",
+          "features/in-app-purchases/android-products",
+          "features/in-app-purchases/app-store-setup",
+          "features/in-app-purchases/revenuecat-setup",
+          "features/in-app-purchases/superwall-integration",
+          "features/in-app-purchases/testing"
         ]
       },
       {

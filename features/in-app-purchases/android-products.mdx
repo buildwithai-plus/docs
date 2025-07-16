@@ -1,60 +1,69 @@
 URL: https://www.revenuecat.com/docs/getting-started/entitlements/android-products
 
-To set up subscription products for Android devices, start by logging into [Google Play Console](https://play.google.com/console). Google Play Console is Google's central hub for managing app releases, testing, in-app purchases, and more.
-
-This guide assumes basic knowledge of Google Play Console, as well as having an app set up and ready for adding in-app purchases.
 
 ## Create a Subscription
 
-> **Info**: You'll need to have an APK uploaded before you can create in-app products. Check out our guide on [sandbox testing on Android](sandbox-android.md) for details on how to upload an APK and roll out a release on a closed test track.
+Inside your app's Google Play Console.
+In the left sidebar, click **Monetize with Play** > **Products** > **Subscriptions**
+If you see the message: "Your app doesn't have any subscriptions yet": refer back to our [Closed testing guide](./closed-testing.mdx)
 
-To create a subscription, go to Google Play Console's 'All Applications' page and select your app from the list.
-
-In the sidebar, select the **Products** dropdown, then choose **Subscriptions**.
-
-![alt text](image-3.png)
-
-After clicking Create, provide a couple pieces of metadata to Google:
+After clicking **Create subscription**, provide the following metadata to Google:
 
 | Metadata   | Description                                                                                                                                                                                                                                                                           |
 | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Product ID | The product ID is a unique alphanumeric ID that is used for accessing your product in development and syncing with RevenueCat. After you use a Product ID for one product in Google Play Console, **it can't be used again across any of your apps, even if the product is deleted**. |
-| Name       | A short name of the item, up to 55 characters. This will be displayed on your Google Play Store listing.                                                                                                                                                                              |
+| Product ID | The product ID is a unique alphanumeric ID that is used for accessing your product. |
+| Name       | A short name of the item, up to 55 characters. This will be displayed on your Google Play Store listing. |
 
 ### Tips for creating robust product IDs
 
 After you use a Product ID for one product in Google Play Console, **it can't be used again across any of your apps, even if the product is deleted**. It helps to be a little organized here from the beginning - we recommend using a consistent naming scheme across all of your product identifiers such as:
 
-> **`<app>_<entitlement>_<version>`**
+> **`<app>_<entitlement>`**
 
 - **app:** Some prefix that will be unique to your app, since the same product ID cannot be used in any future apps you create.
 - **entitlement**: A name for what the product provides access to, e.g., "premium"
-- **version**: A version number
 
 For example, using this format the identifier for your first subscription product that grants access to premium content would be:
 
-> `rc_premium_v1`
+> `bwai_premium`
 
-![alt text](image-2.png)
 
 ### Create a base plan
 
 For subscription products, you'll need to add a base plan. Base plans define a billing period, price, and renewal type for purchasing your subscription. Customers never purchase a subscription product directly, they always purchase a base plan of a subscription.
 
-Click "Add base plan" and fill out the associated fields. Make sure to set a price, and click "Activate". Since Google introduced multiple base plans with Billing Client 5, it's good practice to be as clear as possible when naming your plans, such as: `<duration>-<renewaltype>`, eg. `annual-autorenewing`.
+It's good practice to be as clear as possible when naming your plans, such as: `<duration>-<renewaltype>`, eg. `annual-autorenewing`.
 
-![alt text](image-1.png)
 
-> **Info**: Representation of Google Play subscription products in RevenueCat
-> 
-> RevenueCat Products map to Base Plans for Google Play subscriptions, since those are the products that customers can purchase. Newly set up products in RevenueCat follow the identifier format `<subscription_id>:<base-plan-id>`, whereas products that were set up before February 2023 follow the identifier format `<subscription_id>`.
+Inside the subscription you just created, under "Base plans and offers" click **Add base plan** 
+Base plan ID: `annual-autorenewing`
+Type: `Auto-renewing`:
+    - Billing period: Set to `Yearly`
+    - Keep the rest of the fields as is
+Price and availability: 
+    - Click **Set price**
+        - Toggle all countries
+        - Click **Set price**
+            - Pick your price: Choose a common currency like USD and pick a price (this is only for the billing period you selected)
+            - Click **Update**
+        - All countries will now automatically get their prices converted to their local currency
+    - Click **Save**
 
-### Offers
 
-In addition to base plans, you can create offers for your subscriptions. Offers allow you to provide discounted pricing or free trials to attract new subscribers or re-engage lapsed subscribers.
+Do this for the monthly base plan as well:
 
-> **Info**: Offers are a powerful tool for increasing subscription conversion rates. Consider creating introductory offers like free trials or discounted first-month pricing to encourage users to try your subscription.
+Base plan ID: `monthly-autorenewing`
+Type: `Auto-renewing`:
+    - Billing period: Set to `Monthly`
+    - Keep the rest of the fields as is
+Price and availability: 
+    - Click **Set price**
+        - Toggle all countries
+        - Click **Set price**
+            - Pick your price: Choose a common currency like USD and pick a price (this is only for the billing period you selected)
+            - Click **Update**
+        - All countries will now automatically get their prices converted to their local currency
+    - Click **Save**
 
-## Integrate with RevenueCat
 
-If you're ready to integrate your new Google Play in-app product with RevenueCat, continue our [product setup guide](./entitlements.md).
+Great! You now have your subscription products set up with monthly and yearly base plans.
