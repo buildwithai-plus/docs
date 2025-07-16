@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "willow",
-  "name": "BuildWithAI+ Boilerplate",
+  "name": "BuildWithAI Boilerplate",
   "description": "Production-ready React Native boilerplate for creating powerful mobile applications with AI features",
   "colors": {
     "primary": "#10b981",
@@ -14,8 +14,7 @@
       {
         "group": "Introduction",
         "pages": [
-          "index",
-          "introduction/what-is-buildwithai"
+          "index"
         ]
       },
       {
@@ -62,27 +61,16 @@
       {
         "group": "Advertising",
         "pages": [
-          "ads/admob-setup",
-          "ads/implementation"
-        ]
-      },
-      {
-        "group": "Development",
-        "pages": [
-          "development/ci-cd",
-          "development/app-signing"
+          "features/ads/admob-setup",
+          "features/ads/implementation"
         ]
       },
       {
         "group": "Core Features",
         "pages": [
-          "features/project-structure",
-          "features/navigation",
-          "features/i18n-setup",
-          "features/ui-system",
+          "features/i18n",
           "features/themes",
-          "features/nativewind",
-          "features/reusables",
+          "features/components",
           "features/icons"
         ]
       },

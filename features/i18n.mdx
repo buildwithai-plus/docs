@@ -1,0 +1,133 @@
+---
+title: 'i18n Guide'
+description: 'Using translations in your app'
+---
+
+import { Callout } from 'nextra/components'
+
+# i18n Guide
+
+The BuildWithAI boilerplate comes with a complete internationalization (i18n) system that makes it easy to create multilingual apps. The system uses JSON files for translations and provides a simple hook-based API to integrate translations into your components. This guide will show you how to use and extend the i18n system in your app.
+
+## Adding Text
+
+1. **Edit translation files** in all languages:
+
+```bash
+lib/i18n/locales/en/common.json  # English
+lib/i18n/locales/fr/common.json  # French
+...
+```
+
+2. **Add your text** (same key, different translations):
+
+```json filename="en/common.json"
+{
+  "settings": {
+    "saveButton": "Save Changes"
+  }
+}
+```
+
+```json filename="fr/common.json"
+{
+  "settings": {
+    "saveButton": "Enregistrer"
+  }
+}
+```
+
+3. **Use in components**:
+
+```tsx
+import { useTranslation } from '~/lib/i18n/useTranslation';
+
+function MyComponent() {
+  const { t } = useTranslation();
+  return <Text>{t('settings.saveButton')}</Text>;
+  // English: "Save Changes"
+  // French: "Enregistrer"
+}
+```
+
+## Using Variables in Text
+
+1. **Add variables** with `{{variableName}}` syntax:
+
+```json filename="en/common.json"
+{
+  "profile": {
+    "greeting": "Welcome back, {{name}}!"
+  }
+}
+```
+
+```json filename="fr/common.json"
+{
+  "profile": {
+    "greeting": "Bon retour, {{name}} !"
+  }
+}
+```
+
+2. **Use in components**:
+
+```tsx
+function ProfileScreen() {
+  const { t } = useTranslation();
+  return <Text>{t('profile.greeting', { name: 'John' })}</Text>;
+  // English: "Welcome back, John!"
+  // French: "Bon retour, John !"
+}
+```
+
+<Callout>
+### Best Practices
+
+- Use same keys in both language files
+- Organize by feature: `welcome`, `settings`, etc.
+- Test after adding new translations
+</Callout>
+
+## Adding a New Language
+
+1. **Create language files**:
+
+```bash
+# Create folder and copy template
+mkdir lib/i18n/locales/es
+copy lib/i18n/locales/en/common.json lib/i18n/locales/es/common.json
+```
+
+2. **Translate** content from English to your new language:
+
+```json filename="es/common.json"
+{
+  "welcome": { "title": "Bienvenido" },
+  "settings": { "title": "Configuración" }
+}
+```
+
+3. **Register** the new language in `lib/i18n/i18n.ts`:
+
+```tsx filename="lib/i18n/i18n.ts"
+// Import new language
+import esCommon from './locales/es/common.json';
+
+// Add to resources
+const resources = {
+  en: { common: enCommon },
+  fr: { common: frCommon },
+  es: { common: esCommon }  // New language
+};
+```
+
+4. **Add** the new language to `components/account/LanguageSettingsSheet.tsx`:
+
+```tsx filename="components/account/LanguageSettingsSheet.tsx"
+const languages = [
+  { code: 'en', name: 'English', nativeName: 'English' },
+  { code: 'fr', name: 'French', nativeName: 'Français' },
+  { code: 'es', name: 'Spanish', nativeName: 'Español' }, // Add this
+];
+```

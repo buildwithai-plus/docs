@@ -27,10 +27,10 @@ Now, open the `app.json` file and update the following essential fields to custo
     "slug": "your-app-slug",
     "scheme": "your-app-scheme",
     "ios": {
-      "bundleIdentifier": "com.yourcompany.yourapp"
+      "bundleIdentifier": "com.owner.yourapp"
     },
     "android": {
-      "package": "com.yourcompany.yourapp"
+      "package": "com.owner.yourapp"
     }
   }
 }
@@ -44,81 +44,24 @@ Now, open the `app.json` file and update the following essential fields to custo
 
 You'll need to modify these settings in your project's `app.json` file:
 
-<CardGroup cols={1}>
-  <Card title="name" icon="mobile-screen">
-    **What it is**: The display name of your app as it will appear on users' devices
-    
-    **Example**: `FitTracker Pro` or `Recipe Finder`
-    
-    **Tip**: Choose something descriptive and memorable
-  </Card>
+- **name**: The display name shown on users' devices (e.g., `Travel App`)  
+  *Choose something descriptive and memorable*
 
-  <Card title="slug" icon="link">
-    **What it is**: A unique identifier for your project used in URLs and directories
-    
-    **Example**: `fittracker-pro` or `recipe-finder`
-    
-    **Rules**: Use lowercase letters, hyphens instead of spaces, no special characters
-    
-    **⚠️ WARNING**: The slug **cannot be changed** after publishing without creating a new project!
-  </Card>
+- **slug**: Unique identifier used in URLs and directories (e.g., `travel-app`)  
+  *Use lowercase letters and hyphens only*  
+  **⚠️ Warning:** Cannot be changed after publishing!
 
-  <Card title="scheme" icon="arrow-right-to-bracket">
-    **What it is**: A URL scheme for deep linking to your app from other apps or websites
-    
-    **Example**: `fittrackerapp` or `recipefinderapp`
-    
-    **Tip**: Choose something unique with no spaces or special characters
-  </Card>
+- **scheme**: URL scheme for deep linking (e.g., `travelapp`)  
+  *No spaces or special characters*
 
-  <Card title="bundleIdentifier (iOS)" icon="apple">
-    **What it is**: Your app's unique identifier in Apple's ecosystem
-    
-    **Example for individuals**: `io.github.username.appname` or `dev.yourname.appname`
-    
-    **Format**: Use reverse domain notation - for individuals without a company, use your GitHub username or personal domain
-  </Card>
+- **bundleIdentifier** (iOS): Unique identifier in Apple's ecosystem (e.g., `com.buildwithai.travelapp`)  
+  *Use reverse domain notation where "owner" can be your name, domain, or company*
 
-  <Card title="package (Android)" icon="android">
-    **What it is**: Your app's unique identifier in Google's ecosystem
-    
-    **Example for individuals**: `io.github.username.appname` or `dev.yourname.appname`
-    
-    **Tip**: Should match your iOS bundleIdentifier for consistency
-  </Card>
-</CardGroup>
+- **package** (Android): Unique identifier in Google's ecosystem (e.g., `com.buildwithai.travelapp`)  
+  *Should match your iOS bundleIdentifier for consistency*
 
 ### Step 2: Customize App Icons and Splash Screens
 
 <Info>
   Replace the default icons and splash screens in `assets/images/` with your own. See the [App Icons Guide](/features/customization/app-icons) for creating custom assets with AI.
 </Info>
-
-### Step 3: Set Up Environment Variables
-
-Create your environment file from the example:
-
-```bash
-cp .env.example .env
-```
-
-Update the variables in `.env` with your configuration:
-
-```env
-# App Environment
-APP_ENV=development
-
-# Supabase Configuration
-# (You'll get these after setting up Supabase)
-EXPO_PUBLIC_SUPABASE_URL=
-EXPO_PUBLIC_SUPABASE_ANON_KEY=
-
-# Optional: Analytics Configuration
-EXPO_PUBLIC_GOOGLE_ANALYTICS_ID=
-```
-
-### Next Steps
-
-Now that you've configured your app:
-1. [Set up Supabase](/quickstart/supabase-setup) for authentication
-2. [Create a development build](/quickstart/development-build) to test on real devices

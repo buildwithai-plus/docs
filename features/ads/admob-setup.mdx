@@ -1,65 +1,167 @@
 ---
-title: 'AdMob Setup'
-description: 'Setting up Google AdMob in your BuildWithAI+ application'
+title: 'AdMob Integration'
+description: 'How to set up Google AdMob mobile ads in your app'
 ---
 
-# AdMob Setup
+import { Callout, Steps, Step, Tabs, Tab } from 'nextra/components'
 
-This guide walks you through setting up Google AdMob in your BuildWithAI+ application.
+# AdMob Integration
 
-## Prerequisites
+<Callout type="warning">
+  **Important:** Add monetization to your app only after you've published it to the app stores. Implementing ads too early in your development process can lead to account issues with Google AdMob.
+</Callout>
 
-- Google AdMob account
-- Firebase project (optional, for advanced features)
+## When to Add AdMob
 
-## Registration and Setup
+The BuildWithAI boilerplate comes with AdMob integration ready to be enabled, but we recommend following this timeline:
 
-### 1. Create an AdMob Account
+1. First develop and test your core app functionality
+2. Publish your app to App Store and Google Play
+3. Then set up AdMob and implement monetization
 
-Instructions for creating and configuring your AdMob account.
+This approach ensures your account remains in good standing with ad networks and provides a better user experience.
 
-### 2. Add Your App to AdMob
+## Setup Process Overview
 
-Steps for registering your app with AdMob.
-
-### 3. Configure Ad Units
-
-How to create and configure different ad unit types.
-
-## Integration with React Native
-
-```typescript
-// Example implementation using @react-native-firebase/admob
-import { InterstitialAd, AdEventType, TestIds } from '@react-native-firebase/admob';
-
-const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-xxxxxxxxxxxxxxxx/yyyyyyyyyy';
-
-const interstitial = InterstitialAd.createForAdRequest(adUnitId);
-
-// Load and show the ad
-export const showInterstitialAd = async () => {
-  // Load the ad first
-  interstitial.load();
+<Steps>
+  <Step>
+    ### Create AdMob Account
+    
+    Sign up for an AdMob account at [admob.google.com](https://admob.google.com/) if you don't already have one.
+  </Step>
   
-  // Set up event listener
-  return new Promise((resolve) => {
-    interstitial.onAdEvent((type) => {
-      if (type === AdEventType.LOADED) {
-        // Once ad is loaded, show it
-        interstitial.show();
-      } else if (type === AdEventType.CLOSED) {
-        // Resolve when ad is closed
-        resolve(true);
+  <Step>
+    ### Register Your App in AdMob
+    
+    In the AdMob console:
+    - Click "Apps" in the left sidebar, then "Add app"
+    - Select platform (iOS or Android)
+    - When asked "Is the app listed on a supported app store?" select "Yes"
+    - Enter your app's store information
+  </Step>
+  
+  <Step>
+    ### Enable the AdMob Feature in Your App
+    
+    Follow the implementation instructions below
+  </Step>
+</Steps>
+
+## Implementation
+
+### 1. Enable AdMob Code
+
+<Steps>
+  <Step>
+    ### Rename Example Files
+    
+    The boilerplate includes AdMob functionality in example files that need to be activated:
+    
+    ```bash
+    # From the root of your project
+    mv lib/services/ads/adMobService.ts.example lib/services/ads/adMobService.ts
+    mv lib/services/ads/tracking-transparency.ts.example lib/services/ads/tracking-transparency.ts
+    mv components/ads/BannerAdComponent.tsx.example components/ads/BannerAdComponent.tsx
+    ```
+  </Step>
+  
+  <Step>
+    ### Install Required Packages
+    
+    ```bash
+    npx expo install react-native-google-mobile-ads expo-tracking-transparency
+    ```
+  </Step>
+  
+  <Step>
+    ### Update app.json Configuration
+    
+    <Tabs>
+      <Tab title="Complete Example">
+      ```json filename="app.json"
+      {
+        "expo": {
+          "plugins": [
+            [
+              "react-native-google-mobile-ads",
+              {
+                "androidAppId": "ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx",
+                "iosAppId": "ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx",
+                "userTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
+              }
+            ],
+            [
+              "expo-tracking-transparency",
+              {
+                "userTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+              }
+            ]
+          ]
+        }
       }
-    });
-  });
-};
+      ```
+      </Tab>
+      <Tab title="Google Ads Configuration">
+      ```json filename="Google Mobile Ads plugin"
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx",
+          "iosAppId": "ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx",
+          "userTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
+        }
+      ]
+      ```
+      </Tab>
+      <Tab title="iOS Privacy">
+      ```json filename="App Tracking Transparency plugin"
+      [
+        "expo-tracking-transparency",
+        {
+          "userTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+        }
+      ]
+      ```
+      </Tab>
+    </Tabs>
+  </Step>
+  
+  <Step>
+    ### Uncomment AdMob Code
+    
+    Find all code blocks marked with `TODO: ADMOB` in `app/_layout.tsx` and uncomment them to enable AdMob initialization.
+  </Step>
+</Steps>
+
+## Creating Ad Units
+
+<Callout type="info">
+  When testing your app, always use test ad units. Using production ad units during development can lead to account suspension.
+</Callout>
+
+After your app is published to the app stores:
+
+1. In AdMob console, click "Add ad unit"
+2. Configure your ad unit:
+   - Select ad format (Banner, Interstitial, etc.)
+   - Name your ad unit (e.g., "Main Screen Banner")
+   - Leave partner bidding unchecked for simplicity
+3. Click "Create ad unit" and copy the generated ad unit ID
+
+## Configuring Production Ad Units
+
+After your app is published and you have created ad units:
+
+1. Go to the Expo dashboard: [expo.dev](https://expo.dev/)
+2. Navigate to your project's environment variables: 
+   `https://expo.dev/accounts/[account]/projects/[project]/environment-variables/new`
+3. Add the following variables (production only):
+
+```bash filename="Production Environment Variables"
+EXPO_PUBLIC_ADMOB_BANNER_ANDROID=ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx
+EXPO_PUBLIC_ADMOB_BANNER_IOS=ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx
 ```
 
-## Testing Ads
-
-Information about using test ads during development.
-
-## Next Steps
-
-See [Store Requirements](/features/ads/store-requirements) for compliance information.
+<Callout type="warning">
+  Only enable these variables for Production builds. Make sure "Preview" and "Development" environments are unchecked.
+</Callout>
