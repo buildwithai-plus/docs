@@ -1,57 +1,115 @@
-1. Create a user at [Superwall](https://superwall.com/) if you don't have one already
-2. Create a new project:
-    - Platform: React Native
-    - App Name: Your app name
-    - iOS Bundle ID: Your app's bundle ID from `app.json`
-    - Android Bundle ID: Your app's package name from `app.json`
-    Click **Create App**
+---
+title: "Superwall Setup"
+description: "Set up Superwall for paywall management and A/B testing with RevenueCat integration"
+---
 
-    Superwall will create a new Project, with apps for both iOS and Android.
+## Prerequisites
 
-    You will be taken to the **Dashboard** page.
+Before setting up Superwall, make sure you have:
 
-3. Integrate with RevenueCat:
-    - Go to **Settings** (bottom of left sidebar) > **Revenue Tracking**
-    - Pick **RevenueCat** and click **Get Integration Token** and copy it
+- Completed [RevenueCat setup](./revenuecat) with valid credentials
+- [Imported your products](./import-products-rc) into RevenueCat
+- Your app's bundle ID and package name ready
 
-    - Go to [RevenueCat](https://app.revenuecat.com/)
-    - Select your project
-    - Go to **Integrations** > **Superwall**
-    - Paste the **Integration Token** in the **Superwall Server Secret** field
-    - Click **Save**
+## Create Superwall Account
 
-4. Finish setting up Settings
+<Steps>
+  <Step title="Create Account and Project">
+    1. Create an account at [Superwall](https://superwall.com/)
+    2. Create a new project:
+       - **Platform:** React Native
+       - **App Name:** Your app name
+       - **iOS Bundle ID:** Your app's bundle ID from `app.json`
+       - **Android Bundle ID:** Your app's package name from `app.json`
+    3. Click **Create App**
+    
+    Superwall will create a new project with apps for both iOS and Android, and take you to the **Dashboard** page.
+  </Step>
+</Steps>
 
-    We will need to set up the Revenue Cat Public API Key for both iOS and Android.
-    Go to [RevenueCat](https://app.revenuecat.com/)
-    Select your project
+## Integrate with RevenueCat
 
-    Find your API keys under **API keys** tab in the left sidebar.
-    Click **Show key** for the **Public API Key** for both iOS and Android.
-    - For iOS:
-        - Go to **Settings** > **General**
-            - Revenue Cat Public API Key: The `appl_...` key from RevenueCat
-            - Apple App ID: Your app's ID from App Store Connect
-            - Team ID: Your Team ID from App Store Connect
-            Click **Update Application**
+<Steps>
+  <Step title="Get Integration Token">
+    1. In Superwall, go to **Settings** (bottom of left sidebar) > **Revenue Tracking**
+    2. Select **RevenueCat** and click **Get Integration Token**
+    3. Copy the integration token
+  </Step>
 
-    - For Android:
-        - Go to **Settings** > **General**
-            - Revenue Cat Public API Key: `goog_...` key from RevenueCat
-            Click **Update Application**
+  <Step title="Configure RevenueCat Integration">
+    1. Go to [RevenueCat](https://app.revenuecat.com/)
+    2. Select your project
+    3. Go to **Integrations** > **Superwall**
+    4. Paste the **Integration Token** in the **Superwall Server Secret** field
+    5. Click **Save**
+  </Step>
+</Steps>
 
-5. Create an Entitlement
-    - Go to **Products** in the left sidebar 
-    - Select **Entitlements** in the top menu
-    - Click **+ Add Entitlement**
-        - Identifier: Give it the same name as the entitlement you created in RevenueCat (e.g. `premium`)
+## Configure Platform Settings
 
-5. Add Products to Superwall
-    - Go to **Products** in the left sidebar
-    - Select **Products** in the top menu
-    - Click **+ Add Product**
-        They should appear in the list when you try to add something in a field
-        Fill in the fields not already filled
-        - Entitlements: Select the entitlement you created in the previous step
+<Steps>
+  <Step title="Get RevenueCat API Keys">
+    1. In [RevenueCat](https://app.revenuecat.com/), select your project
+    2. Go to **API keys** tab in the left sidebar
+    3. Click **Show key** for both iOS and Android **Public API Keys**
+    4. Copy and save these keys:
+       - iOS: `appl_...` key
+       - Android: `goog_...` key
+    
+    <Note>
+      Keep these keys handy - you'll need them for the platform configuration below.
+    </Note>
+  </Step>
 
-    Do this for all products you want to add to Superwall (both iOS and Android)
+  <Step title="Configure Platform Settings">
+    1. In Superwall, navigate to **Settings** > **General**
+    2. Configure settings for both platforms by switching between them:
+    
+    **For iOS** (click the **Apple icon** at the top of the sidebar):
+    - **Revenue Cat Public API Key:** Your `appl_...` key from RevenueCat
+    - **Apple App ID:** Your numeric App ID from App Store Connect (find it under **App Information** > **General Information**)
+    - **Team ID:** Your 10-character Team ID from App Store Connect (found under **Membership** or in your Apple Developer account)
+    
+    **For Android** (click the **Play Store icon** at the top of the sidebar):
+    - **Revenue Cat Public API Key:** Your `goog_...` key from RevenueCat
+    
+    3. Click **Update Application** after configuring each platform
+  </Step>
+</Steps>
+
+## Set Up Products and Entitlements
+
+<Steps>
+  <Step title="Create Entitlement">
+    1. Go to **Products** in the left sidebar
+    2. Select **Entitlements** in the top menu
+    3. Click **+ Add Entitlement**
+    4. **Identifier:** Use the same name as the entitlement you created in RevenueCat (e.g., `premium`)
+  </Step>
+
+  <Step title="Add Products">
+    1. Go to **Products** in the left sidebar
+    2. Select **Products** in the top menu
+    3. Click **+ Add Product**
+    4. Fill in the fields (they should appear in the list when you try to add something)
+    5. **Entitlements:** Select the entitlement you created in the previous step
+    6. Complete the product configuration
+    
+    Repeat this process for all products you want to add to Superwall (both iOS and Android).
+  </Step>
+</Steps>
+
+## Next Steps
+
+With Superwall configured, you can now:
+
+- Create and design paywalls in the Superwall dashboard
+- Set up A/B tests for different paywall designs
+- Configure paywall triggers and rules
+- Test your paywall implementation in your app
+
+## Additional Resources
+
+- [Superwall Documentation](https://docs.superwall.com/)
+- [Superwall React Native SDK](https://docs.superwall.com/docs/react-native)
+- [RevenueCat + Superwall Integration Guide](https://www.revenuecat.com/docs/integrations/superwall)

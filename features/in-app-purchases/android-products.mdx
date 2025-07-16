@@ -1,69 +1,77 @@
-URL: https://www.revenuecat.com/docs/getting-started/entitlements/android-products
+---
+title: "Android Products Setup"
+description: "Create subscription products in Google Play Console for your Android app"
+---
 
+## Prerequisites
+
+Before creating subscription products, make sure you have:
+
+- Completed the [Closed testing setup](./closed-testing) for your app
+- Access to your app's Google Play Console
+- Your app uploaded and approved for testing
 
 ## Create a Subscription
 
-Inside your app's Google Play Console.
-In the left sidebar, click **Monetize with Play** > **Products** > **Subscriptions**
-If you see the message: "Your app doesn't have any subscriptions yet": refer back to our [Closed testing guide](./closed-testing.mdx)
+<Steps>
+  <Step title="Navigate to Subscriptions">
+    1. Open your app's Google Play Console
+    2. In the left sidebar, click **Monetize with Play** > **Products** > **Subscriptions**
+    3. If you see "Your app doesn't have any subscriptions yet", complete the [Closed testing guide](./closed-testing) first
+  </Step>
 
-After clicking **Create subscription**, provide the following metadata to Google:
+  <Step title="Create New Subscription">
+    1. Click **Create subscription**
+    2. Provide the following metadata:
 
-| Metadata   | Description                                                                                                                                                                                                                                                                           |
-| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Product ID | The product ID is a unique alphanumeric ID that is used for accessing your product. |
-| Name       | A short name of the item, up to 55 characters. This will be displayed on your Google Play Store listing. |
+    | Metadata   | Description                                                                                                                                                                                                                                                                           |
+    | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    | Product ID | The product ID is a unique alphanumeric ID that is used for accessing your product. |
+    | Name       | A short name of the item, up to 55 characters. This will be displayed on your Google Play Store listing. |
+  </Step>
+</Steps>
 
-### Tips for creating robust product IDs
+  <Step title="Configure Product Details">
+    ### Tips for creating robust product IDs
 
-After you use a Product ID for one product in Google Play Console, **it can't be used again across any of your apps, even if the product is deleted**. It helps to be a little organized here from the beginning - we recommend using a consistent naming scheme across all of your product identifiers such as:
+    After you use a Product ID for one product in Google Play Console, **it can't be used again across any of your apps, even if the product is deleted**. Use a consistent naming scheme:
 
-> **`<app>_<entitlement>`**
+    > **`<app>_<entitlement>`**
 
-- **app:** Some prefix that will be unique to your app, since the same product ID cannot be used in any future apps you create.
-- **entitlement**: A name for what the product provides access to, e.g., "premium"
+    - **app:** Some prefix that will be unique to your app
+    - **entitlement**: A name for what the product provides access to, e.g., "premium"
 
-For example, using this format the identifier for your first subscription product that grants access to premium content would be:
+    For example: `bwai_premium`
+  </Step>
 
-> `bwai_premium`
+  <Step title="Create Base Plans">
+    For subscription products, you'll need to add base plans. Base plans define billing period, price, and renewal type. Customers purchase base plans, not subscription products directly.
 
+    Use clear naming like: `<duration>-<renewaltype>`, e.g., `annual-autorenewing`
 
-### Create a base plan
+    ### Annual Base Plan
+    1. Inside your subscription, under "Base plans and offers" click **Add base plan**
+    2. Configure the plan:
+       - **Base plan ID:** `annual-autorenewing`
+       - **Type:** `Auto-renewing`
+       - **Billing period:** Set to `Yearly`
+       - Keep other fields as default
+    3. Set pricing:
+       - Click **Set price**
+       - Toggle all countries
+       - Click **Set price**
+       - Choose a common currency like USD and pick a price
+       - Click **Update**
+       - All countries will automatically get converted prices
+       - Click **Save**
 
-For subscription products, you'll need to add a base plan. Base plans define a billing period, price, and renewal type for purchasing your subscription. Customers never purchase a subscription product directly, they always purchase a base plan of a subscription.
-
-It's good practice to be as clear as possible when naming your plans, such as: `<duration>-<renewaltype>`, eg. `annual-autorenewing`.
-
-
-Inside the subscription you just created, under "Base plans and offers" click **Add base plan** 
-Base plan ID: `annual-autorenewing`
-Type: `Auto-renewing`:
-    - Billing period: Set to `Yearly`
-    - Keep the rest of the fields as is
-Price and availability: 
-    - Click **Set price**
-        - Toggle all countries
-        - Click **Set price**
-            - Pick your price: Choose a common currency like USD and pick a price (this is only for the billing period you selected)
-            - Click **Update**
-        - All countries will now automatically get their prices converted to their local currency
-    - Click **Save**
-
-
-Do this for the monthly base plan as well:
-
-Base plan ID: `monthly-autorenewing`
-Type: `Auto-renewing`:
-    - Billing period: Set to `Monthly`
-    - Keep the rest of the fields as is
-Price and availability: 
-    - Click **Set price**
-        - Toggle all countries
-        - Click **Set price**
-            - Pick your price: Choose a common currency like USD and pick a price (this is only for the billing period you selected)
-            - Click **Update**
-        - All countries will now automatically get their prices converted to their local currency
-    - Click **Save**
-
+    ### Monthly Base Plan
+    1. Create another base plan with:
+       - **Base plan ID:** `monthly-autorenewing`
+       - **Type:** `Auto-renewing`
+       - **Billing period:** Set to `Monthly`
+    2. Follow the same pricing steps as above
+  </Step>
+</Steps>
 
 Great! You now have your subscription products set up with monthly and yearly base plans.

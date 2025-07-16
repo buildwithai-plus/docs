@@ -1,182 +1,177 @@
-# Prerequisite note
-This guide assumes you already have configured your apps in App Store Connect and/or Google Play Console
+---
+title: "RevenueCat Setup"
+description: "Set up RevenueCat for managing in-app purchases and subscriptions across iOS and Android"
+---
 
-The bundle ID and package name should be the same for both App Store Connect and Google Play Console, for RevenueCat to validate the credentials we will set up.
+## Prerequisites
 
-# Setup
+Before setting up RevenueCat, make sure you have:
 
-## Create a RevenueCat account
-1. Create a RevenueCat account
-    - Project name: Type your app name
+- Configured your apps in App Store Connect and/or Google Play Console
+- The same bundle ID and package name for both platforms
+- Access to your Apple Developer and Google Play Console accounts
 
-## Connect apps
-    - In left side menu click on "Platforms"
-    - Click on "Add app platform"
+## Create RevenueCat Account
 
-### iOS
-1. Select "App Store"
-    - App name: Keep as is - `Your Project Name (App Store)`
-    - App bundle ID: The bundle ID of your app (from `app.json`)
+<Steps>
+  <Step title="Create Account and Project">
+    1. Create a RevenueCat account at [RevenueCat](https://app.revenuecat.com/)
+    2. **Project name:** Enter your app name
+  </Step>
+</Steps>
 
-// You could skip this step (I am not using this)
-2. App Store Connect App-Specific Shared Secret
-    - Log in to App Store Connect (https://appstoreconnect.apple.com/)
-    - Navigate to "Apps" and select your app
-    - Select "App Information" under the "General" section from the left side menu
-    - Select "Manage" under the App-Specific Share Secret section from the right side
-    - Generate and copy your shared secret
-    - Enter the secret in your iOS app settings in the RevenueCat dashboard
+## Connect Your Apps
 
-URL: https://www.revenuecat.com/docs/service-credentials/itunesconnect-app-specific-shared-secret
+<Steps>
+  <Step title="Add App Platforms">
+    1. In the left sidebar, click **Platforms**
+    2. Click **Add app platform**
+  </Step>
+</Steps>
 
-3. In app purchases key configuration (App Store)
-    - **Generating an In-App Purchase Key**
-        - In-app purchase keys are generated in App Store Connect under Users and Access → Integrations → [In-App Purchase](https://appstoreconnect.apple.com/access/integrations/api/subs). 
-        
-            You can use the same in-app purchase key for all App Store apps belonging to the same App Store Connect account.
-            
-        - Select Generate In-App Purchase Key, or—if you've generated an In-App Purchase Key in the past—click on the "+" symbol next to the Active header. You'll be prompted to enter a name for the key.
-        - Once your key is generated, it will appear in Active Keys and you get one shot to download it.
-        - Select Download API Key and store the file in a safe place, you'll need to upload this to RevenueCat in the next step.
-    - **Uploading the In-App Purchase Key to RevenueCat**
-        - In the RevenueCat dashboard, select your App Store app from the Apps tab in your project settings.
-        - Within your app settings, under the tab In-app purchase key configuration, you'll see an area to upload your In-App Purchase Key .p8 file that you downloaded from App Store Connect.
-    - **Providing the Issuer ID to RevenueCat**
-        - Once you uploaded the in-app purchase .p8 file, you'll see an area to input 'Issuer ID'.
-        - You can find this Issuer ID in App Store Connect, under Users and Access → Integrations → In-App Purchase.
-        - If you do not see an Issuer ID at the top of the page, create an App Store Connect API key. The key name/access level does not matter.
-        - Once this is generated, the Issuer ID will show at the top of the page. (The Issuer ID is the same for both the In-App Purchase key and the App Store Connect key.)
-        - Copy the Issuer ID and paste into the RevenueCat 'Issuer ID' field.
-        - Remember to select 'Save changes'.
-    - **Check the status of your credentials**
-        - With App Store credential validation, RevenueCat will validate every time Apple credentials are (re)uploaded or at any time through a click of a button.
-        - A summary message will appear with the results of the validation to provide additional information about the status of your App Store credentials.
-        - Once your credentials are valid, you will see a "Valid credentials" message under your uploaded P8 key file with all permissions checked.
+### iOS App Configuration
 
-URL: https://www.revenuecat.com/docs/service-credentials/itunesconnect-app-specific-shared-secret/in-app-purchase-key-configuration
+<Steps>
+  <Step title="Create iOS App">
+    1. Select **App Store**
+    2. **App name:** Keep as is - `Your Project Name (App Store)`
+    3. **App bundle ID:** The bundle ID of your app (from `app.json`)
+  </Step>
 
-4. App Store Connect API Key Configuration
-    - **Create an App Store Connect API key**
-        - On App Store Connect, navigate to Users and Access → Integrations → [App Store Connect API](https://appstoreconnect.apple.com/access/integrations/api)
-        - Pick "Team Keys" - this way we can use this same key for all apps we make in the future
-        - Click on "Create API Key"
-        - Name: `API key for RevenueCat` for example
-        - Access: `App Manager`
-        - Click "Generate"
-        - Download the generated key. You will receive a .p8 key file. 
-            - This key can only be downloaded once, so make sure you store it in a safe location.
-        - Also take note of the `Issuer ID` (shown above the "Active" table).
+  <Step title="Generate In-App Purchase Key">
+    1. In App Store Connect, go to **Users and Access** → **Integrations** → [**In-App Purchase**](https://appstoreconnect.apple.com/access/integrations/api/subs)
+    2. Select **Generate In-App Purchase Key** or click the **+** symbol next to Active header
+    3. Enter a name for the key
+    4. Once generated, **Download API Key** (you only get one chance to download this)
+    5. Store the file safely - you'll upload it to RevenueCat next
+  </Step>
 
-    - **Upload the App Store Connect API key to RevenueCat**
-        - In the RevenueCat dashboard, select your iOS app from the Apps tab in your project settings.
-        - Within your app settings, under the tab App Store Connect API, you'll see an area to upload your App Store Connect .p8 file that you downloaded from App Store Connect.
+  <Step title="Upload In-App Purchase Key to RevenueCat">
+    1. In RevenueCat dashboard, select your App Store app from the **Apps** tab
+    2. Under **In-app purchase key configuration** tab, upload your .p8 file
+    3. **Issuer ID:** Find this in App Store Connect under **Users and Access** → **Integrations** → **In-App Purchase**
+       - If you don't see an Issuer ID, create an App Store Connect API key first
+       - Copy the Issuer ID and paste into RevenueCat
+    4. Click **Save changes**
+    5. Verify you see "Valid credentials" message with all permissions checked
+  </Step>
 
-        - After uploading the App Store Connect API .p8 file, you will be prompted to input the Issuer ID you saved in the previous step.
+  <Step title="Create App Store Connect API Key">
+    1. In App Store Connect, go to **Users and Access** → **Integrations** → [**App Store Connect API**](https://appstoreconnect.apple.com/access/integrations/api)
+    2. Select **Team Keys** tab
+    3. Click **Create API Key**
+       - **Name:** `API key for RevenueCat`
+       - **Access:** `App Manager`
+    4. Click **Generate**
+    5. Download the .p8 key file (only downloadable once)
+    6. Note the **Issuer ID** shown above the Active table
+  </Step>
 
-        - You will also be prompted to input the Vendor number. This can be found in App Store Connect under [Payments and Financial Reports](https://appstoreconnect.apple.com/itc/payments_and_financial_reports#/), in the top left corner of the page.
-        - Copy the numbers (e.g. `12345678`) from the `Vendor #12345678` text.
-        - Paste the numbers into the Vendor number field in the RevenueCat dashboard.
-        - Remember to select 'Save Changes' in the RevenueCat Dashboard.
+  <Step title="Upload App Store Connect API Key">
+    1. In RevenueCat dashboard, go to your iOS app settings
+    2. Under **App Store Connect API** tab, upload your .p8 file
+    3. Enter the **Issuer ID** from the previous step
+    4. **Vendor number:** Find this in App Store Connect under [**Payments and Financial Reports**](https://appstoreconnect.apple.com/itc/payments_and_financial_reports#/)
+       - Copy the numbers from `Vendor #12345678` (e.g., `12345678`)
+       - Paste into the Vendor number field
+    5. Click **Save Changes**
+  </Step>
+</Steps>
 
-URL: https://www.revenuecat.com/docs/service-credentials/app-store-connect-api
-https://developer.apple.com/documentation/appstoreconnectapi/creating-api-keys-for-app-store-connect-api
+### Android App Configuration
 
+<Steps>
+  <Step title="Create Android App">
+    1. Select **Google Play Store**
+    2. **App name:** `Your Project Name (Play Store)`
+    3. **Google play package:** The package name of your app (from `app.json`)
+  </Step>
 
-### Android
+  <Step title="Enable Required APIs">
+    1. Go to the [Google Cloud Console](https://console.cloud.google.com)
+    2. Select your project or create a new one
+    3. Enable these APIs:
+       - [Google Play Android Developer API](https://console.cloud.google.com/apis/library/androidpublisher.googleapis.com)
+       - [Google Play Developer Reporting API](https://console.cloud.google.com/apis/library/playdeveloperreporting.googleapis.com)
+    4. Click **Enable** for both APIs
+  </Step>
 
+  <Step title="Create Service Account">
+    1. After enabling APIs, click **Create credentials**
+    2. **Credential Type:**
+       - **Select an API:** `Google Play Android Developer API`
+       - **What data will you be accessing:** `Application data`
+       - Click **Next**
+    
+    3. **Create service account:**
+       - **Service account name:** `RevenueCat`
+       - **Service account ID:** Keep auto-generated
+       - **Description:** `RevenueCat service account`
+       - Click **Create and continue**
+    
+    4. **Permissions:** Add these two roles (names must match exactly):
+       - `Pub/Sub Admin` (enables RevenueCat to receive platform server notifications)
+       - `Monitoring Viewer` (enables RevenueCat to monitor the notification queue)
+       - Click **Continue**
+    
+    5. Click **Done** (skip the optional step)
+  </Step>
 
-1. Select "Google Play Store"
-    - App name: `Your Project Name (Play Store)`
-    - Google play package: The package name of your app (from `app.json`)
+  <Step title="Create Service Account Key">
+    1. Go to **Google Cloud Console** → **APIs & Services** → [**Credentials**](https://console.cloud.google.com/apis/credentials)
+    2. Click on your newly created Service Account
+    3. Click **Keys** in the top menu
+    4. Click **Add key** > **Create new key**
+    5. **Key type:** JSON
+    6. Click **Create**
+    7. This downloads a JSON file - save it securely
+    8. Note the service account email address (e.g., `service-account-name@your-project-id.iam.gserviceaccount.com`)
+  </Step>
 
-2. Service Account Credentials JSON
-    #### Checklist
+  <Step title="Grant Financial Access">
+    1. Go to **Google Play Console** → **Users and Permissions**
+    2. Under **Users** tab, click the three dots next to "Manage users"
+    3. Select **Invite new users**
+    4. Enter the service account email address from the previous step
+    5. Select **Account permissions** tab
+    6. Enable these permissions:
+       - Under **App access:** "View app information and download bulk reports (read-only)"
+       - Under **Financial data:** 
+         - "View financial data, orders, and cancellation survey response"
+         - "Manage orders and subscriptions"
+    7. Click **Invite user** and **Send invite**
+  </Step>
 
-    While setting up your Android app in RevenueCat, you can follow this [checklist](https://www.revenuecat.com/docs/service-credentials/creating-play-service-credentials/google-play-checklis#google-play-service-credentials-checklist) from RevenueCat to ensure you have done everything correctly
+  <Step title="Upload Credentials to RevenueCat">
+    1. In RevenueCat dashboard, go to your Android app settings
+    2. **Service Account Credentials JSON:** Upload the JSON file downloaded earlier
+    3. Click **Save changes**
+    4. Verify you see "Valid credentials" message with all permissions checked
+    
+    **Note:** Credentials can take up to 36 hours to become valid. You may see "Invalid Play Store credentials" errors until this happens.
+    
+    **Workaround for faster validation:** In Google Play Console, go to your app's **Monetize** section → **Products** → **Subscriptions**, change any product description and save. This can enable credentials immediately.
+  </Step>
+</Steps>
 
-    > **Note**: Credentials can take up to 36 hours after being created to be valid. You may see "Invalid Play Store credentials" errors (503 or 521) and be unable to make purchases with RevenueCat until this happens.
+## Verification
 
-    - **Enable the Google Developer and Reporting API**
-        - Go to the [API Console](https://console.cloud.google.com)
-        - From the projects list, select your project or create a new one
-        - Go to the [Google Play Android Developer API](https://console.cloud.google.com/apis/library/androidpublisher.googleapis.com) page and the [Google Play Developer Reporting API](https://console.cloud.google.com/apis/library/playdeveloperreporting.googleapis.com) page in Google Cloud Console.
-        - Click Enable for both APIs (This will say Manage when it is enabled)
+After completing the setup, verify that:
 
-    - **Create Service Account**
-        - You will see the "To use this API, you may need credentials" message on your API console after enabling the API's - so let's create the credentials.
-        - Press "Create credentials"
-        1. Credential Type:
-        - Select an API: `Google Play Android Developer API`
-        - What data will you be accessing: `Application data`
-        - Press "Next"
+- Both iOS and Android apps show "Valid credentials" in RevenueCat
+- All required permissions are checked
+- You can access the RevenueCat dashboard without errors
 
-        2. Create service account:
-        - Service account name: e.g. `RevenueCat`
-        - Service account ID: Just keep it as is (automatically generated based on service account name)
-        - (Optional) Service account description: e.g. `RevenueCat service account`
-        - Press "Create and continue"
+## Next Steps
 
-        3. Permissions (it says Optional, but it is required for what we are doing)
-        - We need to add two roles to the service account. Make sure the names match exactly when adding. And **don't** add IAM conditions.
-        - Click `Select a role` and search for:
-            - `Pub/Sub Admin`
-                - Enables RevenueCat to receive platform server notifications
-        - Click "Add another role"
-            - `Monitoring Viewer`
-                - Enables RevenueCat to monitor the notification queue
-        - Press "Continue" 
+With RevenueCat configured, you can now:
 
-        4. Press "Done" - we are skipping "Principals with access (optional)" 
+- [Create subscription products](./ios-products) in App Store Connect
+- [Create subscription products](./android-products) in Google Play Console
+- [Import products into RevenueCat](./import-products-rc)
 
+## Additional Resources
 
-    - **Create a Service Account Key**
-        - Go to Google Cloud Console → APIs & Services → [Credentials](https://console.cloud.google.com/apis/credentials)
-        - Click on your newly created Service Account under "Service Accounts"
-        - Click on "Keys" in the top menu
-        - Click on "Add key" > "Create new key"
-            - Key type: JSON
-            - Click "Create"
-        - This will download a JSON file (your service account key) to your computer
-        - Take note of the email address of the service account:
-            - example: `service-account-name@your-project-id.iam.gserviceaccount.com`
-
-    -**Grant financial access to RevenueCat**    
-        - Go to Google Play Console → Users and Permissions
-        - Under "Users" tab click the three dots to the right of "Manage users"
-        - Select "Invite new users"
-
-        - Invite the service account you created in the previous step
-            - Copy the email address of the service account you created in the previous step
-            - Paste the email address into the "Email address" field
-        - Select "Invite user" at the bottom of the page, and send the invite
-
-        - Select "Account permissions" tab
-        - Enable the following permissions:
-            - Under "App access"
-                - View app information and download bulk reports (read-only)
-            - Under "Financial data"
-                - View financial data, orders, and cancellation survey response
-                - Manage orders and subscriptions
-                
-        - Click "Invite user" at the bottom of the page, and then "Send invite"
-
-    - **Enter the Credentials JSON in RevenueCat**
-        - Go back to the RevenueCat dashboard where we started connecting our Android app.
-        - Service Account Credentials JSON:
-            - Upload the credentials JSON file that was downloaded earlier (example: `your-project-name-some-code.json`)
-        - Click "Save changes"
-
-    - **Upload your signed APK or Android App Bundle**
-        - Ensure you have uploaded your signed APK or Android App Bundle to Google Play Console
-        - Complete all the steps to approve the release
-        - The app should be in a Closed or Open testing track with added testers
-        - Your Subscriptions are in an 'Active' state
-        - Your Google Play Package Name exactly matches the one in RevenueCat
-
-    - **Check the status of your credentials**
-        - RevenueCat will validate Google credentials every time they are (re)uploaded
-        - A summary message will appear with the results of the validation
-        - Once your credentials are valid, you will see a "Valid credentials" message under your uploaded JSON file with all permissions checked
-
-    > **Workaround for faster validation**: In Google Play Console, open your app's dashboard and visit the 'Monetize' section. Go to Products -> Subscriptions/in-app products, and change the description of any product and save the changes. This should work to enable the new service credentials right away.
-
+- [RevenueCat Getting Started Guide](https://www.revenuecat.com/docs/getting-started)
+- [RevenueCat Service Credentials Documentation](https://www.revenuecat.com/docs/service-credentials)
+- [Google Play Service Credentials Checklist](https://www.revenuecat.com/docs/service-credentials/creating-play-service-credentials/google-play-checklis)

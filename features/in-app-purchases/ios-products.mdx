@@ -1,116 +1,156 @@
+---
+title: "iOS Products Setup"
+description: "Create subscription products in App Store Connect for your iOS app"
+---
+
+## Prerequisites
+
+Before creating iOS subscription products, make sure you have:
+
+- An Apple Developer account with paid enrollment
+- Your app's bundle ID ready (from `app.json`)
+- Signed Paid Applications Agreement in App Store Connect
+- Completed tax and banking information in App Store Connect
+
 ## Add iOS App to App Store Connect
 
-Go to [App Store Connect Apps](https://appstoreconnect.apple.com/apps) 
-Next to "Apps", click on "+" > "New App"
-    - Platform: iOS
-    - App Name: Your app name (from `app.json`)
-    - Primary Language: English
-    - Bundle ID: The bundle ID of your app (from `app.json`)
-        - It should have been added automatically by EAS
-    - SKU: Just use your scheme or slug from `app.json`
-    - User Access: Full Access
-    Click **Create**
+<Steps>
+  <Step title="Create New App">
+    1. Go to [App Store Connect Apps](https://appstoreconnect.apple.com/apps)
+    2. Next to "Apps", click **+** > **New App**
+    3. Fill in the app details:
+       - **Platform:** iOS
+       - **App Name:** Your app name (from `app.json`)
+       - **Primary Language:** English
+       - **Bundle ID:** The bundle ID of your app (from `app.json`) - should be automatically added by EAS
+       - **SKU:** Use your scheme or slug from `app.json`
+       - **User Access:** Full Access
+    4. Click **Create**
+
+    **Tip:** You can also do this automatically using: `eas build --platform ios --auto-submit`
+  </Step>
+</Steps>
+
+## Create In-App Purchase Subscriptions
+
+<Steps>
+  <Step title="Verify Agreements and Banking">
+    Before setting up products, ensure you have:
     
-Tip: can also do this automatically using: "eas build --platform ios --auto-submit"
-
-
-## Create an In-App Purchase
-
-> **Info**: Make sure your Paid Applications Agreement is signed
-> 
-> Before you set up your products, make sure you have the latest Paid Applications Agreement signed in in the "Business" module in App Store Connect. **You will not be able to test in-app purchases until the latest version of this agreement is signed with Apple**.
-> 
-> In addition, go through the "Tax" and "Banking" tabs and sign any forms as required. You have to link a bank account to App Store Connect and have the status be "Clear" before being able to test in-app purchases.
-
-Select your app from the list of apps in [App Store Connect](https://appstoreconnect.apple.com/apps)
-Under Monetization, select '**Subscriptions**'
-Then under "Subscription Groups" click the '**Create**
-- Reference name: give it a name (e.g. "Premium Subscriptions") 
-
-Now, inside the Subscription Group:
-- First fix the Localization:
-    - Click **Add Localization**
-    - Language: Select your default language (e.g. English)
-    - Display Name: Give it a name - just use the name you used in the Reference name (e.g. "Premium Subscriptions")
-    - Click **Add**
-
-- Then, under "Subscriptions" click **Create**.
-
-- **Reference Name:** Internal name for App Store Connect reports (not visible to users), max 64 characters
-- **Product ID:** Unique identifier used in development and with RevenueCat
-  - **Important:** Once used, can never be reused across any app, even if deleted
-  - Recommended format: `<app>_<entitlement>_<duration>_<trial>`
-  - Example: Yearly subscription with no trial
-    `bwai_premium_1y`
-  - Example: Monthly subscription with no trial
-    `bwai_premium_1m`
-  - Example: Yearly subscription with 1 week trial
-    `bwai_premium_1y_1w`
-
-To create a subscription with a trial period, you need to add the trial period to the subscription product. Check the guide [here](#bonus-trial-period) for more information.
-
-
-Subscription duration: Pick the duration you want for your subscription. (e.g. 1 year)
-
-Availability: 
-    - Make availabile in at least one country/region (your region).
-        - Or just select **All** in the top right corner
-    - Click **Done**
-
-Subscription Prices: Click **Add Subscription Price**
-    - Country or Region: Select your default currency (e.g. United States (USD))
-    - Price: Select your price (only specific prices are available - ending in ".99")
-    - Click **Next**
-    - Scroll down and click **Next**
-        - Just keep the automatically generated prices
-    - Again, scroll down and click **Confirm** to confirm the prices
-
-Localization: Click **Add Localization**
-    - Language: Select your default language (e.g. English)
-    - Display Name: Give it a name (e.g. "Premium")
-    - Description: Give it a description (e.g. "Unlimited access to all features")
-    - Click **Add**
+    - **Paid Applications Agreement:** Latest version signed in the "Business" module in App Store Connect
+    - **Tax and Banking:** Complete forms in the "Tax" and "Banking" tabs
+    - **Bank Account:** Linked with "Clear" status
     
-Use a concise Display Name and Description that will appear in the App Store and subscription settings. For consistent user experience, use the same Display Name across all products that provide the same access level.
+    **You cannot test in-app purchases until these requirements are met.**
+  </Step>
 
-## Add Reviewer Information
+  <Step title="Create Subscription Group">
+    1. Select your app from the list in [App Store Connect](https://appstoreconnect.apple.com/apps)
+    2. Under **Monetization**, select **Subscriptions**
+    3. Under "Subscription Groups", click **Create**
+    4. **Reference name:** Give it a name (e.g., "Premium Subscriptions")
+    
+    ### Add Localization
+    1. Click **Add Localization**
+    2. **Language:** Select your default language (e.g., English)
+    3. **Display Name:** Use the same name as Reference name (e.g., "Premium Subscriptions")
+    4. Click **Add**
+  </Step>
 
-Finally, add the required reviewer information - a screenshot is mandatory for submission:
+  <Step title="Create Subscription Products">
+    Under "Subscriptions" in your subscription group, click **Create**.
 
-- **Screenshot:** Required (640 x 920 px) - You can [download our placeholder image](/images/Review_Info_640x920.png) for testing; for final submission, use your actual paywall screenshot
-- **Review Notes:** Optional - Add clarifications about your purchase
+    ### Product Configuration
+    - **Reference Name:** Internal name for App Store Connect reports (not visible to users), max 64 characters
+    - **Product ID:** Unique identifier used in development and with RevenueCat
+      
+    **Important:** Once used, Product IDs can never be reused across any app, even if deleted.
+    
+    **Recommended format:** `<app>_<entitlement>_<duration>_<trial>`
+    
+    **Examples:**
+    - Yearly subscription with no trial: `bwai_premium_1y`
+    - Monthly subscription with no trial: `bwai_premium_1m`
+    - Yearly subscription with 1 week trial: `bwai_premium_1y_1w`
 
+    ### Subscription Details
+    1. **Subscription duration:** Pick the duration (e.g., 1 year)
+    2. **Availability:** 
+       - Make available in at least one country/region (your region)
+       - Or select **All** in the top right corner
+       - Click **Done**
+  </Step>
 
-### Bonus: Trial Period
+  <Step title="Configure Pricing">
+    1. **Subscription Prices:** Click **Add Subscription Price**
+    2. **Country or Region:** Select your default currency (e.g., United States (USD))
+    3. **Price:** Select your price (only specific prices ending in ".99" are available)
+    4. Click **Next**
+    5. Keep the automatically generated prices and click **Next**
+    6. Click **Confirm** to confirm the prices
+  </Step>
 
-Create a new subscription product the same way as explained above, but now with a trial period.
+  <Step title="Add Localization">
+    1. Click **Add Localization**
+    2. **Language:** Select your default language (e.g., English)
+    3. **Display Name:** Give it a concise name (e.g., "Premium")
+    4. **Description:** Add a description (e.g., "Unlimited access to all features")
+    5. Click **Add**
+    
+    Use consistent Display Names across all products that provide the same access level for better user experience.
+  </Step>
 
-Let's say I want a yearly subscription with a 1 week trial period: 
+  <Step title="Add Reviewer Information">
+    Add required reviewer information for submission:
+    
+    - **Screenshot:** Required (640 x 920 px) - You can [download our placeholder image](/images/Review_Info_640x920.png) for testing; for final submission, use your actual paywall screenshot
+    - **Review Notes:** Optional - Add clarifications about your purchase
+  </Step>
 
-`bwai_premium_1y_1w` (this is the product ID from above, but with _1w added at the end)
+  <Step title="Save Your Product">
+    Click **Save** to finish setting up your subscription product.
+    
+    Your subscription product should show status as **Ready to submit**, which means you can now add it to your app!
+  </Step>
+</Steps>
 
-Inside your subscription product, you can add a trial period. This is a period during which users can try your subscription for free before being charged. 
+## Adding Trial Periods (Optional)
 
-To add a trial period, go to the subscription product you want to add a trial period to.
+<Steps>
+  <Step title="Create Subscription with Trial">
+    To add a trial period to your subscription:
+    
+    1. Create a new subscription product following the steps above
+    2. Use a product ID that includes the trial duration (e.g., `bwai_premium_1y_1w` for yearly with 1 week trial)
+  </Step>
 
-Under "Subscription Prices" click the **+** > **Create Introductory Offer**
-- Countries or Regions for Introductory Offer: Select **All** and scroll down and click **Next**
-- Introductory Offer Start/End Date: 
-    - Start Date: Just pick today
-    - End Date: **No End Date**
-    Click **Next**
-- Type of Introductory Offer:
-    - Pick **Free**
-        - Duration: Pick your duration (e.g. 1 week)
-    - Click **Next**
+  <Step title="Configure Introductory Offer">
+    Inside your subscription product:
+    
+    1. Under "Subscription Prices", click **+** > **Create Introductory Offer**
+    2. **Countries or Regions:** Select **All** and click **Next**
+    3. **Start/End Date:**
+       - **Start Date:** Select today
+       - **End Date:** **No End Date**
+       - Click **Next**
+    4. **Type of Introductory Offer:**
+       - Select **Free**
+       - **Duration:** Pick your trial duration (e.g., 1 week)
+       - Click **Next**
+    5. Click **Confirm** to confirm the introductory offer
+  </Step>
+</Steps>
 
-Scroll down and click **Confirm** to confirm the introductory offer.
+## Next Steps
 
+With your iOS subscription products created, you can now:
 
-### Done
+- [Import these products into RevenueCat](./import-products-rc)
+- Set up [Superwall integration](./superwall) for paywall management
+- Test your subscriptions using TestFlight
 
-Now, click **Save** to finish setting up your subscription product.
+## Additional Resources
 
-Your subscription product should have status as **Ready to submit**
-
-This means you can now add it to your app!
+- [Apple In-App Purchase Documentation](https://developer.apple.com/in-app-purchase/)
+- [App Store Connect Help](https://help.apple.com/app-store-connect/)
+- [RevenueCat iOS Setup Guide](https://www.revenuecat.com/docs/getting-started/installation/ios)

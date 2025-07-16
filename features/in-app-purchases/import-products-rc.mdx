@@ -1,30 +1,73 @@
-## Entitlements
+---
+title: "Import Products to RevenueCat"
+description: "Import your subscription products from app stores into RevenueCat and configure entitlements"
+---
 
+## Prerequisites
 
-Go to [RevenueCat](https://app.revenuecat.com/)
-Pick your project
-Click **Product catalog** in the left sidebar
-Choose **Entitlements** in the top menu
+Before importing products to RevenueCat, make sure you have:
 
-Click **+ New Entitlement**
-    - Identifier: This identifier will be used in your app to determine level of access (e.g. `premium`)
-    - Description: A description of what the Entitlement unlocks (e.g. `Premium access to all features`)
-    Click **Add**
+- Completed the [RevenueCat setup](./revenuecat)
+- Created subscription products in [Google Play Console](./android-products) and/or [App Store Connect](./ios-products)
+- Your products are in "Ready to Submit" or "Published" status
 
-## Import Products
+## Configure Entitlements
 
-Still inside **Product catalog** 
+<Steps>
+  <Step title="Create New Entitlement">
+    1. Go to [RevenueCat](https://app.revenuecat.com/)
+    2. Select your project
+    3. Click **Product catalog** in the left sidebar
+    4. Choose **Entitlements** in the top menu
+    5. Click **+ New Entitlement**
+       - **Identifier:** This identifier will be used in your app to determine level of access (e.g., `premium`)
+       - **Description:** A description of what the Entitlement unlocks (e.g., `Premium access to all features`)
+    6. Click **Add**
+  </Step>
+</Steps>
 
-Click **Products** in the top menu
-For each app you want to import products for, click the **Import** button
-RevenueCat will display a list of products that are available to import.
-Choose the products you want to import
-Click **Import**
+## Import Products from App Stores
 
-If the import is successful, you will see the products in the lists with status **Ready to Submit** or **Published**
+<Steps>
+  <Step title="Import Products">
+    1. Still inside **Product catalog**, click **Products** in the top menu
+    2. For each app you want to import products for, click the **Import** button
+    3. RevenueCat will display a list of products that are available to import
+    4. Choose the products you want to import
+    5. Click **Import**
+    
+    If the import is successful, you will see the products in the list with status **Ready to Submit** or **Published**.
+  </Step>
 
-Now you can click **Attach** in the Entitlements column
-    - Attach to Entitlement: Select the entitlement you created in the previous step
-    - Click **Attach**
+  <Step title="Attach Products to Entitlements">
+    For each imported product:
+    
+    1. Click **Attach** in the Entitlements column
+    2. **Attach to Entitlement:** Select the entitlement you created in the previous step
+    3. Click **Attach**
+    
+    Repeat this process for all your products.
+  </Step>
+</Steps>
 
-Do this for all your products.
+## Verification
+
+After completing the import process, verify that:
+
+- All your products appear in the RevenueCat Product catalog
+- Each product is attached to the correct entitlement
+- Product status shows as **Ready to Submit** or **Published**
+- The product identifiers match those in your app stores
+
+## Next Steps
+
+With your products imported and configured in RevenueCat, you can now:
+
+- Set up [Superwall integration](./superwall) for paywall management
+- Test your in-app purchases using the configured products
+- Implement the subscription logic in your app code
+
+## Additional Resources
+
+- [RevenueCat Product Catalog Documentation](https://www.revenuecat.com/docs/entitlements)
+- [RevenueCat Entitlements Guide](https://www.revenuecat.com/docs/getting-started/entitlements)
