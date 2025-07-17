@@ -28,6 +28,15 @@
         ]
       },
       {
+        "group": "Core Features",
+        "pages": [
+          "features/i18n",
+          "features/ui/components",
+          "features/ui/styling-conventions",
+          "features/ui/nativewind"
+        ]
+      },
+      {
         "group": "Authentication",
         "pages": [
           "features/auth/social-auth",
@@ -38,15 +47,13 @@
       {
         "group": "Push Notifications",
         "pages": [
-          "push/credentials-setup",
-          "push/implementation"
+          "push-setup"
         ]
       },
       {
         "group": "Analytics",
         "pages": [
-          "analytics/posthog-setup",
-          "analytics/event-tracking"
+          "posthog-setup"
         ]
       },
       {
@@ -54,35 +61,17 @@
         "pages": [
           "features/in-app-purchases/closed-testing",
           "features/in-app-purchases/android-products",
+          "features/in-app-purchases/ios-sandbox",
           "features/in-app-purchases/app-store-setup",
-          "features/in-app-purchases/revenuecat-setup",
-          "features/in-app-purchases/superwall-integration",
-          "features/in-app-purchases/testing"
+          "features/in-app-purchases/revenuecat",
+          "features/in-app-purchases/import-products-rc",
+          "features/in-app-purchases/superwall"
         ]
       },
       {
         "group": "Advertising",
         "pages": [
-          "features/ads/admob-setup",
-          "features/ads/implementation"
-        ]
-      },
-      {
-        "group": "Core Features",
-        "pages": [
-          "features/i18n",
-          "features/themes",
-          "features/components",
-          "features/icons"
-        ]
-      },
-      {
-        "group": "EAS Workflow",
-        "pages": [
-          "eas/development-builds",
-          "eas/production-builds",
-          "eas/updates",
-          "eas/best-practices"
+          "features/admob-setup"
         ]
       }
     ]

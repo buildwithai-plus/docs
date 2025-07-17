@@ -99,17 +99,108 @@ Before setting up Superwall, make sure you have:
   </Step>
 </Steps>
 
-## Next Steps
+## Testing Your Integration
 
-With Superwall configured, you can now:
+<Steps>
+  <Step title="Configure Environment Variables">
+    Update the API keys in your `.env` file:
+    
+    ```
+    # Superwall API Keys
+    EXPO_PUBLIC_SUPERWALL_API_KEY_IOS=your-superwall-ios-api-key
+    EXPO_PUBLIC_SUPERWALL_API_KEY_ANDROID=your-superwall-android-api-key
 
-- Create and design paywalls in the Superwall dashboard
-- Set up A/B tests for different paywall designs
-- Configure paywall triggers and rules
-- Test your paywall implementation in your app
+    # RevenueCat API Keys
+    EXPO_PUBLIC_REVENUECAT_API_KEY_IOS=your-revenuecat-ios-api-key
+    EXPO_PUBLIC_REVENUECAT_API_KEY_ANDROID=your-revenuecat-android-api-key
+    ```
+    
+    Replace the placeholder values with your actual API keys from RevenueCat and Superwall dashboards.
+  </Step>
 
-## Additional Resources
+  <Step title="Rename Example Files">
+    Rename the example files by running these commands in your project root:
+    
+    ```bash
+    mv lib/iap/RCPurchaseController.tsx.example lib/iap/RCPurchaseController.tsx
+    ```
+    
+    ```bash
+    mv lib/iap/SuperwallDelegate.ts.example lib/iap/SuperwallDelegate.ts
+    ```
+  </Step>
 
-- [Superwall Documentation](https://docs.superwall.com/)
-- [Superwall React Native SDK](https://docs.superwall.com/docs/react-native)
-- [RevenueCat + Superwall Integration Guide](https://www.revenuecat.com/docs/integrations/superwall)
+  <Step title="Configure Example Campaign and Paywall">
+    Before creating your own campaigns and paywalls, you can use the example campaign provided by Superwall:
+    
+    1. In the Superwall dashboard, navigate to **Campaigns** in the left sidebar
+    2. Click on **Example Campaign**
+    3. Select the **1 Paywall** tab
+    4. Click on the paywall card, then click **Edit Paywall**
+    5. In the paywall editor, select the **Products** tab in the left sidebar
+    6. Configure your products:
+       - Set your **Annual** subscription product as the primary product
+       - Set your **Monthly** subscription product as the secondary product
+       - Click **Save** when done
+    
+    You can trigger this paywall in your app using the `campaign_trigger` placement ID.
+  </Step>
+
+  <Step title="Configure Google Play Products in Superwall">
+    Add your previously created subscription products to Superwall one by one. You'll need to add both your annual and monthly subscription products separately.
+    
+    1. Navigate to **Products** > **Products** in the Superwall dashboard
+    2. Click **+ Add Product**
+    
+    ### Adding Annual Subscription
+    Fill in these fields for your annual subscription:
+    
+    - **Product ID**: Enter the exact Product ID from Google Play (e.g., `bwai_premium`)
+    - **Base Plan ID**: Enter your annual base plan ID (e.g., `annual-autorenewing`)
+    - **Automatically Pick Offer**: Toggle ON to let Superwall choose the best available offer
+    - **Trial**: Select "None" unless you have a specific trial configuration
+    - **Price**: Select the exact price from Google Play
+    - **Period**: Select "Year"
+    - **Entitlements**: Select the premium entitlement you created earlier
+    - Click **Save** to add the product
+    
+    ### Adding Monthly Subscription
+    Repeat the process for your monthly subscription:
+    
+    - **Product ID**: Enter the exact Product ID from Google Play (e.g., `bwai_premium`)
+    - **Base Plan ID**: Enter your monthly base plan ID (e.g., `monthly-autorenewing`)
+    - **Automatically Pick Offer**: Toggle ON
+    - **Trial**: Select "None" unless you have a specific trial configuration
+    - **Price**: Select the exact price from Google Play 
+    - **Period**: Select "Month"
+    - **Entitlements**: Select the same entitlement as the annual subscription
+    - Click **Save** to add the product
+    
+    When "Automatically Pick Offer" is enabled, Superwall will choose the best offer available to the user, prioritizing the longest free trial the customer is eligible for, followed by the cheapest introductory price.
+  </Step>
+
+  <Step title="Uncomment Feature Code">
+    The boilerplate already includes some code for showing paywalls, but it's commented out by default.
+    Uncomment all code blocks marked with `TODO: IAP` in these files:
+    
+    - `app/_layout.tsx`
+    - `app/(tabs)/index.tsx`
+    - `app/(tabs)/premium.tsx`
+    
+    Each file contains clear TODO comments marking the sections to uncomment.
+  </Step>
+
+  <Step title="Build and Test">
+    After making these changes, re-run the EAS development build for your platform:
+    
+    ```bash
+    # For iOS
+    eas build --profile development --platform ios
+    
+    # For Android
+    eas build --profile development --platform android
+    ```
+    
+    Once the build completes, install it on your device to test the Superwall integration with RevenueCat.
+  </Step>
+</Steps>
