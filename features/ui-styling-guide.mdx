@@ -1,0 +1,229 @@
+---
+title: 'UI & Styling Guide'
+description: 'Build beautiful interfaces with React Native Reusables and your pre-configured design system'
+icon: 'palette'
+---
+
+# UI & Styling Guide
+
+Your app comes with a complete design system that makes building beautiful interfaces easy. Here's what you need to know to get started.
+
+## What's Included
+
+Your boilerplate includes three main parts that work together:
+1. **NativeWind** - Style components using simple class names like `p-4` and `bg-primary`
+2. **Theme System** - Automatic light/dark mode with consistent colors
+3. **Pre-built Components** - Ready-to-use UI components with built-in styling
+
+## 1. Styling with NativeWind
+
+Instead of writing complex styles, use simple class names with NativeWind. It's like Tailwind CSS for React Native:
+
+```tsx
+// Add padding, background, and rounded corners
+<View className="p-4 bg-card rounded-lg">
+  <Text className="text-lg font-bold">Hello World</Text>
+</View>
+
+// Create a horizontal layout
+<View className="flex-row items-center gap-3">
+  <Avatar />
+  <Text className="flex-1">User Name</Text>
+</View>
+```
+
+**Most common classes you'll use:**
+- `p-4` - Add padding
+- `m-2` - Add margin  
+- `flex-row` - Horizontal layout
+- `items-center` - Center items vertically
+- `bg-primary` - Use theme colors
+- `text-lg` - Large text
+- `rounded-lg` - Rounded corners
+
+
+
+## 2. Theme Colors
+
+Use semantic theme colors instead of hard-coded colors. These automatically adapt to dark mode:
+
+```tsx
+// ❌ Don't use hard-coded colors
+<View className="bg-white">
+  <Text className="text-black">Hello</Text>
+</View>
+
+// ✅ Use theme colors
+<View className="bg-card">
+  <Text className="text-foreground">Hello</Text>
+</View>
+```
+
+**Available theme colors:**
+- `text-foreground` - Main text color
+- `text-muted-foreground` - Secondary text
+- `bg-card` - Card backgrounds
+- `bg-primary` - Primary buttons/accents
+- `bg-secondary` - Secondary buttons
+- `border-border` - Border color
+
+### Changing Theme Colors
+
+To change theme colors, update the HSL values in `global.css`:
+
+```css
+:root {
+  --background: 0 0% 100%;     /* Light mode background */
+  --foreground: 240 10% 3.9%;  /* Light mode text */
+  --primary: 280 75% 60%;      /* Light mode primary */
+}
+
+.dark:root {
+  --background: 240 10% 3.9%;  /* Dark mode background */
+  --foreground: 0 0% 98%;      /* Dark mode text */
+  --primary: 280 85% 70%;      /* Dark mode primary */
+}
+```
+
+**Important:** After updating colors, also update navigation bar colors in `lib/constants.ts` to match your theme.
+
+### Adding New Colors
+
+To add completely new colors:
+
+1. Add to `global.css`:
+```css
+:root {
+  --warning: 38 92% 50%;           /* Orange color */
+  --warning-foreground: 0 0% 100%;  /* Text on warning */
+}
+.dark:root {
+  --warning: 38 100% 60%;          /* Lighter orange */
+  --warning-foreground: 0 0% 100%;  /* Text on warning */
+}
+```
+
+2. Add to `tailwind.config.js`:
+```js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        warning: 'hsl(var(--warning))',
+        'warning-foreground': 'hsl(var(--warning-foreground))'
+      }
+    }
+  }
+}
+```
+
+Now you can use `bg-warning` with `text-warning-foreground` for proper contrast:
+
+```tsx
+<View className="bg-warning p-4 rounded-lg">
+  <Text className="text-warning-foreground font-medium">
+    Please review your changes before continuing
+  </Text>
+</View>
+```
+
+## 3. React Native Reusables
+
+React Native Reusables is universal shadcn/ui for React Native - a focused collection of components crafted with NativeWind v4 and accessibility in mind.
+
+**Key features:**
+- **Universal** - Works on Android, iOS, and web
+- **Accessible** - Built with screen readers in mind
+- **Customizable** - Code lives in your project, not node_modules
+- **Dark mode** - Built-in theme support
+
+[View all components →](https://www.reactnativereusables.com/)
+
+## 4. Using Components
+
+### Text
+
+Use the `Text` component for all text. It supports variants and sizes:
+
+```tsx
+import { Text } from "~/components/ui/text"
+
+<Text>Default text</Text>
+<Text variant="muted">Secondary text</Text>
+<Text variant="destructive">Error message</Text>
+
+<Text size="xs">Extra small</Text>
+<Text size="lg">Large text</Text>
+```
+
+### Button
+
+Buttons must wrap text in a `Text` component:
+
+```tsx
+import { Button } from "~/components/ui/button"
+
+<Button>
+  <Text>Default Button</Text>
+</Button>
+
+<Button variant="destructive">
+  <Text>Delete</Text>
+</Button>
+
+<Button size="sm">
+  <Text>Small Button</Text>
+</Button>
+```
+
+### Card
+
+Cards are composed of multiple parts:
+
+```tsx
+import { Card, CardHeader, CardContent } from "~/components/ui/card"
+
+<Card>
+  <CardHeader>
+    <Text className="font-semibold">Card Title</Text>
+  </CardHeader>
+  <CardContent>
+    <Text>Card content goes here</Text>
+  </CardContent>
+</Card>
+```
+
+## 5. Using Icons
+
+Import icons from `~/lib/icons` and style them with any NativeWind classes:
+
+```tsx
+import { AlertTriangle } from "~/lib/icons"
+
+<View className="flex-row items-center gap-2 bg-warning p-4 rounded-lg">
+  <AlertTriangle 
+    className="text-warning-foreground opacity-80 rotate-12" 
+    size={20} 
+  />
+  <Text className="text-warning-foreground flex-1">
+    Please review your changes
+  </Text>
+</View>
+```
+
+**Adding your own icons:** Check `~/lib/icons/Home.tsx` to see how icons are wrapped with `iconWithClassName`. This enables using any NativeWind class (colors, opacity, rotation, etc) on Lucide icons.
+
+## Quick Tips
+
+1. **Always import from `~/components/ui/`** - Don't use React Native's built-in components
+2. **Use theme colors** - `bg-primary` instead of `bg-blue-500`
+3. **Test both themes** - Check your UI in light and dark mode
+4. **Install components first** - Check what's available before building custom UI
+
+You're all set! Start building beautiful interfaces with your pre-configured design system.
+
+## Further Reading
+
+- [React Native Reusables Documentation (reactnativereusables.com)](https://www.reactnativereusables.com/)
+- [Component Showcase](https://rnr-showcase.vercel.app/components)
+- [NativeWind Documentation](https://www.nativewind.dev/)

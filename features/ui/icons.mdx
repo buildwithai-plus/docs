@@ -1,0 +1,73 @@
+---
+title: 'Icons'  
+description: 'How to use and style icons with NativeWind in React Native Reusables'  
+---
+
+# Icons System
+
+React Native Reusables uses a streamlined approach to handle icons that integrates seamlessly with NativeWind styling. This system allows you to apply styling classes directly to your icons, creating a consistent design language throughout your application.
+
+## How It Works
+
+The icon system uses [Lucide React Native](https://lucide.dev/guide/packages/lucide-react-native) for the base icons and leverages NativeWind's `cssInterop` functionality to enable styling through className props. This is accomplished through a utility function called `iconWithClassName` that registers icons with NativeWind.
+
+The `iconWithClassName` utility enables you to:
+
+- Apply color styles to icons using Tailwind classes
+- Control opacity through class names
+- Maintain a consistent styling approach between components and icons
+
+## Adding New Icons
+
+To add a new icon to your project:
+
+1. Create a new file in the `~/lib/icons/` directory with the name of the Lucide icon you want to use
+2. Import the icon from `lucide-react-native`
+3. Import the `iconWithClassName` utility from `./iconWithClassName`
+4. Register the icon using `iconWithClassName`
+5. Export the icon as a named export
+
+### Example: Adding Icons
+
+```tsx
+// ~/lib/icons/Sun.tsx
+import { Sun } from 'lucide-react-native';
+import { iconWithClassName } from './iconWithClassName';
+
+iconWithClassName(Sun);
+export { Sun };
+```
+
+```tsx
+// ~/lib/icons/MoonStar.tsx
+import { MoonStar } from 'lucide-react-native';
+import { iconWithClassName } from './iconWithClassName';
+
+iconWithClassName(MoonStar);
+export { MoonStar };
+```
+
+## Using Icons in Components
+
+Once you've registered an icon, you can use it in your components with NativeWind classes:
+
+```tsx
+import { Sun } from '~/lib/icons/Sun';
+
+function MyComponent() {
+  return (
+    <View className="p-4">
+      {/* Apply color and opacity styles directly via className */}
+      <Sun className="text-blue-500 opacity-80" />
+    </View>
+  );
+}
+```
+
+## Caution
+
+When working with icons, remember these important points:
+
+- **Always register your icons**: Icons must be wrapped with `iconWithClassName` to support styling via className
+- **Create separate files**: Each icon should have its own file in the `~/lib/icons/` directory
+- **Limited properties**: Only color and opacity can be controlled via className by default

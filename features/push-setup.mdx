@@ -152,8 +152,10 @@ Make sure your app's backend API is set up to receive and store these tokens. Th
 After setting up push notification credentials for either platform, you need to create a new development build with these credentials:
 
 ```bash
-eas build --profile development --platform [ios|android|all]
+eas build --profile development
 ```
+
+Pick your platform (ios, android, or all) and wait for the build to finish.
 
 Once the build is complete, install it on your device to test the push notification functionality.
 

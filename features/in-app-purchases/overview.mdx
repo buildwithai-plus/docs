@@ -1,0 +1,87 @@
+---
+title: "In-App Purchases Overview"
+description: "An overview of implementing in-app purchases and subscriptions in your app"
+---
+
+## Introduction
+
+This guide provides a comprehensive overview of implementing in-app purchases and subscriptions in your app. We'll cover the entire process from setting up your app in the app stores to testing purchases.
+
+## Components and Flow
+
+In-app purchases involve several components working together:
+
+1. **App Stores** - Where you configure your products and handle transactions
+   - Google Play Console for Android
+   - App Store Connect for iOS
+
+2. **RevenueCat** - A subscription management service that:
+   - Syncs products from both platforms
+   - Provides cross-platform purchase verification
+   - Manages subscription status
+
+3. **Superwall** - A paywall management service that:
+   - Creates beautiful paywalls without code
+   - Handles A/B testing
+   - Manages campaigns and conversions
+
+4. **Your App** - Where the user interacts with paywalls and makes purchases
+
+## Implementation Steps
+
+![In-App Purchase Flow](/images/iap-flow-diagram.png)
+
+### 1. Platform Setup
+- [Google Play Console Setup](./google-play-console-setup) - Create and configure your Android app
+- [App Store Connect Setup](./app-store-connect-setup) - Create and configure your iOS app
+
+### 2. Product Configuration
+- [Android Products Setup](./android-products) - Create subscription products for Android
+- [iOS Products Setup](./ios-products) - Create subscription products for iOS
+
+### 3. Testing Configuration
+- [Android Closed Testing](./closed-testing) - Set up testing for Android in-app purchases
+- [iOS Sandbox Testing](./ios-sandbox) - Test in-app purchases on iOS
+
+### 4. Integration
+- [RevenueCat Setup](./revenuecat) - Configure your RevenueCat account
+- [Import Products to RevenueCat](./import-products-rc) - Import your products from app stores
+- [Superwall Setup](./superwall) - Configure paywalls and A/B testing
+
+## Enable Billing in Your Project
+
+<Steps>
+  <Step title="Configure Billing Permissions">
+    Before creating your production builds for testing or release, you need to enable billing functionality in your Expo/React Native project:
+
+    1. Install required packages:
+    ```bash
+    npx expo install expo-superwall react-native-purchases expo-build-properties
+    ```
+
+    2. Add the expo plugin to your `app.json`:
+    ```json
+    [  
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "16.0"
+          },
+          "android": {
+            "minSdkVersion": 26
+          }
+        }
+    ]
+    ```
+
+    This will install the necessary packages and configure your project with the minimum SDK versions required for in-app purchases. These packages will automatically add the necessary `BILLING` permission to your Android app and set up the iOS requirements.
+  </Step>
+</Steps>
+
+## Getting Started
+
+Start by setting up your app in the respective app stores:
+- For Android apps, begin with [Google Play Console Setup](./google-play-console-setup)
+- For iOS apps, begin with [App Store Connect Setup](./app-store-connect-setup)
+
+If you're building for both platforms, we recommend setting up both platforms in parallel.

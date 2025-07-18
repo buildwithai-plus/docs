@@ -1,0 +1,102 @@
+---
+title: "Google Play Console Setup"
+description: "Create and configure your app in Google Play Console for in-app purchases"
+---
+
+## Prerequisites
+
+Before setting up your app in Google Play Console, make sure you have:
+
+- A Google Play Console developer account
+- Your app's package name ready (from `app.json`)
+- Access to create and manage apps in Google Play Console
+
+## Create your app in Google Play Console
+
+<Steps>
+  <Step title="Create New App">
+    1. Open [Google Play Console](https://play.google.com/console/)
+    2. Select **All apps** > **Create app**
+    
+    ### App Details
+    - Select a default language and add your app name as it should appear on Google Play
+    - Specify whether your application is an app or a game
+    - Specify whether your application is free or paid
+    - Add an email address for Play Store users to contact you
+    
+    ### Declarations
+    - Acknowledge the "Developer Program Policies" and "US export laws" declarations
+    - Accept the Play App Signing Terms of Service
+    
+    3. Click **Create app**
+  </Step>
+
+  <Step title="Complete App Setup">
+    When the app is created, you'll be taken to the app's **Dashboard** page.
+
+    1. Click **View tasks** in the **Finish setting up your app** section
+    2. Complete all tasks in the checklist:
+
+    **Let us know about the content of your app:**
+    - Set privacy policy
+    - App access
+    - Ads
+    - Content rating
+    - Target audience
+    - Data safety
+    - Government apps
+    - Financial features
+    - Health
+
+    **Manage how your app is organized and presented:**
+    - Select an app category and provide contact details
+    - Set up your store listing
+
+    Once all tasks are completed, you can proceed with the next steps.
+  </Step>
+</Steps>
+
+## Create Production Build
+
+<Steps>
+  <Step title="Create EAS Production Build">
+    Before proceeding to closed testing, you'll need to create a production build:
+    
+    1. Build your app for production:
+    ```bash
+    eas build -p android --profile production
+    ```
+
+    2. Track the build progress:
+       - Open the URL printed in the terminal, or
+       - Visit the [EAS dashboard](https://expo.dev/accounts/[YOUR_ACCOUNT]/projects/[YOUR_PROJECT]/builds)
+       - Select your newly created production build
+
+    3. When the build completes:
+       - Under **Build artifacts**, click **Download** to get the **.aab** file
+       - This file will be used to upload to Google Play Console
+  </Step>
+</Steps>
+
+## Configure License Testing
+
+<Steps>
+  <Step title="Set Up License Testing">
+    To test in-app purchases, you need to configure license testing:
+
+    1. Open [Google Play Console](https://play.google.com/console/)
+    2. In the sidebar, click **Settings**
+    3. Scroll down to find **License testing** under **Monetization** and click it
+    4. **Choose license testers:** Add the email addresses you want to use for testing
+    5. Make sure the account you're using on your Android testing device is added to the testers list
+    6. **License response:** Select **RESPOND_NORMALLY**
+    7. Click **Save changes**
+  </Step>
+</Steps>
+
+## Next Steps
+
+Now that you've set up your app in Google Play Console, you can:
+
+- [Set up closed testing](./closed-testing) for your app to test in-app purchases
+- [Create subscription products](./android-products) in Google Play Console

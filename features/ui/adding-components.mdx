@@ -1,0 +1,371 @@
+---
+title: 'Adding Components'
+description: 'Learn how to use pre-built React Native Reusables components'
+icon: 'puzzle-piece'
+---
+
+# Adding Components
+
+React Native Reusables provides a collection of pre-built, accessible components that integrate perfectly with your theme and NativeWind styles. In this section, you'll learn how to add these components to your project and customize them to fit your needs.
+
+## What You'll Learn
+
+- How to install React Native Reusables components
+- Where component files are created in your project
+- How to use the most common components
+- How to customize components after installation
+
+## Installing Components
+
+React Native Reusables uses a unique approach: instead of importing components from a library, it copies the component code directly into your project. This gives you complete control to customize each component.
+
+To install a component, use the CLI command:
+
+```bash
+# Basic syntax
+npx @react-native-reusables/cli@latest add <component-name>
+
+# Example: Install the button component
+npx @react-native-reusables/cli@latest add button
+```
+
+### Common Components to Install
+
+Here are some of the most useful components you might want to add:
+
+```bash
+# Essential UI components
+npx @react-native-reusables/cli@latest add button
+npx @react-native-reusables/cli@latest add card
+npx @react-native-reusables/cli@latest add input
+npx @react-native-reusables/cli@latest add text
+
+# Form components
+npx @react-native-reusables/cli@latest add checkbox
+npx @react-native-reusables/cli@latest add select
+npx @react-native-reusables/cli@latest add switch
+
+# Layout components
+npx @react-native-reusables/cli@latest add sheet
+npx @react-native-reusables/cli@latest add tabs
+```
+
+## Where Components Are Created
+
+When you install a component, the CLI creates the component files in your project's `components/ui/` directory. For example, installing the button component creates:
+
+```
+components/
+  └── ui/
+      └── button.tsx
+```
+
+This means you can import components from your own project, not from an external library:
+
+```tsx
+// ✅ Correct way to import
+import { Button } from '~/components/ui/button';
+
+// ❌ Incorrect way (this won't work)
+import { Button } from 'react-native-reusables';
+```
+
+## Using Common Components
+
+Let's look at how to use some of the most common components:
+
+### Button Component
+
+The Button component provides a consistent, accessible button with multiple variants.
+
+```tsx
+// Button examples with different variants
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
+
+function ButtonExamples() {
+  return (
+    <View className="gap-4 p-4">
+      {/* Default (primary) button */}
+      <Button onPress={() => console.log('Pressed')}>
+        <Text className="text-primary-foreground">Primary Button</Text>
+      </Button>
+      
+      {/* Secondary variant */}
+      <Button variant="secondary">
+        <Text>Secondary Button</Text>
+      </Button>
+      
+      {/* Destructive variant (for delete actions) */}
+      <Button variant="destructive">
+        <Text>Delete</Text>
+      </Button>
+      
+      {/* Outline variant */}
+      <Button variant="outline">
+        <Text>Outline Button</Text>
+      </Button>
+      
+      {/* Ghost variant (no background) */}
+      <Button variant="ghost">
+        <Text>Ghost Button</Text>
+      </Button>
+      
+      {/* Link variant (looks like a text link) */}
+      <Button variant="link">
+        <Text>Link Button</Text>
+      </Button>
+    </View>
+  );
+}
+```
+
+### Card Component
+
+The Card component provides a container for content with a consistent style. It's composed of multiple parts that you can use together:
+
+```tsx
+// Card example with all parts
+import { Card, CardHeader, CardContent, CardFooter } from '~/components/ui/card';
+import { Text } from '~/components/ui/text';
+import { Button } from '~/components/ui/button';
+
+function CardExample() {
+  return (
+    <View className="p-4">
+      <Card>
+        <CardHeader>
+          <Text className="text-xl font-bold">Card Title</Text>
+          <Text className="text-muted-foreground">Card subtitle or description</Text>
+        </CardHeader>
+        
+        <CardContent>
+          <Text>This is the main content area of the card. You can put any content here.</Text>
+        </CardContent>
+        
+        <CardFooter className="flex-row justify-end gap-2">
+          <Button variant="outline">
+            <Text>Cancel</Text>
+          </Button>
+          <Button>
+            <Text className="text-primary-foreground">Submit</Text>
+          </Button>
+        </CardFooter>
+      </Card>
+    </View>
+  );
+}
+```
+
+### Input Component
+
+The Input component provides a styled text input field:
+
+```tsx
+// Input example
+import { Input } from '~/components/ui/input';
+import { Text } from '~/components/ui/text';
+import { View } from 'react-native';
+
+function InputExample() {
+  return (
+    <View className="p-4 gap-4">
+      {/* Basic input */}
+      <View>
+        <Text className="text-sm font-medium mb-1.5">Email</Text>
+        <Input 
+          placeholder="Enter your email" 
+          keyboardType="email-address"
+        />
+      </View>
+      
+      {/* Disabled input */}
+      <View>
+        <Text className="text-sm font-medium mb-1.5">Username</Text>
+        <Input 
+          value="johndoe" 
+          editable={false} 
+        />
+        <Text className="text-xs text-muted-foreground mt-1">
+          Username cannot be changed
+        </Text>
+      </View>
+      
+      {/* Password input */}
+      <View>
+        <Text className="text-sm font-medium mb-1.5">Password</Text>
+        <Input 
+          placeholder="Enter your password" 
+          secureTextEntry={true}
+        />
+      </View>
+    </View>
+  );
+}
+```
+
+## Customizing Components
+
+One of the biggest advantages of React Native Reusables is that you can fully customize the components after installation. Since the component code is in your project, you can modify it however you want.
+
+### Simple Customization with NativeWind
+
+The easiest way to customize components is by using the `className` prop:
+
+```tsx
+// Customizing a button with NativeWind
+<Button className="rounded-full px-8">
+  <Text>Rounded Button</Text>
+</Button>
+```
+
+### Modifying Component Source Code
+
+For deeper customization, you can edit the component source code directly:
+
+1. Open the component file in your editor (e.g., `components/ui/button.tsx`)
+2. Modify the code to fit your needs
+3. The changes will apply everywhere the component is used
+
+For example, to change the default padding of the Button component:
+
+```tsx
+// Original button.tsx code
+const buttonVariants = cva(
+  "flex-row items-center justify-center rounded-md",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary",
+        destructive: "bg-destructive",
+        outline: "border border-input bg-transparent",
+        // ...other variants
+      },
+      size: {
+        default: "px-4 py-2", // <-- Change this line
+        sm: "px-3 py-1",
+        lg: "px-6 py-3",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+);
+```
+
+Change to:
+
+```tsx
+// Modified button.tsx code
+const buttonVariants = cva(
+  "flex-row items-center justify-center rounded-md",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary",
+        destructive: "bg-destructive",
+        outline: "border border-input bg-transparent",
+        // ...other variants
+      },
+      size: {
+        default: "px-5 py-3", // <-- Changed padding
+        sm: "px-3 py-1",
+        lg: "px-6 py-3",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+);
+```
+
+### Adding New Variants
+
+You can also add new variants to components:
+
+```tsx
+// Adding a new "success" variant to button.tsx
+const buttonVariants = cva(
+  "flex-row items-center justify-center rounded-md",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary",
+        destructive: "bg-destructive",
+        outline: "border border-input bg-transparent",
+        // Add new variant
+        success: "bg-green-500", 
+      },
+      // ...other options
+    },
+    // ...defaultVariants
+  }
+);
+```
+
+Then use it in your app:
+
+```tsx
+<Button variant="success">
+  <Text className="text-white">Success</Text>
+</Button>
+```
+
+## Try It Yourself
+
+Now that you know how to use React Native Reusables components, try creating a simple form:
+
+1. Install the necessary components (button, input, text)
+2. Create a form with email and password inputs
+3. Add a submit button
+4. Style the form with NativeWind classes
+
+Your form might look something like this:
+
+```tsx
+// 📱 A simple login form with React Native Reusables
+import { View } from 'react-native';
+import { Text } from '~/components/ui/text';
+import { Input } from '~/components/ui/input';
+import { Button } from '~/components/ui/button';
+
+function LoginForm() {
+  return (
+    <View className="p-6 gap-4">
+      <Text className="text-2xl font-bold text-center mb-2">Login</Text>
+      
+      <View>
+        <Text className="text-sm font-medium mb-1.5">Email</Text>
+        <Input 
+          placeholder="Enter your email" 
+          keyboardType="email-address"
+        />
+      </View>
+      
+      <View>
+        <Text className="text-sm font-medium mb-1.5">Password</Text>
+        <Input 
+          placeholder="Enter your password" 
+          secureTextEntry={true}
+        />
+      </View>
+      
+      <Button className="mt-4">
+        <Text className="text-primary-foreground font-medium">Sign In</Text>
+      </Button>
+      
+      <Text className="text-center text-muted-foreground">
+        Don't have an account? <Text className="text-primary">Sign up</Text>
+      </Text>
+    </View>
+  );
+}
+```
+
+## What's Next
+
+Now that you know how to use pre-built components, let's see how to combine everything you've learned into complete, real-world examples in the next section!

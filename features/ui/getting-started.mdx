@@ -1,0 +1,135 @@
+---
+title: 'Getting Started with UI & Styling'
+description: 'Learn the basics of styling your app with themes, NativeWind, and React Native Reusables'
+icon: 'rocket'
+---
+
+# Getting Started with UI & Styling
+
+Welcome to the UI & Styling guide! If you're new to styling in React Native or feeling overwhelmed by all the options, you're in the right place. This guide will walk you through everything step-by-step, starting with the basics.
+
+## What Are These Styling Systems?
+
+Your app uses three complementary systems that work together to create beautiful, consistent interfaces:
+
+### 1. Theme System
+
+**What it is:** A collection of color variables that automatically adapt to light and dark mode.
+
+**What it does:** Provides semantic color names like `primary` or `background` instead of hardcoded values like `#3B82F6`.
+
+**When to use it:** Whenever you need to reference a color in your app.
+
+### 2. NativeWind
+
+**What it is:** A utility-first styling approach that lets you add styles directly in your JSX.
+
+**What it does:** Transforms simple class names like `p-4` or `bg-primary` into actual styles.
+
+**When to use it:** For all your component styling needs - spacing, layout, colors, typography.
+
+### 3. React Native Reusables
+
+**What it is:** A collection of pre-built, customizable UI components.
+
+**What it does:** Provides ready-to-use components like buttons, cards, and inputs that follow best practices.
+
+**When to use it:** When you need common UI elements that are already styled and accessible.
+
+## How They Work Together
+
+Think of these three systems like building a house:
+
+🏗️ **Theme System** is the foundation - it defines your color palette and ensures consistency.
+
+🧱 **NativeWind** provides the building blocks - utility classes that let you construct any layout.
+
+🏠 **React Native Reusables** gives you pre-built rooms - complete components you can move in and use right away.
+
+![Styling Systems Working Together](../images/styling-systems.png)
+
+## Before & After: The Power of Styling
+
+Let's see what a difference these systems make with a simple example:
+
+### Before: Unstyled Component
+
+```tsx
+// 😕 Unstyled component - functional but plain
+function ProfileCard() {
+  return (
+    <View>
+      <View>
+        <Text>John Doe</Text>
+        <Text>Premium Member</Text>
+      </View>
+      
+      <View>
+        <Text>Member since: January 2025</Text>
+      </View>
+      
+      <View>
+        <Pressable>
+          <Text>Edit</Text>
+        </Pressable>
+        <Pressable>
+          <Text>Delete</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
+}
+```
+
+### After: Styled Component
+
+```tsx
+// 🤩 Styled component - beautiful and consistent
+import { Card, CardHeader, CardContent, CardFooter } from '~/components/ui/card';
+import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
+
+function ProfileCard() {
+  return (
+    <View className="p-4">
+      <Card>
+        <CardHeader>
+          <Text className="text-xl font-bold">John Doe</Text>
+          <Text className="text-muted-foreground">Premium Member</Text>
+        </CardHeader>
+        
+        <CardContent>
+          <View className="bg-muted p-3 rounded-md">
+            <Text>Member since: January 2025</Text>
+          </View>
+        </CardContent>
+        
+        <CardFooter className="flex-row gap-2">
+          <Button variant="outline">
+            <Text>Edit</Text>
+          </Button>
+          <Button variant="destructive">
+            <Text>Delete</Text>
+          </Button>
+        </CardFooter>
+      </Card>
+    </View>
+  );
+}
+```
+
+The styled version:
+- Uses **theme colors** like `muted-foreground` for consistent coloring
+- Applies **NativeWind classes** like `p-4` and `rounded-md` for spacing and appearance
+- Incorporates **React Native Reusables** components like `Card` and `Button` for professional UI elements
+
+## What You'll Learn
+
+In this guide, you'll learn:
+
+1. How to apply your first NativeWind styles
+2. How to customize your app's colors
+3. How to add and use pre-built components
+4. How to combine everything into complete, professional interfaces
+
+Ready to get started? Let's begin with your first styles in the next section!

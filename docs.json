@@ -31,9 +31,7 @@
         "group": "Core Features",
         "pages": [
           "features/i18n",
-          "features/ui/components",
-          "features/ui/styling-conventions",
-          "features/ui/nativewind"
+          "features/ui-styling-guide"
         ]
       },
       {
@@ -47,13 +45,13 @@
       {
         "group": "Push Notifications",
         "pages": [
-          "push-setup"
+          "features/push-setup"
         ]
       },
       {
         "group": "Analytics",
         "pages": [
-          "posthog-setup"
+          "features/posthog-setup"
         ]
       },
       {
@@ -62,7 +60,7 @@
           "features/in-app-purchases/closed-testing",
           "features/in-app-purchases/android-products",
           "features/in-app-purchases/ios-sandbox",
-          "features/in-app-purchases/app-store-setup",
+          "features/in-app-purchases/ios-products",
           "features/in-app-purchases/revenuecat",
           "features/in-app-purchases/import-products-rc",
           "features/in-app-purchases/superwall"

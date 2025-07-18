@@ -22,7 +22,7 @@ Before setting up Apple Sign-In, make sure you have:
     5. Select `App IDs` and click `Continue`
     6. Choose `App` as the type and click `Continue`
     7. Fill in a description (e.g., "My App") 
-    8. Enter your `Bundle Identifier` that matches your `app.json` (e.g., `com.yourcompany.yourapp`)
+    8. Enter your `Bundle Identifier` that matches your `app.json` (e.g., `com.buildwithai.travelapp`)
     9. Scroll down to `Capabilities` and enable `Sign In with Apple`
     10. Click `Continue` then `Register` on the top right
   </Step>
@@ -33,15 +33,15 @@ Before setting up Apple Sign-In, make sure you have:
     3. Click the `+` button to create a new identifier
     4. Select `Service IDs` and click `Continue`
     5. Fill in a description (e.g., "My App - Apple Sign In")
-    6. Enter a unique identifier, which could be your app ID with `.signin` appended (e.g. `com.yourcompany.yourapp.signin`)
+    6. Enter a unique identifier, which could be your app ID with `.signin` appended (e.g. `com.buildwithai.travelapp.signin`)
     7. Click `Continue` then `Register` on the top right
     
     After registration:
     
     8. Click on your newly created Service ID from the list
     9. Check `Sign In with Apple` and click `Configure`
-    10. Add your Supabase domain as a Website URL (e.g., `https://your-project-ref.supabase.co`)
-    11. Add your return URL (e.g., `https://your-project-ref.supabase.co/auth/v1/callback`)
+    10. Add your Supabase domain as a Website URL (your Supabase project URL in `.env`)
+    11. Add your return URL (your Supabase project URL in `.env` + `/auth/v1/callback`)
     12. Click `Save`, then `Continue`, and `Save` again
   </Step>
 
@@ -51,7 +51,7 @@ Before setting up Apple Sign-In, make sure you have:
     3. Click the `+` button to create a new key
     4. Enter a name for your key (e.g., "My App Sign In Key")
     5. Check `Sign In with Apple` and click `Configure`
-    6. Select your primary App ID (e.g., `com.yourcompany.yourapp`) and click `Save`
+    6. Select your primary App ID (e.g., `com.buildwithai.travelapp`) and click `Save`
     7. Click `Continue` then `Register`
     8. **Download** your private key file (a file with `.p8` at the end) - this can **only** be downloaded once
     9. Note your `Key ID` for later use
@@ -74,7 +74,7 @@ According to the Apple Docs it needs to be a JWT token encrypted using the Ellip
 
 // 👉 FILL THESE IN:
 const TEAM_ID   = "YOUR_TEAM_ID";             // e.g. 1A2B3C4D5E
-const CLIENT_ID = "com.example.service";      // your Service ID
+const CLIENT_ID = "YOUR_CLIENT_ID";           // e.g. com.buildwithai.travelapp.signin
 const KEY_ID    = "YOUR_KEY_ID";              // the 10-char Key ID
 const KEY_FILE  = "./AuthKey_XXXXXXXXXX.p8";  // path to your .p8 file
 
@@ -122,7 +122,7 @@ npm install jsonwebtoken
 
 3. Edit the four const lines at the top of `gen_apple_secret.js`:
    - `TEAM_ID`: Your Apple Developer Team ID
-   - `CLIENT_ID`: The Service ID you created (e.g. `com.yourcompany.yourapp.signin`)
+   - `CLIENT_ID`: The Service ID you created (e.g. `com.buildwithai.travelapp.signin`)
    - `KEY_ID`: The Key ID of the private key you downloaded
    - `KEY_FILE`: The path to your downloaded .p8 file
 
@@ -140,7 +140,7 @@ node gen_apple_secret.js
     2. Find `Apple` in the list of Auth Providers and click it to open the settings
     3. Toggle `Enable Sign in with Apple`
     4. Fill in the required fields:
-       - **Client IDs**: The Service ID you created (e.g., `com.yourcompany.yourapp.signin`)
+       - **Client IDs**: The Service ID you created (e.g., `com.buildwithai.travelapp.signin`)
        - **Secret Key (for OAuth)**: Paste the generated client secret JWT from the previous step
     5. Click `Save`
   </Step>
@@ -192,6 +192,16 @@ Now that you've set up Apple Sign-In with Supabase, you need to enable the featu
 </Steps>
 
 Once you've completed these steps, the Apple Sign-In button will appear in the authentication screens and be fully functional - on iOS only.
+
+### Re-build your app
+
+Re-build your app to apply the changes:
+
+```bash
+eas build -p ios --profile development
+```
+
+Install the new EAS build on your device.
 
 ### Testing Your Configuration
 

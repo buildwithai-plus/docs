@@ -1,0 +1,228 @@
+---
+title: 'Your First Styles'
+description: 'Learn how to style components with NativeWind utility classes'
+icon: 'paintbrush'
+---
+
+# Your First Styles
+
+Now that you understand the styling systems, let's start applying some styles! This section will walk you through your first NativeWind styles, starting with the basics and building up to more complex layouts.
+
+## What You'll Learn
+
+- How to add your first NativeWind classes
+- How to combine multiple style properties
+- How to use theme colors in your styles
+- How to create common layouts with NativeWind
+
+## Step 1: Your First Style - Adding Padding
+
+Let's start with the most basic style - adding some padding to a component:
+
+```tsx
+// 📱 A simple box with padding
+import { View } from 'react-native';
+
+function SimpleBox() {
+  return (
+    <View className="p-4">
+      {/* Content goes here */}
+    </View>
+  );
+}
+```
+
+**What this does:** The `p-4` class adds 16 pixels of padding on all sides of the View.
+
+**Try it yourself:** Add different padding values like `p-2` (8px) or `p-8` (32px) to see how it changes.
+
+## Step 2: Adding Background Color
+
+Now let's add a background color to make our box visible:
+
+```tsx
+// 📱 A blue box with padding
+import { View } from 'react-native';
+
+function BlueBox() {
+  return (
+    <View className="p-4 bg-blue-500">
+      {/* Content goes here */}
+    </View>
+  );
+}
+```
+
+**What this does:** 
+- `p-4` adds 16px padding on all sides
+- `bg-blue-500` adds a medium blue background color
+
+**Try it yourself:** Try other colors like `bg-red-500` or `bg-green-500`.
+
+## Step 3: Using Theme Colors
+
+Instead of using hardcoded colors, let's use our theme colors for better consistency:
+
+```tsx
+// 📱 A box using theme colors
+import { View } from 'react-native';
+
+function ThemedBox() {
+  return (
+    <View className="p-4 bg-primary">
+      {/* Content goes here */}
+    </View>
+  );
+}
+```
+
+**What this does:** 
+- `bg-primary` uses your app's primary color, which automatically adapts to light/dark mode
+
+**Why this is better:** Theme colors ensure your app looks consistent and adapts to light/dark mode automatically.
+
+## Step 4: Adding Text with Styling
+
+Let's add some text to our box and style it:
+
+```tsx
+// 📱 A box with styled text
+import { View } from 'react-native';
+import { Text } from '~/components/ui/text';
+
+function BoxWithText() {
+  return (
+    <View className="p-4 bg-primary">
+      <Text className="text-primary-foreground font-bold text-lg">
+        Hello World
+      </Text>
+    </View>
+  );
+}
+```
+
+**What this does:**
+- `text-primary-foreground` sets text color to contrast with primary background
+- `font-bold` makes the text bold
+- `text-lg` increases the font size to "large"
+
+## Step 5: Creating a Card Layout
+
+Now let's combine what we've learned to create a simple card layout:
+
+```tsx
+// 📱 A simple card with rounded corners and shadow
+import { View } from 'react-native';
+import { Text } from '~/components/ui/text';
+
+function SimpleCard() {
+  return (
+    <View className="p-4 bg-card rounded-lg shadow m-2">
+      <Text className="text-card-foreground font-bold text-lg mb-2">
+        Card Title
+      </Text>
+      <Text className="text-muted-foreground">
+        This is a simple card with rounded corners and a shadow.
+        It uses theme colors for consistent styling.
+      </Text>
+    </View>
+  );
+}
+```
+
+**What this does:**
+- `bg-card` uses the card background color from your theme
+- `rounded-lg` adds rounded corners
+- `shadow` adds a subtle drop shadow
+- `m-2` adds a small margin around the card
+- `mb-2` adds margin at the bottom of the title
+- `text-muted-foreground` uses a slightly muted text color for the description
+
+## NativeWind Classes by Category
+
+Here's a quick reference of the most common NativeWind classes grouped by purpose:
+
+### Spacing
+
+| Class | What it does | Example |
+|-------|-------------|---------|
+| `p-{size}` | Padding on all sides | `p-4` |
+| `px-{size}` | Horizontal padding | `px-4` |
+| `py-{size}` | Vertical padding | `py-2` |
+| `pt/pr/pb/pl-{size}` | Padding top/right/bottom/left | `pt-2` |
+| `m-{size}` | Margin on all sides | `m-4` |
+| `mx-{size}` | Horizontal margin | `mx-4` |
+| `my-{size}` | Vertical margin | `my-2` |
+| `mt/mr/mb/ml-{size}` | Margin top/right/bottom/left | `mt-2` |
+| `gap-{size}` | Gap between flex items | `gap-2` |
+
+### Layout
+
+| Class | What it does | Example |
+|-------|-------------|---------|
+| `flex-row` | Horizontal flex direction | `flex-row` |
+| `flex-col` | Vertical flex direction | `flex-col` |
+| `items-center` | Center items vertically | `items-center` |
+| `justify-center` | Center items horizontally | `justify-center` |
+| `justify-between` | Space items evenly | `justify-between` |
+| `flex-1` | Make item expand to fill space | `flex-1` |
+| `w-{size}` | Set width | `w-full` |
+| `h-{size}` | Set height | `h-12` |
+
+### Appearance
+
+| Class | What it does | Example |
+|-------|-------------|---------|
+| `bg-{color}` | Background color | `bg-primary` |
+| `rounded-{size}` | Border radius | `rounded-lg` |
+| `border` | Add border | `border` |
+| `border-{color}` | Border color | `border-gray-200` |
+| `shadow` | Add shadow | `shadow` |
+| `opacity-{value}` | Set opacity | `opacity-50` |
+
+### Typography
+
+| Class | What it does | Example |
+|-------|-------------|---------|
+| `text-{color}` | Text color | `text-primary` |
+| `text-{size}` | Font size | `text-lg` |
+| `font-bold` | Bold text | `font-bold` |
+| `font-medium` | Medium weight text | `font-medium` |
+| `text-center` | Center align text | `text-center` |
+| `italic` | Italic text | `italic` |
+| `underline` | Underlined text | `underline` |
+
+## Try It Yourself
+
+Now that you've learned the basics, try creating a notification message component:
+
+1. Start with a `View` with padding
+2. Add a background color (try `bg-blue-100` for light blue)
+3. Add rounded corners with `rounded-lg`
+4. Add a title with bold text
+5. Add a description with regular text
+6. Add an icon or emoji at the beginning
+
+Your component might look something like this:
+
+```tsx
+// 📱 A notification message component
+import { View } from 'react-native';
+import { Text } from '~/components/ui/text';
+
+function NotificationMessage() {
+  return (
+    <View className="p-4 bg-blue-100 rounded-lg m-2 flex-row items-center">
+      <Text className="text-2xl mr-2">ℹ️</Text>
+      <View>
+        <Text className="font-bold text-blue-800">Information</Text>
+        <Text className="text-blue-600">This is an important notification message.</Text>
+      </View>
+    </View>
+  );
+}
+```
+
+## What's Next
+
+Now that you know how to apply basic styles with NativeWind, let's learn how to customize your app's colors in the next section!

@@ -7,9 +7,11 @@ description: "Set up Superwall for paywall management and A/B testing with Reven
 
 Before setting up Superwall, make sure you have:
 
+- Completed the platform setup for [Google Play Console](./google-play-console-setup) and/or [App Store Connect](./app-store-connect-setup)
+- Created [Android products](./android-products) and/or [iOS products](./ios-products)
+- Set up testing environments with [Android closed testing](./closed-testing) or [iOS sandbox testing](./ios-sandbox)
 - Completed [RevenueCat setup](./revenuecat) with valid credentials
 - [Imported your products](./import-products-rc) into RevenueCat
-- Your app's bundle ID and package name ready
 
 ## Create Superwall Account
 
@@ -204,3 +206,23 @@ Before setting up Superwall, make sure you have:
     Once the build completes, install it on your device to test the Superwall integration with RevenueCat.
   </Step>
 </Steps>
+
+## Next Steps
+
+Congratulations! You've now completed the entire in-app purchase setup flow:
+
+1. Set up your app in the platform stores ([Google Play Console](./google-play-console-setup), [App Store Connect](./app-store-connect-setup))
+2. Created subscription products ([Android](./android-products), [iOS](./ios-products))
+3. Configured testing environments ([Android closed testing](./closed-testing), [iOS sandbox](./ios-sandbox))
+4. Set up [RevenueCat](./revenuecat) for subscription management
+5. [Imported products](./import-products-rc) into RevenueCat
+6. Configured Superwall for paywall management
+
+From here, you can:
+
+- Customize your paywalls and campaigns in Superwall
+- Develop and refine your app's monetization strategy
+- Run A/B tests for different paywall designs
+- Monitor subscription analytics in RevenueCat and Superwall
+
+For more information about implementing the subscription logic in your app code, refer to the [RevenueCat documentation](https://www.revenuecat.com/docs/getting-started/quickstart) and [Superwall documentation](https://docs.superwall.com/docs).

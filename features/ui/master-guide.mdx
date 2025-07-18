@@ -1,0 +1,174 @@
+---
+title: 'UI & Styling Guide'
+description: 'Build beautiful interfaces with your pre-configured design system'
+icon: 'palette'
+---
+
+# UI & Styling Guide
+
+Your app comes with a complete design system already configured and ready to use. This guide shows you how to style components, customize themes, and use pre-built UI components.
+
+## Your Design System
+
+Your boilerplate includes:
+- **NativeWind** for utility-first styling
+- **Theme system** with automatic light/dark mode
+- **Pre-built components** (Button, Card, Text, Avatar, etc.)
+- **Global styles** in `global.css`
+
+Everything works together seamlessly - no setup required.
+
+## Styling with NativeWind
+
+Use utility classes directly in your JSX:
+
+```tsx
+// Basic styling
+<View className="p-4 bg-card rounded-lg">
+  <Text className="text-lg font-bold">Hello World</Text>
+</View>
+
+// Layout with flexbox
+<View className="flex-row items-center gap-3">
+  <Avatar />
+  <Text className="flex-1">User Name</Text>
+</View>
+```
+
+### Common Classes
+
+| Purpose | Classes | Example |
+|---------|---------|---------|
+| **Spacing** | `p-4`, `m-2`, `gap-3` | `className="p-4 m-2"` |
+| **Layout** | `flex-row`, `items-center`, `justify-between` | `className="flex-row items-center"` |
+| **Colors** | `bg-primary`, `text-foreground` | `className="bg-primary text-white"` |
+| **Size** | `w-full`, `h-12`, `flex-1` | `className="w-full h-12"` |
+
+## Theme Colors
+
+Your theme automatically adapts to light/dark mode. Use semantic color names:
+
+```tsx
+// Theme colors (recommended)
+<View className="bg-primary">
+  <Text className="text-primary-foreground">Button</Text>
+</View>
+
+// Available theme colors
+bg-background     // Main background
+bg-card          // Card backgrounds  
+bg-primary       // Brand color
+bg-muted         // Subtle backgrounds
+text-foreground  // Main text
+text-muted-foreground // Secondary text
+```
+
+### Customizing Colors
+
+Edit `global.css` to change your theme:
+
+```css
+:root {
+  --primary: 280 75% 60%;  /* Purple instead of blue */
+}
+
+.dark:root {
+  --primary: 280 85% 70%;  /* Lighter purple for dark mode */
+}
+```
+
+## Using Components
+
+Your app includes pre-built components. Import from `~/components/ui/`:
+
+```tsx
+import { Button } from '~/components/ui/button';
+import { Card, CardHeader, CardContent } from '~/components/ui/card';
+import { Text } from '~/components/ui/text';
+
+function MyScreen() {
+  return (
+    <Card className="m-4">
+      <CardHeader>
+        <Text className="text-xl font-bold">Welcome</Text>
+      </CardHeader>
+      <CardContent>
+        <Button onPress={() => console.log('Pressed')}>
+          <Text>Get Started</Text>
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+### Available Components
+
+Your boilerplate includes:
+- `Button` - Various styles and variants
+- `Card` - Container with header/content/footer
+- `Text` - Themed text component
+- `Avatar` - User profile images
+- `Progress` - Progress indicators
+- `Tooltip` - Hover information
+
+### Adding More Components
+
+Install additional components as needed:
+
+```bash
+npx @react-native-reusables/cli@latest add input
+npx @react-native-reusables/cli@latest add switch
+npx @react-native-reusables/cli@latest add alert
+```
+
+## Complete Example
+
+Here's a login form using your design system:
+
+```tsx
+import { View } from 'react-native';
+import { Button } from '~/components/ui/button';
+import { Card, CardHeader, CardContent } from '~/components/ui/card';
+import { Text } from '~/components/ui/text';
+
+export function LoginForm() {
+  return (
+    <View className="flex-1 bg-background p-6 justify-center">
+      <Card>
+        <CardHeader>
+          <Text className="text-2xl font-bold text-center">Welcome Back</Text>
+          <Text className="text-muted-foreground text-center">
+            Sign in to your account
+          </Text>
+        </CardHeader>
+        
+        <CardContent className="gap-4">
+          {/* Add Input components here */}
+          
+          <Button className="mt-4">
+            <Text className="text-primary-foreground font-medium">
+              Sign In
+            </Text>
+          </Button>
+          
+          <Text className="text-center text-muted-foreground text-sm">
+            Don't have an account?{' '}
+            <Text className="text-primary">Sign up</Text>
+          </Text>
+        </CardContent>
+      </Card>
+    </View>
+  );
+}
+```
+
+## Best Practices
+
+1. **Use theme colors** - `bg-primary` instead of `bg-blue-500`
+2. **Consistent spacing** - Stick to `p-2`, `p-4`, `p-6` scale
+3. **Semantic components** - Use `Card` for containers, `Button` for actions
+4. **Test both modes** - Check light and dark themes
+5. **Customize at source** - Edit component files in `components/ui/` for app-wide changes
+
+Your design system is ready to use - start building beautiful interfaces right away!

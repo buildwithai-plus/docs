@@ -1,109 +1,26 @@
 ---
-title: "Closed Testing Setup"
-description: "Set up closed testing for your Android app to enable in-app purchase testing"
+title: "Android Closed Testing"
+description: "Set up closed testing for your Android app to test in-app purchases"
 ---
 
 ## Prerequisites
 
 Before setting up closed testing, make sure you have:
 
-- A Google Play Console developer account
-- Your app's package name ready (from `app.json`)
-- Access to create and manage apps in Google Play Console
-
-## Create your app in Google Play Console
-
-<Steps>
-  <Step title="Create New App">
-    1. Open [Google Play Console](https://play.google.com/console/)
-    2. Select **All apps** > **Create app**
-    
-    ### App Details
-    - Select a default language and add your app name as it should appear on Google Play
-    - Specify whether your application is an app or a game
-    - Specify whether your application is free or paid
-    - Add an email address for Play Store users to contact you
-    
-    ### Declarations
-    - Acknowledge the "Developer Program Policies" and "US export laws" declarations
-    - Accept the Play App Signing Terms of Service
-    
-    3. Click **Create app**
-  </Step>
-
-  <Step title="Complete App Setup">
-    When the app is created, you'll be taken to the app's **Dashboard** page.
-
-    1. Click **View tasks** in the **Finish setting up your app** section
-    2. Complete all tasks in the checklist:
-
-    **Let us know about the content of your app:**
-    - Set privacy policy
-    - App access
-    - Ads
-    - Content rating
-    - Target audience
-    - Data safety
-    - Government apps
-    - Financial features
-    - Health
-
-    **Manage how your app is organized and presented:**
-    - Select an app category and provide contact details
-    - Set up your store listing
-
-    Once all tasks are completed, you can proceed to **Closed testing**.
-  </Step>
-</Steps>
+- Completed the [Google Play Console Setup](./google-play-console-setup) for your app
+- Created a production build (.aab file) of your app
+- Access to your app's Google Play Console
 
 ## Set Up Closed Testing
+
+
 
 Once you've completed the app setup, you can access **Closed testing** from:
 - Your app's **Dashboard** page, or
 - **Test and release** > **Testing** > **Closed testing** in the left sidebar
 
 <Steps>
-  <Step title="Enable Billing in Your Project">
-    To enable billing functionality in your Expo/React Native project:
 
-    1. Install required packages:
-    ```bash
-    npx expo install expo-superwall react-native-purchases expo-build-properties
-    ```
-
-    2. Add the expo plugin to your `app.json`:
-    ```json
-    [
-        "expo-build-properties",
-        {
-          "ios": {
-            "deploymentTarget": "16.0"
-          },
-          "android": {
-            "minSdkVersion": 26
-          }
-        }
-    ]
-    ```
-
-    This will install the necessary packages and configure your project with the minimum SDK versions required for in-app purchases. These packages will automatically add the necessary `BILLING` permission to your Android app.
-  </Step>
-
-  <Step title="Create EAS Production Build">
-    1. Build your app for production:
-    ```bash
-    eas build -p android --profile production
-    ```
-
-    2. Track the build progress:
-       - Open the URL printed in the terminal, or
-       - Visit the [EAS dashboard](https://expo.dev/accounts/[YOUR_ACCOUNT]/projects/[YOUR_PROJECT]/builds)
-       - Select your newly created production build
-
-    3. When the build completes:
-       - Under **Build artifacts**, click **Download** to get the **.aab** file
-       - This file will be used to upload to Google Play Console
-  </Step>
 
   <Step title="Configure Closed Test Track">
     1. Navigate to the **Closed testing** section in Google Play Console
@@ -148,17 +65,7 @@ Once you've completed the app setup, you can access **Closed testing** from:
     Reviews are typically completed within 7 days, but small releases are usually approved within a day.
   </Step>
 
-  <Step title="Configure License Testing">
-    To test in-app purchases, you need to configure license testing:
 
-    1. Open [Google Play Console](https://play.google.com/console/)
-    2. In the sidebar, click **Settings**
-    3. Scroll down to find **License testing** under **Monetization** and click it
-    4. **Choose license testers:** Use the testers list you created in the closed testing track
-    5. Make sure the account you're using on your Android testing device is added to the testers list
-    6. **License response:** Select **RESPOND_NORMALLY**
-    7. Click **Save changes**
-  </Step>
 </Steps>
 
 ## How Testers Join Your Closed Test
@@ -175,4 +82,8 @@ They will also be added as a tester in the closed testing track. You need 12 use
 
 ## Next Steps
 
-You can now add real subscription products to your Android app using the [Android Products Setup](./android-products) guide.
+With your closed testing track set up, you can now:
+
+1. [Create subscription products](./android-products) for your Android app
+2. [Import your products into RevenueCat](./import-products-rc) for subscription management
+3. [Set up Superwall](./superwall) for paywall management

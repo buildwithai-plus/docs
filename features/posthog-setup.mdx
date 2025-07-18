@@ -1,48 +1,108 @@
----
-title: 'PostHog Analytics Setup'
-description: 'Setting up PostHog analytics in your BuildWithAI application'
----
+# PostHog Analytics
 
-# PostHog Analytics Setup
+This boilerplate comes with built-in support for PostHog analytics, which has been modularized for simplicity.
 
-This guide walks you through setting up PostHog analytics in your BuildWithAI application.
+## Setup Instructions
 
-## Prerequisites
+<Step title="Create a PostHog Account">
+  Go to the [PostHog website](https://us.posthog.com/signup) and create an account.
+  
+  At the top of the signup page, you'll need to choose a **Data Region**:
+  
+  - **US hosting** (Virginia, USA)
+    - Faster if you and your users are based in the US
+    - Easier to comply with some US regulations
+  
+  - **EU hosting** (Frankfurt, Germany)
+    - Faster if you and your users are based in Europe
+    - Keeps data in the EU to comply with GDPR requirements
+  
+  You can migrate to another region later if needed.
+  
+  After completing the signup flow, you'll see a welcome screen asking "Where do you want to start?"
+</Step>
 
-- PostHog account
-- BuildWithAI application
+<Step title="Select Product Analytics">
+  On the welcome screen, click the **Product Analytics** button.
+  
+  This will take you to the onboarding process for setting up analytics in your project.
+</Step>
 
-## Installation & Configuration
+<Step title="Choose React Native Integration">
+  In the installation screen, select **React Native** as your source type from the menu on the left.
+  
+  You'll see integration instructions specifically for React Native applications.
+</Step>
 
-### 1. Create a PostHog Project
+<Step title="Copy Your API Key and Host">
+  From the [PostHog Project Settings](https://app.posthog.com/project/settings), locate and copy your:
+  - API Key (looks like `phc_XXXXXXXXXX...`) 
+  - Host URL (Depending on your Data Region, `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
+  
+  You'll need these values to configure your application.
+</Step>
 
-Create a new project in your PostHog dashboard.
+<Step title="Configure environment variables">
+  Add your PostHog API key and host to your environment variables in `.env`:
+  
+  ```
+  EXPO_PUBLIC_POSTHOG_API_KEY=your-posthog-api-key-here
+  EXPO_PUBLIC_POSTHOG_HOST=your-posthog-host-here
+  ```
+</Step>
 
-### 2. Get Your API Key
+<Step title="Install the dependency">
+  Install the PostHog React Native package:
 
-Locate your project API key in the PostHog dashboard.
+  ```bash
+  npx expo install posthog-react-native expo-file-system expo-application expo-device expo-localization
+  ```
+</Step>
 
-### 3. Configure PostHog in Your App
 
-```typescript
-// Example implementation
-import { PostHogProvider } from 'posthog-react-native';
-import { POSTHOG_API_KEY } from '@env';
+<Step title="Uncomment PostHog Code">
+  The boilerplate already includes code for PostHog analytics, but it's commented out by default.
+  Uncomment all code blocks marked with `TODO: PostHog` in this file:
+  
+  - `app/_layout.tsx`
+  
+  You'll need to uncomment:
+  - The PostHog imports
+  - The PostHog provider wrapper around your app
+</Step>
 
-export default function App() {
-  return (
-    <PostHogProvider
-      apiKey={POSTHOG_API_KEY}
-      options={{
-        host: 'https://app.posthog.com',
-      }}
-    >
-      {/* Your app components */}
-    </PostHogProvider>
-  );
-}
-```
+<Step title="Using PostHog for Event Tracking">
+  Once enabled, you can track events in your app using the PostHog hook. Here's an example:
 
-## Next Steps
+  ```typescript
+  import { usePostHog } from 'posthog-react-native';
 
-After setting up PostHog, see [Tracking Analytics Events](/features/analytics/tracking) for implementing event tracking.
+  function MyComponent() {
+    const posthog = usePostHog();
+    
+    const handleButtonPress = () => {
+      // Track a custom event
+      posthog.capture('button_pressed', {
+        buttonName: 'signup',
+        userType: 'new'
+      });
+      
+      // Rest of your handler logic
+    };
+    
+    return (
+      <Button onPress={handleButtonPress} title="Sign Up" />
+    );
+  }
+  ```
+</Step>
+
+<Step title="Set Up Screen Tracking">
+  For automatic screen tracking with Expo Router, consider adding middleware to track screen views.
+  
+  This allows you to track user navigation throughout your app automatically.
+</Step>
+
+## Additional Resources
+
+For full documentation, visit the [PostHog React Native SDK documentation](https://posthog.com/docs/libraries/react-native).

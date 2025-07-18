@@ -9,46 +9,29 @@ import { Tip, Info } from 'nextra/components'
 
 ## Step 1: Create a Google Cloud Project
 
-1. Create a new project in the Google Cloud Console.
-
-Visit: https://console.cloud.google.com/projectcreate
-
-
+1. Create a Google Cloud project for your app in the [Google Cloud Console](https://console.cloud.google.com/projectcreate), if you don't have one already
 
 - Give it the name of your app
 - Select the organization you want to use
 - Click Create
 - Wait for the project to be created 
 
-
-
-Official docs: https://developers.google.com/workspace/guides/create-project
-
-
 2. Enable the Google Sign-In API
 
 - Select your new project
 - Click on APIs & Services in the left menu
-
-
 
 3. Configure the consent screen
 
 Pick the OAuth Consent Screen option in the left menu, and click "Get started".
 
 
-
 - App Information: Fill it out the form with App Name and User support email:
-
-
 
 - Audience: pick "External"
 - Contact Information: These email addresses are for Google to notify you about any changes to your project.
 - Finish: Agree to the Google API Services: User Data Policy.
 - Press "Create"
-
-Official docs: https://developers.google.com/workspace/guides/configure-oauth-consent
-
 
 4. Create OAuth client ID credentials
 
@@ -58,8 +41,6 @@ Pick the "Clients" option in the left menu
 
 - Application type: Pick "Web Application"
 - Name: Choose a name for your web client
-
-Official docs: https://developers.google.com/workspace/guides/create-credentials#oauth-client-id
 
 ## Step 2: Create Web OAuth Client ID
 
@@ -82,10 +63,10 @@ You need to create a Web OAuth Client ID for Supabase authentication to work pro
     Set up the appropriate URIs for your application:
 
     1. Under **Authorized JavaScript origins**, click **Add URI**
-       - Enter `https://yourprojectref.supabase.co` (replace with your actual Supabase project URL)
+       - Enter your Supabase project URL from `.env` (e.g. `https://yourprojectref.supabase.co`)
 
     2. Under **Authorized redirect URIs**, click **Add URI**
-       - Enter `https://yourprojectref.supabase.co/auth/v1/callback` (replace with your actual Supabase project URL)
+       - Enter your Supabase project URL from `.env` + `/auth/v1/callback` (e.g. `https://yourprojectref.supabase.co/auth/v1/callback`)
   </Step>
 
   <Step title="Generate and Save Credentials">
@@ -104,19 +85,20 @@ You need to create a Web OAuth Client ID for Supabase authentication to work pro
 
 <Steps>
   <Step title="Access Supabase Authentication Settings">
-    1. Go to your [Supabase Dashboard](https://app.supabase.com)
+    1. Go to your [Supabase Dashboard](https://supabase.com)
     2. Select your project
     3. Navigate to **Authentication** in the left sidebar
-    4. Select **Providers** tab
+    4. Select **Sign In / Providers** tab
   </Step>
 
   <Step title="Configure Google Provider">
     1. Find and click on the **Google** provider
     2. Toggle the switch to **Enable** the Google provider
-    3. Enter your **Client ID** and **Client Secret** from the web client you created in Step 2
-    4. Verify that the **Redirect URL** matches what you set up in the Google Cloud Console
-       (`https://yourprojectref.supabase.co/auth/v1/callback`)
-    5. Click **Save** to apply your changes
+    3. Client ID: Enter your **Client ID** (e.g. `your-web-client-id`)
+    4. Client Secret: Enter your **Client Secret**
+    5. Callback URL (for OAuth): Verify that the **Callback URL** matches the **Redirect URI** you set up in the Google Cloud Console
+       (e.g. `https://yourprojectref.supabase.co/auth/v1/callback`)
+    6. Click **Save** to apply your changes
   </Step>
 </Steps>
 
@@ -127,20 +109,12 @@ After setting up the web client for Supabase, you need to create platform-specif
 <Tabs>
   <Tab title="Android">
     <Steps>
-      <Step title="Generate SHA-1 Certificate Fingerprint">
-        1. Run this command in your terminal to obtain the SHA-1 fingerprint:
-
-        ```bash
-        keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
-        ```
-
-        2. Look for the line that starts with "SHA1:" in the output.
-        3. It will look something like: `SHA1: XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX`
+      <Step title="Get SHA-1 Certificate Fingerprint from Expo Dashboard">
+        1. Go to the [Expo Dashboard Project Credentials page](https://expo.dev/accounts/[ACCOUNT]/projects/[PROJECT]/credentials)
+        2. Click on your **Application Identifier** (e.g., com.buildwithai.travelapp)
+        3. Under the **Android upload keystore** section, find and copy the **SHA-1 Fingerprint**
         4. Save this value for the next step.
 
-        <Tip>
-          For production apps, you'll need to generate a separate fingerprint using your release keystore.
-        </Tip>
       </Step>
 
       <Step title="Create Android OAuth Client ID">
@@ -152,8 +126,8 @@ After setting up the web client for Supabase, you need to create platform-specif
       <Step title="Configure Android Client Settings">
         1. Enter a descriptive **Name** for your Android application
         2. Enter your app's **Package name** in the Package name field
-           * This should match the package name in your `app.json` under `android.package`
-        3. Enter the **SHA-1 certificate fingerprint** you generated earlier
+           * This should match the package name in your `app.json` (e.g., `com.buildwithai.travelapp`)
+        3. Enter the **SHA-1 certificate fingerprint** you copied earlier
         4. Click the **Create** button
         5. Save your Android Client ID - you'll need it for your app configuration
       </Step>
@@ -171,7 +145,7 @@ After setting up the web client for Supabase, you need to create platform-specif
       <Step title="Configure iOS Client Settings">
         1. Enter a descriptive **Name** for your iOS application
         2. Enter your app's **Bundle ID** in the Bundle ID field
-           * This should match the Bundle ID in your `app.json` under `ios.bundleIdentifier`
+           * This should match the Bundle ID in your `app.json` (e.g., `com.buildwithai.travelapp`)
         3. Click the **Create** button
         4. Save your iOS Client ID - you'll need it for your app configuration
       </Step>

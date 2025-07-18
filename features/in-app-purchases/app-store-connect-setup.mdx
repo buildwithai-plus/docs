@@ -1,0 +1,102 @@
+---
+title: "App Store Connect Setup"
+description: "Create and configure your app in App Store Connect for in-app purchases"
+---
+
+## Prerequisites
+
+Before setting up your app in App Store Connect, make sure you have:
+
+- An Apple Developer account with paid enrollment
+- Your app's bundle ID ready (from `app.json`)
+- Access to create and manage apps in App Store Connect
+
+## Add iOS App to App Store Connect
+
+<Steps>
+  <Step title="Create New App">
+    1. Go to [App Store Connect Apps](https://appstoreconnect.apple.com/apps)
+    2. Next to "Apps", click **+** > **New App**
+    3. Fill in the app details:
+       - **Platform:** iOS
+       - **App Name:** Your app name (from `app.json`)
+       - **Primary Language:** English
+       - **Bundle ID:** The bundle ID of your app (from `app.json`) - should be automatically added by EAS
+       - **SKU:** Use your scheme or slug from `app.json`
+       - **User Access:** Full Access
+    4. Click **Create**
+
+    **Tip:** You can also do this automatically using: `eas build --platform ios --auto-submit`
+  </Step>
+</Steps>
+
+## Verify Agreements and Banking
+
+<Steps>
+  <Step title="Complete Required Agreements and Banking">
+    Before setting up products, ensure you have:
+    
+    - **Paid Applications Agreement:** Latest version signed in the "Business" module in App Store Connect
+    - **Tax and Banking:** Complete forms in the "Tax" and "Banking" tabs
+    - **Bank Account:** Linked with "Clear" status
+    
+    **You cannot test in-app purchases until these requirements are met.**
+  </Step>
+</Steps>
+
+## Enable In-App Purchases for Your App
+
+<Steps>
+  <Step title="Configure App Settings">
+    1. Select your app from the list in [App Store Connect](https://appstoreconnect.apple.com/apps)
+    2. Under **App Information**, ensure "In-App Purchases" is enabled
+    3. If not enabled:
+       - Click the **Edit** button
+       - Check the box next to "In-App Purchases"
+       - Click **Save**
+  </Step>
+</Steps>
+
+## Configure Your Expo Project
+
+<Steps>
+  <Step title="Set Up Required Packages">
+    1. Install the necessary packages:
+    ```bash
+    npx expo install expo-superwall react-native-purchases expo-build-properties
+    ```
+
+    2. Add the expo plugin to your `app.json`:
+    ```json
+    [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "16.0"
+          },
+          "android": {
+            "minSdkVersion": 26
+          }
+        }
+    ]
+    ```
+
+    This installs the necessary packages and configures your project with the minimum SDK versions required for in-app purchases.
+  </Step>
+
+  <Step title="Create EAS Build">
+    1. Build your app:
+    ```bash
+    eas build -p ios --profile development
+    ```
+
+    2. When the build completes, install it on your device to prepare for testing in-app purchases
+  </Step>
+</Steps>
+
+## Next Steps
+
+Now that you've set up your app in App Store Connect, you can:
+
+- [Create subscription products](./ios-products) for your iOS app
+- [Set up iOS Sandbox testing](./ios-sandbox) for testing in-app purchases

@@ -7,29 +7,9 @@ description: "Create subscription products in App Store Connect for your iOS app
 
 Before creating iOS subscription products, make sure you have:
 
-- An Apple Developer account with paid enrollment
-- Your app's bundle ID ready (from `app.json`)
+- Completed the [App Store Connect Setup](./app-store-connect-setup) for your app
 - Signed Paid Applications Agreement in App Store Connect
 - Completed tax and banking information in App Store Connect
-
-## Add iOS App to App Store Connect
-
-<Steps>
-  <Step title="Create New App">
-    1. Go to [App Store Connect Apps](https://appstoreconnect.apple.com/apps)
-    2. Next to "Apps", click **+** > **New App**
-    3. Fill in the app details:
-       - **Platform:** iOS
-       - **App Name:** Your app name (from `app.json`)
-       - **Primary Language:** English
-       - **Bundle ID:** The bundle ID of your app (from `app.json`) - should be automatically added by EAS
-       - **SKU:** Use your scheme or slug from `app.json`
-       - **User Access:** Full Access
-    4. Click **Create**
-
-    **Tip:** You can also do this automatically using: `eas build --platform ios --auto-submit`
-  </Step>
-</Steps>
 
 ## Create In-App Purchase Subscriptions
 
@@ -145,9 +125,9 @@ Before creating iOS subscription products, make sure you have:
 
 With your iOS subscription products created, you can now:
 
+- [Set up sandbox testing](./ios-sandbox) to test your purchases
 - [Import these products into RevenueCat](./import-products-rc)
 - Set up [Superwall integration](./superwall) for paywall management
-- Test your subscriptions using TestFlight
 
 ## Additional Resources
 

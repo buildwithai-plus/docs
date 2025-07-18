@@ -1,9 +1,15 @@
 ---
-title: "Testing iOS In-App Purchases with Sandbox"
-description: "A beginner's guide to setting up sandbox testing for your iOS app"
+title: "iOS Sandbox Testing"
+description: "Set up sandbox testing for your iOS app to test in-app purchases"
 ---
 
-# iOS Sandbox Testing Guide
+## Prerequisites
+
+Before setting up sandbox testing, make sure you have:
+
+- Completed the [App Store Connect Setup](./app-store-connect-setup) for your app
+- Created subscription products in [App Store Connect](./ios-products)
+- A development build of your app installed on your iOS device
 
 ## What Is Sandbox Testing?
 
@@ -73,3 +79,11 @@ In TestFlight, all subscription renewals happen once per day regardless of the o
 ## Need More Help?
 
 See [Apple's official documentation](https://developer.apple.com/documentation/storekit/in-app_purchase/testing_at_all_stages_of_development_with_xcode_and_the_sandbox) for advanced topics.
+
+## Next Steps
+
+With your sandbox testing environment set up, you can now:
+
+1. [Set up RevenueCat](./revenuecat) for subscription management
+2. [Import your products into RevenueCat](./import-products-rc)
+3. [Configure Superwall](./superwall) for paywall management
