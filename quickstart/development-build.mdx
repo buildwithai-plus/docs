@@ -54,17 +54,6 @@ import { Accordion, AccordionGroup } from 'nextra/components'
                Press `Enter` to use the website method (recommended)
 
             On your iOS device:
-            - Open your camera app
-            - Scan the QR code from the terminal
-            - Open the provided URL in your device's browser
-            - Tap "Download Profile" button, and press "Continue" or "Allow" when prompted. 
-            - Go to Settings app > Tap "Profile downloaded" > Tap "Install" and allow the installation.
-            - After the device is registered, you'll be redirected to the browser, and see a success message.
-            - Done!
-
-            <Info>
-              For more detailed instructions, see [Expo's guide for registering your device](https://docs.expo.dev/tutorial/eas/ios-development-build-for-devices/)
-            </Info>
           </Step>
 
           <Step title="Create iOS Development Build">
@@ -79,68 +68,27 @@ import { Accordion, AccordionGroup } from 'nextra/components'
             eas build -p ios --profile development
             ```
 
-            You'll be guided through several prompts:
+            You'll be guided through these prompts:
 
-            1. **iOS Bundle Identifier**
-               ```bash
-               What would you like your iOS bundle identifier to be?
-               ```
-               Press `Enter` to use the bundle identifier you defined in `app.json`.
+            1. **Apple ID**  
+               Enter your Apple ID credentials when prompted.
 
-            2. **Apple Account Login**
-               ```bash
-               Do you want to log in to your Apple account? (Y/n)
-               ```
-               Press `Y` to proceed (required for first-time builds).
+            2. **Team Selection**  
+               Choose your Apple Developer team.
 
-            3. **Distribution Certificate**
-               ```bash
-               Generate new Apple Distribution Certificate? (Y/n)
-               ```
-               Press `Y` to generate a new certificate.
+            3. **Bundle Identifier**  
+               Press `Enter` to use the one from your `app.json`.
 
-            4. **Device Selection**
-               Choose from the devices you just registered in the previous step using the provisioning profile.
-
-            5. **Encryption Compliance**
-               ```bash
-               iOS app only uses standard/exempt encryption? (Y/n)
-               ```
-               Press `Y` (this is the default value, don't worry about this setting).
+            4. **Push Notifications**  
+               Press `Y` to enable push notifications capability.
 
             The build will begin in the cloud. You can monitor progress in the terminal or via the EAS dashboard.
-          </Step>
 
-          <Step title="Install the Development Build">
-            After the build completes:
-            - Scan the QR code from the EAS dashboard or terminal
-            - Tap "Open with iTunes" when it appears in the Camera app
-            - Confirm installation when prompted
-            
-            The app will appear in your device's app library.
-          </Step>
-
-          <Step title="Enable Developer Mode on your iPhone">
             <Info>
-              If you're using iOS 16 or newer, you'll need to enable Developer Mode on your iPhone to run development builds.
+              The build process takes about 10-15 minutes. While waiting, proceed to the [Supabase Setup](/quickstart/supabase-setup) guide, then return to [Install Development Build](/quickstart/install-development-build) once the build is complete.
             </Info>
-
-            1. Open Settings > Privacy & Security and scroll down to Developer Mode
-
-            2. Tap the switch to enable Developer Mode
-               - You'll see a security warning alert
-               - Tap Restart to continue
-
-            3. After your device restarts:
-               - Unlock your device
-               - Tap Turn On in the confirmation alert
-               - Enter your device passcode when prompted
           </Step>
         </Steps>
-
-        <Tip>
-          For additional help, see [Expo's iOS Setup Guide](https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build&platform=ios&device=physical) and [Expo's EAS iOS Development Build Guide](https://docs.expo.dev/tutorial/eas/ios-development-build-for-devices/)
-        </Tip>
       </Tab>
 
       <Tab title="Android">
@@ -159,116 +107,26 @@ import { Accordion, AccordionGroup } from 'nextra/components'
 
             You'll be guided through these prompts:
 
-            1. **Android Application ID**
-               ```bash
-               What would you like your Android application id to be?
-               ```
-               Press `Enter` to use the package name you defined in `app.json`.
+            1. **Android Application ID**  
+               When asked about the application ID (e.g., `com.buildwithai.travelapp`), press `Enter` to use the package name you defined in `app.json`.
 
-            2. **Android Keystore**
-               ```bash
-               Generate a new Android Keystore? (Y/n)
-               ```
-               Press `Y` to generate a new keystore (required for signing your app).
+            2. **Android Keystore**  
+               When asked about generating a new keystore, press `Y` (required for signing your app).
             
             The build will begin in the cloud. You can monitor progress in the terminal or via the EAS dashboard.
-          </Step>
 
-          <Step title="Install the Development Build">
-            After the build completes:
-            1. Scan the QR code shown in the terminal or EAS dashboard
-            2. Download the APK file when prompted
-            3. When your browser asks to install the APK:
-               - If prompted about "Install unknown apps", tap Settings
-               - Enable installation permission for your browser
-               - Go back and tap "Install"
-            
-            The app will appear in your device's app library.
+            <Info>
+              The build process takes about 10-15 minutes. While waiting, proceed to the [Supabase Setup](/quickstart/supabase-setup) guide, then return to [Install Development Build](/quickstart/install-development-build) once the build is complete.
+            </Info>
           </Step>
         </Steps>
-
-        <Tip>
-          For additional help, see [Expo's Android Setup Guide](https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build&platform=android&device=physical) and [Expo's EAS Android Development Build Guide](https://docs.expo.dev/tutorial/eas/android-development-build/)
-        </Tip>
       </Tab>
     </Tabs>
   </Step>
 
-  <Step title="Start the Development Server">
-    Once you have installed the development build on your device, start the development server:
-
-    ```bash
-    npx expo start
-    ```
-
-    Then connect your device to the development server:
-
-    1. Open the app on your device
-    2. Log in to your Expo account by pressing the profile icon in the top right.
-    3. Tap "Fetch development servers" and select your server from the list
-    4. Or just scan the QR code from the terminal
-
-    <Info>
-      Make sure your computer and device are on the same Wi-Fi network for the best development experience.
-    </Info>
-
-    <Accordion title="QR Code Not Working?">
-      First, check your network setup:
-
-      1. **Check Network Connection**
-         - Make sure your computer and phone are using the same network
-         - This could be the same Wi-Fi, or a hotspot connection
-         - Check that you're not accidentally using different networks
-
-      2. **Check Network Type** (if at home)
-         - Your home network might be set as "Public" in your system settings
-         - Try changing it to "Private" in your Wi-Fi settings
-
-      If you still can't connect, or if you're on a public network (like at cafes, schools or libraries), you'll need to use tunnel mode:
-
-      1. Install ngrok with admin privileges:
-      <Tabs>
-        <Tab title="Windows">
-          ```bash
-          # Run PowerShell as Administrator
-          npm install --global @expo/ngrok
-          ```
-        </Tab>
-        <Tab title="macOS/Linux">
-          ```bash
-          sudo npm install --global @expo/ngrok
-          ```
-        </Tab>
-      </Tabs>
-
-      2. Start the tunnel:
-      ```bash
-      npx expo start --tunnel
-      ```
-
-      3. Scan the new QR code that appears
-
-      <Info>
-        Note: Tunnel mode is slower than a direct connection, so try to use the same network when possible.
-      </Info>
-    </Accordion>
+  <Step title="Next Steps">
+    Once your build completes:
+    1. Continue with [Supabase Setup](/quickstart/supabase-setup) if you haven't already
+    2. Follow the [Install Development Build](/quickstart/install-development-build) guide to get your app running
   </Step>
 </Steps>
-
-## Update Supabase URL Configuration
-
-After successfully creating your development build, you need to update your Supabase authentication URL configuration to work with your app scheme:
-
-1. **Go to your Supabase dashboard**
-2. **Navigate to Authentication → URL Configuration**
-3. **Update the following settings**:
-
-### Site URL
-- Set your site URL to your app's scheme that you configured in `app.json` with `://` at the end
-- Example: if your scheme is `myapp`, set it to `myapp://`
-
-### Redirect URLs
-- Add your app scheme followed by `://**`
-- Example: `myapp://**`
-
-These scheme-based URLs are essential for proper authentication flow when using your development build, as they enable your app to handle authentication redirects correctly.

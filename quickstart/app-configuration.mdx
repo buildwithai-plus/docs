@@ -8,7 +8,7 @@ import { Card, CardGroup } from 'nextra/components'
 
 ## Configure Your App
 
-After setting up your project repository and Supabase authentication, the next step is to configure your app's essential settings before creating a development build.
+After setting up your project repository and Supabase authentication, the next step is to configure your app's essential settings and visual identity before creating a development build.
 
 ### Step 1: Configure App Settings
 
@@ -16,6 +16,59 @@ The boilerplate comes with an example configuration file. Start by renaming it t
 
 ```bash
 cp app.json.example app.json
+```
+
+### Step 2: Configure App Icons & Splash Screens
+
+Customizing your app's icons and splash screens helps create a professional, branded experience for your users.
+
+#### Asset Requirements
+
+##### App Icons
+
+For the best results across all devices, prepare the following images:
+
+| Asset | Size (pixels) | Description |
+|-------|--------------|-------------|
+| App Icon | 1024×1024 | The primary app icon, will be resized for various platforms |
+| iOS Icon (Light Mode) | 1024×1024 | Optional icon variant for iOS light mode |
+| iOS Icon (Dark Mode) | 1024×1024 | Optional icon variant for iOS dark mode |
+
+<Tip>
+  Use PNG format for your icons to ensure the best quality and transparency support.
+</Tip>
+
+##### Splash Screen
+
+Prepare a splash screen image that:
+- Is at least 1242×2436 pixels (iPhone X resolution)
+- Has your app logo centered
+- Uses a solid background color that matches your brand
+
+#### Configuration
+
+In your `app.json`, update the following sections:
+
+```json
+{
+  "expo": {
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    }
+  }
+}
+```
+
+Place your icon and splash screen images in the `assets` folder of your project.
+
+<Info>
+  The boilerplate includes placeholder images that you can use as templates for sizing and positioning.
+</Info>
+
+### Step 3: Configure App Settings
 ```
 
 Now, open the `app.json` file and update the following essential fields to customize your app:

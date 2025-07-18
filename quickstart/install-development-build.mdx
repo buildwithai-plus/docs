@@ -1,0 +1,141 @@
+---
+title: "Install Development Build"
+description: "Install and set up your development build on your device"
+---
+
+import { Tip, Info, Note } from 'nextra/components'
+import { Tabs, Tab } from 'nextra/components'
+import { Steps, Step } from 'nextra/components'
+import { Accordion } from 'nextra/components'
+
+## Installing Your Development Build
+
+<Steps>
+  <Step title="Install the Build">
+    <Tabs>
+      <Tab title="iOS">
+        <Steps>
+          <Step title="Install on Your Device">
+            After the build completes:
+            - Scan the QR code from the EAS dashboard or terminal
+            - Tap "Open with iTunes" when it appears in the Camera app
+            - Confirm installation when prompted
+            
+            The app will appear in your device's app library.
+          </Step>
+
+          <Step title="Enable Developer Mode">
+            <Info>
+              If you're using iOS 16 or newer, you'll need to enable Developer Mode on your iPhone to run development builds.
+            </Info>
+
+            1. Open Settings > Privacy & Security and scroll down to Developer Mode
+
+            2. Tap the switch to enable Developer Mode
+               - You'll see a security warning alert
+               - Tap Restart to continue
+
+            3. After your device restarts:
+               - Unlock your device
+               - Tap Turn On in the confirmation alert
+               - Enter your device passcode when prompted
+          </Step>
+        </Steps>
+
+        <Tip>
+          For additional help, see [Expo's iOS Setup Guide](https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build&platform=ios&device=physical)
+        </Tip>
+      </Tab>
+
+      <Tab title="Android">
+        <Steps>
+          <Step title="Install on Your Device">
+            After the build completes:
+            1. Scan the QR code shown in the terminal or EAS dashboard
+            2. Download the APK file when prompted
+            3. When your browser asks to install the APK:
+               - If prompted about "Install unknown apps", tap Settings
+               - Enable installation permission for your browser
+               - Go back and tap "Install"
+            
+            The app will appear in your device's app library.
+          </Step>
+        </Steps>
+
+        <Tip>
+          For additional help, see [Expo's Android Setup Guide](https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build&platform=android&device=physical)
+        </Tip>
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Start the Development Server">
+    Once you have installed the development build on your device, start the development server:
+
+    ```bash
+    npx expo start
+    ```
+
+    Then connect your device to the development server:
+
+    1. Open the app on your device
+    2. Log in to your Expo account by pressing the profile icon in the top right
+    3. Tap "Fetch development servers" and select your server from the list
+    4. Or just scan the QR code from the terminal
+
+    <Info>
+      Make sure your computer and device are on the same Wi-Fi network for the best development experience.
+    </Info>
+
+    <Accordion title="QR Code Not Working?">
+      First, check your network setup:
+
+      1. **Check Network Connection**
+         - Make sure your computer and phone are using the same network
+         - This could be the same Wi-Fi, or a hotspot connection
+         - Check that you're not accidentally using different networks
+
+      2. **Check Network Type** (if at home)
+         - Your home network might be set as "Public" in your system settings
+         - Try changing it to "Private" in your Wi-Fi settings
+
+      If you still can't connect, or if you're on a public network (like at cafes, schools or libraries), you'll need to use tunnel mode:
+
+      1. Install ngrok with admin privileges:
+      <Tabs>
+        <Tab title="Windows">
+          ```bash
+          # Run PowerShell as Administrator
+          npm install --global @expo/ngrok
+          ```
+        </Tab>
+        <Tab title="macOS/Linux">
+          ```bash
+          sudo npm install --global @expo/ngrok
+          ```
+        </Tab>
+      </Tabs>
+
+      2. Start the tunnel:
+      ```bash
+      npx expo start --tunnel
+      ```
+
+      3. Scan the new QR code that appears
+
+      <Info>
+        Note: Tunnel mode is slower than a direct connection, so try to use the same network when possible.
+      </Info>
+    </Accordion>
+  </Step>
+</Steps>
+
+## 🚀 Awesome Job!
+
+High five! 👏 You've just completed one of the trickiest parts of mobile development - getting your app running on your actual phone. That's a big deal!
+
+Now when you make changes to your code, you'll see them appear instantly on your phone. It's like magic! ✨
+
+Don't worry if everything feels a bit overwhelming right now - that's totally normal. Take it one step at a time, and remember: every amazing app started exactly where you are now.
+
+Ready to start building your app? Let's go! 😄

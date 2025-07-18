@@ -5,19 +5,42 @@ description: "Set up your Supabase project for authentication"
 
 ## Setting up Supabase
 
+<Note>
+  If you're here while waiting for your development build to complete, you're in the right place! This setup can be done in parallel and will be ready when your build finishes.
+</Note>
+
 The BuildWithAI boilerplate uses [Supabase](https://supabase.com/) for authentication and database. This guide will walk you through the initial setup.
 
-### Creating a Supabase Project
+### Configure Authentication URLs
 
-1. **Create a Supabase account**:
-   - Go to [supabase.com](https://database.new) and sign up for an account if you don't have one
+First, let's configure the authentication URLs for your development build:
+
+1. **Go to your Supabase dashboard** at [supabase.com](https://database.new)
+   - Sign up for an account if you don't have one
    - Log in to your account
 
-2. **Create a new project**:
-   - Click "New Project" in the Supabase dashboard
-   - Fill in your project details:
-     - Name: Choose a name for your project
-     - Database Password: Just use the existing one (DON'T share it)
+2. **Navigate to Authentication → URL Configuration**
+
+3. **Update the following settings**:
+
+   ### Site URL
+   - Set your site URL to your app's scheme that you configured in `app.json` with `://` at the end
+   - Example: if your scheme is `myapp`, set it to `myapp://`
+
+   ### Redirect URLs
+   - Add your app scheme followed by `://**`
+   - Example: `myapp://**`
+
+   These scheme-based URLs are essential for proper authentication flow in your development build.
+
+### Create a New Project
+
+Now create a new project:
+
+1. Click "New Project" in the Supabase dashboard
+2. Fill in your project details:
+   - Name: Choose a name for your project
+   - Database Password: Just use the existing one (DON'T share it)
      - Region: Choose a region closest to your target users
    - Click "Create project"
 
@@ -49,7 +72,7 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 
 #### Development Build Configuration
 
-Configure the URL settings for your development build:
+Configure the URL settings for your development build: #NO U
 
 1. **Site URL**: 
    - Set to your app scheme (e.g., `myapp://`)
