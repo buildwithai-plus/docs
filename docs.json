@@ -1,17 +1,17 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "aspen",
-  "name": "BuildWithAI Boilerplate",
+  "theme": "mint",
+  "name": "BuildWithAI Plus",
   "description": "Production-ready React Native boilerplate for creating powerful mobile applications with AI features",
   "colors": {
     "primary": "#10b981",
     "light": "#34d399",
     "dark": "#059669"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "logo": {
-    "light": "logo/light.png",
-    "dark": "logo/dark.png"
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
   },
   "navigation": {
     "groups": [
@@ -30,7 +30,7 @@
         ]
       },
       {
-        "group": "📱 Development Setup",
+        "group": "📱 Run on Your Phone",
         "pages": [
           "quickstart/development-build",
           "quickstart/supabase-setup",
@@ -38,7 +38,7 @@
         ]
       },
       {
-        "group": "🎨 Design & UI",
+        "group": "✨ Design & Localization",
         "pages": [
           "features/ui-styling-guide",
           "features/i18n"
@@ -51,27 +51,36 @@
         ]
       },
       {
-        "group": "🔑 Authentication",
+        "group": "🔑 Sign In with Google & Apple",
         "pages": [
           "features/auth/google-auth",
           "features/auth/apple-auth"
         ]
       },
       {
-        "group": "📈 User Analytics",
+        "group": "📊 Analytics",
         "pages": [
           "features/posthog-setup"
         ]
       },
       {
-        "group": "💰 Revenue",
+        "group": "💳 In-App Purchases",
         "pages": [
           "features/in-app-purchases/overview",
-          "features/in-app-purchases/closed-testing",
+          "features/in-app-purchases/google-play-console-setup",
           "features/in-app-purchases/android-products",
+          "features/in-app-purchases/app-store-connect-setup",
           "features/in-app-purchases/ios-products",
+          "features/in-app-purchases/closed-testing",
+          "features/in-app-purchases/ios-sandbox",
           "features/in-app-purchases/revenuecat",
-          "features/in-app-purchases/superwall",
+          "features/in-app-purchases/import-products-rc",
+          "features/in-app-purchases/superwall"
+        ]
+      },
+      {
+        "group": "📣 Advertising",
+        "pages": [
           "features/admob-setup"
         ]
       }
