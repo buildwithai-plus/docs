@@ -58,7 +58,8 @@
         "pages": [
           "development/typescript/overview",
           "development/routing/setup",
-          "development/ui/nativewind"
+          "development/ui/nativewind",
+          "development/ui/theme-customization"
         ]
       }
     ]
