@@ -8,7 +8,7 @@
     "light": "#34d399",
     "dark": "#059669"
   },
-  "favicon": "/favicon.png",
+  "favicon": "favicon-optimized.svg",
   "logo": {
     "light": "/logo/light.png",
     "dark": "/logo/dark.png"
@@ -22,45 +22,20 @@
         ]
       },
       {
-        "group": "🚀 Getting Started",
+        "group": "🚀 Quick Start",
         "pages": [
           "quickstart/project-setup",
-          "quickstart/app-configuration",
-          "quickstart/eas-setup"
-        ]
-      },
-      {
-        "group": "📱 Run on Your Phone",
-        "pages": [
           "quickstart/development-build",
           "quickstart/supabase-setup",
           "quickstart/install-development-build"
         ]
       },
       {
-        "group": "✨ Design & Localization",
+        "group": "🔑 Authentication",
         "pages": [
-          "features/ui-styling-guide",
-          "features/i18n"
-        ]
-      },
-      {
-        "group": "🔔 Push Notifications",
-        "pages": [
-          "features/push-setup"
-        ]
-      },
-      {
-        "group": "🔑 Sign In with Google & Apple",
-        "pages": [
+          "features/auth/supabase-setup",
           "features/auth/google-auth",
           "features/auth/apple-auth"
-        ]
-      },
-      {
-        "group": "📊 Analytics",
-        "pages": [
-          "features/posthog-setup"
         ]
       },
       {
@@ -79,9 +54,11 @@
         ]
       },
       {
-        "group": "📣 Advertising",
+        "group": "⚡ Development",
         "pages": [
-          "features/admob-setup"
+          "development/typescript/overview",
+          "development/routing/setup",
+          "development/ui/nativewind"
         ]
       }
     ]

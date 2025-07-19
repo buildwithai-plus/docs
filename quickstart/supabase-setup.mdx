@@ -9,81 +9,50 @@ description: "Set up your Supabase project for authentication"
   If you're here while waiting for your development build to complete, you're in the right place! This setup can be done in parallel and will be ready when your build finishes.
 </Note>
 
-The BuildWithAI boilerplate uses [Supabase](https://supabase.com/) for authentication and database. This guide will walk you through the initial setup.
+The BuildWithAI boilerplate uses [Supabase](https://supabase.com/) for authentication and database. Follow these steps to set up your backend:
 
-### Configure Authentication URLs
-
-First, let's configure the authentication URLs for your development build:
+### Create Supabase Project
 
 1. **Go to your Supabase dashboard** at [supabase.com](https://database.new)
    - Sign up for an account if you don't have one
    - Log in to your account
 
-2. **Navigate to Authentication → URL Configuration**
+2. **Create a new project**
+   - Click **New Project**
+   - Choose a name for your project
+   - Set a database password
+   - Select the region closest to your users
+   - Click **Create Project**
 
-3. **Update the following settings**:
+### Project Credentials
 
-   ### Site URL
-   - Set your site URL to your app's scheme that you configured in `app.json` with `://` at the end
-   - Example: if your scheme is `myapp`, set it to `myapp://`
+1. **Get your API keys**
+   - Once the project is ready, go to **Project Settings** → **API**
+   - Copy the "Project URL" and "anon/public" key
 
-   ### Redirect URLs
-   - Add your app scheme followed by `://**`
-   - Example: `myapp://**`
-
-   These scheme-based URLs are essential for proper authentication flow in your development build.
-
-### Create a New Project
-
-Now create a new project:
-
-1. Click "New Project" in the Supabase dashboard
-2. Fill in your project details:
-   - Name: Choose a name for your project
-   - Database Password: Just use the existing one (DON'T share it)
-     - Region: Choose a region closest to your target users
-   - Click "Create project"
-
-3. **Wait for project initialization**:
-   - This may take a few minutes while Supabase provisions your database and authentication services
-
-### Configuring Your Project
-
-Once your Supabase project is created, you'll need to get your project credentials:
-
-1. **Get your project URL and anon key**:
-   - In your Supabase dashboard, go to Project Settings → API
-   - Copy the "URL" and "anon/public" key
-
-2. **Add credentials to your app**:
+2. **Add to your app**
    - Open the `.env` file you created earlier from `.env.example`
-   - Update your Supabase credentials:
+   - Update with your copied credentials:
 
-```
+```bash
 EXPO_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
 EXPO_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
 
-### URL Configuration for Development
+### URL Configuration
 
-1. **Configure authentication settings**:
-   - In your Supabase dashboard, navigate to **Authentication** → **URL Configuration**
-   - Configure the following settings:
+Set up the authentication URLs for your development build:
 
-#### Development Build Configuration
+1. In your project dashboard, go to **Authentication** → **URL Configuration**
 
-Configure the URL settings for your development build: #NO U
+2. Configure these settings:
+   - **Site URL**: Your app scheme from `app.json` + `://` (e.g., `travelapp://`)
+   - **Redirect URLs**: Your app scheme + `://**` (e.g., `travelapp://**`)
 
-1. **Site URL**: 
-   - Set to your app scheme (e.g., `myapp://`)
-
-2. **Redirect URLs**:
-   - Add `myapp://**` (replace 'myapp' with your actual app scheme)
-
-<Tip>
+<Warning>
   If you want to quickly test the app with Expo Go before moving to development builds:
-  1. Go to **Authentication** → **Email Templates**
-  2. Toggle off **Enable email confirmations**
+  1. Go to **Authentication** → **Sign In / Providers** → **Email**
+  2. Toggle off **Confirm email** under the Email provider settings
   
-  This is only for initial Expo Go testing. We'll create a proper development build with EAS in the next section.
-</Tip>
+  **Important**: Remember to re-enable this setting before deploying to production for proper security.
+</Warning>
