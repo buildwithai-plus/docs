@@ -1,0 +1,68 @@
+---
+title: "Theme Customization"
+description: "Learn how to customize your app's theme colors using the Tweakcn visual editor"
+---
+
+## Overview
+
+You can customize your app's theme colors using the Tweakcn Editor - a visual tool that generates NativeWind (TailwindCSS) compatible color schemes.
+
+<Frame caption="Tweakcn Editor - Visual Theme Designer">
+  ![Tweakcn Editor showing the theme customization interface](/images/theme-editor.png)
+</Frame>
+
+## Customizing Your Theme
+
+<Steps>
+  <Step title="Design in Tweakcn">
+    1. Open the [Tweakcn Editor](https://tweakcn.com/editor/theme?tab=ai)
+    2. Use the AI chat or manually adjust colors
+    3. Toggle between light/dark modes to test your theme
+    4. Click `{ } Code` in the top right
+    5. Select **Tailwind v4** and **HSL** format
+    6. Click **Copy** to get your theme code
+
+    <Frame caption="Theme Code Export">
+      ![Theme code export dialog](/images/theme-code.png)
+    </Frame>
+  </Step>
+
+  <Step title="Update Your Files">
+    1. In `global.css`, paste the new theme code but:
+       - Keep the three imports at the top:
+         ```css
+         @tailwind base;
+         @tailwind components;
+         @tailwind utilities;
+         ```
+       - Change `.dark` to `.dark:root`
+
+    2. In `lib/constants.ts`, update the theme colors:
+       ```typescript
+       export const NAV_THEME = {
+         light: {
+           background: 'hsl(0 0% 100%)',
+           text: 'hsl(222.2 84% 4.9%)',
+           primary: 'hsl(221.2 83.2% 53.3%)',
+           // ... other light mode colors
+         },
+         dark: {
+           background: 'hsl(222.2 84% 4.9%)',
+           text: 'hsl(210 40% 98%)',
+           // ... dark mode colors
+         }
+       };
+       ```
+  </Step>
+
+  <Step title="Test Your Theme">
+    1. Restart your development server
+    2. Test in both light and dark modes
+    3. Check all UI components for proper contrast
+    4. Test on physical devices
+
+    <Note>
+      Colors may appear slightly different on physical devices compared to simulators.
+    </Note>
+  </Step>
+</Steps>
