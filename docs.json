@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "BuildWithAI",
+  "name": "BuildWithAI Boilerplate",
   "description": "Production-ready React Native boilerplate for creating powerful mobile applications with AI features",
   "colors": {
     "primary": "#10b981",
@@ -90,29 +90,14 @@
   "contextual": {
     "options": [
       "copy",
-      "view",
       "chatgpt",
       "claude",
-      "perplexity",
-      {
-        "title": "Ask Gemini",
-        "description": "Ask Google Gemini about the current page",
-        "icon": "sparkle",
-        "href": {
-          "base": "https://gemini.google.com/app",
-          "query": [
-            {
-              "key": "q",
-              "value": "Ask question about https://mintlify.com/docs$path.md"
-            }
-          ]
-        }
-      }
+      "perplexity"
     ]
   },
   "footer": {
     "socials": {
-      "github": "https://github.com/buildwithai-templates/boilerplate",
+      "github": "https://github.com/steffensunbranch/buildwithai-boilerplate",
       "youtube": "https://www.youtube.com/@BuildWithAIChannel",
       "website": "https://www.buildwithai.io",
       "x-twitter": "https://x.com/solgrenk"
