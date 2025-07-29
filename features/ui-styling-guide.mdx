@@ -35,7 +35,12 @@ Style your components using simple class names instead of complex style objects:
 
 ## Ready-to-Use Components
 
-Your app includes pre-built components that look great and work perfectly. Just import and use them:
+Your app includes pre-built components that look great and work perfectly. All components support:
+- **Variants** - Predefined styles (use these first)
+- **className** - Custom styling to override or extend variants
+- **Custom variants** - You can add new variants or modify existing ones
+
+**Pro tip:** Start with variants, then use className for tweaks. The AI can help you with class names!
 
 [View all available components →](https://www.reactnativereusables.com/)
 
@@ -53,8 +58,31 @@ import { Text } from "~/components/ui/text"
 ```tsx
 import { Button } from "~/components/ui/button"
 
+{/* Default button */}
 <Button>
   <Text>Click me</Text>
+</Button>
+
+{/* Different variants */}
+<Button variant="destructive">
+  <Text>Delete</Text>
+</Button>
+
+<Button variant="outline">
+  <Text>Cancel</Text>
+</Button>
+
+<Button variant="secondary">
+  <Text>Secondary</Text>
+</Button>
+
+{/* Different sizes */}
+<Button size="sm">
+  <Text>Small</Text>
+</Button>
+
+<Button size="lg">
+  <Text>Large</Text>
 </Button>
 ```
 
@@ -69,7 +97,7 @@ import { Card, CardContent } from "~/components/ui/card"
 </Card>
 ```
 
-**Need to customize?** Add `className` to any component to override the default styling. The AI can help you with the right class names!
+**Want more customization?** You can also create new variants or modify existing ones in the component files!
 
 ## Adding Icons
 

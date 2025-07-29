@@ -1,0 +1,90 @@
+---
+title: "Install Windsurf IDE"
+description: "Quick guide to install Windsurf IDE for development"
+---
+
+# Install Windsurf IDE
+
+Windsurf is the recommended IDE for building your React Native app with AI assistance. Here's how to install it:
+
+## Step 1: Download Windsurf
+
+1. Go to [windsurf.com/download/editor](https://windsurf.com/download/editor)
+2. Download Windsurf for your operating system:
+   - **Windows**: Download the Windows installer
+   - **macOS**: Download the macOS installer
+   - **Linux**: Download the Linux package
+
+## Step 2: Install Windsurf
+
+### Windows:
+1. Run the downloaded installer (.exe file)
+2. Follow the installation wizard
+3. Accept the license agreement
+4. Choose installation location (default is fine)
+5. Select additional tasks:
+   - ✅ Create a desktop icon
+   - ✅ Add "Open with Windsurf" action to context menu
+   - ✅ Add to PATH (important for terminal access)
+6. Click "Install" and wait for completion
+
+### macOS:
+1. Open the downloaded .dmg file
+2. Drag Windsurf to your Applications folder
+3. Open Windsurf from Applications
+4. If you see a security warning, go to System Preferences > Security & Privacy and click "Open Anyway"
+
+### Linux:
+**For .deb packages (Ubuntu/Debian):**
+```bash
+sudo dpkg -i windsurf-*.deb
+sudo apt-get install -f  # Fix any dependency issues
+```
+
+**For .rpm packages (Red Hat/Fedora):**
+```bash
+sudo rpm -i windsurf-*.rpm
+```
+
+## Step 3: First Launch
+
+1. Open Windsurf
+2. You may be prompted to:
+   - Sign in with your account (recommended)
+   - Install recommended extensions
+   - Set up sync settings
+3. Windsurf will automatically detect and suggest installing extensions for React Native development
+
+## Step 4: Verify Installation
+
+1. Open Windsurf
+2. Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS)
+3. Type "Terminal: Create New Terminal"
+4. A terminal should open at the bottom of the window
+
+## Recommended Extensions
+
+Windsurf will suggest these automatically, but you can install them manually:
+
+- **React Native Tools** - For React Native development
+- **ES7+ React/Redux/React-Native snippets** - Code snippets
+- **Prettier** - Code formatting
+- **GitLens** - Enhanced Git capabilities
+
+## Troubleshooting
+
+**Can't open terminal?**
+- Make sure "Add to PATH" was selected during installation
+- Restart Windsurf after installation
+
+**Extensions not working?**
+- Go to Extensions panel (Ctrl+Shift+X)
+- Search for and install the recommended extensions
+
+**Need help?**
+- [Windsurf Documentation](https://windsurf.com/docs)
+- Built-in help: Press F1 and search for help topics
+
+## Next Steps
+
+✅ Windsurf IDE is installed! You can now continue with the [Project Setup](/quickstart/project-setup) guide.

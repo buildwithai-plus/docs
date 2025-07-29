@@ -1,0 +1,81 @@
+---
+title: "Install Git"
+description: "Quick guide to install Git for version control"
+---
+
+# Install Git
+
+Git is required to clone the boilerplate code and manage your project versions. Here's how to install it:
+
+## Step 1: Download Git
+
+1. Go to [git-scm.com/downloads](https://git-scm.com/downloads)
+2. Download Git for your operating system:
+   - **Windows**: Download Git for Windows
+   - **macOS**: Download Git for macOS
+   - **Linux**: Use your package manager
+
+## Step 2: Install Git
+
+### Windows:
+1. Run the downloaded installer
+2. Follow the installation wizard with these recommended settings:
+   - **Default editor**: Use Visual Studio Code (or keep default)
+   - **PATH environment**: Git from the command line and also from 3rd-party software
+   - **Line ending conversions**: Checkout Windows-style, commit Unix-style
+   - **Terminal emulator**: Use Windows' default console window
+3. Click "Install" and wait for completion
+
+### macOS:
+**Option 1 - Installer:**
+1. Run the downloaded installer
+2. Follow the installation wizard
+3. You may need to allow installation from "System Preferences > Security"
+
+**Option 2 - Homebrew (if you have it):**
+```bash
+brew install git
+```
+
+### Linux (Ubuntu/Debian):
+```bash
+# Update package index
+sudo apt update
+
+# Install Git
+sudo apt install git
+```
+
+## Step 3: Configure Git
+
+After installation, set up your identity (required for commits):
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
+## Step 4: Verify Installation
+
+Open your terminal/command prompt and run:
+
+```bash
+git --version
+```
+
+You should see something like `git version 2.40.0` or higher.
+
+## Troubleshooting
+
+**Command not found?**
+- Restart your terminal/command prompt
+- On Windows, restart your computer
+- Make sure Git was added to PATH during installation
+
+**Need help with Git?**
+- [Git documentation](https://git-scm.com/doc)
+- [GitHub Git Handbook](https://guides.github.com/introduction/git-handbook/)
+
+## Next Steps
+
+✅ Git is installed! You can now continue with the [Project Setup](/quickstart/project-setup) guide.

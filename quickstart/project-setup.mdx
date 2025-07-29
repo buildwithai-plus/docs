@@ -9,11 +9,15 @@ This guide will walk you through the process of setting up your BuildWithAI boil
 
 ### Prerequisites
 
-Before you begin, make sure you have the following installed:
+Before you begin, make sure you have the following:
 
-- [Node.js](https://nodejs.org/en/download) (v16 or later)
-- [Git](https://git-scm.com/downloads)
-- [Windsurf IDE](https://windsurf.com/download/editor)
+**Required Software** (skip if you already have them):
+- [Node.js](https://nodejs.org/en/download) (v16 or later) - [Need help installing? →](/quickstart/setup-nodejs)
+- [Git](https://git-scm.com/downloads) - [Need help installing? →](/quickstart/setup-git)
+- [Windsurf IDE](https://windsurf.com/download/editor) - [Need help installing? →](/quickstart/setup-windsurf)
+
+**Required Account:**
+- [Expo Account](https://expo.dev/signup) - Create a free account - [Need help? →](/quickstart/setup-expo-account)
 
 ### Step 1: Create Your Project
 
@@ -28,29 +32,39 @@ Before you begin, make sure you have the following installed:
    - Windows: `Ctrl+Shift+\`` (backtick)
    - macOS: `Cmd+Shift+\` (backtick)
 
-2. Run the following commands:
+2. Copy this command, paste it in the terminal, and press Enter:
 
 ```bash
 git clone https://github.com/steffensunbranch/buildwithai-boilerplate.git .
+```
 
+3. Copy this command, paste it in the terminal, and press Enter:
+
+```bash
 git remote remove origin
 ```
 
 ### Step 3: Install Dependencies
 
-Install all required dependencies:
+Copy this command, paste it in the terminal, and press Enter:
 
 ```bash
 npm install
 ```
 
+This will download and install all the packages your app needs. It may take a few minutes.
+
 ### Step 4: Create Environment Variables File
 
-The boilerplate includes an example environment file with placeholders for various services:
+Your boilerplate includes an example environment file (`.env.example`) with placeholders for various services. You need to create your own copy of this file called `.env`.
+
+Copy this command, paste it in the terminal, and press Enter:
 
 ```bash
 cp .env.example .env
 ```
+
+This creates a new file called `.env` that is a copy of `.env.example`. You'll add your actual API keys and settings to this `.env` file later.
 
 <Info>
   You'll configure specific environment variables as you set up various features in the following guides.

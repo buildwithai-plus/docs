@@ -3,13 +3,13 @@ title: "2. Configure Your App"
 description: "Configure your app settings before building"
 ---
 
-## Configure Your App
+# Configure Your App
 
-After setting up your project repository and Supabase authentication, the next step is to configure your app's essential settings and visual identity before creating a development build.
+After setting up your project, the next step is to configure your app's essential settings and visual identity before creating a development build.
 
 ### Step 1: Configure App Settings
 
-The boilerplate comes with an example configuration file. Start by renaming it to `app.json`:
+The boilerplate comes with an example configuration file. Copy and paste this command into your terminal and press Enter to create your app.json file:
 
 ```bash
 cp app.json.example app.json
@@ -19,39 +19,49 @@ cp app.json.example app.json
 
 Customizing your app's icons and splash screens helps create a professional, branded experience for your users.
 
-#### Asset Requirements
+#### Current Default Assets
 
-##### App Icons
+Your app currently uses these default placeholder assets:
 
-For the best results across all devices, prepare the following images:
+![Default App Icon and Splash Screen](../assets/images/default-app-assets.png)
+*Default icon and splash screen that come with the boilerplate*
 
-| Asset | Size (pixels) | Description |
-|-------|--------------|-------------|
-| App Icon | 1024×1024 | The primary app icon, will be resized for various platforms |
-| iOS Icon (Light Mode) | 1024×1024 | Optional icon variant for iOS light mode |
-| iOS Icon (Dark Mode) | 1024×1024 | Optional icon variant for iOS dark mode |
+#### Create Your Custom Assets
 
-<Tip>
-  Use PNG format for your icons to ensure the best quality and transparency support.
-</Tip>
+**Need help creating icons?** Use these free tools to generate app icons in the right sizes:
+- [Canva App Icon Maker](https://www.canva.com/create/app-icons/) - Free templates and easy resizing
+- [App Icon Generator](https://appicon.co/) - Upload one image, get all sizes
+- [IconKitchen](https://icon.kitchen/) - Free icon generator with templates
 
-##### Splash Screen
+##### Asset Requirements
 
-Prepare a splash screen image that:
-- Is at least 1242×2436 pixels (iPhone X resolution)
-- Has your app logo centered
-- Uses a solid background color that matches your brand
+**App Icons:**
+- **Size**: 1024×1024 pixels
+- **Format**: PNG with transparency
+- **Style**: Simple, recognizable design that works at small sizes
+
+**Splash Screen:**
+- **Size**: At least 1242×2436 pixels (iPhone X resolution)
+- **Content**: Your app logo centered on a solid background
+- **Format**: PNG or JPG
+
+#### Add Your Assets
+
+1. **Locate the images folder**: In your project root, find the `assets/images` folder
+2. **Replace the default files**:
+   - Replace `assets/images/icon.png` with your app icon
+   - Replace `assets/images/splash.png` with your splash screen
 
 #### Configuration
 
-In your `app.json`, update the following sections:
+In your `app.json`, update the following sections (highlighted in blue):
 
 ```json
 {
   "expo": {
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     }
@@ -59,36 +69,11 @@ In your `app.json`, update the following sections:
 }
 ```
 
-Place your icon and splash screen images in the `assets` folder of your project.
-
 <Info>
   The boilerplate includes placeholder images that you can use as templates for sizing and positioning.
 </Info>
 
 ### Step 3: Configure App Settings
-```
-
-Now, open the `app.json` file and update the following essential fields to customize your app:
-
-```json
-{
-  "expo": {
-    "name": "Your App Name",
-    "slug": "your-app-slug",
-    "scheme": "your-app-scheme",
-    "ios": {
-      "bundleIdentifier": "com.owner.yourapp"
-    },
-    "android": {
-      "package": "com.owner.yourapp"
-    }
-  }
-}
-```
-
-<Tip>
-  The boilerplate includes many more configuration options, but these are the essential fields you need to update before starting development.
-</Tip>
 
 #### Essential fields to update:
 
@@ -110,8 +95,28 @@ You'll need to modify these settings in your project's `app.json` file:
 - **package** (Android): Unique identifier in Google's ecosystem (e.g., `com.buildwithai.travelapp`)  
   *Should match your iOS bundleIdentifier for consistency*
 
-### Step 2: Customize App Icons and Splash Screens
+#### Update Your app.json
 
-<Info>
-  Replace the default icons and splash screens in `assets/images/` with your own. See the [App Icons Guide](/features/app-icons) for creating custom assets with AI.
-</Info>
+Open the `app.json` file and update the following essential fields (change the <span style="color: #0066cc; font-weight: bold;">blue text</span> to your own values):
+
+```json
+{
+  "expo": {
+    "name": "Your App Name",
+    "slug": "your-app-slug", 
+    "scheme": "your-app-scheme",
+    "ios": {
+      "bundleIdentifier": "com.owner.yourapp"
+    },
+    "android": {
+      "package": "com.owner.yourapp"
+    }
+  }
+}
+```
+
+<Tip>
+  The boilerplate includes many more configuration options, but these are the essential fields you need to update before starting development.
+</Tip>
+
+
