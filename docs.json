@@ -22,7 +22,7 @@
         ]
       },
       {
-        "group": "🚀 Getting Started",
+        "group": "Setup Your Project",
         "pages": [
           "quickstart/project-setup",
           "quickstart/app-configuration",
@@ -30,7 +30,7 @@
         ]
       },
       {
-        "group": "📱 Run on Your Phone",
+        "group": "Test on Your Phone",
         "pages": [
           "quickstart/development-build",
           "quickstart/supabase-setup",
@@ -38,7 +38,7 @@
         ]
       },
       {
-        "group": "✨ Design & Localization",
+        "group": "Work with Your App",
         "pages": [
           "features/ui-styling-guide",
           "features/theme-customization",
@@ -46,26 +46,26 @@
         ]
       },
       {
-        "group": "🔔 Push Notifications",
+        "group": "Push Notifications",
         "pages": [
           "features/push-setup"
         ]
       },
       {
-        "group": "🔑 Sign In with Google & Apple",
+        "group": "Social Authentication",
         "pages": [
           "features/auth/google-auth",
           "features/auth/apple-auth"
         ]
       },
       {
-        "group": "📊 Analytics",
+        "group": "Analytics",
         "pages": [
           "features/posthog-setup"
         ]
       },
       {
-        "group": "💳 In-App Purchases",
+        "group": "In-App Purchases",
         "pages": [
           "features/in-app-purchases/overview",
           "features/in-app-purchases/google-play-console-setup",
@@ -80,7 +80,7 @@
         ]
       },
       {
-        "group": "📣 Advertising",
+        "group": "Advertising",
         "pages": [
           "features/admob-setup"
         ]
