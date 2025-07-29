@@ -27,14 +27,23 @@ eas login
 
 ### Step 3: Configure Build Profiles
 
-Copy and paste this command into your terminal and press Enter to create your build configuration:
+Now let's set up your project for building. Run this command:
 
 ```bash
 eas build:configure
 ```
 
-This creates an `eas.json` file with standard EAS build profiles. For now, we'll use the `development` profile which is designed for testing on real devices.
+You'll see two prompts:
 
-<Tip>
-  The `eas.json` file is automatically generated. You don't need to edit it for basic development.
-</Tip>
+1. `Would you like to automatically create an EAS project for [your-app-name]?`  
+   ✅ Type `y` and press Enter
+
+2. `Which platforms would you like to configure for EAS Build?`  
+   ✅ Press Enter to select `All` (it's selected by default)
+
+This will:
+- Create your project on EAS
+- Link your local project to EAS
+- Generate an `eas.json` file with build settings
+
+🎉 Your project is now ready for the next steps!

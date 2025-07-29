@@ -5,118 +5,111 @@ description: "Configure your app settings before building"
 
 # Configure Your App
 
-After setting up your project, the next step is to configure your app's essential settings and visual identity before creating a development build.
+Let's set up your app's identity and basic configuration.
 
-### Step 1: Configure App Settings
+### Create Your Configuration
 
-The boilerplate comes with an example configuration file. Copy and paste this command into your terminal and press Enter to create your app.json file:
-
+1. Create your config file by copying the example:
 ```bash
 cp app.json.example app.json
 ```
 
-### Step 2: Configure App Icons & Splash Screens
-
-Customizing your app's icons and splash screens helps create a professional, branded experience for your users.
-
-#### Current Default Assets
-
-Your app currently uses these default placeholder assets:
-
-![Default App Icon and Splash Screen](../assets/images/default-app-assets.png)
-*Default icon and splash screen that come with the boilerplate*
-
-#### Create Your Custom Assets
-
-**Need help creating icons?** Use these free tools to generate app icons in the right sizes:
-- [Canva App Icon Maker](https://www.canva.com/create/app-icons/) - Free templates and easy resizing
-- [App Icon Generator](https://appicon.co/) - Upload one image, get all sizes
-- [IconKitchen](https://icon.kitchen/) - Free icon generator with templates
-
-##### Asset Requirements
-
-**App Icons:**
-- **Size**: 1024×1024 pixels
-- **Format**: PNG with transparency
-- **Style**: Simple, recognizable design that works at small sizes
-
-**Splash Screen:**
-- **Size**: At least 1242×2436 pixels (iPhone X resolution)
-- **Content**: Your app logo centered on a solid background
-- **Format**: PNG or JPG
-
-#### Add Your Assets
-
-1. **Locate the images folder**: In your project root, find the `assets/images` folder
-2. **Replace the default files**:
-   - Replace `assets/images/icon.png` with your app icon
-   - Replace `assets/images/splash.png` with your splash screen
-
-#### Configuration
-
-In your `app.json`, update the following sections (highlighted in blue):
+2. Open `app.json` and update these essential settings:
 
 ```json
 {
   "expo": {
-    "icon": "./assets/images/icon.png",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    }
-  }
-}
-```
-
-<Info>
-  The boilerplate includes placeholder images that you can use as templates for sizing and positioning.
-</Info>
-
-### Step 3: Configure App Settings
-
-#### Essential fields to update:
-
-You'll need to modify these settings in your project's `app.json` file:
-
-- **name**: The display name shown on users' devices (e.g., `Travel App`)  
-  *Choose something descriptive and memorable*
-
-- **slug**: Unique identifier used in URLs and directories (e.g., `travel-app`)  
-  *Use lowercase letters and hyphens only*  
-  **⚠️ Warning:** Cannot be changed after publishing!
-
-- **scheme**: URL scheme for deep linking (e.g., `travelapp`)  
-  *No spaces or special characters*
-
-- **bundleIdentifier** (iOS): Unique identifier in Apple's ecosystem (e.g., `com.buildwithai.travelapp`)  
-  *Use reverse domain notation where "owner" can be your name, domain, or company*
-
-- **package** (Android): Unique identifier in Google's ecosystem (e.g., `com.buildwithai.travelapp`)  
-  *Should match your iOS bundleIdentifier for consistency*
-
-#### Update Your app.json
-
-Open the `app.json` file and update the following essential fields (change the <span style="color: #0066cc; font-weight: bold;">blue text</span> to your own values):
-
-```json
-{
-  "expo": {
-    "name": "Your App Name",
-    "slug": "your-app-slug", 
-    "scheme": "your-app-scheme",
+    "name": "Your App Name",        // Change this to your app name (e.g., Travel App)
+    "slug": "your-app-slug",        // Change this to your app slug (e.g., travel-app)
+    "scheme": "your-app-scheme",     // Change this to your app scheme (e.g., travelapp)
     "ios": {
-      "bundleIdentifier": "com.owner.yourapp"
+      "bundleIdentifier": "com.owner.yourapp"  // Change to your unique bundle ID (e.g., com.buildwithai.travelapp)
     },
     "android": {
-      "package": "com.owner.yourapp"
+      "package": "com.owner.yourapp"          // Change to same ID as iOS bundleIdentifier (e.g., com.buildwithai.travelapp)
     }
   }
 }
 ```
 
+### Understanding the Settings
+
+- **name**: Your app's display name in stores and on devices
+  ✅ *Choose something descriptive and memorable*
+
+- **slug**: Your app's URL and directory name
+  ✅ *Use lowercase and hyphens*  
+  ⚠️ *Cannot change after publishing!*
+
+- **scheme**: How other apps open yours   
+  <Tooltip tip="Deep linking is like creating a special URL for your app. When someone taps a link like 'travelapp://bookings' (in an email or website), their phone knows to open your app directly to a specific screen. It's how apps connect to each other!">Enables deep linking</Tooltip>  
+  ✅ *Use simple lowercase letters, no spaces or special characters*
+
+- **bundleIdentifier** (iOS): Your app's unique iOS identifier
+  ✅ *Format: com.owner.yourapp (replace 'owner' with your name/company/domain)*
+
+- **package** (Android): Your app's unique Android identifier
+  ✅ *Must match your iOS bundleIdentifier exactly for consistency*
+
+### Step 3: Create App Icons & Splash Screens
+
+Your app needs several icon variants for different platforms and modes. The boilerplate includes placeholder images that you can replace with your own designs.
+
+#### Required Icons
+
+In your `assets/images/` folder, you'll need:
+
+- **Main App Icon** (`icon.png`, 1024×1024)  
+  *Your primary icon used in app stores and as a fallback*
+
+- **iOS Variants**:
+  - `ios-icon-light.png` - *For light mode, visible on white backgrounds*
+  - `ios-icon-dark.png` - *For dark mode, visible on black backgrounds*
+  - `ios-icon-tinted.png` - *Special version that iOS can color-match to its theme*
+
+- **Android Variants**:
+  - `adaptive-icon.png` - *Foreground layer with center-focused design*
+  - `adaptive-icon-monochrome.png` - *Single-color version for system themes*
+
+- **Splash Screen** (`splash.png`, 1242×2436)  
+  *The loading screen users see when opening your app*
+
+#### Creating Your Icons
+
+1. **Generate Base Icon**
+   Use ChatGPT's image generator with this prompt:
+   ```
+   "Create a professional mobile app icon:
+   - Modern [describe your app's purpose] symbol
+   - 1024×1024 pixels, square format
+   - Minimalist design with [your brand color]
+   - Clean lines and subtle gradients
+   - Bold, instantly recognizable shape
+   - Transparent background
+   - No text or tiny details"
+   ```
+
+2. **Create Variants**
+   For each variant, show ChatGPT your base icon and ask:
+   ```
+   For dark mode:
+   "Make this icon visible on dark backgrounds with lighter colors"
+
+   For monochrome:
+   "Convert this to a single-color black icon with transparency"
+
+   For adaptive:
+   "Adjust this icon to fit in the center 70% area for Android"
+   ```
+
+3. **Alternative Tools**
+   - Use [Figma](https://www.figma.com) or [Canva](https://www.canva.com) for manual editing
+   - Try [Icon Kitchen](https://icon.kitchen) for automatic Android variants
+
 <Tip>
-  The boilerplate includes many more configuration options, but these are the essential fields you need to update before starting development.
+Always test your icons at full size (1024×1024) and app size (180×180) to ensure they're clear at all sizes.
 </Tip>
 
+### Next Steps
 
+Now that you've configured your app and prepared your icons, it's time to set up EAS Build. This will let you create development builds to test your app on real devices.

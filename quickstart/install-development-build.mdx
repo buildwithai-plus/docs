@@ -5,6 +5,16 @@ description: "Install and set up your development build on your device"
 
 ## Installing Your Development Build
 
+### Check Network Setup First
+
+<Info>
+Before installing, make sure:
+1. Your computer and phone are on the same Wi-Fi network
+2. Your firewall isn't blocking the Expo server (allow Node.js if prompted)
+3. Your antivirus isn't blocking local connections
+4. Your Wi-Fi is set to "Private" network (not "Public")
+</Info>
+
 <Tabs>
   <Tab title="iOS">
     <Steps>
@@ -75,27 +85,30 @@ description: "Install and set up your development build on your device"
     4. Tap "Fetch development servers"
     5. Select your server from the list
 
-    **Alternatively**, just scan the QR code from the terminal.
-
-    <Info>
-      Make sure your computer and device are on the same Wi-Fi network for the best development experience.
-    </Info>
+    **Alternatively**, scan the QR code from the terminal (see troubleshooting below if it doesn't work).
   </Step>
 </Steps>
 
-<Accordion title="QR Code Not Working?">
-  ### Check Network Setup
-  1. **Same Network**
-     - Ensure your computer and phone use the same Wi-Fi
-     - A hotspot connection also works
-     - Double-check you're not on different networks
+<Accordion title="App Not Connecting?">
+  ### Common Solutions
 
-  2. **Network Privacy** (Home Networks)
-     - Check if your network is set as "Public"
-     - Change to "Private" in Wi-Fi settings
+  1. **Check Server Status**
+     - Make sure `npx expo start` is running
+     - Look for any error messages in the terminal
+     - Try stopping and restarting the server
+
+  2. **Network Issues**
+     - Confirm both devices show the same Wi-Fi name
+     - Try using your phone as a hotspot instead
+     - Check if your network is set to "Private" in Windows
+
+  3. **Security Blocks**
+     - Watch for firewall popups about Node.js or Expo
+     - Check antivirus logs for blocked connections
+     - Try temporarily disabling firewall/antivirus to test
 
   ### Use Tunnel Mode
-  If you're on a public network (cafes, schools, libraries) or still can't connect:
+  If you're on a restricted network or the above doesn't help:
 
   1. Install ngrok with admin privileges:
   <Tabs>
