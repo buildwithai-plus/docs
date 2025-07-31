@@ -1,29 +1,7 @@
 ---
 title: "Setup Push Notifications"
-description: "Configure push notifications for your BuildWithAI app on iOS and Android"
+description: "Configure push notifications for your app"
 ---
-
-# Push Notifications Setup
-
-The BuildWithAI boilerplate includes a comprehensive push notification system powered by Expo's notification services. This guide will walk you through the setup process for both iOS and Android platforms.
-
-## Overview
-
-The push notification system in the boilerplate handles:
-
-- Requesting and storing push notification permissions
-- Registering and managing device tokens
-- Handling incoming notifications (foreground, background, and when app is closed)
-- Displaying notification UI and handling user interactions
-
-## Prerequisites
-
-Before you begin, you'll need:
-
-- A BuildWithAI boilerplate project set up
-- An Expo account (if you don't have one, [sign up here](https://expo.dev/signup))
-- Apple Developer account (for iOS push notifications)
-- Firebase project (for Android push notifications)
 
 ## Step 1: Configure Expo Push Tokens
 
@@ -52,28 +30,18 @@ Make sure your app's backend API is set up to receive and store these tokens. Th
 
 <Tabs>
   <Tab title="iOS Setup (APNs)">
-    <Note>
-      The easiest way to set up iOS push notifications is during your initial development build process as described in the [Development Build Guide](/quickstart/development-build.mdx).
-    </Note>
+    <Tip>
+      If you skipped push notification setup during your initial [development build](/quickstart/development-build.mdx) by answering "no" to the prompt, follow these instructions to add push notification support.
+    </Tip>
 
-    <Info>
-      A paid Apple Developer Account is required for iOS push notifications.
-    </Info>
-
-    <Steps>
-      <Step title="Adding Push Notifications After Initial Build">
-        <Tip>
-          If you skipped push notification setup during your initial development build or answered "no" to the prompts, follow these instructions to add push notification support later.
-        </Tip>
-
-        1. **Run the EAS credentials command:**
-           ```sh
-           eas credentials --platform ios
-           ```
-           - Choose `Push Notifications: Manage your Apple Push Notifications Key`.
-           - Follow the prompts to add or generate a new push notification key for your project.
-      </Step>
-    </Steps>
+    <Accordion title="Adding Push Notifications After Initial Build">
+      1. **Run the EAS credentials command:**
+         ```sh
+         eas credentials --platform ios
+         ```
+         - Choose `Push Notifications: Manage your Apple Push Notifications Key`.
+         - Follow the prompts to add or generate a new push notification key for your project.
+    </Accordion>
   </Tab>
   
   <Tab title="Android Setup (FCM)">

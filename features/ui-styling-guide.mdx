@@ -5,99 +5,243 @@ description: 'Build beautiful interfaces with React Native Reusables and your pr
 
 # UI & Styling Guide
 
-Your app comes with everything you need to build beautiful interfaces. Don't worry about complex styling - the AI will help you with that! Here's a quick overview of what's available.
+This guide introduces you to **NativeWind** (styling) and **React Native Reusables** (components) that power your app's UI system.
 
-## Quick Start with NativeWind
+## Why NativeWind vs. StyleSheets
 
-Style your components using simple class names instead of complex style objects:
+### Traditional StyleSheet Approach
 
 ```tsx
-// Add padding and make text bigger
+import { StyleSheet, View, Text } from 'react-native';
+
+function TraditionalComponent() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Hello World</Text>
+      <Text style={styles.subtitle}>Welcome to my app</Text>
+      <View style={styles.button}>
+        <Text style={styles.buttonText}>Click me</Text>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 8,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#333333',
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#666666',
+  },
+  button: {
+    marginTop: 16,
+    padding: 12,
+    backgroundColor: '#5850EC',
+    borderRadius: 4,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontWeight: '500',
+  },
+});
+```
+
+### NativeWind Approach
+
+```tsx
+import { View } from 'react-native';
+import { Text } from '~/components/ui/text';
+
+function NativeWindComponent() {
+  return (
+    <View className="p-4 bg-muted rounded-lg">
+      <Text className="text-lg font-bold mb-2 text-foreground">Hello World</Text>
+      <Text className="text-sm text-muted-foreground">Welcome to my app</Text>
+      <View className="mt-4 p-3 bg-primary rounded items-center">
+        <Text className="text-primary-foreground font-medium">Click me</Text>
+      </View>
+    </View>
+  );
+}
+```
+
+### Benefits of NativeWind
+
+1. **Readability** - Styles are right where you use them, making components easier to understand
+2. **No naming headaches** - No need to come up with unique style names for every component
+3. **Theme support** - Use theme variables like `bg-primary` that automatically adapt to light/dark modes
+4. **Consistency** - Predefined spacing, colors, and typography scales keep your UI consistent
+5. **Less code** - What takes 30+ lines with StyleSheet can often be done in 10 lines with NativeWind
+6. **No style merging** - Avoid complex StyleSheet merging logic for conditional styling
+
+## Getting Started with NativeWind
+
+NativeWind lets you style components using simple class names instead of complex style objects. It works just like Tailwind CSS but for React Native.
+
+### Basic NativeWind Classes
+
+```tsx
+// Import UI components from library and View from react-native
+import { View } from "react-native";
+import { Text } from "~/components/ui/text";
+
+// Add padding (p-4 = padding of size 4)
 <View className="p-4">
+  {/* Make text larger (text-lg) and bold */}
   <Text className="text-lg font-bold">Hello World</Text>
 </View>
 
-// Put things side by side
-<View className="flex-row items-center gap-3">
+// Put items side by side (flex-row) with space between (gap-2)
+<View className="flex-row items-center gap-2">
   <Text>👋</Text>
   <Text>Welcome!</Text>
 </View>
 ```
 
-**Most useful classes:**
-- `p-4` - Add padding (space inside)
-- `flex-row` - Put items side by side
-- `text-lg` - Make text larger
-- `bg-primary` - Use your app's main color
-- `rounded-lg` - Add rounded corners
+### Common NativeWind Classes Explained
 
-**Pro tip:** Use theme colors like `bg-primary` and `text-foreground` instead of hardcoded colors like `bg-white`. They automatically work in both light and dark mode!
+**Layout:**
+- `p-2`, `p-4`, `p-6` - Padding (space inside) small, medium, large
+- `m-2`, `m-4`, `m-6` - Margin (space outside) small, medium, large
+- `flex-row` - Position items horizontally (side by side)
+- `flex-col` - Position items vertically (default)
+- `items-center` - Center items vertically when in row, horizontally when in column
+- `justify-center` - Center items horizontally when in row, vertically when in column
+- `gap-2`, `gap-4` - Space between items
 
-## Ready-to-Use Components
+**Typography:**
+- `text-sm`, `text-base`, `text-lg`, `text-xl` - Text sizes
+- `font-bold`, `font-medium` - Text weights
+- `text-center`, `text-left` - Text alignment
 
-Your app includes pre-built components that look great and work perfectly. All components support:
-- **Variants** - Predefined styles (use these first)
-- **className** - Custom styling to override or extend variants
-- **Custom variants** - You can add new variants or modify existing ones
+**Colors:**
+- `bg-primary` - Background using your theme's primary color
+- `text-primary` - Text using your theme's primary color
+- `text-primary-foreground` - Text color designed to be visible on primary background
+- `border-primary` - Border using your theme's primary color
 
-**Pro tip:** Start with variants, then use className for tweaks. The AI can help you with class names!
+**Shapes:**
+- `rounded-md`, `rounded-lg`, `rounded-xl` - Rounded corners (small, medium, large)
+- `border-2` - Border with thickness 2
+- `w-full` - Full width
+- `h-12`, `h-24` - Fixed height
 
-[View all available components →](https://www.reactnativereusables.com/)
+## React Native Reusables Component Library
 
-### Quick Component Examples
+Your app includes pre-built components from [React Native Reusables](https://www.reactnativereusables.com/) - shadcn/ui for React Native. These components:
 
-**Text:**
-```tsx
-import { Text } from "~/components/ui/text"
+- Work across **iOS, Android, and web** platforms
+- Support **light and dark mode** automatically
+- Are built with **accessibility** in mind
+- Can be styled with NativeWind classes
 
-<Text>Normal text</Text>
-<Text variant="muted">Lighter text</Text>
+### Component Features
+
+- **Variants** - Pre-defined styles like `variant="outline"` or `size="sm"`
+- **className** - Use NativeWind classes to customize further
+- **Props** - Additional customization through standard React props
+
+### Key Components
+
+- **Button** - Different variants, sizes, and states
+- **Text** - Typography with semantic variants
+- **Card** - Container with header, content, and footer sections
+- **Input** - Text fields with validation states
+- **Avatar** - User profile images with fallbacks
+
+### Adding More Components
+
+Add more components with the CLI:
+
+```bash
+npx @react-native-reusables/cli@latest add component-name
 ```
 
-**Button:**
-```tsx
-import { Button } from "~/components/ui/button"
+Example: If you want to add a progress bar component, you can run in the terminal:
 
-{/* Default button */}
-<Button>
-  <Text>Click me</Text>
-</Button>
-
-{/* Different variants */}
-<Button variant="destructive">
-  <Text>Delete</Text>
-</Button>
-
-<Button variant="outline">
-  <Text>Cancel</Text>
-</Button>
-
-<Button variant="secondary">
-  <Text>Secondary</Text>
-</Button>
-
-{/* Different sizes */}
-<Button size="sm">
-  <Text>Small</Text>
-</Button>
-
-<Button size="lg">
-  <Text>Large</Text>
-</Button>
+```bash
+npx @react-native-reusables/cli@latest add progress-bar
 ```
 
-**Card:**
-```tsx
-import { Card, CardContent } from "~/components/ui/card"
+You can find all available components [here](https://www.reactnativereusables.com/components).
 
-<Card>
-  <CardContent>
-    <Text>Card content</Text>
-  </CardContent>
-</Card>
+## Complete Example
+
+Here's a complete example using Card, Button, and Text components:
+
+```tsx
+import { View } from "react-native";
+import { Text } from "~/components/ui/text";
+import { Button } from "~/components/ui/button";
+import { Card, CardContent, CardHeader, CardFooter } from "~/components/ui/card";
+
+function ProductCard() {
+  return (
+    <Card className="m-4 overflow-hidden border border-border">
+      {/* CardHeader with padding (p-4) and centered content */}
+      <CardHeader className="p-4 bg-muted">
+        <Text className="text-lg font-bold text-center">Premium Plan</Text>
+      </CardHeader>
+
+      {/* CardContent with padding and space between items */}
+      <CardContent className="p-4 gap-4">
+        <Text className="text-secondary-foreground">All features including:</Text>
+        
+        {/* Feature items with icon and text */}
+        <View className="flex-row items-center gap-2">
+          <Text>✓</Text>
+          <Text>Unlimited projects</Text>
+        </View>
+        
+        <View className="flex-row items-center gap-2">
+          <Text>✓</Text>
+          <Text>Priority support</Text>
+        </View>
+
+        {/* Price with large text */}
+        <Text className="text-xl font-bold text-center mt-2">$9.99/month</Text>
+      </CardContent>
+
+      {/* CardFooter with padding and centered button */}
+      <CardFooter className="p-4 bg-background border-t border-border">
+        {/* Primary button with full width */}
+        <Button 
+          className="w-full" 
+          variant="default">
+          {/* Always wrap text in Button with Text component */}
+          <Text className="text-primary-foreground font-medium">Subscribe Now</Text>
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
 ```
 
-**Want more customization?** You can also create new variants or modify existing ones in the component files!
+### What This Example Shows
+
+1. **Imports** - Get UI components from `~/components/ui/` and basic components like `View` from React Native
+2. **Card Layout** - Header, Content, and Footer sections
+3. **NativeWind Classes** - Using spacing (`p-4`, `gap-4`), colors (`bg-muted`), and typography (`text-lg`)
+4. **Button Usage** - Always wrap text inside Button with the `<Text>` component
+5. **Layout Structure** - Flex row for side-by-side items, centering with `text-center`
+
+## Quick Tips
+
+1. **Combine approaches** - Use component variants for consistent styling, then customize with className when needed
+2. **Check dark mode** - Test your UI in both light and dark themes to ensure good contrast
+3. **Learn from examples** - Study the pre-built components to see best practices
+4. **Use theme colors** - Stick with theme variables like `bg-primary` instead of hardcoded colors
+5. **Ask the AI** - Need help with styling? Just ask!
 
 ## Adding Icons
 
@@ -122,25 +266,18 @@ import { Heart } from "~/lib/icons/Heart"
 
 **Browse all icons:** [lucide.dev/icons](https://lucide.dev/icons/)
 
-## Need Help?
-
-- **Styling questions?** Ask the AI - it knows all the class names and can help you style anything
-- **Want to change colors?** Check the [Theme Customization](/features/theme-customization) guide
-- **Learn more about NativeWind?** Visit [nativewind.dev](https://nativewind.dev) for detailed documentation
-
-Remember: You don't need to memorize all the class names. The AI will help you build beautiful interfaces!
-
 ## Quick Tips
 
-1. **Always import from `~/components/ui/`** - Don't use React Native's built-in components
-2. **Use theme colors** - `bg-primary` instead of `bg-blue-500`
-3. **Test both themes** - Check your UI in light and dark mode
-4. **Install components first** - Check what's available before building custom UI
+1. **Import from `~/components/ui/`** - Use these instead of React Native components
+2. **Use theme colors** - Try `bg-primary` instead of specific colors
+3. **Ask the AI** - It can help with styling and class names
+4. **Check both themes** - Test your UI in light and dark mode
 
-You're all set! Start building beautiful interfaces with your pre-configured design system.
+## Need Help?
 
-## Further Reading
+Ask the AI for styling help or check [Theme Customization](/features/theme-customization).
 
-- [React Native Reusables Documentation (reactnativereusables.com)](https://www.reactnativereusables.com/)
-- [Component Showcase](https://rnr-showcase.vercel.app/components)
-- [NativeWind Documentation](https://www.nativewind.dev/)
+## Learn More
+
+- [React Native Reusables Components](https://www.reactnativereusables.com/components)
+- [NativeWind Cheatsheet](https://www.nativewind.dev/tailwind-tokens/reference)

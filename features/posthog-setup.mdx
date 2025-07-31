@@ -5,95 +5,111 @@ description: "Add powerful analytics to your app with PostHog integration"
 
 This boilerplate comes with built-in support for PostHog analytics, helping you understand how users interact with your app. Let's set it up!
 
+## Step 1: Create and Configure PostHog Account
+
 <Steps>
+  <Step title="Create a PostHog Account">
+    Go to the [PostHog website](https://us.posthog.com/signup) and create an account.
 
-### Create a PostHog Account
-Go to the [PostHog website](https://us.posthog.com/signup) and create an account.
+    At the top of the signup page, you'll need to choose a **Data Region**:
 
-At the top of the signup page, you'll need to choose a **Data Region**:
+    - **US hosting** (Virginia, USA)
+      - Faster if you and your users are based in the US
+      - Easier to comply with some US regulations
 
-- **US hosting** (Virginia, USA)
-  - Faster if you and your users are based in the US
-  - Easier to comply with some US regulations
+    - **EU hosting** (Frankfurt, Germany)
+      - Faster if you and your users are based in Europe
+      - Keeps data in the EU to comply with GDPR requirements
 
-- **EU hosting** (Frankfurt, Germany)
-  - Faster if you and your users are based in Europe
-  - Keeps data in the EU to comply with GDPR requirements
+    You can migrate to another region later if needed.
+  </Step>
 
-You can migrate to another region later if needed.
+  <Step title="Select Product Analytics">
+    On the welcome screen, click the **Product Analytics** button.
 
-### Select Product Analytics
-On the welcome screen, click the **Product Analytics** button.
+    This will take you to the onboarding process for setting up analytics in your project.
+  </Step>
 
-This will take you to the onboarding process for setting up analytics in your project.
+  <Step title="Choose React Native Integration">
+    In the installation screen, select **React Native** as your source type from the menu on the left.
 
-### Choose React Native Integration
-In the installation screen, select **React Native** as your source type from the menu on the left.
+    You'll see integration instructions specifically for React Native applications.
+  </Step>
+</Steps>
 
-You'll see integration instructions specifically for React Native applications.
+## Step 2: Get API Credentials
 
-### Copy Your API Key and Host
-From the [PostHog Project Settings](https://app.posthog.com/project/settings), locate and copy your:
-- API Key (looks like `phc_XXXXXXXXXX...`) 
-- Host URL (Depending on your Data Region, `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
+<Steps>
+  <Step title="Copy Your API Key and Host">
+    From the [PostHog Project Settings](https://app.posthog.com/project/settings), locate and copy your:
+    - API Key (looks like `phc_XXXXXXXXXX...`) 
+    - Host URL (Depending on your Data Region, `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
 
-You'll need these values to configure your application.
+    You'll need these values to configure your application.
+  </Step>
+</Steps>
 
-### Configure Environment Variables
-Add your PostHog API key and host to your environment variables in `.env`:
+## Step 3: Configure Your Application
 
-```bash
-EXPO_PUBLIC_POSTHOG_API_KEY=your-posthog-api-key-here
-EXPO_PUBLIC_POSTHOG_HOST=your-posthog-host-here
-```
+<Steps>
+  <Step title="Configure Environment Variables">
+    Add your PostHog API key and host to your environment variables in `.env`:
 
-### Install Dependencies
-Install the PostHog React Native package and its required dependencies:
+    ```bash
+    EXPO_PUBLIC_POSTHOG_API_KEY=your-posthog-api-key-here
+    EXPO_PUBLIC_POSTHOG_HOST=your-posthog-host-here
+    ```
+  </Step>
 
-```bash
-npx expo install posthog-react-native expo-file-system expo-application expo-device expo-localization
-```
+  <Step title="Install Dependencies">
+    Install the PostHog React Native package and its required dependencies:
 
-### Enable PostHog
-The boilerplate already includes code for PostHog analytics, but it's commented out by default.
-Uncomment all code blocks marked with `TODO: PostHog` in `app/_layout.tsx`:
+    ```bash
+    npx expo install posthog-react-native expo-file-system expo-application expo-device expo-localization
+    ```
+  </Step>
 
-- The PostHog imports
-- The PostHog provider wrapper around your app
+  <Step title="Enable PostHog">
+    The boilerplate already includes code for PostHog analytics, but it's commented out by default.
+    Uncomment all code blocks marked with `TODO: PostHog` in `app/_layout.tsx`
+  </Step>
+</Steps>
 
-### Track Events
-Once enabled, you can track events in your app using the PostHog hook:
+## Step 4: Track User Events
 
-```typescript
-import { usePostHog } from 'posthog-react-native';
+<Steps>
+  <Step title="Implement Event Tracking">
+    Once enabled, you can track events in your app using the PostHog hook:
 
-function MyComponent() {
-  const posthog = usePostHog();
-  
-  const handleButtonPress = () => {
-    // Track a custom event
-    posthog.capture('button_pressed', {
-      buttonName: 'signup',
-      userType: 'new'
-    });
-    
-    // Rest of your handler logic
-  };
-  
-  return (
-    <Button onPress={handleButtonPress} title="Sign Up" />
-  );
-}
-```
+    ```typescript
+    import { usePostHog } from 'posthog-react-native';
 
-### Track Screen Views
-For automatic screen tracking with Expo Router, consider adding middleware to track screen views.
-
-This allows you to track user navigation throughout your app automatically.
-
+    function MyComponent() {
+      const posthog = usePostHog();
+      
+      const handleButtonPress = () => {
+        // Track a custom event
+        posthog.capture('button_pressed', {
+          buttonName: 'signup',
+          userType: 'new'
+        });
+        
+        // Rest of your handler logic
+      };
+      
+      return (
+        <Button onPress={handleButtonPress} title="Sign Up" />
+      );
+    }
+    ```
+  </Step>
 </Steps>
 
 ## Next Steps
+
+<Tip>
+  PostHog offers additional features like feature flags, A/B testing, and session recordings. Consider exploring these options as your app grows.
+</Tip>
 
 <Info>
   For more advanced features and customization options, check out the [PostHog React Native SDK documentation](https://posthog.com/docs/libraries/react-native).

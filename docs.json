@@ -68,15 +68,33 @@
         "group": "In-App Purchases",
         "pages": [
           "features/in-app-purchases/overview",
-          "features/in-app-purchases/google-play-console-setup",
-          "features/in-app-purchases/android-products",
-          "features/in-app-purchases/app-store-connect-setup",
-          "features/in-app-purchases/ios-products",
-          "features/in-app-purchases/closed-testing",
-          "features/in-app-purchases/ios-sandbox",
-          "features/in-app-purchases/revenuecat",
-          "features/in-app-purchases/import-products-rc",
-          "features/in-app-purchases/superwall"
+          {
+            "group": "Android Setup",
+            "icon": "android",
+            "pages": [
+              "features/in-app-purchases/google-play-console-setup",
+              "features/in-app-purchases/closed-testing",
+              "features/in-app-purchases/android-products"
+            ]
+          },
+          {
+            "group": "iOS Setup",
+            "icon": "apple",
+            "pages": [
+              "features/in-app-purchases/app-store-connect-setup",
+              "features/in-app-purchases/ios-sandbox",
+              "features/in-app-purchases/ios-products"
+            ]
+          },
+          {
+            "group": "Integration",
+            "icon": "code",
+            "pages": [
+              "features/in-app-purchases/revenuecat",
+              "features/in-app-purchases/import-products-rc",
+              "features/in-app-purchases/superwall"
+            ]
+          }
         ]
       },
       {

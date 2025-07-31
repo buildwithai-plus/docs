@@ -3,40 +3,43 @@ title: "Google Sign-In"
 description: "Set up Google Sign-In authentication for your mobile app"
 ---
 
-## Step 1: Create a Google Cloud Project
+## Step 1: Set Up a Google Cloud Project
 
+<Info>
+If you've already set up [Push Notifications](/features/push-setup) for Android, you likely have a Google Cloud project. You can use the same project for Google Sign-In.
+</Info>
+
+<Accordion title="Create a new Google Cloud Project">
 1. Create a Google Cloud project for your app in the [Google Cloud Console](https://console.cloud.google.com/projectcreate), if you don't have one already
 
 - Give it the name of your app
 - Select the organization you want to use
 - Click Create
 - Wait for the project to be created 
+</Accordion>
 
-2. Enable the Google Sign-In API
+<Steps>
+  <Step title="Enable the Google Sign-In API">
+  - Select your Google Cloud project
+  - Click on APIs & Services in the left menu
+  - Click "+ ENABLE APIS AND SERVICES" at the top
+  - Search for "Google Identity" and select "Google Identity Services API"
+  - Click Enable
+  </Step>
 
-- Select your new project
-- Click on APIs & Services in the left menu
-
-3. Configure the consent screen
-
-Pick the OAuth Consent Screen option in the left menu, and click "Get started".
-
-
-- App Information: Fill it out the form with App Name and User support email:
-
-- Audience: pick "External"
-- Contact Information: These email addresses are for Google to notify you about any changes to your project.
-- Finish: Agree to the Google API Services: User Data Policy.
-- Press "Create"
-
-4. Create OAuth client ID credentials
-
-Pick the "Clients" option in the left menu
-
-
-
-- Application type: Pick "Web Application"
-- Name: Choose a name for your web client
+  <Step title="Configure the consent screen">
+  - Pick the OAuth Consent Screen option in the left menu
+  - Click "Get started"
+  </Step>
+  
+  <Step title="Complete the consent screen configuration">
+  - App Information: Fill it out the form with App Name and User support email
+  - Audience: pick "External"
+  - Contact Information: These email addresses are for Google to notify you about any changes to your project
+  - Finish: Agree to the Google API Services: User Data Policy
+  - Press "Create"
+  </Step>
+</Steps>
 
 ## Step 2: Create Web OAuth Client ID
 
@@ -45,8 +48,6 @@ You need to create a Web OAuth Client ID for Supabase authentication to work pro
 <Steps>
   <Step title="Access the Google Cloud Console">
     In the Google Cloud console, navigate to **Menu** > **Google Auth platform** > **Clients**
-    
-    
   </Step>
 
   <Step title="Create OAuth Client">
