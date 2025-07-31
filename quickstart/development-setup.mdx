@@ -1,0 +1,153 @@
+---
+title: "3. EAS Setup & Development Build"
+description: "Set up Expo Application Services and create development builds for testing"
+---
+
+## Setting up EAS and Creating Development Builds
+
+[Expo Application Services (EAS)](https://expo.dev/eas) is a cloud service for building and deploying your app. This guide covers both the initial EAS setup and creating development builds for testing on your device.
+
+<Steps>
+  <Step title="Install EAS CLI">
+    Copy and paste this command into your terminal and press Enter to install the EAS CLI globally on your development machine:
+
+    ```bash
+    npm install -g eas-cli
+    ```
+  </Step>
+
+  <Step title="Log in to Expo">
+    You'll need an Expo account to use EAS. If you don't have one, sign up at [expo.dev](https://expo.dev/signup).
+
+    Copy and paste this command into your terminal and press Enter to log in:
+
+    ```bash
+    eas login
+    ```
+  </Step>
+
+  <Step title="Configure Build Profiles">
+    Now let's set up your project for building. Run this command:
+
+    ```bash
+    eas build:configure
+    ```
+
+    You'll see two prompts:
+
+    1. `Would you like to automatically create an EAS project for [your-app-name]?`  
+       ✅ Type `y` and press Enter
+
+    2. `Which platforms would you like to configure for EAS Build?`  
+       ✅ Press Enter to select `All` (it's selected by default)
+
+    This will:
+    - Create your project on EAS
+    - Link your local project to EAS
+    - Generate an `eas.json` file with build settings
+  </Step>
+
+</Steps>
+
+## Create Development Build
+
+<Tabs>
+  <Tab title="iOS">
+    ### Build iOS Development App
+    <Steps>
+      <Step title="Enroll in Apple Developer Program">
+            An active [Apple Developer Program](https://developer.apple.com/programs/enroll) subscription is required (costs $99 per year).
+      </Step>
+
+      <Step title="Register Your Device">
+            ```bash
+            eas device:create
+            ```
+
+            You'll be guided through these prompts:
+
+            1. When asked about your Expo account, press `Y` to continue with your current account.
+
+            2. Enter your Apple ID credentials when prompted.
+
+            3. For device registration method, select the website option (recommended) by pressing `Enter`.
+
+            A QR code and registration URL will appear in your terminal. On your iOS device:
+
+            1. Scan the QR code or open the provided URL
+            2. Tap the **Download Profile** button
+            3. Open the **Settings** app and install the provisioning profile
+            4. Return to your browser to confirm the successful installation
+      </Step>
+
+      <Step title="Build iOS Development App">
+        <Info>
+          Ensure your `eas.json` has `developmentClient: true` in the development profile before proceeding.
+        </Info>
+
+        Run the build command:
+        ```bash
+        eas build --platform ios --profile development
+        ```
+
+        <Tip>
+          You can also use the shorter command: `eas build -p ios --profile development`
+        </Tip>
+
+        You'll be guided through these prompts:
+
+        1. **Apple ID**  
+          Enter your Apple ID credentials when prompted.
+
+        2. **Team Selection**  
+          Choose your Apple Developer team.
+
+        3. **Bundle Identifier**  
+          Press `Enter` to use the one from your `app.json`.
+
+        4. **Push Notifications**  
+          Press `Y` to enable push notifications capability.
+
+        The build will begin in the cloud and takes approximately 10-15 minutes to complete. You can monitor progress in the terminal or via the EAS dashboard.
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Android">
+    ### Build Android Development App
+
+    <Info>
+      Ensure your `eas.json` has `developmentClient: true` in the development profile before proceeding.
+    </Info>
+
+    Run the build command:
+    ```bash
+    eas build --platform android --profile development
+    ```
+
+    <Tip>
+      You can also use the shorter command: `eas build -p android --profile development`
+    </Tip>
+
+    You'll be guided through these prompts:
+
+    1. **Android Application ID**  
+      When asked about the application ID (e.g., `com.buildwithai.travelapp`), press `Enter` to use the package name you defined in `app.json`.
+
+    2. **Android Keystore**  
+      When asked about generating a new keystore, press `Y` (required for signing your app).
+    
+    The build will begin in the cloud and takes approximately 10-15 minutes to complete. You can monitor progress in the terminal or via the EAS dashboard.
+  </Tab>
+</Tabs>
+
+<Info>
+  While the build is in progress, you can continue to the next guide: [Supabase Setup](/quickstart/supabase-setup)
+</Info>
+
+## Next Steps
+
+After your development build is ready, you'll need to:
+
+1. [Set up Supabase](/quickstart/supabase-setup) for your backend services
+2. [Install the development build](/quickstart/install-development-build) on your device

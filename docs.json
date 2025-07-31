@@ -8,98 +8,126 @@
     "light": "#34d399",
     "dark": "#059669"
   },
+  "icons": {
+    "library": "lucide"
+  },
   "favicon": "/logo/favicon.png",
   "logo": {
     "light": "/logo/light.png",
     "dark": "/logo/dark.png"
   },
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Request Feature",
+        "href": "https://buildwithai.canny.io/feature-requests"
+      },
+      {
+        "label": "Become Affiliate",
+        "href": "https://bwa-website.vercel.app/buildwithai-plus/affiliate"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get Started",
+      "href": "https://bwa-website.vercel.app/buildwithai-plus"
+    }
+  },
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Community",
+          "icon": "discord",
+          "href": "https://discord.gg/buildwithai"
+        },
+        {
+          "anchor": "GitHub",
+          "icon": "github",
+          "href": "https://github.com/steffensunbranch/buildwithai-boilerplate"
+        },
+        {
+          "anchor": "Support",
+          "icon": "mail",
+          "href": "mailto:steffen@buildwithai.io"
+        }
+      ]
+    },
     "groups": [
       {
-        "group": "Introduction",
+        "group": "Getting Started",
         "pages": [
-          "index"
-        ]
-      },
-      {
-        "group": "Setup Your Project",
-        "pages": [
-          "quickstart/project-setup",
-          "quickstart/app-configuration",
-          "quickstart/eas-setup"
-        ]
-      },
-      {
-        "group": "Test on Your Phone",
-        "pages": [
-          "quickstart/development-build",
-          "quickstart/supabase-setup",
-          "quickstart/install-development-build"
-        ]
-      },
-      {
-        "group": "Work with Your App",
-        "pages": [
-          "features/ui-styling-guide",
-          "features/theme-customization",
-          "features/i18n"
-        ]
-      },
-      {
-        "group": "Push Notifications",
-        "pages": [
-          "features/push-setup"
-        ]
-      },
-      {
-        "group": "Social Authentication",
-        "pages": [
-          "features/auth/google-auth",
-          "features/auth/apple-auth"
-        ]
-      },
-      {
-        "group": "Analytics",
-        "pages": [
-          "features/posthog-setup"
-        ]
-      },
-      {
-        "group": "In-App Purchases",
-        "pages": [
-          "features/in-app-purchases/overview",
+          "index",
           {
-            "group": "Android Setup",
-            "icon": "android",
+            "group": "Get Started",
+            "icon": "rocket",
             "pages": [
-              "features/in-app-purchases/google-play-console-setup",
-              "features/in-app-purchases/closed-testing",
-              "features/in-app-purchases/android-products"
-            ]
-          },
-          {
-            "group": "iOS Setup",
-            "icon": "apple",
-            "pages": [
-              "features/in-app-purchases/app-store-connect-setup",
-              "features/in-app-purchases/ios-sandbox",
-              "features/in-app-purchases/ios-products"
-            ]
-          },
-          {
-            "group": "Integration",
-            "icon": "code",
-            "pages": [
-              "features/in-app-purchases/revenuecat",
-              "features/in-app-purchases/import-products-rc",
-              "features/in-app-purchases/superwall"
+              "quickstart/project-setup",
+              "quickstart/app-configuration",
+              "quickstart/development-setup",
+              "quickstart/supabase-setup",
+              "quickstart/install-development-build"
             ]
           }
         ]
       },
       {
-        "group": "Advertising",
+        "group": "Core Features",
         "pages": [
+          {
+            "group": "Styling",
+            "icon": "palette",
+            "pages": [
+              "features/ui-styling-guide",
+              "features/theme-customization"
+            ]
+          },
+          {
+            "group": "Authentication",
+            "icon": "user-check",
+            "pages": [
+              "features/auth/social-auth",
+              "features/auth/google-auth",
+              "features/auth/apple-auth"
+            ]
+          },
+          "features/posthog-setup",
+          "features/i18n"
+        ]
+      },
+      {
+        "group": "Monetization",
+        "pages": [
+          {
+            "group": "In-App Purchases",
+            "icon": "shopping-cart",
+            "pages": [
+              "features/in-app-purchases/overview",
+              {
+                "group": "Android Setup",
+                "icon": "android",
+                "pages": [
+                  "features/in-app-purchases/google-play-console-setup",
+                  "features/in-app-purchases/closed-testing",
+                  "features/in-app-purchases/android-products"
+                ]
+              },
+              {
+                "group": "iOS Setup",
+                "icon": "apple",
+                "pages": [
+                  "features/in-app-purchases/app-store-connect-setup",
+                  "features/in-app-purchases/ios-sandbox",
+                  "features/in-app-purchases/ios-products"
+                ]
+              },
+              "features/in-app-purchases/revenuecat",
+              "features/in-app-purchases/superwall"
+            ]
+          },
           "features/admob-setup"
         ]
       }
@@ -110,7 +138,9 @@
       "copy",
       "chatgpt",
       "claude",
-      "perplexity"
+      "perplexity",
+      "mcp",
+      "cursor"
     ]
   },
   "footer": {
@@ -119,6 +149,11 @@
       "youtube": "https://www.youtube.com/@BuildWithAIChannel",
       "website": "https://www.buildwithai.io",
       "x-twitter": "https://x.com/solgrenk"
+    }
+  },
+  "errors": {
+    "404": {
+      "redirect": true
     }
   }
 }

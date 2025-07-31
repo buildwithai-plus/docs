@@ -1,131 +1,249 @@
 ---
-title: 'Make it International'
+title: 'Internationalization'
 description: 'Using translations in your app'
+icon: 'globe'
 ---
 
-# i18n Guide
+# Making Your App Multilingual
 
-The BuildWithAI boilerplate comes with a complete internationalization (i18n) system that makes it easy to create multilingual apps. The system uses JSON files for translations and provides a simple hook-based API to integrate translations into your components. This guide will show you how to use and extend the i18n system in your app.
+The boilerplate includes a ready-to-use internationalization (i18n) system that makes creating multilingual apps simple. This guide will walk you through the process with practical examples.
 
-## Adding Text
+## What You'll Learn
 
-1. **Edit translation files** in all languages:
+- How to use existing translations
+- Adding new text and phrases
+- Working with dynamic content (variables)
+- Creating a new language
+- Building a complete multilingual feature
 
-```bash
-lib/i18n/locales/en/common.json  # English
-lib/i18n/locales/fr/common.json  # French
-...
-```
 
-2. **Add your text** (same key, different translations):
+## Simple Translation Examples
 
-```json filename="en/common.json"
-{
-  "settings": {
-    "saveButton": "Save Changes"
-  }
-}
-```
+Let's learn how to use translations in your app with a simple Fortune Cookie example.
 
-```json filename="fr/common.json"
-{
-  "settings": {
-    "saveButton": "Enregistrer"
-  }
-}
-```
+### Step 1: Set Up Your Translation Files
 
-3. **Use in components**:
+<Steps>
+  <Step title="Find the translation files">
+    Your app already has translation files in:
+    
+    ```bash
+    lib/i18n/locales/en/common.json  # English
+    lib/i18n/locales/fr/common.json  # French
+    ```
+  </Step>
+  
+  <Step title="Add translations to English file">
+    Open `lib/i18n/locales/en/common.json` and add:
+    
+    ```json
+    {
+      "fortune": {
+        "title": "Your Fortune",
+        "message": "Today is your lucky day!",
+        "button": "New Fortune"
+      }
+    }
+    ```
+  </Step>
+  
+  <Step title="Add same translations in French">
+    Open `lib/i18n/locales/fr/common.json` and add:
+    
+    ```json
+    {
+      "fortune": {
+        "title": "Votre Fortune",
+        "message": "Aujourd'hui est votre jour de chance !",
+        "button": "Nouvelle Fortune"
+      }
+    }
+    ```
+  </Step>
+</Steps>
+
+### Step 2: Use the Translations in Your Component
+
+Here's a basic example of using translations:
 
 ```tsx
+import { View } from 'react-native';
+import { Text } from '~/components/ui/text';
+import { Button } from '~/components/ui/button';
 import { useTranslation } from '~/lib/i18n/useTranslation';
 
-function MyComponent() {
+export function FortuneMessage() {
+  // This gives you the translation function
   const { t } = useTranslation();
-  return <Text>{t('settings.saveButton')}</Text>;
-  // English: "Save Changes"
-  // French: "Enregistrer"
+  
+  return (
+    <View className="p-4 bg-card rounded-lg">
+      {/* Title in current language */}
+      <Text className="text-xl font-bold text-foreground mb-2">
+        {t('fortune.title')}
+      </Text>
+      
+      {/* Fortune message in current language */}
+      <Text className="text-muted-foreground mb-4">
+        {t('fortune.message')}
+      </Text>
+      
+      {/* Button with text in current language */}
+      <Button onPress={() => {}}>
+        <Text className="text-primary-foreground">
+          {t('fortune.button')}
+        </Text>
+      </Button>
+    </View>
+  );
 }
 ```
 
-## Using Variables in Text
+That's it! The component will automatically display text in the user's selected language.
 
-1. **Add variables** with `{{variableName}}` syntax:
+### Step 3: Using Variables in Translations
 
-```json filename="en/common.json"
-{
-  "profile": {
-    "greeting": "Welcome back, {{name}}!"
-  }
-}
-```
+You can also include dynamic content in your translations:
 
-```json filename="fr/common.json"
-{
-  "profile": {
-    "greeting": "Bon retour, {{name}} !"
-  }
-}
-```
+<Steps>
+  <Step title="Add translations with variables">
+    Add to your English file (`en/common.json`):
+    
+    ```json
+    {
+      "greeting": {
+        "welcome": "Welcome, {{name}}!",
+        "lucky_number": "Your lucky number today is {{number}}."
+      }
+    }
+    ```
+    
+    And to your French file (`fr/common.json`):
+    
+    ```json
+    {
+      "greeting": {
+        "welcome": "Bienvenue, {{name}} !",
+        "lucky_number": "Votre numéro de chance aujourd'hui est {{number}}."
+      }
+    }
+    ```
+    
+    Notice the `{{name}}` and `{{number}}` placeholders.
+  </Step>
+  
+  <Step title="Use variables in your component">
+    Here's how to use these translations with variables:
+    
+    ```tsx
+import { View } from 'react-native';
+import { Text } from '~/components/ui/text';
+import { Card } from '~/components/ui/card';
+import { useTranslation } from '~/lib/i18n/useTranslation';
 
-2. **Use in components**:
-
-```tsx
-function ProfileScreen() {
+export function Greeting() {
   const { t } = useTranslation();
-  return <Text>{t('profile.greeting', { name: 'John' })}</Text>;
-  // English: "Welcome back, John!"
-  // French: "Bon retour, John !"
+  const userName = 'Alex';
+  const luckyNumber = 7;
+  
+  return (
+    <Card className="p-4">
+      {/* Pass the name variable to the translation */}
+      <Text className="text-lg font-bold mb-2">
+        {t('greeting.welcome', { name: userName })}
+      </Text>
+      
+      {/* Pass the number variable to the translation */}
+      <Text className="text-muted-foreground">
+        {t('greeting.lucky_number', { number: luckyNumber })}
+      </Text>
+    </Card>
+  );
 }
 ```
+    
+    The second parameter to the `t()` function is an object containing your variable values.
+  </Step>
+</Steps>
+
+## Adding a New Language
+
+Now let's add Spanish as a new language option:
+
+<Steps>
+  <Step title="Create language folder and file">
+    ```bash
+    # Create folder for Spanish translations
+    mkdir lib/i18n/locales/es
+    
+    # Copy English file as a template
+    copy lib/i18n/locales/en/common.json lib/i18n/locales/es/common.json
+    ```
+  </Step>
+  
+  <Step title="Translate to new language">
+    Edit `lib/i18n/locales/es/common.json` with Spanish translations:
+    
+    ```json
+    {
+      "profile": {
+        "greeting": "¡Hola, {{name}}! Actualiza tu perfil a continuación.",
+        "title": "Tu Perfil",
+        "nameLabel": "Nombre Completo",
+        "emailLabel": "Correo Electrónico",
+        "bioLabel": "Acerca de Mí",
+        "saveButton": "Guardar Perfil",
+        "successMessage": "¡Perfil actualizado con éxito!"
+      }
+    }
+    ```
+  </Step>
+  
+  <Step title="Register the new language">
+    Open `lib/i18n/i18n.ts` and update it to include Spanish:
+    
+    ```tsx
+    // Import language files
+    import enCommon from './locales/en/common.json';
+    import frCommon from './locales/fr/common.json';
+    import esCommon from './locales/es/common.json'; // Add this
+    
+    // Configure resources
+    const resources = {
+      en: { common: enCommon },
+      fr: { common: frCommon },
+      es: { common: esCommon }  // Add this
+    };
+    ```
+  </Step>
+  
+  <Step title="Add to language selector">
+    Find the language selection component (`components/account/LanguageSettingsSheet.tsx`) and add Spanish:
+    
+    ```tsx
+    const languages = [
+      { code: 'en', name: 'English', nativeName: 'English' },
+      { code: 'fr', name: 'French', nativeName: 'Français' },
+      { code: 'es', name: 'Spanish', nativeName: 'Español' }, // Add this
+    ];
+    ```
+  </Step>
+</Steps>
+
+## Testing Your Translations
+
+To make sure your translations work correctly:
+
+1. Open your app and navigate to the language settings (usually in the account/settings section)
+2. Switch between languages and verify your text appears correctly
+3. Check that variable substitutions work as expected
 
 <Tip>
 ### Best Practices
 
-- Use same keys in both language files
-- Organize by feature: `welcome`, `settings`, etc.
-- Test after adding new translations
+- **Stay organized**: Group translations by feature ("profile", "settings", etc.)
+- **Be consistent**: Use the same key naming patterns throughout
+- **Keep keys in English**: Even for translations, keep the key names in English
+- **Test thoroughly**: Test all languages after adding new translations
+- **Use descriptive keys**: Keys like "profile.nameLabel" are self-explanatory
 </Tip>
-
-## Adding a New Language
-
-1. **Create language files**:
-
-```bash
-# Create folder and copy template
-mkdir lib/i18n/locales/es
-copy lib/i18n/locales/en/common.json lib/i18n/locales/es/common.json
-```
-
-2. **Translate** content from English to your new language:
-
-```json filename="es/common.json"
-{
-  "welcome": { "title": "Bienvenido" },
-  "settings": { "title": "Configuración" }
-}
-```
-
-3. **Register** the new language in `lib/i18n/i18n.ts`:
-
-```tsx filename="lib/i18n/i18n.ts"
-// Import new language
-import esCommon from './locales/es/common.json';
-
-// Add to resources
-const resources = {
-  en: { common: enCommon },
-  fr: { common: frCommon },
-  es: { common: esCommon }  // New language
-};
-```
-
-4. **Add** the new language to `components/account/LanguageSettingsSheet.tsx`:
-
-```tsx filename="components/account/LanguageSettingsSheet.tsx"
-const languages = [
-  { code: 'en', name: 'English', nativeName: 'English' },
-  { code: 'fr', name: 'French', nativeName: 'Français' },
-  { code: 'es', name: 'Spanish', nativeName: 'Español' }, // Add this
-];
-```

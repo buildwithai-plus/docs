@@ -3,73 +3,100 @@ title: "1. Clone & Setup Boilerplate"
 description: "Get your BuildWithAI boilerplate up and running in minutes"
 ---
 
-## Boilerplate Setup
+<Note>
+  This is the first step in setting up your React Native app. Complete this guide before moving to the next steps.
+</Note>
 
-This guide will walk you through the process of setting up your BuildWithAI boilerplate from scratch, from cloning the repository to configuring your development environment.
+## Prerequisites
 
-### Prerequisites
+Before you begin, make sure you have the following tools and accounts ready:
 
-Before you begin, make sure you have the following:
+<CardGroup cols={2}>
+  <Card title="Required Software" icon="wrench">
+    <ul className="mt-2">
+      <li>[Node.js](https://nodejs.org/en/download) (v16 or later)</li>
+      <li>[Git](https://git-scm.com/downloads)</li>
+      <li>[Windsurf IDE](https://windsurf.com/download/editor)</li>
+    </ul>
+  </Card>
+  
+  <Card title="Required Account" icon="user">
+    <ul className="mt-2">
+      <li>[Expo Account](https://expo.dev/signup) - Free signup</li>
+    </ul>
+  </Card>
+</CardGroup>
 
-**Required Software** (skip if you already have them):
-- [Node.js](https://nodejs.org/en/download) (v16 or later) - [Need help installing? →](/quickstart/setup-nodejs)
-- [Git](https://git-scm.com/downloads) - [Need help installing? →](/quickstart/setup-git)
-- [Windsurf IDE](https://windsurf.com/download/editor) - [Need help installing? →](/quickstart/setup-windsurf)
+## Setup Process
 
-**Required Account:**
-- [Expo Account](https://expo.dev/signup) - Create a free account - [Need help? →](/quickstart/setup-expo-account)
+<Steps>
+  <Step title="Create Your Project">
+    1. Open **Windsurf IDE**
+    2. Click the **Open Folder** button
+    3. Create a new empty folder for your project
+    4. Select the folder and click **Open**
+    
+    <Tip>Give your folder a descriptive name related to your app</Tip>
+  </Step>
 
-### Step 1: Create Your Project
+  <Step title="Clone the Boilerplate">
+    Open the terminal in Windsurf IDE:
+    
+    <Tabs>
+      <Tab title="Windows">
+        Press **Ctrl+Shift+`** (backtick)
+      </Tab>
+      <Tab title="macOS">
+        Press **Cmd+Shift+`** (backtick)
+      </Tab>
+    </Tabs>
+    
+    Run this command to clone the repository:
+    
+    ```bash
+    git clone https://github.com/steffensunbranch/buildwithai-boilerplate.git .
+    ```
+    
+    Then remove the origin link:
+    
+    ```bash
+    git remote remove origin
+    ```
+    
+    <Warning>
+      Don't forget the period at the end of the clone command. It ensures files are cloned directly into your current folder.
+    </Warning>
+  </Step>
 
-1. Open [Windsurf IDE](https://windsurf.com/download/editor)
-2. Click the "Open Folder" button
-3. Create a new empty folder for your project
-4. Select this folder and click "Open"
+  <Step title="Install Dependencies">
+    In the same terminal, run:
+    
+    ```bash
+    npm install
+    ```
+    
+    <Info>
+      This will download and install all required packages. It may take several minutes to complete.
+    </Info>
+  </Step>
 
-### Step 2: Get the Boilerplate code
+  <Step title="Set Up Environment Variables">
+    Create your environment file by copying the example:
+    
+    ```bash
+    cp .env.example .env
+    ```
+    
+    <Accordion title="What are environment variables?">
+      Environment variables store configuration settings that may change between environments (development, staging, production).
+      
+      Your `.env` file will store API keys, service URLs, and other configuration values that should not be committed to source control.
+      
+      You'll add specific values as you follow the next guides in this documentation.
+    </Accordion>
+  </Step>
+</Steps>
 
-1. Open the terminal in Windsurf either by:
-   - Using keyboard shortcut:
-     - Windows: **Ctrl+Shift+`** (backtick)
-     - macOS: **Cmd+Shift+`** (backtick)
-   - Or using menu:
-     - Click **Terminal** in the top menu bar
-     - Select **New Terminal**
+## Next Steps
 
-2. Copy this command, paste it in the terminal, and press Enter:
-
-```bash
-git clone https://github.com/steffensunbranch/buildwithai-boilerplate.git .
-```
-
-3. Copy this command, paste it in the terminal, and press Enter:
-
-```bash
-git remote remove origin
-```
-
-### Step 3: Install Dependencies
-
-Copy this command, paste it in the terminal, and press Enter:
-
-```bash
-npm install
-```
-
-This will download and install all the packages your app needs. It may take a few minutes.
-
-### Step 4: Create Environment Variables File
-
-Your boilerplate includes an example environment file (`.env.example`) with placeholders for various services. You need to create your own copy of this file called `.env`.
-
-Copy this command, paste it in the terminal, and press Enter:
-
-```bash
-cp .env.example .env
-```
-
-This creates a new file called `.env` that is a copy of `.env.example`. You'll add your actual API keys and settings to this `.env` file later.
-
-<Info>
-  You'll configure specific environment variables as you set up various features in the following guides.
-</Info>
+Now that you've set up the boilerplate, you should [configure your app settings](/quickstart/app-configuration) to customize it for your specific project.
