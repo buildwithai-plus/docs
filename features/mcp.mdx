@@ -1,0 +1,129 @@
+---
+title: "MCP Server"
+description: "Learn how to access BuildWithAI documentation directly through Windsurf using the Model Context Protocol"
+icon: "zap"
+---
+
+## Introduction
+
+This guide shows you how to access BuildWithAI Boilerplate documentation directly through Windsurf using the Model Context Protocol (MCP).
+
+<Info>**MCP (Model Context Protocol)** allows AI assistants like Cascade to connect with external tools and data sources, enhancing their capabilities.</Info>
+
+## What is the BuildWithAI MCP Server?
+
+The BuildWithAI MCP server lets you search through our documentation **directly** from Windsurf. This means:
+
+- Get immediate answers to your questions about BuildWithAI Boilerplate
+- Find relevant code examples and implementation guides
+- Access documentation without leaving your development environment
+
+## Configuring the MCP Server in Windsurf
+
+### 1. Add the BuildWithAI MCP Server
+
+1. Click on the **MCP Servers** icon in the top toolbar of the Cascade window
+   
+   ![MCP Servers button](/images/mcp-servers-button.png)
+   
+2. Click **Manage Servers**
+   
+3. Click **View raw config** <Icon icon="file-text" color="#fff" /> 
+
+    This will open your `mcp_config.json` file
+
+#### If your configuration file is empty
+
+If your file only contains `{"mcpServers": {}}`, replace the entire content with:
+
+```json
+{
+  "mcpServers": {
+    "buildwithai": {
+      "serverUrl": "https://docs.buildwithai.io/mcp"
+    }
+  }
+}
+```
+
+#### If you already have other MCP servers configured
+
+If you already have other servers configured, add the BuildWithAI server inside the `mcpServers` object (don't forget to add a comma after the previous server):
+
+```json
+{
+  "mcpServers": {
+    "existing-server": {
+      // existing configuration
+    },
+    "buildwithai": {
+      "serverUrl": "https://docs.buildwithai.io/mcp"
+    }
+  }
+}
+```
+
+### 3. Save and Refresh Your Configuration
+
+After editing the configuration:
+
+1. Save the `mcp_config.json` file
+   
+2. Close the file
+   
+3. Go back to the "Manage MCP servers" window (where you clicked "View raw config")
+   
+4. Click the **Refresh** <Icon icon="rotate-cw" color="#fff" /> button
+   
+5. You should now see BuildWithAI appearing in your list of available MCP servers
+
+![BuildWithAI MCP Server in Windsurf](/images/mpc-windsurf.png)
+
+## Using the BuildWithAI MCP Server
+
+Once the MCP server is set up, you can immediately start using it with Cascade:
+
+### Example prompts to Cascade:
+
+```
+How do I set up Google authentication in the BuildWithAI Boilerplate?
+```
+
+```
+Show me how to implement in-app purchases for iOS in the BuildWithAI Boilerplate?
+```
+
+```
+Add some appropriate icons to this component using the BuildWithAI Boilerplate.
+```
+
+Cascade will search through the BuildWithAI documentation and provide you with relevant information, code examples, and implementation guides directly in the chat.
+
+<Check>The BuildWithAI MCP server provides access to our complete documentation</Check>
+
+## Troubleshooting
+
+If you encounter any issues with the BuildWithAI MCP server:
+
+1. Verify that your `mcp_config.json` file is correctly formatted
+   
+2. Ensure that you've clicked the refresh button after adding the plugin
+   
+3. Check your internet connection to ensure you can reach the BuildWithAI MCP server
+   
+4. Try restarting Windsurf if the plugin isn't appearing
+
+## Adding BuildWithAI MCP server to Cursor
+
+If you prefer using Cursor instead of Windsurf, you can easily add the BuildWithAI MCP server to Cursor:
+
+1. On any BuildWithAI documentation page, click the dropdown menu button next to "Copy page"
+   
+2. Select "Connect to Cursor"
+   
+   ![Connect to Cursor option](/images/mcp-cursor.png)
+   
+3. This will prompt you to open Cursor
+   
+4. Follow the instructions in Cursor to add the BuildWithAI MCP server
+

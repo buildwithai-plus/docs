@@ -71,7 +71,8 @@
               "quickstart/supabase-setup",
               "quickstart/install-development-build"
             ]
-          }
+          },
+          "features/mcp"
         ]
       },
       {
@@ -147,7 +148,7 @@
     "socials": {
       "github": "https://github.com/steffensunbranch/buildwithai-boilerplate",
       "youtube": "https://www.youtube.com/@BuildWithAIChannel",
-      "website": "https://www.buildwithai.io",
+      "website": "https://bwa-website.vercel.app",
       "x-twitter": "https://x.com/solgrenk"
     }
   },
