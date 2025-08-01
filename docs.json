@@ -21,34 +21,24 @@
   },
   "navbar": {
     "links": [
-      {
-        "label": "Request Feature",
-        "href": "https://buildwithai.canny.io/feature-requests"
-      },
-      {
-        "label": "Become Affiliate",
-        "href": "https://bwa-website.vercel.app/buildwithai-plus/affiliate"
-      }
+      // {
+      //   "label": "Request Feature",
+      //   "href": "https://buildwithai.canny.io/feature-requests"
+      // },
+      // {
+      //   "label": "Become Affiliate",
+      //   "href": "https://bwa-website.vercel.app/buildwithai-plus/affiliate"
+      // }
     ],
-    "primary": {
-      "type": "button",
-      "label": "Get Started",
-      "href": "https://bwa-website.vercel.app/buildwithai-plus"
-    }
+    // "primary": {
+    //   "type": "button",
+    //   "label": "Get Started",
+    //   "href": "https://bwa-website.vercel.app/buildwithai-plus"
+    // }
   },
   "navigation": {
     "global": {
       "anchors": [
-        {
-          "anchor": "Community",
-          "icon": "discord",
-          "href": "https://discord.gg/buildwithai"
-        },
-        {
-          "anchor": "GitHub",
-          "icon": "github",
-          "href": "https://github.com/steffensunbranch/buildwithai-boilerplate"
-        },
         {
           "anchor": "Support",
           "icon": "mail",
@@ -58,11 +48,11 @@
     },
     "groups": [
       {
-        "group": "Getting Started",
+        "group": "App Setup",
         "pages": [
           "index",
           {
-            "group": "Get Started",
+            "group": "Setup",
             "icon": "rocket",
             "pages": [
               "quickstart/project-setup",
@@ -76,7 +66,7 @@
         ]
       },
       {
-        "group": "Core Features",
+        "group": "Customising Your App",
         "pages": [
           {
             "group": "Styling",
@@ -100,7 +90,7 @@
         ]
       },
       {
-        "group": "Monetization",
+        "group": "Monetizating Your App",
         "pages": [
           {
             "group": "In-App Purchases",
