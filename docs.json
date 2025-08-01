@@ -120,14 +120,6 @@
       "cursor"
     ]
   },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/steffensunbranch/buildwithai-boilerplate",
-      "youtube": "https://www.youtube.com/@BuildWithAIChannel",
-      "website": "https://bwa-website.vercel.app",
-      "x-twitter": "https://x.com/solgrenk"
-    }
-  },
   "errors": {
     "404": {
       "redirect": true
