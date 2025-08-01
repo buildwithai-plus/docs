@@ -34,7 +34,7 @@
     },
     "groups": [
       {
-        "group": "App Setup",
+        "group": "Setting up Your App",
         "pages": [
           "index",
           {
