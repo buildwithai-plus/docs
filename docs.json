@@ -18,23 +18,9 @@
   },
   "styling": {
     "eyebrows": "breadcrumbs"
-  },
+ },
   "navbar": {
-    "links": [
-      // {
-      //   "label": "Request Feature",
-      //   "href": "https://buildwithai.canny.io/feature-requests"
-      // },
-      // {
-      //   "label": "Become Affiliate",
-      //   "href": "https://bwa-website.vercel.app/buildwithai-plus/affiliate"
-      // }
-    ],
-    // "primary": {
-    //   "type": "button",
-    //   "label": "Get Started",
-    //   "href": "https://bwa-website.vercel.app/buildwithai-plus"
-    // }
+    "links": []
   },
   "navigation": {
     "global": {
