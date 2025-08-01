@@ -62,13 +62,15 @@ Before you begin, follow our guides to set up the following tools and accounts (
     </Tabs>
     Run this command to clone the repository:
 
-    bash
+    ```bash
     git clone https://github.com/steffensunbranch/buildwithai-boilerplate.git .
+    ```
 
     Then remove the origin link:
 
-    bash
+    ```bash
     git remote remove origin
+    ```
 
     <Warning>
       Don't forget the period at the end of the clone command. It ensures files are cloned directly into your current folder.
@@ -77,8 +79,9 @@ Before you begin, follow our guides to set up the following tools and accounts (
   <Step title="Install Dependencies">
     In the same terminal, run:
 
-    bash
+    ```bash
     npm install
+    ```
 
     <Info>
       This will download and install all required packages. It may take several minutes to complete.
@@ -87,8 +90,9 @@ Before you begin, follow our guides to set up the following tools and accounts (
   <Step title="Set Up Environment Variables">
     Create your environment file by copying the example:
 
-    bash
+    ```bash
     cp .env.example .env
+    ```
 
     <Accordion title="What are environment variables?">
       Environment variables store configuration settings that may change between environments (development, staging, production).
