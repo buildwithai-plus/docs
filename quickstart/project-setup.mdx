@@ -16,7 +16,8 @@ Before you begin, follow our guides to set up the following tools and accounts (
     <ul className="mt-2">
       <li><a href="/quickstart/setup-nodejs"><u>Node.js</u></a></li>
       <li><a href="/quickstart/setup-git"><u>Git</u></a></li>
-      <li><a href="/quickstart/setup-windsurf"><u>Windsurf IDE</u></a></li>
+      <li><a href="/quickstart/setup-cursor"><u>Cursor IDE</u></a> (Recommended)</li>
+      <li><a href="/quickstart/setup-windsurf"><u>Windsurf IDE</u></a> (Alternative)</li>
     </ul>
   </Card>
   
@@ -27,48 +28,45 @@ Before you begin, follow our guides to set up the following tools and accounts (
   </Card>
 </CardGroup>
 
+<Info>We recommend **Cursor IDE** for its powerful AI assistance and VS Code compatibility. Choose **Windsurf** if you prefer a different AI coding experience.</Info>
+
 ## Setup Process
 
 <Steps>
-  <Step title="Create Your Project">
-    1. Open **Windsurf IDE**
-    2. Click the **Open Folder** button
-    3. Create a new empty folder for your project
-    4. Select the folder and click **Open**
-
-    <Tip>
-      Give your folder a descriptive name related to your app
-    </Tip>
-  </Step>
   <Step title="Clone the Boilerplate">
-    Open the terminal in Windsurf IDE:
-
     <Tabs>
-      <Tab title="Windows">
-        Press **Ctrl\+Shift\+** (backtick)
+      <Tab title="Cursor IDE (Recommended)">
+        1. Open **Cursor IDE**
+        2. Click **Clone Repo** (or press `Ctrl+Shift+P` and search "Git: Clone")
+        3. Paste this GitHub repository URL:
+           ```
+           https://github.com/steffensunbranch/buildwithai-boilerplate.git
+           ```
+        4. Click **Clone from GitHub**
+        5. Sign in to GitHub when prompted
+        6. Choose where to save your project
+        7. Click **Open** when the clone completes
       </Tab>
-      <Tab title="macOS">
-        Press **Cmd\+Shift\+** (backtick)
+      <Tab title="Windsurf IDE">
+        1. Open **Windsurf IDE**
+        2. Click **Clone Repo** or use Command Palette (`Ctrl+Shift+P`)
+        3. Paste this GitHub repository URL:
+           ```
+           https://github.com/steffensunbranch/buildwithai-boilerplate.git
+           ```
+        4. Click **Clone from GitHub**
+        5. Sign in to GitHub when prompted
+        6. Choose where to save your project
+        7. Click **Open** when the clone completes
       </Tab>
     </Tabs>
-    Run this command to clone the repository:
 
-    ```bash
-    git clone https://github.com/steffensunbranch/buildwithai-boilerplate.git .
-    ```
-
-    Then remove the origin link:
-
-    ```bash
-    git remote remove origin
-    ```
-
-    <Warning>
-      Don't forget the period at the end of the clone command. It ensures files are cloned directly into your current folder.
-    </Warning>
+    <Info>
+      This method automatically handles the Git setup and opens your project in the correct location.
+    </Info>
   </Step>
   <Step title="Install Dependencies">
-    In the same terminal, run:
+    Open the integrated terminal in your IDE (`Ctrl+J` / `Cmd+J` for Cursor, or `Ctrl+Shift+` for Windsurf) and run:
 
     ```bash
     npm install

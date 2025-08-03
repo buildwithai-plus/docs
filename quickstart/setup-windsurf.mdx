@@ -1,90 +1,113 @@
 ---
 title: "Install Windsurf IDE"
-description: "Quick guide to install Windsurf IDE for development"
+description: "Official guide to install Windsurf IDE for React Native development"
 ---
 
-# Install Windsurf IDE
+## Prerequisites
 
-Windsurf is the recommended IDE for building your React Native app with AI assistance. Here's how to install it:
+Check that your system meets the minimum requirements:
 
-## Step 1: Download Windsurf
+<Tabs>
+  <Tab title="Windows">
+    Windows 10 or later
+  </Tab>
+  <Tab title="macOS">
+    OS X Yosemite or later
+  </Tab>
+  <Tab title="Linux">
+    Ubuntu 20.04+ (glibc ≥ 2.31, glibcxx ≥ 3.4.26)
+    
+    Other distributions: glibc ≥ 2.28, glibcxx ≥ 3.4.25
+  </Tab>
+</Tabs>
 
-1. Go to [windsurf.com/download/editor](https://windsurf.com/download/editor)
-2. Download Windsurf for your operating system:
-   - **Windows**: Download the Windows installer
-   - **macOS**: Download the macOS installer
-   - **Linux**: Download the Linux package
+## Download Windsurf
 
-## Step 2: Install Windsurf
+Download the installer for your platform:
 
-### Windows:
-1. Run the downloaded installer (.exe file)
-2. Follow the installation wizard
-3. Accept the license agreement
-4. Choose installation location (default is fine)
-5. Select additional tasks:
-   - ✅ Create a desktop icon
-   - ✅ Add "Open with Windsurf" action to context menu
-   - ✅ Add to PATH (important for terminal access)
-6. Click "Install" and wait for completion
+<Tabs>
+  <Tab title="Windows">
+    [Download for Windows](https://windsurf.com/windsurf/download)
+  </Tab>
+  <Tab title="macOS">
+    [Download for macOS](https://windsurf.com/windsurf/download_mac)
+  </Tab>
+  <Tab title="Linux">
+    [Download for Linux](https://windsurf.com/windsurf/download_linux)
+  </Tab>
+</Tabs>
 
-### macOS:
-1. Open the downloaded .dmg file
-2. Drag Windsurf to your Applications folder
-3. Open Windsurf from Applications
-4. If you see a security warning, go to System Preferences > Security & Privacy and click "Open Anyway"
+## Install Windsurf
 
-### Linux:
-**For .deb packages (Ubuntu/Debian):**
-```bash
-sudo dpkg -i windsurf-*.deb
-sudo apt-get install -f  # Fix any dependency issues
-```
+1. Download the installer for your platform from the links above
+2. Run the installer and follow your system's standard installation process
+3. Launch Windsurf to begin setup
 
-**For .rpm packages (Red Hat/Fedora):**
-```bash
-sudo rpm -i windsurf-*.rpm
-```
+## First-Time Setup
 
-## Step 3: First Launch
+<Steps>
+  <Step title="Launch Windsurf">
+    Open Windsurf for the first time to begin the onboarding process.
+  </Step>
+  
+  <Step title="Choose Setup Flow">
+    Select how you want to configure Windsurf:
+    - **Start fresh** - Clean installation with default settings (recommended for beginners)
+    - **Import from VS Code** - Migrate your existing VS Code settings, extensions, and configurations
+    - **Import from Cursor** - Migrate your existing Cursor settings and configurations
+    
+    <Info>If you're coming from VS Code or Cursor, importing will save time by transferring your familiar setup</Info>
+  </Step>
+  
+  <Step title="Configure Editor">
+    Choose your preferences:
+    - **Keybindings**: VS Code (recommended) or Vim
+    - **Theme**: Select your preferred color scheme
+  </Step>
+  
+  <Step title="Create Account">
+    Sign up for a free Windsurf account or log in with an existing account.
+    
+    <Warning>A Windsurf account is required to use the IDE</Warning>
+  </Step>
+  
+  <Step title="Optional: Install Windsurf in PATH">
+    During setup, you'll have the option to install Windsurf in your system PATH.
+    
+    **Benefits of installing in PATH:**
+    - Open projects from command line with `windsurf .`
+    - Launch Windsurf from any terminal or command prompt
+    - Integrate with other development tools
+    
+    <Tip>Recommended for developers who frequently use the command line</Tip>
+  </Step>
+</Steps>
 
-1. Open Windsurf
-2. You may be prompted to:
-   - Sign in with your account (recommended)
-   - Install recommended extensions
-   - Set up sync settings
-3. Windsurf will automatically detect and suggest installing extensions for React Native development
+## Explore Windsurf Features
 
-## Step 4: Verify Installation
+After installation, you can:
 
-1. Open Windsurf
-2. Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS)
-3. Type "Terminal: Create New Terminal"
-4. A terminal should open at the bottom of the window
+- **Access Cascade**: Use the AI assistant panel for code generation and help
+- **Open projects**: Use the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) to open folders or remote servers
+- **Generate projects**: Use AI to create new projects
+- **Configure settings**: Customize Windsurf to your preferences
 
-## Recommended Extensions
+<Info>Windsurf includes built-in AI assistance and doesn't support extensions from external marketplaces</Info>
 
-Windsurf will suggest these automatically, but you can install them manually:
+## Updates
 
-- **React Native Tools** - For React Native development
-- **ES7+ React/Redux/React-Native snippets** - Code snippets
-- **Prettier** - Code formatting
-- **GitLens** - Enhanced Git capabilities
+Windsurf will notify you when updates are available:
 
-## Troubleshooting
+- Click **"Restart to Update"** when prompted
+- Manually check: Profile dropdown > **"Check for Updates"**
+- Or use Command Palette > **"Check for Updates"**
 
-**Can't open terminal?**
-- Make sure "Add to PATH" was selected during installation
-- Restart Windsurf after installation
-
-**Extensions not working?**
-- Go to Extensions panel (Ctrl+Shift+X)
-- Search for and install the recommended extensions
-
-**Need help?**
-- [Windsurf Documentation](https://windsurf.com/docs)
-- Built-in help: Press F1 and search for help topics
+<Accordion title="Need to restart onboarding">
+  Open Command Palette and search for "Reset Onboarding" to restart the setup process.
+</Accordion>
 
 ## Next Steps
 
-✅ Windsurf IDE is installed! You can now continue with the [Project Setup](/quickstart/project-setup) guide.
+<Check>Windsurf IDE is now installed and configured</Check>
+
+Continue with [Project Setup](/quickstart/project-setup) to clone and configure your React Native boilerplate.
