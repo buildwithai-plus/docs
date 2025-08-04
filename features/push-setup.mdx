@@ -1,30 +1,18 @@
 ---
-title: "Setup Push Notifications"
+title: "Push Notifications"
 description: "Configure push notifications for your app"
+icon: "bell"
 ---
 
-## Step 1: Configure Expo Push Tokens
+This guide shows you how to quickly enable push notifications in your app. The boilerplate already includes all the necessary code - you just need to uncomment a few lines and configure your services.
 
-The boilerplate provides a hook for managing push tokens:
+## Step 1: Enable Push Notifications in Your Code
 
-```jsx
-// src/hooks/useNotifications.ts
-import { useEffect } from 'react';
-import * as Notifications from 'expo-notifications';
-import * as Device from 'expo-device';
-import { Platform } from 'react-native';
-import { supabase } from '@/lib/supabase';
+The boilerplate includes a ready-to-use notification system that just needs to be enabled:
 
-export function useNotifications(userId: string | null) {
-  useEffect(() => {
-    registerForPushNotifications(userId);
-  }, [userId]);
-
-  // Implementation details...
-}
-```
-
-Make sure your app's backend API is set up to receive and store these tokens. The boilerplate uses Supabase to store device tokens.
+1. Open `lib/notifications/useNotification.ts`
+2. Find the code block with `// TODO: Android - Uncomment to enable Android push notifications`
+3. Uncomment the code block (remove the `/*` at the beginning and `*/` at the end)
 
 ## Step 2: Platform-Specific Setup
 
@@ -123,14 +111,12 @@ Pick your platform (ios, android, or all) and wait for the build to finish.
 
 Once the build is complete, install it on your device to test the push notification functionality.
 
-## Step 4: Test Push Notifications
+## Step 4: Testing Notifications
 
-<Info>
-  Your app includes a built-in demo screen for testing push notifications.  
-</Info>
+The boilerplate includes a built-in notifications demo that makes testing easy:
 
 1. Open your development build
-2. Navigate to the `Account` tab
+2. Navigate to the `Account` tab 
 3. Select `Notifications` settings
 4. Tap on `Test Push Notifications`
 5. Follow the on-screen instructions to send and receive test notifications
