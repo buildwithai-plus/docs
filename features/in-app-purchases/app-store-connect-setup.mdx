@@ -14,21 +14,54 @@ Before setting up your app in App Store Connect, make sure you have:
 ## Add iOS App to App Store Connect
 
 <Steps>
-  <Step title="Create New App">
-    1. Go to [App Store Connect Apps](https://appstoreconnect.apple.com/apps)
-    2. Next to "Apps", click **+** > **New App**
-    3. Fill in the app details:
-       - **Platform:** iOS
-       - **App Name:** Your app name (from `app.json`)
-       - **Primary Language:** English
-       - **Bundle ID:** The bundle ID of your app (from `app.json`) - should be automatically added by EAS
-       - **SKU:** Use your scheme or slug from `app.json`
-       - **User Access:** Full Access
-    4. Click **Create**
+  <Step title="Recommended: Create App entry via EAS (auto-submit)">
+    This uses one iOS build, but it's usually worth it since EAS creates the App Store record for you and uploads the build.
 
-    **Tip:** You can also do this automatically using: `eas build --platform ios --auto-submit`
+    1. Run:
+    ```bash
+    eas build -p ios --profile production --auto-submit
+    ```
+
+    2. Sign in when prompted:
+       - Enter your Apple ID email and password, then choose the correct team.
+
+    3. What it does:
+       - Builds your iOS app in the cloud, creates the App Store record if missing, uploads the build, and submits it to TestFlight.
+       - It is NOT submitted to the App Store for review.
+
+    4. Track progress:
+       - Open the dashboard link printed in your terminal to follow the build and processing.
+
+    5. Why now:
+       - Makes the app available in App Store Connect so we can add in‑app purchases next. It uses one build, but is usually worth it.
+
+    <Note>
+    After the build and submission finish, your app should appear here: https://appstoreconnect.apple.com/apps
+    
+    If you see errors in the terminal or on the EAS links (build/submission), open the link, copy the logs, and paste them to your AI assistant (Cursor / Claude Code / Windsurf) with a note like: "EAS iOS build or submission failed" plus the logs.
+    </Note>
   </Step>
 </Steps>
+
+<details>
+  <summary>Manual setup (alternative)</summary>
+
+  <Steps>
+    <Step title="Create New App">
+      1. Go to [App Store Connect Apps](https://appstoreconnect.apple.com/apps)
+      2. Next to "Apps", click **+** > **New App**
+      3. Fill in the app details:
+         - **Platform:** iOS
+         - **App Name:** Your app name (from `app.json`)
+         - **Primary Language:** English
+         - **Bundle ID:** The bundle ID of your app (from `app.json`) - should be automatically added by EAS
+         - **SKU:** You can just use your scheme or slug from `app.json`
+         - **User Access:** Full Access
+      4. Click **Create**
+    </Step>
+  </Steps>
+
+</details>
 
 ## Verify Agreements and Banking
 
@@ -44,55 +77,7 @@ Before setting up your app in App Store Connect, make sure you have:
   </Step>
 </Steps>
 
-## Enable In-App Purchases for Your App
-
-<Steps>
-  <Step title="Configure App Settings">
-    1. Select your app from the list in [App Store Connect](https://appstoreconnect.apple.com/apps)
-    2. Under **App Information**, ensure "In-App Purchases" is enabled
-    3. If not enabled:
-       - Click the **Edit** button
-       - Check the box next to "In-App Purchases"
-       - Click **Save**
-  </Step>
-</Steps>
-
-## Configure Your Expo Project
-
-<Steps>
-  <Step title="Set Up Required Packages">
-    1. Install the necessary packages:
-    ```bash
-    npx expo install expo-superwall react-native-purchases expo-build-properties
-    ```
-
-    2. Add the expo plugin to your `app.json`:
-    ```json
-    [
-        "expo-build-properties",
-        {
-          "ios": {
-            "deploymentTarget": "16.0"
-          },
-          "android": {
-            "minSdkVersion": 26
-          }
-        }
-    ]
-    ```
-
-    This installs the necessary packages and configures your project with the minimum SDK versions required for in-app purchases.
-  </Step>
-
-  <Step title="Create EAS Build">
-    1. Build your app:
-    ```bash
-    eas build -p ios --profile development
-    ```
-
-    2. When the build completes, install it on your device to prepare for testing in-app purchases
-  </Step>
-</Steps>
+ 
 
 ## Next Steps
 
