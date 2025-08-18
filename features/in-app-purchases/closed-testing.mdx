@@ -3,11 +3,15 @@ title: "Closed Testing"
 description: "Set up closed testing for your Android app to test in-app purchases"
 ---
 
-## Set Up Closed Testing
+## Open Closed testing in Google Play Console
 
 Once you've completed the app setup, you can access **Closed testing** from:
 - Your app's **Dashboard** page, or
 - **Test and release** > **Testing** > **Closed testing** in the left sidebar
+
+<Note>
+  You're setting up a <strong>Closed testing</strong> release to prepare your app for in‑app purchases. This step is required to enable Google Play Billing and internal testing. It <strong>does not</strong> publish your app to production or make it publicly available. You'll ship a production release when you're ready.
+</Note>
 
 <Steps>
   <Step title="Configure Closed Test Track">
@@ -32,7 +36,7 @@ Once you've completed the app setup, you can access **Closed testing** from:
     4. Click **Save**
   </Step>
 
-  <Step title="Create and Release Your Build">
+  <Step title="Create and Release a Closed Test Build (required to enable in‑app purchases)">
     ### Upload Your Build
     1. **App bundles:** Click **Upload** and select the Android App Bundle (.aab file) from the previous step
     2. **Release name:** Name it (e.g., "First Test release")
@@ -44,7 +48,9 @@ Once you've completed the app setup, you can access **Closed testing** from:
     2. If everything looks good, click **Save**
     3. When the **Go to Publishing Overview** alert appears, click **Go to overview**
 
-    ### Send for Review
+    ### Send for Review (Closed test only)
+    This submits your release for the <strong>Closed testing</strong> track only and is required to enable Google Play Billing and in‑app purchases.
+    It is <strong>not</strong> a production submission.
     1. Google will run automatic checks for common issues
     2. If there are issues: View and fix them, then return to **Overview**
     3. If no issues: Click **Send X change(s) for review**
@@ -67,9 +73,3 @@ Copy the URL and open it on your testing device (or any browser logged in with t
 Opening the link will show a Google Play page with a **BECOME A TESTER** button. Press that button and your user will be able to make testing purchases on your testing device.
 
 They will also be added as a tester in the closed testing track. You need 12 users testing your app for 14 days to be able to publish your app to the Play Store.
-
-## Next Steps
-
-With your closed testing track set up, you can now:
-
-[Create subscription products](./android-products) for your Android app

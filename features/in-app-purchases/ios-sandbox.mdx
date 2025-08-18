@@ -22,20 +22,12 @@ Sandbox testing lets you test in-app purchases without using real money. It's an
 
 Install your development build on your iOS device.
 
-### Step 2: Make a Purchase
+### Step 2: Add Sandbox Account to Settings
 
-When you try to make a purchase, you'll be prompted to sign in with your sandbox account credentials.
-
-> **Note:** After your first purchase, iOS will remember your sandbox account.
-
-### Step 3: Add Sandbox Account to Settings (Optional)
-
-For easier testing, add your sandbox account to settings:
+Add your sandbox account on the device so it's ready when you integrate purchases:
 
 - iOS 13-17: **Settings > App Store > Sandbox Account**
 - iOS 18+: **Settings > Developer > Sandbox Apple Account**
-
-If you don't see these options, make a sandbox purchase first.
 
 ## Important Things to Know
 
@@ -53,10 +45,6 @@ Subscription renewals are accelerated in sandbox mode:
 - **Slow response:** Sandbox purchases may take up to 15 seconds. This is normal.
 - **Price differences:** Prices may not match what you set in App Store Connect. Focus on testing the purchase flow, not the exact prices.
 
-### Verifying Purchases
-
-After a purchase, check your RevenueCat dashboard with the "View Sandbox Data" toggle enabled.
-
 ## Reset Your Testing Environment
 
 ### To test as a new user:
@@ -71,11 +59,3 @@ In TestFlight, all subscription renewals happen once per day regardless of the o
 ## Need More Help?
 
 See [Apple's official documentation](https://developer.apple.com/documentation/storekit/in-app_purchase/testing_at_all_stages_of_development_with_xcode_and_the_sandbox) for advanced topics.
-
-## Next Steps
-
-With your sandbox testing environment set up, you can now:
-
-1. [Set up RevenueCat](./revenuecat) for subscription management
-2. [Import your products into RevenueCat](./import-products-rc)
-3. [Configure Superwall](./superwall) for paywall management
