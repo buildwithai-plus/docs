@@ -1,0 +1,73 @@
+---
+title: "App Icons & Splash Screens"
+description: "Create professional app icons and splash screens for your mobile app"
+---
+
+<Tip>
+  **Coming Soon:** We're building a dedicated application that will automatically generate optimal app icons for all required formats and sizes. Stay tuned for updates!
+</Tip>
+
+## Overview
+
+Your app needs several icon variants for different platforms and display modes. The boilerplate includes placeholder images that you can replace with your own custom designs at any time during development.
+
+## Required Icon Assets
+
+In your `assets/images/` folder, you'll need:
+
+- **Main App Icon** (`icon.png`, 1024×1024)\
+  _Your primary icon used in app stores and as a fallback_
+- **iOS Variants**:
+  - `ios-icon-light.png` - _For light mode, visible on white backgrounds_
+  - `ios-icon-dark.png` - _For dark mode, visible on black backgrounds_
+  - `ios-icon-tinted.png` - _Special version that iOS can color-match to its theme_
+- **Android Variants**:
+  - `adaptive-icon.png` - _Foreground layer with center-focused design_
+  - `adaptive-icon-monochrome.png` - _Single-color version for system themes_
+- **Splash Screen** (`splash.png`, 1242×2436)\
+  _The loading screen users see when opening your app_
+
+## Creating Your Icons
+
+### Option 1: Using AI Tools
+
+1. **Generate Base Icon**
+   Use ChatGPT's image generator with this prompt:
+
+   ```
+   "Create a professional mobile app icon:
+   - Modern [describe your app's purpose] symbol
+   - 1024×1024 pixels, square format
+   - Minimalist design with [your brand color]
+   - Clean lines and subtle gradients
+   - Bold, instantly recognizable shape
+   - Transparent background
+   - No text or tiny details"
+   ```
+
+2. **Create Variants**
+   For each variant, show ChatGPT your base icon and ask:
+
+   ```
+   For dark mode:
+   "Make this icon visible on dark backgrounds with lighter colors"
+   
+   For monochrome:
+   "Convert this to a single-color black icon with transparency"
+   
+   For adaptive:
+   "Adjust this icon to fit in the center 70% area for Android"
+   ```
+
+### Option 2: Using Design Tools
+
+- Use [Figma](https://www.figma.com) or [Canva](https://www.canva.com) for manual editing
+- Try [Icon Kitchen](https://icon.kitchen) for automatic Android variants
+
+<Tip>
+  Always test your icons at full size (1024×1024) and app size (180×180) to ensure they're clear at all sizes.
+</Tip>
+
+## Using Your New Icons
+
+Once you've created your icons, simply replace the placeholder files in the `assets/images/` directory. The Expo build system will automatically generate all the required sizes and variants for different devices when you build your app.

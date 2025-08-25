@@ -38,67 +38,21 @@ cp app.json.example app.json
   ⚠️ _Cannot change after publishing\!_
 - **scheme**: How other apps open yours\
   <Tooltip tip="Deep linking is like creating a special URL for your app. When someone taps a link like 'travelapp://bookings' (in an email or website), their phone knows to open your app directly to a specific screen. It's how apps connect to each other!">Enables deep linking</Tooltip>\
-  ✅ _Use simple lowercase letters, no spaces or special characters_
+  _Use simple lowercase letters, no spaces or special characters_
 - **bundleIdentifier** (iOS): Your app's unique iOS identifier
-  ✅ _Format: com.owner.yourapp (replace 'owner' with your name/company/domain)_
+  _Format: com.owner.yourapp (replace 'owner' with your name/company/domain)_
 - **package** (Android): Your app's unique Android identifier
-  ✅ _Must match your iOS bundleIdentifier exactly for consistency_
+  _Must match your iOS bundleIdentifier exactly for consistency_
 
-### Step 3: Create App Icons & Splash Screens
+### Step 3: App Icons & Splash Screens
 
-Your app needs several icon variants for different platforms and modes. The boilerplate includes placeholder images that you can replace with your own designs.
+The boilerplate includes placeholder app icons and splash screens in the `assets/images/` folder. These placeholders are functional and allow you to continue with development, so you can customize them later when you're ready to brand your app.
 
-#### Required Icons
+<Info>
+  For detailed instructions on creating and customizing your app icons, please see our [App Icons & Splash Screens Guide](/features/app-icons-guide).
+</Info>
 
-In your `assets/images/` folder, you'll need:
-
-- **Main App Icon** (`icon.png`, 1024×1024)\
-  _Your primary icon used in app stores and as a fallback_
-- **iOS Variants**:
-  - `ios-icon-light.png` - _For light mode, visible on white backgrounds_
-  - `ios-icon-dark.png` - _For dark mode, visible on black backgrounds_
-  - `ios-icon-tinted.png` - _Special version that iOS can color-match to its theme_
-- **Android Variants**:
-  - `adaptive-icon.png` - _Foreground layer with center-focused design_
-  - `adaptive-icon-monochrome.png` - _Single-color version for system themes_
-- **Splash Screen** (`splash.png`, 1242×2436)\
-  _The loading screen users see when opening your app_
-
-#### Creating Your Icons
-
-1. **Generate Base Icon**
-   Use ChatGPT's image generator with this prompt:
-
-   ```
-   "Create a professional mobile app icon:
-   - Modern [describe your app's purpose] symbol
-   - 1024×1024 pixels, square format
-   - Minimalist design with [your brand color]
-   - Clean lines and subtle gradients
-   - Bold, instantly recognizable shape
-   - Transparent background
-   - No text or tiny details"
-   ```
-2. **Create Variants**
-   For each variant, show ChatGPT your base icon and ask:
-
-   ```
-   For dark mode:
-   "Make this icon visible on dark backgrounds with lighter colors"
-   
-   For monochrome:
-   "Convert this to a single-color black icon with transparency"
-   
-   For adaptive:
-   "Adjust this icon to fit in the center 70% area for Android"
-   ```
-3. **Alternative Tools**
-   - Use [Figma](https://www.figma.com) or [Canva](https://www.canva.com) for manual editing
-   - Try [Icon Kitchen](https://icon.kitchen) for automatic Android variants
-
-<Tip>
-  Always test your icons at full size (1024×1024) and app size (180×180) to ensure they're clear at all sizes.
-</Tip>
+While not urgent for initial development, you'll want to replace these placeholders with your own branded assets before publishing to app stores.
 
 ### Next Steps
 
