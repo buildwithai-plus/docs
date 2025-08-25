@@ -1,0 +1,157 @@
+---
+title: "Superwall Product Configuration"
+description: "Configure products and entitlements in Superwall"
+icon: "tags"
+---
+
+# Superwall Product Configuration
+
+This guide explains how to properly set up products and entitlements in the Superwall dashboard to match your App Store Connect and Google Play Console configurations.
+
+## Understanding Products and Entitlements
+
+In Superwall, **products** represent the actual items users purchase, while **entitlements** represent the access or features these products unlock. This separation allows you to:
+
+- Organize different subscription tiers
+- Offer multiple products that grant the same level of access
+- Track user entitlements across different storefronts
+
+## Creating Entitlements
+
+Entitlements represent access levels in your app. For simple apps with one subscription level, you can use just one entitlement (like `premium`).
+
+<Steps>
+  <Step title="Create an Entitlement">
+    1. Go to **Products** in the left sidebar
+    2. Select **Entitlements** in the top menu
+    3. Click **+ Add Entitlement**
+    4. Enter an **Identifier** (e.g., `premium`)
+    5. Click **Save**
+  </Step>
+
+  <Step title="Understanding Multiple Entitlements">
+    If your app offers different access tiers (like Basic, Premium, Ultimate), create an entitlement for each tier:
+    
+    - **Basic**: `basic` - for essential features
+    - **Premium**: `premium` - for standard features
+    - **Ultimate**: `ultimate` - for all features
+    
+    <Note>
+      If your app only has one level of service, you don't need multiple entitlements. The default single entitlement is sufficient.
+    </Note>
+  </Step>
+
+  <Step title="Managing Entitlements">
+    To edit or delete an entitlement:
+    
+    1. Find the entitlement in the list
+    2. Click the **pencil icon** to edit or the **trash icon** to delete
+    
+    <Warning>
+      If an entitlement is associated with any product, you must first remove that association before you can delete the entitlement.
+    </Warning>
+  </Step>
+</Steps>
+
+## Adding Products
+
+Products in Superwall should match the products you've created in App Store Connect or Google Play Console.
+
+<Steps>
+  <Step title="Add a New Product">
+    1. Go to the **Products** section in the Superwall dashboard
+    2. Click **+ Add Product**
+  </Step>
+
+  <Step title="Configure Product Details">
+    Fill out these fields:
+    
+    | Field | Description |
+    | ----- | ----------- |
+    | **Identifier** | The exact product ID from App Store or Google Play |
+    | **Trial** | Duration of free trial period (if applicable) |
+    | **Price** | Product price (select from dropdown or enter manually) |
+    | **Period** | Subscription length (None for one-time purchases) |
+    | **Entitlements** | Select which entitlement(s) this product grants |
+    
+    <Warning>
+      Ensure your product identifier exactly matches what's in App Store Connect or Google Play Console. Mismatches are the most common cause of products not working correctly.
+    </Warning>
+  </Step>
+
+  <Step title="Save Your Product">
+    Click **Save** to add the product to your configuration.
+    
+    <Note>
+      The pricing information you enter is only used in the Paywall Editor. On device, pricing information comes directly from the App Store or Google Play Store and will be automatically localized.
+    </Note>
+  </Step>
+</Steps>
+
+## Finding Product Identifiers
+
+### App Store Connect
+
+<Steps>
+  <Step title="Navigate to Your Subscriptions">
+    1. In App Store Connect, go to your app
+    2. Click on **App Store** tab
+    3. Select **Subscriptions** from the sidebar
+    4. Click on your subscription group
+  </Step>
+
+  <Step title="Copy Product ID">
+    1. Find your subscription in the list
+    2. Copy the **Product ID** field
+    
+    <Note>
+      Products should not be in the "Missing Metadata" state for testing. They should be either "Ready to Submit" or "Approved".
+    </Note>
+  </Step>
+</Steps>
+
+### Google Play Console
+
+<Steps>
+  <Step title="For Subscription Products">
+    1. In Google Play Console, go to your app
+    2. Navigate to **Monetize** > **Products** > **Subscriptions**
+    3. Find and copy the **Product ID**
+    4. Note the **Base Plan ID** if you'll use it specifically
+  </Step>
+
+  <Step title="For In-App Products">
+    1. Navigate to **Monetize** > **Products** > **In-app products**
+    2. Find and copy the **Product ID**
+    3. For period type, select **None (Lifetime/Consumable)**
+  </Step>
+</Steps>
+
+## Working with Google Play Offers
+
+Google Play allows you to create multiple offers for each base subscription plan.
+
+<Steps>
+  <Step title="Automatic Offer Selection">
+    When you don't specify a particular offer, Superwall uses this logic to choose the best offer:
+    
+    1. First, it looks for the longest free trial the customer is eligible for
+    2. If no free trial is available, it finds the cheapest introductory period
+    3. If neither exists, it defaults to the base plan
+    
+    <Tip>
+      If you have an offer you never want automatically selected, add the tag `sw-ignore-offer` to that offer in Google Play Console.
+    </Tip>
+  </Step>
+
+  <Step title="Specifying Particular Offers">
+    For A/B testing or specific campaigns:
+    
+    1. Copy the **Offer ID** from Google Play Console
+    2. Specify this offer ID in your Superwall product configuration
+    
+    <Note>
+      When you specify an offer ID, Superwall will only use that offer if the user is eligible, otherwise falling back to the base plan.
+    </Note>
+  </Step>
+</Steps>
