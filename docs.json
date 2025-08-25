@@ -87,14 +87,15 @@
             "group": "In-App Purchases",
             "icon": "shopping-cart",
             "pages": [
-              "features/in-app-purchases/overview",
+              "features/in-app-purchases/superwall-setup",
               {
                 "group": "Android Setup",
                 "icon": "android",
                 "pages": [
                   "features/in-app-purchases/google-play-console-setup",
                   "features/in-app-purchases/closed-testing",
-                  "features/in-app-purchases/android-products"
+                  "features/in-app-purchases/android-products",
+                  "features/in-app-purchases/superwall-android"
                 ]
               },
               {
@@ -103,11 +104,10 @@
                 "pages": [
                   "features/in-app-purchases/app-store-connect-setup",
                   "features/in-app-purchases/ios-sandbox",
-                  "features/in-app-purchases/ios-products"
+                  "features/in-app-purchases/ios-products",
+                  "features/in-app-purchases/superwall-ios"
                 ]
-              },
-              "features/in-app-purchases/revenuecat",
-              "features/in-app-purchases/superwall"
+              }
             ]
           },
           "features/admob-setup"

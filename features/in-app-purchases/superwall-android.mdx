@@ -1,0 +1,125 @@
+---
+title: "Configure Superwall"
+description: "Configure Superwall for Android in-app purchases"
+---
+
+## Prerequisites
+
+Before continuing, make sure you have:
+
+- Completed the [Superwall Setup](./superwall-setup) guide
+- Set up [Google Play Console](./google-play-console-setup)
+- Created [Android products](./android-products) in Google Play Console
+- Set up a Google Cloud project (or be ready to create one)
+
+## Configure Revenue Tracking
+
+<Warning>
+  **Important Information Before Starting:**
+  
+  - Google Play revenue tracking is currently in private beta with Superwall
+  - This integration is complex - follow all steps exactly as described
+  - After configuration, it may take up to 36 hours for the keys to start working
+</Warning>
+
+<Steps>
+  <Step title="Access or Create a Google Cloud Project">
+    1. Visit the [Google Cloud Console](https://console.cloud.google.com/)
+    2. If you've already set up [Push Notifications](../push-setup) for Android, or [Google Authentication](../auth/google-auth), use that same project
+    3. Otherwise, click **Create Project** and follow the prompts to create a new one
+  </Step>
+  
+  <Step title="Enable Required Google APIs">
+    1. Enable [Google Play Android Developer API](https://console.cloud.google.com/apis/library/androidpublisher.googleapis.com)
+    2. Enable [Cloud Pub/Sub API](https://console.cloud.google.com/apis/library/pubsub.googleapis.com)
+    3. Verify both APIs show a blue **Manage** button next to the **Try this API** button and a green **API Enabled** check
+  </Step>
+  
+  <Step title="Create a new service account">
+    1. Visit [Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new user
+    2. Fill in the service account details (name, ID, description)
+    3. For permissions, add:
+       - **Pub/Sub Admin** role
+       - **Monitoring Viewer** role
+    4. Skip the **Principals with access** step
+  </Step>
+
+  <Step title="Download the service account credentials">
+    1. Click on the newly created service account
+    2. Go to the **Keys** tab
+    3. Click **Add key**
+    4. Select **Create new key**
+    5. Select **JSON**
+    6. Click **Create**
+    7. **Save** the downloaded JSON key file securely
+  </Step>
+
+  <Step title="Upload credentials to Superwall">
+    1. In Superwall dashboard, go to **Settings** > **Revenue Tracking**
+    2. Pick **Google Play** (Forward events from Google Play)
+    3. Enter your app's **Package Name**
+    4. Upload the JSON key file to **Google Play JSON Key**
+    5. Click **Save**
+    6. Notice the **Topic** field that appears below the **Save** button.
+    7. Click on it and pick the link from the dropdown.
+    8. Copy this generated **Topic Name** for use in the next step.
+  </Step>
+  
+  <Step title="Add service account to Google Play Console">
+    1. Visit [Google Play Console](https://play.google.com/console)
+    2. Select **Users and Permissions**
+    3. Click **Invite new users**
+    4. Paste in the email address of the service account you created
+    5. Select **Account Permissions**
+    6. Add the following permissions:
+       - **View app information and download bulk reports**
+       - **View financial data, orders, and cancellation survey responses**
+       - **Manage orders and subscriptions**
+    7. Click **Invite**
+  </Step>
+  
+  <Step title="Configure Pub/Sub in Google Play Console">
+    1. Go to your **app** within the [Google Play Console](https://play.google.com/console)
+    2. Select **Monetize with Play** > **Monetization setup** 
+    3. Under **Google Play Billing**, check **Enable real-time notifications**
+    4. Under **Notification content**, select **Subscriptions, voided purchases, and all one-time products**
+    5. Paste the copied **Topic Name** from Superwall into the **Topic name** field
+    6. Click **Save**
+  </Step>
+</Steps>
+
+## Configure Products
+
+<Note>
+  This guide assumes you've already created the Premium entitlement in the [Superwall Setup](./superwall-setup) guide.
+</Note>
+
+<Steps>
+  <Step title="Gather Product Information">
+    Reference the product IDs and base plan IDs you created in the [Android Products](./android-products) guide.
+    
+    <Note>
+      Ensure your product IDs and base plan IDs are **100%** correct and match exactly what's in Google Play Console. Products must have a valid status to be used with Superwall.
+    </Note>
+  </Step>
+
+  <Step title="Add Monthly and Yearly Subscriptions">
+    1. In Superwall dashboard, go to **Products** > **Products**
+    2. For each subscription type (Monthly and Yearly):
+       - Click **+ Add Product**
+       - **Product ID:** Enter your product ID following the `<app>_<entitlement>` pattern
+       - **Base Plan ID:** Enter the base plan ID (`monthly-autorenewing` for monthly or `annual-autorenewing` for yearly)
+       - **Automatically Pick Offer:** Toggle ON to let Superwall choose the best offer (prioritizes longest free trial, then cheapest price)
+       - **Price:** Select the exact price from Google Play
+       - **Period:** Select **Month** for monthly or **Year** for yearly subscription
+       - **Entitlements:** Select `premium` for both subscription types
+       - Click **Save**
+  </Step>
+</Steps>
+
+## Next Steps
+
+Now that you've configured Superwall for Android, you can:
+- Implement the SDK in your React Native app
+- Set up paywalls and features
+- Begin testing purchases with the Google Play test environment
