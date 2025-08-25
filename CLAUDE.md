@@ -43,7 +43,8 @@ mint update
 ### Navigation Groups
 1. **Setting Up Your App** - Initial setup and MCP configuration
 2. **Customising Your App** - Styling, auth, analytics, i18n
-3. **Monetizating Your App** - In-app purchases and advertising
+3. **Optional Features** - Authentication, analytics, error tracking, push notifications
+4. **Monetizating Your App** - In-app purchases and advertising
 
 ### Key Features
 - **MCP Integration** - Model Context Protocol server for accessing docs through Cursor/Windsurf
@@ -75,6 +76,13 @@ mint update
 
 - **No build process required** - Mintlify handles compilation
 - **Live reload** - Changes appear immediately with `mint dev`
-- **Production deployment** - Automatic via GitHub integration
+- **Production deployment** - Automatic via GitHub integration to main branch
 - **MCP server integration** - Allows docs access directly from supported IDEs
 - **TASKS.md** contains pending documentation updates
+- **Contextual actions** - docs.json configured with copy, ChatGPT, Claude, Perplexity, MCP, and Cursor options
+
+## Troubleshooting
+
+- If dev environment isn't running: Run `mint update` to get latest CLI version
+- Page loads as 404: Ensure running in folder with `docs.json`
+- Missing navigation: Check `docs.json` navigation structure matches file organization
