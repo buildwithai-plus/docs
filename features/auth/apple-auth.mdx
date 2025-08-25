@@ -160,55 +160,12 @@ node gen_apple_secret.js
 Now that you've set up Apple Sign-In with Supabase, you need to enable the feature in your app codebase:
 
 <Steps>
-  <Step title="Enable the Feature in Your Codebase">
-    1. Rename the example file by running:
-    ```bash
-    mv lib/auth/methods/apple-auth.ts.example lib/auth/methods/apple-auth.ts
-    ```
-    2. Install the required dependency:
-    ```bash
-    npx expo install expo-apple-authentication
-    ```
-    3. Update your `app.json` to add Apple Sign-In configuration:
-    ```json
-    {
-      "expo": {
-        "ios": {
-          // Add this to the iOS section
-          "usesAppleSignIn": true
-        },
-        "plugins": [
-          // Add this to the plugins array
-          "expo-apple-authentication"
-        ]
-      }
-    }
-    ```
-  </Step>
-
-  <Step title="Uncomment Feature Code">
-    The boilerplate already includes all necessary code for Apple Sign-In, but it's commented out by default.
-    Uncomment all code blocks marked with `TODO: APPLE SIGN-IN` in these files:
-    - `lib/auth/context.tsx`
-    - `app/welcome.tsx`
-    - `app/login.tsx`
-    - `app/register.tsx`
-    
-    Each file contains clear TODO comments marking the sections to uncomment.
+  <Step title="Implementation">
+    Follow the implementation instructions in the `integrations/apple-auth/README.md` file included in your boilerplate codebase. This file contains all necessary steps for setting up Apple Sign-In in your application.
   </Step>
 </Steps>
 
-Once you've completed these steps, the Apple Sign-In button will appear in the authentication screens and be fully functional - on iOS only.
-
-### Re-build your app
-
-Re-build your app to apply the changes:
-
-```bash
-eas build -p ios --profile development
-```
-
-Install the new EAS build on your device.
+Once you've completed the implementation steps, the Apple Sign-In button will appear in the authentication screens and be fully functional - on iOS only.
 
 ### Testing Your Configuration
 

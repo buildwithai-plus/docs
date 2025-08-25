@@ -1,104 +1,50 @@
 ---
-title: "PostHog (v2: AI Wizard)"
+title: "PostHog"
 description: "Set up PostHog analytics in minutes using the official AI wizard for React Native"
 icon: "chart-line"
 ---
 
 <Note>
-  This v2 guide sets up PostHog via the official AI wizard. You'll sign up if needed, choose your region (EU/US), and accept defaults. Our boilerplate already includes ready-to-uncomment PostHog code.
+  This guide sets up PostHog via the official AI wizard. The wizard automatically configures your app with all necessary settings.
 </Note>
- 
-<Info>
-  The PostHog wizard is experimental. Feedback welcome at <i>joshua [at] posthog [dot] com</i>.
-</Info>
 
-## Quick Setup
+## Step 1: Run the PostHog Wizard
 
 <Steps>
-  <Step title="Run the PostHog wizard">
-    In your project root, run:
+  <Step title="Launch the wizard">
+    In your project root directory, run the following command:
 
     ```bash
     npx @posthog/wizard --integration react-native
     ```
-
-    When prompted:
-    - Choose <b>Sign up</b> if you don't have an account yet
-    - Select your data region: <b>EU</b> or <b>US</b>
-    - Accept defaults for the rest
-    
-    <Info>
-      The wizard uses sensible defaults by default (equivalent to <code>--default</code>). You can still answer prompts interactively.
-    </Info>
-
-    <Accordion title="Non-interactive examples (signup + region)">
-      Run the wizard without prompts:
-
-      ```bash
-      # EU region + create account
-      npx @posthog/wizard --integration react-native --signup --region eu
-
-      # US region + create account
-      npx @posthog/wizard --integration react-native --signup --region us
-      ```
-    </Accordion>
   </Step>
 
-  <Step title="Enable PostHog in the app">
-    This boilerplate ships with PostHog code commented out. The wizard will detect this and intelligently update/uncomment the integration for React Native.
-
-    - After the wizard completes, review the changes to `app/_layout.tsx`
-    - You shouldn't need to manually uncomment anything
-    - If it didn't apply correctly, revert the changes and use the classic guide: <a href="/features/posthog-setup"><u>PostHog (manual setup)</u></a>
+  <Step title="Set up your account">
+    During the wizard setup:
+    - Choose <b>Sign up</b> if you don't have a PostHog account yet
+    - If you already have an account, choose <b>Log in</b>
   </Step>
 
-  <Step title="Environment variables">
-    The wizard writes the required environment variables for you.
-
-    - Ensure `.env` or `.env.local` remains listed in your `.gitignore`
-    - Verify that the following are present in your environment:
-      - `EXPO_PUBLIC_POSTHOG_API_KEY`
-      - `EXPO_PUBLIC_POSTHOG_HOST` (eu/us host based on your selection)
-    - If this doesn't work for you, revert and try the manual guide: <a href="/features/posthog-setup"><u>PostHog (manual setup)</u></a>
-  </Step>
-
-  <Step title="Verify tracking">
-    Start the app, use a few screens, then in PostHog open <b>Live Events</b> to confirm events are arriving.
-
-    Optional test snippet:
-
-    ```tsx
-    import { usePostHog } from 'posthog-react-native'
-    import { Button } from 'react-native'
-
-    export function Example() {
-      const posthog = usePostHog()
-      return <Button title="Test event" onPress={() => posthog.capture('test_event')} />
-    }
-    ```
+  <Step title="Select your data region">
+    Choose where your analytics data will be stored:
+    - <b>EU</b>: Frankfurt, Germany (GDPR-compliant, faster for European users)
+    - <b>US</b>: Virginia, USA (faster for North American users)
   </Step>
 </Steps>
 
-## Optional: MCP integration
+## Step 2: Test the Implementation
 
-If you use MCP-enabled clients, you can add/remove the PostHog MCP server:
+<Steps>
+  <Step title="Implementation">
+    Follow the implementation instructions in the `integrations/posthog/README.md` file included in your boilerplate codebase. This file contains all necessary steps for testing PostHog in your application, including the test button component.
+  </Step>
 
-```bash
-# Add
-npx @posthog/wizard mcp add
-
-# Remove
-npx @posthog/wizard mcp remove
-```
-
-## Notes
-
-<Tip>
-  Region guidance:
-  - <b>EU hosting</b> (Frankfurt): EU/GDPR-friendly, faster for EU users
-  - <b>US hosting</b> (Virginia): faster for US users, common for US compliance
-</Tip>
-
-<Info>
-  You can migrate regions later if needed. For advanced usage, see `npx @posthog/wizard --help`.
-</Info>
+  <Step title="Test the integration">
+    Once you've followed the README instructions:
+    1. Restart your app
+    2. Use the test button component as described in the README
+    3. Log in to your PostHog dashboard
+    4. Go to <b>Live Events</b> section
+    5. Confirm that your test events appear in the dashboard
+  </Step>
+</Steps>

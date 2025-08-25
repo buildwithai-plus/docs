@@ -75,7 +75,7 @@
               "features/auth/apple-auth"
             ]
           },
-          "features/posthog-setup",
+          "features/posthog-setup-v2",
           "features/push-setup"
         ]
       },

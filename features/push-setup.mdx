@@ -4,40 +4,26 @@ description: "Configure push notifications for your app"
 icon: "bell"
 ---
 
-This guide shows you how to quickly enable push notifications in your app. The boilerplate already includes all the necessary code - you just need to uncomment a few lines and configure your services.
+This guide shows you how to set up push notifications in your app. The boilerplate includes all the necessary code structure, but platform-specific setup is required, particularly for Android devices.
 
-## Step 1: Enable Push Notifications in Your Code
+**Important Note:** 
+- Android push notifications are **disabled by default** until you complete the setup process in this guide.
+- iOS push notifications are already enabled if you selected "yes" to enabling push notifications during your first development build.
 
-The boilerplate includes a ready-to-use notification system that just needs to be enabled:
+## Step 1: Service Setup
 
-1. Open `lib/notifications/useNotification.ts`
-2. Find the code block with `// TODO: Android - Uncomment to enable Android push notifications`
-3. Uncomment the code block (remove the `/*` at the beginning and `*/` at the end)
-
-## Step 2: Platform-Specific Setup
+Before implementing push notifications in your app, you need to set up the necessary services for each platform:
 
 <Tabs>
-  <Tab title="iOS Setup (APNs)">
-    <Tip>
-      If you skipped push notification setup during your initial [development build](/quickstart/development-build.mdx) by answering "no" to the prompt, follow these instructions to add push notification support.
-    </Tip>
-
-    <Accordion title="Adding Push Notifications After Initial Build">
-      1. **Run the EAS credentials command:**
-         ```sh
-         eas credentials --platform ios
-         ```
-         - Choose `Push Notifications: Manage your Apple Push Notifications Key`.
-         - Follow the prompts to add or generate a new push notification key for your project.
-    </Accordion>
-  </Tab>
-  
   <Tab title="Android Setup (FCM)">
+    <Tip>
+      Android push notifications are disabled by default in the boilerplate. Follow this guide to enable them for your app.
+    </Tip>
 
     **Documentation references:**
     - [Expo Push Notifications Setup](https://docs.expo.dev/push-notifications/push-notifications-setup/)
     - [FCM Credentials Guide](https://docs.expo.dev/push-notifications/fcm-credentials/)
-
+    
     <Steps>
       <Step title="Create a Firebase Project">
         1. Go to the [Firebase Console](https://console.firebase.google.com/)
@@ -64,54 +50,50 @@ The boilerplate includes a ready-to-use notification system that just needs to b
         > **Note:** Copy your **SHA-1 fingerprint** from the **Android upload keystore** table
       </Step>
 
-      <Step title="Add Android App to Firebase and Configure google-services.json">
+      <Step title="Add Android App to Firebase & Download Configuration File">
         1. In the Firebase Console, go to your project and click **Add app** and select **Android**
            - Enter your Android package name (found in your `app.json`)
            - For the App nickname, you can use your app name
            - Paste your **SHA-1 fingerprint** from the **Android upload keystore** table from the last step
            - Register the app and download the `google-services.json` file
-      </Step>
-
-      <Step title="Set up the downloaded file in your project">
-        1. **Save the `google-services.json` file**
+        
+        2. **Save the `google-services.json` file**
            - Put it in your project's main folder (where your `package.json` or `app.json` files are)
-
-        2. **Tell Expo where to find the file by adding this to your `app.json`:**
-           ```json
-           {
-             "expo": {
-               "android": {
-                 "package": "com.yourcompany.yourappname",
-                 "versionCode": 1,
-                 "googleServicesFile": "./google-services.json"
-               }
-             }
-           }
-           ```
-
-        > **Note:** This is a sensitive file that should not be tracked by git. But, EAS needs it to build the app. So:
-        > - Make sure it is added to the `.gitignore` file
-        > - But not in the `.easignore` file
-
-        > **Note:** Just skip the rest of the flow in Firebase (*Add Firebase SDK* and *Next steps*)
+        
+        2. **Just skip the rest of the flow in Firebase**
+           - Skip **Add Firebase SDK** and **Next steps**
+        
+        > **Note:** This is a sensitive file that should not be tracked by git. Make sure it is added to your `.gitignore` file, but not in the `.easignore` file.
       </Step>
     </Steps>
   </Tab>
+
+  <Tab title="iOS Setup (APNs)">
+    <Tip>
+      iOS push notifications are already enabled if you selected "yes" during your initial [development build](/quickstart/development-build.mdx). If you skipped this setup, follow these instructions to add push notification support later.
+    </Tip>
+
+    <Accordion title="Adding Push Notifications After Initial Build">
+      1. **Run the EAS credentials command:**
+         ```sh
+         eas credentials --platform ios
+         ```
+         - Choose `Push Notifications: Manage your Apple Push Notifications Key`.
+         - Follow the prompts to add or generate a new push notification key for your project.
+    </Accordion>
+  </Tab>
 </Tabs>
 
-## Step 3: Rebuild Your App
+## Step 2: Implementation
 
-After setting up push notification credentials for either platform, you need to create a new development build with these credentials:
+Follow the implementation instructions in the `integrations/push/README.md` file included in your boilerplate codebase. This file contains all necessary steps for integrating push notifications in your application, including:
 
-```bash
-eas build --profile development
-```
+- Code configuration and uncommenting
+- Integration of the `google-services.json` file 
+- Required app.json settings
+- Build instructions
 
-Pick your platform (ios, android, or all) and wait for the build to finish.
-
-Once the build is complete, install it on your device to test the push notification functionality.
-
-## Step 4: Testing Notifications
+## Step 3: Testing Notifications
 
 The boilerplate includes a built-in notifications demo that makes testing easy:
 

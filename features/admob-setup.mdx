@@ -23,129 +23,37 @@ This approach ensures your account remains in good standing with ad networks and
 ## Setup Process Overview
 
 <Steps>
-  <Step>
-    ### Create AdMob Account
-    
+  <Step title="Create AdMob Account">
     Sign up for an AdMob account at [admob.google.com](https://admob.google.com/) if you don't already have one.
   </Step>
   
-  <Step>
-    ### Register Your App in AdMob
-    
+  <Step title="Register Your App in AdMob">
     In the AdMob console:
     - Click "Apps" in the left sidebar, then "Add app"
     - Select platform (iOS or Android)
     - When asked "Is the app listed on a supported app store?" select "Yes"
     - Enter your app's store information
   </Step>
-  
-  <Step>
-    ### Enable the AdMob Feature in Your App
-    
-    Follow the implementation instructions below
+
+  <Step title="Implementation">
+    Follow the implementation instructions in the `integrations/admob/README.md` file included in your boilerplate codebase. This file contains all necessary steps for setting up AdMob in your application.
+  </Step>
+
+  <Step title="Creating Ad Units">
+    <Warning>
+      When testing your app, always use test ad units. Using production ad units during development can lead to account suspension.
+    </Warning>
+
+    After your app is published to the app stores:
+
+    1. In AdMob console, click "Add ad unit"
+    2. Configure your ad unit:
+       - Select ad format (Banner, Interstitial, etc.)
+       - Name your ad unit (e.g., "Main Screen Banner")
+       - Leave partner bidding unchecked for simplicity
+    3. Click "Create ad unit" and copy the generated ad unit ID
   </Step>
 </Steps>
-
-## Implementation
-
-### 1. Enable AdMob Code
-
-<Steps>
-  <Step>
-    ### Rename Example Files
-    
-    The boilerplate includes AdMob functionality in example files that need to be activated:
-    
-    ```bash
-    # From the root of your project
-    mv lib/services/ads/adMobService.ts.example lib/services/ads/adMobService.ts
-    mv lib/services/ads/tracking-transparency.ts.example lib/services/ads/tracking-transparency.ts
-    mv components/ads/BannerAdComponent.tsx.example components/ads/BannerAdComponent.tsx
-    ```
-  </Step>
-  
-  <Step>
-    ### Install Required Packages
-    
-    ```bash
-    npx expo install react-native-google-mobile-ads expo-tracking-transparency
-    ```
-  </Step>
-  
-  <Step>
-    ### Update app.json Configuration
-    
-    <Tabs>
-      <Tab title="Complete Example">
-      ```json filename="app.json"
-      {
-        "expo": {
-          "plugins": [
-            [
-              "react-native-google-mobile-ads",
-              {
-                "androidAppId": "ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx",
-                "iosAppId": "ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx",
-                "userTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
-              }
-            ],
-            [
-              "expo-tracking-transparency",
-              {
-                "userTrackingPermission": "This identifier will be used to deliver personalized ads to you."
-              }
-            ]
-          ]
-        }
-      }
-      ```
-      </Tab>
-      <Tab title="Google Ads Configuration">
-      ```json filename="Google Mobile Ads plugin"
-      [
-        "react-native-google-mobile-ads",
-        {
-          "androidAppId": "ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx",
-          "iosAppId": "ca-app-pub-xxxxxxxxxxxxxxxx~xxxxxxxxxx",
-          "userTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
-        }
-      ]
-      ```
-      </Tab>
-      <Tab title="iOS Privacy">
-      ```json filename="App Tracking Transparency plugin"
-      [
-        "expo-tracking-transparency",
-        {
-          "userTrackingPermission": "This identifier will be used to deliver personalized ads to you."
-        }
-      ]
-      ```
-      </Tab>
-    </Tabs>
-  </Step>
-  
-  <Step>
-    ### Uncomment AdMob Code
-    
-    Find all code blocks marked with `TODO: ADMOB` in `app/_layout.tsx` and uncomment them to enable AdMob initialization.
-  </Step>
-</Steps>
-
-## Creating Ad Units
-
-<Warning>
-  When testing your app, always use test ad units. Using production ad units during development can lead to account suspension.
-</Warning>
-
-After your app is published to the app stores:
-
-1. In AdMob console, click "Add ad unit"
-2. Configure your ad unit:
-   - Select ad format (Banner, Interstitial, etc.)
-   - Name your ad unit (e.g., "Main Screen Banner")
-   - Leave partner bidding unchecked for simplicity
-3. Click "Create ad unit" and copy the generated ad unit ID
 
 ## Configuring Production Ad Units
 

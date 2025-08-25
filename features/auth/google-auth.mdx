@@ -160,103 +160,18 @@ After setting up the web client for Supabase, you need to create platform-specif
 Now that you've set up all the necessary OAuth clients, you need to configure your app to use Google Sign-In:
 
 <Steps>
-  <Step title="Enable the Basic Feature">
-    1. Rename the example file by running:
+  <Step title="Implementation">
+    Follow the implementation instructions in the `integrations/google-auth/README.md` file included in your boilerplate codebase. This file contains all necessary steps for setting up Google Sign-In in your application, including:
     
-    ```bash
-    mv lib/auth/methods/google-auth.ts.example lib/auth/methods/google-auth.ts
-    ```
-    
-    2. Install the required dependency:
-    
-    ```bash
-    npx expo install @react-native-google-signin/google-signin
-    ```
-    
-    3. Update your `.env` file with your Google OAuth web client ID (from Step 2):
-    
-    ```env
-    EXPO_PUBLIC_GOOGLE_OAUTH_CLIENT_ID=your-web-client-id
-    ```
+    - File activation
+    - Package installation
+    - Environment variables configuration
+    - Platform-specific setup for iOS and Android
+    - Code enablement
   </Step>
 </Steps>
 
-<Tabs>
-  <Tab title="iOS Configuration">
-    <Steps>
-      <Step title="Add Environment Variables">
-        Add your iOS Client ID to your `.env` file:
-        
-        ```env
-        EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID=your-ios-client-id
-        ```
-      </Step>
-      
-      <Step title="Update app.json Configuration">
-        Update your `app.json` to add iOS-specific Google Sign-In configuration:
-        
-        ```json
-        {
-          "expo": {
-            "plugins": [
-              // Add this to the plugins array
-              [
-                "@react-native-google-signin/google-signin",
-                {
-                  "iosUrlScheme": "your-ios-client-id"
-                }
-              ]
-            ]
-          }
-        }
-        ```
-      </Step>
-    </Steps>
-  </Tab>
-  
-  <Tab title="Android Configuration">
-    <Steps>
-      <Step title="Add Environment Variables">
-        Add your Android Client ID to your `.env` file:
-        
-        ```env
-        EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID=your-android-client-id
-        ```
-      </Step>
-      
-      <Step title="Update app.json Configuration">
-        Update your `app.json` to add Android-specific Google Sign-In configuration:
-        
-        ```json
-        {
-          "expo": {
-            "android": {
-              // Add this to the android section
-              "googleServicesFile": "./google-services.json"
-            }
-          }
-        }
-        ```
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
-
-<Steps>
-  <Step title="Uncomment Feature Code">
-    The boilerplate already includes all necessary code for Google Sign-In, but it's commented out by default.
-    Uncomment all code blocks marked with `TODO: GOOGLE SIGN-IN` in these files:
-    
-    - `lib/auth/context.tsx`
-    - `app/welcome.tsx`
-    - `app/login.tsx`
-    - `app/register.tsx`
-    
-    Each file contains clear TODO comments marking the sections to uncomment.
-  </Step>
-</Steps>
-
-Once you've completed these steps, the Google Sign-In button will appear in the authentication screens and be fully functional on both iOS and Android.
+Once you've completed the implementation steps, the Google Sign-In button will appear in the authentication screens and be fully functional on both iOS and Android.
 
 ## Testing Your Configuration
 
