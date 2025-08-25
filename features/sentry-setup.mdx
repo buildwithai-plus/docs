@@ -1,0 +1,52 @@
+---
+title: "Sentry"
+description: "Set up Sentry error tracking in minutes using the official AI wizard for React Native"
+icon: "bug"
+---
+
+<Note>
+  This guide sets up Sentry via the official AI wizard. The wizard automatically configures your app with all necessary error tracking settings.
+</Note>
+
+## Step 1: Run the Sentry Wizard
+
+<Steps>
+  <Step title="Launch the wizard">
+    In your project root directory, run the following command:
+
+    ```bash
+    npx @sentry/wizard --integration reactNative
+    ```
+  </Step>
+
+  <Step title="Set up your account">
+    During the wizard setup:
+    - Choose <b>Sign up</b> if you don't have a Sentry account yet
+    - If you already have an account, choose <b>Log in</b>
+  </Step>
+
+  <Step title="Select your platforms">
+    Use arrow keys to navigate and press <b>spacebar</b> to select which platforms you want to set up (iOS, Android, or both).
+  </Step>
+</Steps>
+
+<Check>
+  The wizard will install dependencies and update the relevant files, configuring Sentry error tracking in your codebase.
+</Check>
+
+## Step 2: Test the Implementation
+
+<Steps>
+  <Step title="Implementation">
+    Follow the implementation instructions in the `integrations/sentry/README.md` file included in your boilerplate codebase. This file contains all necessary steps for testing Sentry in your application, including the test button component.
+  </Step>
+
+  <Step title="Test the integration">
+    Once you've followed the README instructions:
+    1. Restart your app
+    2. Use the test Sentry button component as described in the README
+    3. Log in to your Sentry dashboard
+    4. Go to the <b>Issues</b> section
+    5. Confirm that your test errors appear in the dashboard
+  </Step>
+</Steps>

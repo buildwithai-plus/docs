@@ -71,12 +71,12 @@
             "group": "Authentication",
             "icon": "user-check",
             "pages": [
-              "features/auth/social-auth",
               "features/auth/google-auth",
               "features/auth/apple-auth"
             ]
           },
           "features/posthog-setup-v2",
+          "features/sentry-setup",
           "features/push-setup"
         ]
       },
