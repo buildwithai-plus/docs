@@ -3,46 +3,103 @@ title: "2. Configure Your App"
 description: "Let's set up your app's identity and basic configuration."
 ---
 
-### Create Your Configuration
+### Step 1: Create Your Configuration File
 
-1. Create your config file by copying the example:
+Run this command in your terminal to create your config file:
 
 ```bash
 cp app.json.example app.json
 ```
 
-2. Open `app.json` and update these essential settings:
+### Step 2: Update Your App Settings
+
+Open `app.json` and replace the placeholder values with your actual app information:
 
 ```json
 {
   "expo": {
-    "name": "Your App Name",        // Change this to your app name (e.g., Travel App)
-    "slug": "your-app-slug",        // Change this to your app slug (e.g., travel-app)
-    "scheme": "your-app-scheme",     // Change this to your app scheme (e.g., travelapp)
+    "name": "Travel App",                    // ← Your app's display name
+    "slug": "travel-app",                    // ← Your app's URL identifier
+    "scheme": "travelapp",                   // ← Your app's deep link scheme
     "ios": {
-      "bundleIdentifier": "com.owner.yourapp"  // Change to your unique bundle ID (e.g., com.buildwithai.travelapp)
+      "bundleIdentifier": "com.buildwithai.travelapp"  // ← Your unique iOS ID
     },
     "android": {
-      "package": "com.owner.yourapp"          // Change to same ID as iOS bundleIdentifier (e.g., com.buildwithai.travelapp)
+      "package": "com.buildwithai.travelapp"           // ← Your unique Android ID
     }
   }
 }
 ```
 
-### Understanding the Settings
+### Understanding Each Setting
 
-- **name**: Your app's display name in stores and on devices
-  ✅ _Choose something descriptive and memorable_
-- **slug**: Your app's URL and directory name
-  ✅ _Use lowercase and hyphens_\
-  ⚠️ _Cannot change after publishing\!_
-- **scheme**: How other apps open yours\
-  <Tooltip tip="Deep linking is like creating a special URL for your app. When someone taps a link like 'travelapp://bookings' (in an email or website), their phone knows to open your app directly to a specific screen. It's how apps connect to each other!">Enables deep linking</Tooltip>\
-  _Use simple lowercase letters, no spaces or special characters_
-- **bundleIdentifier** (iOS): Your app's unique iOS identifier
-  _Format: com.owner.yourapp (replace 'owner' with your name/company/domain)_
-- **package** (Android): Your app's unique Android identifier
-  _Must match your iOS bundleIdentifier exactly for consistency_
+#### 1. **App Name** (`name`)
+**What it is**: The name people see when they download your app from the App Store or Google Play.
+
+**Format**: Normal words with spaces and capital letters
+
+**Examples**:
+- `"Travel App"`
+- `"Fitness Tracker"`
+- `"Recipe Book"`
+
+---
+
+#### 2. **App Slug** (`slug`)
+**What it is**: A unique identifier used in URLs and file names. Think of it as your app's "username" on the internet.
+
+**Format**: lowercase-letters-with-hyphens
+
+**Examples**:
+- `"Travel App"` → `"travel-app"`
+- `"Fitness Tracker"` → `"fitness-tracker"`
+
+⚠️ **Important**: You cannot change this after publishing your app!
+
+---
+
+#### 3. **App Scheme** (`scheme`)
+**What it is**: A special code that lets other apps open your app directly. Like a "phone number" for your app.
+
+**Format**: lowercaseletters (no spaces, no hyphens)
+
+**Examples**:
+- `"travel-app"` → `"travelapp"`
+- `"fitness-tracker"` → `"fitnesstracker"`
+
+<Info>
+**Deep Linking Example**: When someone taps a link like `travelapp://bookings` in an email, their phone automatically opens your Travel App and goes to the bookings screen.
+</Info>
+
+---
+
+#### 4. **Bundle Identifier** (`bundleIdentifier` for iOS & `package` for Android)
+**What it is**: A unique "address" for your app that Apple and Google use to identify it. Like a postal address for your app.
+
+**Format**: `com.[identifier].[slug]` (all lowercase, no spaces)
+
+**Identifier options**:
+- Your name: `johndoe`
+- Your company: `acmecorp`
+- Your domain: `mysite` (without .com)
+
+**Examples**:
+- `"travel-app"` → `com.johndoe.travelapp`
+- `"fitness-tracker"` → `com.acmecorp.fitnesstracker`
+
+⚠️ **Important**: The iOS `bundleIdentifier` and Android `package` must be exactly the same!
+
+---
+
+### Quick Reference Table
+
+| Setting | What It Is | Example | Format |
+|---------|------------|---------|--------|
+| **name** | Display name in stores | `"Travel App"` | Normal words with spaces |
+| **slug** | URL identifier | `"travel-app"` | lowercase-with-hyphens |
+| **scheme** | Deep link code | `"travelapp"` | lowercaseletters |
+| **bundleIdentifier** | Unique app address | `"com.johndoe.travelapp"` | `com.[identifier].[slug]` |
+| **package** | Same as bundleIdentifier | `"com.johndoe.travelapp"` | Must match exactly |
 
 ### Step 3: App Icons & Splash Screens
 

@@ -1,52 +1,50 @@
 ---
-title: "Install Git"
+title: "Set Up Git"
 description: "Quick guide to install Git for version control"
 ---
 
-# Install Git
+Git is highly recommended for version control and tracking your project changes. It's a best practice for all developers.
 
-Git is required to clone the boilerplate code and manage your project versions. Here's how to install it:
+## Install Git
 
-## Step 1: Download Git
+<Tabs>
+  <Tab title="Windows">
+    1. Go to [git-scm.com/downloads](https://git-scm.com/downloads)
+    2. Download Git for Windows
+    3. Run the downloaded installer
+    4. Follow the installation wizard with these recommended settings:
+       - **Default editor**: Use Visual Studio Code (or keep default)
+       - **PATH environment**: Git from the command line and also from 3rd-party software
+       - **Line ending conversions**: Checkout Windows-style, commit Unix-style
+       - **Terminal emulator**: Use Windows' default console window
+    5. Click **Install** and wait for completion
+  </Tab>
+  
+  <Tab title="macOS">
+    1. Go to [git-scm.com/downloads](https://git-scm.com/downloads)
+    2. Download Git for macOS
+    3. Run the downloaded installer
+    4. Follow the installation wizard
+    5. You may need to allow installation from "System Preferences > Security"
+    
+    **Alternative - Homebrew (if you have it):**
+    ```bash
+    brew install git
+    ```
+  </Tab>
+  
+  <Tab title="Linux">
+    ```bash
+    # Update package index
+    sudo apt update
+    
+    # Install Git
+    sudo apt install git
+    ```
+  </Tab>
+</Tabs>
 
-1. Go to [git-scm.com/downloads](https://git-scm.com/downloads)
-2. Download Git for your operating system:
-   - **Windows**: Download Git for Windows
-   - **macOS**: Download Git for macOS
-   - **Linux**: Use your package manager
-
-## Step 2: Install Git
-
-### Windows:
-1. Run the downloaded installer
-2. Follow the installation wizard with these recommended settings:
-   - **Default editor**: Use Visual Studio Code (or keep default)
-   - **PATH environment**: Git from the command line and also from 3rd-party software
-   - **Line ending conversions**: Checkout Windows-style, commit Unix-style
-   - **Terminal emulator**: Use Windows' default console window
-3. Click "Install" and wait for completion
-
-### macOS:
-**Option 1 - Installer:**
-1. Run the downloaded installer
-2. Follow the installation wizard
-3. You may need to allow installation from "System Preferences > Security"
-
-**Option 2 - Homebrew (if you have it):**
-```bash
-brew install git
-```
-
-### Linux (Ubuntu/Debian):
-```bash
-# Update package index
-sudo apt update
-
-# Install Git
-sudo apt install git
-```
-
-## Step 3: Configure Git
+## Configure Git
 
 After installation, set up your identity (required for commits):
 
@@ -55,7 +53,7 @@ git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
 
-## Step 4: Verify Installation
+## Verify Installation
 
 Open your terminal/command prompt and run:
 
@@ -74,5 +72,3 @@ You should see something like `git version 2.40.0` or higher.
 
 **Need help with Git?**
 - [Git documentation](https://git-scm.com/doc)
-- [GitHub Git Handbook](https://guides.github.com/introduction/git-handbook/)
-
