@@ -24,8 +24,8 @@
       "anchors": [
         {
           "anchor": "Support",
-          "icon": "mail",
-          "href": "mailto:steffen@buildwithai.io"
+          "icon": "discord",
+          "href": "https://discord.com/invite/GRxPhcxd4d"
         }
       ]
     },
@@ -53,11 +53,12 @@
         "pages": [
           "features/theme-customization",
           "features/app-icons-guide",
-          "features/i18n"
+          "features/i18n",
+          "features/onboarding-guide"
         ]
       },
       {
-        "group": "Optional Features",
+        "group": "Features",
         "icon": "puzzle",
         "pages": [
           {

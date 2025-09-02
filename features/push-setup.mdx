@@ -95,6 +95,8 @@ Follow the implementation instructions in the `integrations/push/README.md` file
 
 ## Step 3: Testing Notifications
 
+### Local Testing
+
 The boilerplate includes a built-in notifications demo that makes testing easy:
 
 1. Open your development build
@@ -102,3 +104,63 @@ The boilerplate includes a built-in notifications demo that makes testing easy:
 3. Select `Notifications` settings
 4. Tap on `Test Push Notifications`
 5. Follow the on-screen instructions to send and receive test notifications
+
+### External Testing with Expo
+
+For testing push notifications from an external source without backend setup:
+
+1. Get your Expo push token from the app's test notification screen
+2. Visit [expo.dev/notifications](https://expo.dev/notifications)
+3. Enter your token and compose a test message
+4. Send and verify delivery on your device
+
+## Step 4: Backend Integration
+
+<Steps>
+  <Step title="Set Up Supabase Database">
+    Create a `device_tokens` table with:
+    - `id`, `user_id`, `token`, `platform`, `created_at`, `updated_at`
+    - Set appropriate RLS policies
+  </Step>
+
+  <Step title="Register Tokens">
+    Modify lib/notifications/useNotification.ts to send the Expo push token to Supabase when:
+    - A user logs in
+    - The token is refreshed
+  </Step>
+
+  <Step title="Create Notification Service">
+    Build a backend service using:
+    - Supabase Edge Functions or a separate server
+    - Expo Server SDK for sending notifications
+  </Step>
+
+  <Step title="Token Management">
+    Implement logic to:
+    - Update tokens on device changes
+    - Remove invalid tokens based on receipts
+  </Step>
+</Steps>
+
+## Step 5: Backend Testing
+
+<Steps>
+  <Step title="Create Test Endpoint">
+    Build a secure function to:
+    - Query user's tokens from Supabase
+    - Send test notifications
+  </Step>
+
+  <Step title="Monitor Delivery">
+    Track notification statuses and handle failures
+  </Step>
+</Steps>
+
+## Best Practices
+
+<Accordion title="Security & Performance">
+  - Use RLS policies for token protection
+  - Implement authentication for sending endpoints
+  - Add database indexes for efficient queries
+  - Batch notifications for multiple recipients
+</Accordion>
