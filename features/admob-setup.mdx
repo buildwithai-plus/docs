@@ -35,29 +35,39 @@ This approach ensures your account remains in good standing with ad networks and
     - Enter your app's store information
   </Step>
 
-  <Step title="Implementation">
-    Follow the implementation instructions in the `integrations/admob/README.md` file included in your boilerplate codebase. This file contains all necessary steps for setting up AdMob in your application.
-  </Step>
-
-  <Step title="Creating Ad Units">
-    <Warning>
-      When testing your app, always use test ad units. Using production ad units during development can lead to account suspension.
-    </Warning>
-
-    After your app is published to the app stores:
-
-    1. In AdMob console, click "Add ad unit"
-    2. Configure your ad unit:
-       - Select ad format (Banner, Interstitial, etc.)
-       - Name your ad unit (e.g., "Main Screen Banner")
-       - Leave partner bidding unchecked for simplicity
-    3. Click "Create ad unit" and copy the generated ad unit ID
+  <Step title="Get App IDs for Configuration">
+    After registering your app:
+    
+    1. In the AdMob console, go to "Apps" in the sidebar
+    2. Click on your app to view its details
+    3. Find and copy these essential IDs:
+       - **iOS App ID**: Starts with `ca-app-pub-` (needed for app.json)
+       - **Android App ID**: Starts with `ca-app-pub-` (needed for app.json)
+       
+    These IDs will be used in your app.json configuration, as described in the implementation instructions.
   </Step>
 </Steps>
 
-## Configuring Production Ad Units
+## Implementation
 
-After your app is published and you have created ad units:
+Follow the implementation instructions in the `integrations/admob/README.md` file included in your boilerplate codebase. This file contains all necessary steps for setting up AdMob in your application.
+
+## Creating and Configuring Ad Units
+
+<Warning>
+  When testing your app, always use test ad units. Using production ad units during development can lead to account suspension.
+</Warning>
+
+After your app is published to the app stores:
+
+1. In AdMob console, click "Add ad unit"
+2. Configure your ad unit:
+   - Select ad format (Banner, Interstitial, etc.)
+   - Name your ad unit (e.g., "Main Screen Banner")
+   - Leave partner bidding unchecked for simplicity
+3. Click "Create ad unit" and copy the generated ad unit ID
+
+Once you have created your ad units:
 
 1. Go to the Expo dashboard: [expo.dev](https://expo.dev/)
 2. Navigate to your project's environment variables: 

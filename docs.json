@@ -49,17 +49,10 @@
         ]
       },
       {
-        "group": "Customising Your App",
+        "group": "Customization Guides",
         "pages": [
-          {
-            "group": "Styling",
-            "icon": "palette",
-            "pages": [
-              "features/ui-styling-guide",
-              "features/theme-customization",
-              "features/app-icons-guide"
-            ]
-          },
+          "features/theme-customization",
+          "features/app-icons-guide",
           "features/i18n"
         ]
       },

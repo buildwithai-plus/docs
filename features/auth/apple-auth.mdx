@@ -5,9 +5,7 @@ icon: "apple"
 ---
 
 <Warning>
-  **App Store Requirement**: Apple requires that if you implement any third-party authentication options (like Google, Facebook, or Twitter) in your iOS app, you **must** also implement Apple Sign-In to pass the App Store review process. This is a mandatory requirement from Apple, not optional.
-  
-  See [Apple's Sign-In Guidelines](https://developer.apple.com/app-store/review/guidelines/#sign-in-with-apple) for more details.
+  **App Store Requirement**: Apple requires that if you implement any third-party authentication options (like [Google Sign-In](/features/auth/google-auth)) in your iOS app, you **must** also implement Apple Sign-In to pass the App Store review process. This is a mandatory requirement from Apple, not optional.
 </Warning>
 
 ## Prerequisites
@@ -68,42 +66,32 @@ Before setting up Apple Sign-In, make sure you have:
 
 The secret key you downloaded is used to create the client_secret string you'll need to authenticate your users. According to the Apple Docs it needs to be a JWT token encrypted using the Elliptic Curve Digital Signature Algorithm (ECDSA) with the P-256 curve and the SHA-256 hash algorithm.
 
-This integration includes a script to generate the required client secret JWT for Apple Sign-In.
+This integration includes scripts to generate the required client secret JWT for Apple Sign-In - choose either the interactive or manual method below.
 
-### Step-by-Step Guide
+### Option 1: Interactive Script (Recommended)
 
-1. **Get your Apple Developer credentials:**
-   - **Team ID**: Found in Apple Developer Portal → Membership → Team ID
-   - **Service ID**: The identifier you created (e.g., `com.buildwithai.travelapp.signin`)
-   - **Key ID**: The 10-character ID from your private key
-   - **Private Key**: The `.p8` file you downloaded from Apple Developer Portal
+We've included an interactive script that guides you through the process step-by-step:
 
-2. **Configure the script:**
-   - Open `integrations/apple-auth/gen-apple-secret.js` in your code editor
-   - Replace the placeholder values at the top:
-   ```javascript
-   const TEAM_ID   = "1A2B3C4D5E";              // Your actual Team ID
-   const CLIENT_ID = "com.buildwithai.travelapp.signin";  // Your Service ID
-   const KEY_ID    = "ABCD123456";              // Your Key ID
-   const KEY_FILE  = "./AuthKey_ABCD123456.p8"; // Your .p8 filename
-   ```
+1. **Prepare your credentials:**
+   - Have your Apple Developer credentials ready (Team ID, Service ID, Key ID)
+   - Copy your downloaded `.p8` private key file to the project root directory
 
-3. **Add your private key file:**
-   - Copy your `.p8` file to the same folder as `gen-apple-secret.js`
-   - Make sure the filename matches what you put in `KEY_FILE`
-
-4. **Generate the client secret:**
+2. **Run the interactive script:**
    ```bash
-   node integrations/apple-auth/gen-apple-secret.js
+   npm run apple-secret
    ```
-   
-   The script will automatically install the required dependency if needed.
 
-5. **Copy the result:**
+3. **Follow the prompts:**
+   - Enter your Team ID when asked
+   - Enter your Service ID (e.g., `com.buildwithai.travelapp.signin`)
+   - Enter your Key ID
+   - The script will automatically find your `.p8` file if it's in the project root
+
+4. **Copy the result:**
    - The script will output a long JWT token
    - Copy the entire token (it starts with `eyJ...`)
 
-6. **Add to Supabase:**
+5. **Add to Supabase:**
    - Go to your Supabase Dashboard
    - Navigate to Authentication → Sign In / Providers
    - Find "Apple" and click to configure
@@ -112,7 +100,16 @@ This integration includes a script to generate the required client secret JWT fo
    - Set "Client IDs" to your Service ID
    - Click Save
 
+### Alternative: Manual Script
 
+If the interactive script doesn't work for your setup or you prefer a manual approach, you can use the alternative manual script:
+
+1. First, open and update `integrations/apple-auth/gen-apple-secret.js` with your Team ID, Service ID, Key ID, and private key file path
+
+2. Then run the script:
+   ```bash
+   npm run apple-secret-manual
+   ```
 
 
 
