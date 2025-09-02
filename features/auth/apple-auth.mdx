@@ -23,20 +23,19 @@ Before setting up Apple Sign-In, make sure you have:
 <Steps>
   <Step title="Create an App ID in the Apple Developer Portal">
     1. Go to the [Apple Developer Portal](https://developer.apple.com/account/)
-    2. Navigate to `Certificates, IDs & Profiles`
-    3. Click on `Identifiers` in the left sidebar
-    4. Click the `+` button to create a new identifier
-    5. Select `App IDs` and click `Continue`
-    6. Choose `App` as the type and click `Continue`
-    7. Fill in a description (e.g., "My App") 
-    8. Enter your `Bundle Identifier` that matches your `app.json` (e.g., `com.buildwithai.travelapp`)
-    9. Scroll down to `Capabilities` and enable `Sign In with Apple`
+    2. Under `Certificates, IDs & Profiles`, click on `Identifiers`.
+    3. Click the `+` button to create a new identifier
+    4. Select `App IDs` and click `Continue`
+    5. Choose `App` as the type and click `Continue`
+    6. Fill in a description (e.g., "My App") 
+    7. Enter your `Bundle Identifier` that matches your `app.json` (e.g., `com.buildwithai.travelapp`)
+    8. Scroll down to `Capabilities` and enable `Sign In with Apple`
     10. Click `Continue` then `Register` on the top right
   </Step>
 
   <Step title="Create a Service ID">
-    1. In the Apple Developer Portal, go to `Certificates, IDs & Profiles`
-    2. Click on `Identifiers` in the left sidebar
+    1. Go to the [Apple Developer Portal](https://developer.apple.com/account/)
+    2. Under `Certificates, IDs & Profiles`, click on `Identifiers`.
     3. Click the `+` button to create a new identifier
     4. Select `Service IDs` and click `Continue`
     5. Fill in a description (e.g., "My App - Apple Sign In")
@@ -53,8 +52,8 @@ Before setting up Apple Sign-In, make sure you have:
   </Step>
 
   <Step title="Create a Private Key">
-    1. In the Apple Developer Portal, go to `Certificates, IDs & Profiles`
-    2. Click on `Keys` in the sidebar
+    1. Go to the [Apple Developer Portal](https://developer.apple.com/account/)
+    2. Under `Certificates, IDs & Profiles`, click on `Keys` in the sidebar
     3. Click the `+` button to create a new key
     4. Enter a name for your key (e.g., "My App Sign In Key")
     5. Check `Sign In with Apple` and click `Configure`
@@ -67,91 +66,53 @@ Before setting up Apple Sign-In, make sure you have:
 
 ## Generate a client_secret
 
-The secret key you downloaded is used to create the client_secret string you'll need to authenticate your users.
+The secret key you downloaded is used to create the client_secret string you'll need to authenticate your users. According to the Apple Docs it needs to be a JWT token encrypted using the Elliptic Curve Digital Signature Algorithm (ECDSA) with the P-256 curve and the SHA-256 hash algorithm.
 
-According to the Apple Docs it needs to be a JWT token encrypted using the Elliptic Curve Digital Signature Algorithm (ECDSA) with the P-256 curve and the SHA-256 hash algorithm.
+This integration includes a script to generate the required client secret JWT for Apple Sign-In.
 
-```js
-#!/usr/bin/env node
-/**
- * gen_apple_secret.js
- * Simple "Sign in with Apple" client_secret generator
- * Usage: node gen_apple_secret.js
- */
+### Step-by-Step Guide
 
-// 👉 FILL THESE IN:
-const TEAM_ID   = "YOUR_TEAM_ID";             // e.g. 1A2B3C4D5E
-const CLIENT_ID = "YOUR_CLIENT_ID";           // e.g. com.buildwithai.travelapp.signin
-const KEY_ID    = "YOUR_KEY_ID";              // the 10-char Key ID
-const KEY_FILE  = "./AuthKey_XXXXXXXXXX.p8";  // path to your .p8 file
+1. **Get your Apple Developer credentials:**
+   - **Team ID**: Found in Apple Developer Portal → Membership → Team ID
+   - **Service ID**: The identifier you created (e.g., `com.buildwithai.travelapp.signin`)
+   - **Key ID**: The 10-character ID from your private key
+   - **Private Key**: The `.p8` file you downloaded from Apple Developer Portal
 
-import fs from "fs";
-import jwt from "jsonwebtoken";
+2. **Configure the script:**
+   - Open `integrations/apple-auth/gen-apple-secret.js` in your code editor
+   - Replace the placeholder values at the top:
+   ```javascript
+   const TEAM_ID   = "1A2B3C4D5E";              // Your actual Team ID
+   const CLIENT_ID = "com.buildwithai.travelapp.signin";  // Your Service ID
+   const KEY_ID    = "ABCD123456";              // Your Key ID
+   const KEY_FILE  = "./AuthKey_ABCD123456.p8"; // Your .p8 filename
+   ```
 
-// Read your private key
-const privateKey = fs.readFileSync(KEY_FILE, "utf8");
+3. **Add your private key file:**
+   - Copy your `.p8` file to the same folder as `gen-apple-secret.js`
+   - Make sure the filename matches what you put in `KEY_FILE`
 
-// Build timestamps
-const now = Math.floor(Date.now() / 1000);
-const exp = now + 180 * 24 * 3600; // 180 days
+4. **Generate the client secret:**
+   ```bash
+   node integrations/apple-auth/gen-apple-secret.js
+   ```
+   
+   The script will automatically install the required dependency if needed.
 
-// Sign the JWT
-const token = jwt.sign(
-  {
-    iss: TEAM_ID,
-    iat: now,
-    exp,
-    aud: "https://appleid.apple.com",
-    sub: CLIENT_ID
-  },
-  privateKey,
-  {
-    algorithm: "ES256",
-    keyid: KEY_ID
-  }
-);
+5. **Copy the result:**
+   - The script will output a long JWT token
+   - Copy the entire token (it starts with `eyJ...`)
 
-// Output to console
-console.log("\n🔑 Your client_secret JWT:\n");
-console.log(token);
-console.log();
-```
+6. **Add to Supabase:**
+   - Go to your Supabase Dashboard
+   - Navigate to Authentication → Sign In / Providers
+   - Find "Apple" and click to configure
+   - Enable "Sign in with Apple"
+   - Paste the JWT as "Secret Key (for OAuth)"
+   - Set "Client IDs" to your Service ID
+   - Click Save
 
-### Quick Steps
 
-1. Drop `gen_apple_secret.js` and your `AuthKey_XXXXXXXXXX.p8` into your Expo project root.
-
-2. Install `jsonwebtoken`:
-
-```bash
-npm install jsonwebtoken
-```
-
-3. Edit the four const lines at the top of `gen_apple_secret.js`:
-   - `TEAM_ID`: Your Apple Developer Team ID
-   - `CLIENT_ID`: The Service ID you created (e.g. `com.buildwithai.travelapp.signin`)
-   - `KEY_ID`: The Key ID of the private key you downloaded
-   - `KEY_FILE`: The path to your downloaded .p8 file
-
-4. Run the script:
-
-```bash
-node gen_apple_secret.js
-```
-
-5. Copy the printed JWT and use it in the Supabase setup in the next step.
-
-<Steps>
-  <Step title="Configure Supabase Auth Provider">
-    1. In your Supabase dashboard, go to `Authentication` > `Sign In / Providers` in the left sidebar
-    2. Find `Apple` in the list of Auth Providers and click it to open the settings
-    3. Toggle `Enable Sign in with Apple`
-    4. Fill in the required fields:
-       - **Client IDs**: The Service ID you created (e.g., `com.buildwithai.travelapp.signin`)
-       - **Secret Key (for OAuth)**: Paste the generated client secret JWT from the previous step
-    5. Click `Save`
-  </Step>
-</Steps>
 
 
 

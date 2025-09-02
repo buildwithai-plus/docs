@@ -1,0 +1,152 @@
+---
+title: "Onboarding System"
+description: "Customize the built-in onboarding experience to introduce users to your app's key features"
+icon: "presentation-screen"
+---
+
+## Overview
+
+Your app comes with a template onboarding experience that introduces users to your app's key features. This guide shows you how to customize it for your app.
+
+## What You Need to Update
+
+### 1. Animation Files (Lottie)
+
+**Location:** `assets/onboarding/lotties/`
+
+We've included some free Lottie animations from [LottieFiles](https://lottiefiles.com/free-animations) to get you started. Replace these with animations that better match your app's theme.
+
+### 2. Text Content
+
+**Location:** 
+- `lib/i18n/locales/en/onboarding.json` (English)
+- `lib/i18n/locales/fr/onboarding.json` (French)
+
+## How to Customize
+
+<Steps>
+  <Step title="Replace Animation Files">
+    1. **Find Lottie animations** that match your app's theme:
+       - **Free sources:** [LottieFiles](https://lottiefiles.com/), [IconScout](https://iconscout.com/lotties)
+       - **Create your own:** Use [LottieFiles Editor](https://editor.lottiefiles.com/) or Adobe After Effects
+
+    2. **Download your animations** as `.json` files
+
+    3. **Replace the existing files** in `assets/onboarding/lotties/`:
+       - Upload your own `.json` files with your preferred filenames
+       - Update the filenames in `app/onboarding.tsx` (around line 22-25) to match your new files
+  </Step>
+
+  <Step title="Update Text Content">
+    Edit the JSON files to match your app's content:
+
+    **English** (`lib/i18n/locales/en/onboarding.json`):
+    ```json
+    {
+      "slide1": {
+        "title": "Your App Title Here",
+        "description": "Describe your app's main benefit"
+      },
+      "slide2": {
+        "title": "Second Feature",
+        "description": "Explain another key feature"
+      },
+      "slide3": {
+        "title": "Third Feature", 
+        "description": "Highlight another benefit"
+      },
+      "slide4": {
+        "title": "Get Started",
+        "description": "Final call to action"
+      }
+    }
+    ```
+
+    **French** (`lib/i18n/locales/fr/onboarding.json`):
+    - Translate the same content structure to French
+  </Step>
+
+  <Step title="Add or Remove Slides (Optional)">
+    You can easily customize the number of onboarding slides:
+
+    **To add a slide:**
+    1. Add a new Lottie file to `assets/onboarding/lotties/`
+    2. Add the filename to `app/onboarding.tsx` 
+    3. Add corresponding text in both `onboarding.json` files (e.g., `"slide5"`)
+
+    **To remove a slide:**
+    1. Remove the Lottie file reference from `app/onboarding.tsx`
+    2. Remove the corresponding text from both `onboarding.json` files
+  </Step>
+</Steps>
+
+<Check>
+  Your onboarding will automatically update with your new content. Test it by running your app and checking that all animations and text appear correctly.
+</Check>
+
+## Tips for Great Onboarding
+
+<Accordion title="Animation Selection">
+  - Choose animations that represent your app's core features
+  - Keep file sizes under 500KB for fast loading
+  - Use consistent style/color scheme across all animations
+</Accordion>
+
+<Accordion title="Text Guidelines">
+  - Keep titles short and impactful (under 40 characters)
+  - Descriptions should be 1-2 sentences max
+  - Focus on benefits, not just features
+  - Use action-oriented language
+</Accordion>
+
+<Accordion title="Recommended Animation Themes">
+  - **Slide 1:** App launch, rocket, or main feature
+  - **Slide 2:** Core functionality or user interaction
+  - **Slide 3:** Key benefit or unique feature
+  - **Slide 4:** Success, completion, or call-to-action
+</Accordion>
+
+## Example Implementation
+
+Here's how to add a 5th slide to your onboarding:
+
+```json
+{
+  "slide1": { "title": "...", "description": "..." },
+  "slide2": { "title": "...", "description": "..." },
+  "slide3": { "title": "...", "description": "..." },
+  "slide4": { "title": "...", "description": "..." },
+  "slide5": { "title": "New Feature", "description": "Describe your new feature" }
+}
+```
+
+Then update your `app/onboarding.tsx` file to include the new slide:
+
+```tsx
+// In app/onboarding.tsx
+const lotties = [
+  require('../assets/onboarding/lotties/animation1.json'),
+  require('../assets/onboarding/lotties/animation2.json'),
+  require('../assets/onboarding/lotties/animation3.json'),
+  require('../assets/onboarding/lotties/animation4.json'),
+  require('../assets/onboarding/lotties/animation5.json'), // New animation
+];
+```
+
+<Tip>
+  For the best user experience, limit your onboarding to 3-5 slides. Too many slides can cause users to skip the entire onboarding process.
+</Tip>
+
+## File Structure
+
+```
+assets/onboarding/lotties/
+├── animation1.json
+├── animation2.json
+├── animation3.json
+└── animation4.json
+
+lib/i18n/locales/
+├── en/onboarding.json    ← English text
+└── fr/onboarding.json    ← French text
+```
