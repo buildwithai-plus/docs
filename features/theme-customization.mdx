@@ -20,8 +20,9 @@ You can customize your app's theme colors using the Tweakcn Editor - a visual to
     2. Use the AI chat or manually adjust colors
     3. Toggle between light/dark modes to test your theme
     4. Click `{ } Code` in the top right
-    5. Select **Tailwind v4** and **HSL** format
-    6. Click **Copy** to get your theme code
+    5. Select **Tailwind v3** and **HSL** format
+    6. Make sure **index.css** is selected
+    7. Click **Copy** to get your theme code
 
     <Frame caption="Theme Code Export">
       ![Theme code export dialog](/images/theme-code.png)
@@ -29,16 +30,11 @@ You can customize your app's theme colors using the Tweakcn Editor - a visual to
   </Step>
 
   <Step title="Update Your Files">
-    1. In `global.css`, paste the new theme code but:
-       - Keep the three imports at the top:
-         ```css
-         @tailwind base;
-         @tailwind components;
-         @tailwind utilities;
-         ```
-       - Change `.dark` to `.dark:root`
+    1. Copy the theme code from TweakCN and paste it inside the `@layer base { }` block in your `global.css` file
+    
+    2. In the pasted code, replace `.dark` with `.dark:root`
 
-    2. In `lib/constants.ts`, update the theme colors:
+    3. In `lib/constants.ts`, update the theme colors:
        ```typescript
        export const NAV_THEME = {
          light: {

@@ -69,13 +69,19 @@
               "features/auth/apple-auth"
             ]
           },
-          "features/posthog-setup-v2",
-          "features/sentry-setup",
+          {
+            "group": "Analytics & Monitoring",
+            "icon": "bar-chart",
+            "pages": [
+              "features/posthog-setup-v2",
+              "features/sentry-setup"
+            ]
+          },
           "features/push-setup"
         ]
       },
       {
-        "group": "Monetizating Your App",
+        "group": "Monetization",
         "pages": [
           {
             "group": "In-App Purchases",
@@ -112,11 +118,13 @@
   "contextual": {
     "options": [
       "copy",
+      "view",
       "chatgpt",
       "claude",
       "perplexity",
       "mcp",
-      "cursor"
+      "cursor",
+      "vscode"
     ]
   },
   "errors": {
