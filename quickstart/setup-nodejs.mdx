@@ -9,35 +9,72 @@ Node.js is required to run your React Native app and manage packages. Here's how
 
 ## Step 1: Download Node.js
 
-1. Go to [nodejs.org](https://nodejs.org/en/download)
-2. Download the **LTS version** (recommended for most users)
-3. Choose your operating system:
-   - **Windows**: Download the Windows Installer (.msi)
-   - **macOS**: Download the macOS Installer (.pkg)
-   - **Linux**: Download the Linux Binaries or use your package manager
+<Tabs>
+  <Tab title="Windows (Recommended)">
+    **For Windows users, we strongly recommend using the .msi installer:**
+
+    1. Go to [nodejs.org](https://nodejs.org/en/download)
+    2. Click **Download Node.js (LTS)** - this downloads the .msi installer
+    3. The .msi installer is the easiest and most reliable method for Windows
+
+    <Info>
+      The .msi installer automatically handles PATH configuration and is the most beginner-friendly option for Windows users.
+    </Info>
+  </Tab>
+  
+  <Tab title="macOS">
+    1. Go to [nodejs.org](https://nodejs.org/en/download)
+    2. Download the **LTS version** 
+    3. Choose the macOS Installer (.pkg)
+  </Tab>
+  
+  <Tab title="Linux">
+    1. Go to [nodejs.org](https://nodejs.org/en/download)
+    2. Download the Linux Binaries or use your package manager (see installation steps below)
+  </Tab>
+</Tabs>
 
 ## Step 2: Install Node.js
 
-### Windows & macOS:
-1. Run the downloaded installer
-2. Follow the installation wizard
-3. Accept the license agreement
-4. Keep all default settings
-5. Make sure **Add to PATH** is selected during installation
-6. Click "Install" and wait for completion
+<Tabs>
+  <Tab title="Windows">
+    **Installing with the .msi installer:**
+    
+    1. Double-click the downloaded `.msi` file
+    2. Click **Next** through the installation wizard
+    3. Accept the license agreement
+    4. **Important**: Keep all default settings (especially "Add to PATH")
+    5. Click **Install** and wait for completion
+    6. Click **Finish** when done
 
-### Linux (Ubuntu/Debian):
-```bash
-# Update package index
-sudo apt update
+    <Tip>
+      The .msi installer automatically adds Node.js to your system PATH, so you can use `node` and `npm` commands from any terminal window.
+    </Tip>
+  </Tab>
+  
+  <Tab title="macOS">
+    1. Double-click the downloaded `.pkg` file
+    2. Follow the installation wizard
+    3. Accept the license agreement
+    4. Keep all default settings
+    5. Click "Install" and wait for completion
+  </Tab>
+  
+  <Tab title="Linux">
+    ### Ubuntu/Debian:
+    ```bash
+    # Update package index
+    sudo apt update
 
-# Install Node.js
-sudo apt install nodejs npm
+    # Install Node.js
+    sudo apt install nodejs npm
 
-# Or use the official repository for latest version
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt-get install -y nodejs
-```
+    # Or use the official repository for latest version
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    ```
+  </Tab>
+</Tabs>
 
 ## Step 3: Verify Installation
 

@@ -24,18 +24,45 @@ The BuildWithAI boilerplate uses [Supabase](https://supabase.com/) for authentic
 
 ### Project Credentials
 
-1. **Get your API keys**
-   - Once the project is ready, go to **Project Settings** → **API**
-   - Copy the "Project URL" and "anon/public" key
+<Steps>
+  <Step title="Find Your API Keys">
+    Once your project is ready (this takes about 2 minutes), you need to get your credentials:
 
-2. **Add to your app**
-   - Open the `.env` file you created earlier from `.env.example`
-   - Update with your copied credentials:
+    **Get Project URL:**
+    1. At the bottom of the left sidebar, find **Project Settings**
+    2. Click on **Data API**
+    3. Copy the **Project URL** (looks like `https://abcdefghijklmnop.supabase.co`)
 
-```bash
-EXPO_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-EXPO_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-```
+    **Get Anon Key:**
+    1. Click on **API keys (NEW)** (right under Data API in the same settings menu)
+    2. Copy the **anon public** key (a long string starting with `eyJhbGciOi...`)
+
+    <Warning>
+      **IMPORTANT**: Only copy the **anon public** key. DO NOT copy the **service_role** key - this is a secret key that should never be used in your app code for security reasons.
+    </Warning>
+  </Step>
+
+  <Step title="Add Credentials to Your App">
+    1. **Open your .env file**: In your project folder, open the `.env` file you created earlier
+    2. **Replace the placeholder values** with your actual Supabase credentials:
+
+    **Before (placeholder values):**
+    ```bash
+    EXPO_PUBLIC_SUPABASE_URL=your-supabase-url
+    EXPO_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+    ```
+
+    **After (with your real values):**
+    ```bash
+    EXPO_PUBLIC_SUPABASE_URL=https://abcdefghijklmnop.supabase.co
+    EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFiY2RlZmdoaWprbG1ub3AiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTY5...
+    ```
+
+    <Warning>
+      **Important**: Replace the entire placeholder text with your actual values. Don't add quotes around the values.
+    </Warning>
+  </Step>
+</Steps>
 
 ### URL Configuration
 
@@ -49,8 +76,8 @@ Set up the authentication URLs for your development build:
 
 <Info>
   If you want to quickly test the app with Expo Go before moving to development builds:
-  1. Go to **Authentication** → **Sign In / Providers** → **Email**
-  2. Toggle off **Confirm email** under the Email provider settings
+  1. In the left sidebar, go to **Authentication** → **Sign In / Providers**
+  2. Toggle off **Confirm email** under the **User Signups** section
   
   **Important**: Remember to re-enable this setting before you deploy to production for proper security.
 </Info>
