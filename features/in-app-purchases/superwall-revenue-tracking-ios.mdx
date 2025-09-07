@@ -1,21 +1,21 @@
 ---
-title: "Configure Superwall"
-description: "Configure Superwall for iOS in-app purchases"
+title: "Revenue tracking"
+description: "Configure revenue tracking with App Store Connect integration"
 ---
 
 ## Prerequisites
 
 Before continuing, make sure you have:
 
-- Completed the [Superwall Setup](./superwall-setup) guide
+- Completed the [Superwall setup](./superwall-setup) guide
 - Set up [App Store Connect](./app-store-connect-setup)
 - Created [iOS products](./ios-products) in App Store Connect
 - Set up testing environments with [iOS sandbox testing](./ios-sandbox)
 
-## Configure Revenue Tracking
+## Configure revenue tracking
 
 <Steps>
-  <Step title="Set Up App Store Server Notifications">
+  <Step title="Set up App Store Server Notifications">
     1. In [App Store Connect](https://appstoreconnect.apple.com/), navigate to your app
     2. Go to **App Information** tab
     3. Scroll down to find **App Store Server Notifications**
@@ -26,7 +26,7 @@ Before continuing, make sure you have:
     5. Click **Save** in App Store Connect
     
     <Note>
-      This setup forwards subscription events from App Store Connect directly to Superwall, enabling accurate tracking of subscription statuses and renewals.
+    This setup forwards subscription events from App Store Connect directly to Superwall, enabling accurate tracking of subscription statuses and renewals.
     </Note>
   </Step>
 
@@ -40,16 +40,16 @@ Before continuing, make sure you have:
     2. Under Keys, choose **In-App Purchase**
   </Step>
 
-  <Step title="Create and Download Key">
+  <Step title="Create and download key">
     1. Click on **+** to create a new key if you don't have one
     2. Add a name (e.g., "Superwall Integration") and click **Generate**
     3. Click on **Download In-App Purchase Key** for the new key
     4. On the resulting modal, click **Download**
     
     <Note>
-      You can reuse the same key for all apps falling under the same App Store Connect account. If you no longer have access to a previously downloaded P8 key file, simply create a new one.
-      
-      **IMPORTANT**: You only have one chance to download the key file. Make sure to save it in a secure location.
+    You can reuse the same key for all apps falling under the same App Store Connect account. If you no longer have access to a previously downloaded P8 key file, simply create a new one.
+    
+    **IMPORTANT**: You only have one chance to download the key file. Make sure to save it in a secure location.
     </Note>
   </Step>
 
@@ -58,13 +58,13 @@ Before continuing, make sure you have:
     2. Upload the P8 key file you downloaded in the previous step under "P8 Key File"
     3. Fill in the **Bundle ID** of your app
     4. Enter the **Key ID** of the key you created in App Store Connect
-       - You can find this in the "Key ID" column shown in the key listing
-       - Locate the row for the key you made and copy the corresponding Key ID
+      - You can find this in the "Key ID" column shown in the key listing
+      - Locate the row for the key you made and copy the corresponding Key ID
     5. For **Issuer ID**, fill in the value found at Users and Access > Integrations > In-App Purchase in App Store Connect
     6. Click on **Update** and confirm everything is set up correctly
   </Step>
 
-  <Step title="Create API Key in App Store Connect">
+  <Step title="Create API key in App Store Connect">
     1. In App Store Connect, go to **Users and Access** > **Keys**
     2. Click **+** to add a new key
     3. Enter a name for the key (e.g., "Superwall API Integration")
@@ -73,7 +73,7 @@ Before continuing, make sure you have:
     6. Download the P8 key file when prompted - **this is your only chance to download it**
     
     <Note>
-      Store the downloaded P8 file securely - you won't be able to download it again.
+    Store the downloaded P8 file securely - you won't be able to download it again.
     </Note>
   </Step>
 
@@ -86,43 +86,17 @@ Before continuing, make sure you have:
     6. Click **Update**
     
     <Note>
-      After configuration, Superwall will be able to automatically pull product data from App Store Connect.
+    After configuration, Superwall will be able to automatically pull product data from App Store Connect.
     </Note>
   </Step>
 </Steps>
 
-## Configure Products
+<Check>
+Your Superwall revenue tracking is now configured for iOS. You can proceed to configure products, entitlements, and paywalls.
+</Check>
 
-<Note>
-  This guide assumes you've already created the Premium entitlement in the [Superwall Setup](./superwall-setup) guide.
-</Note>
+## Next steps
 
-<Steps>
-  <Step title="Gather Product Information">
-    Reference the product IDs you created in the [iOS Products](./ios-products) guide. 
-    
-    <Note>
-      Ensure your product IDs are **100%** correct and match exactly what's in App Store Connect. Also verify your products have a valid status (either **Ready to Submit**, **Approved**, or **Published**). Products in **Missing Metadata** state cannot be tested.
-    </Note>
-  </Step>
+After completing revenue tracking setup, continue with:
 
-  <Step title="Add Monthly and Yearly Subscriptions">
-    1. In Superwall dashboard, go to **Products** > **Products**
-    2. For each subscription type (Monthly, Yearly, or Yearly with Trial):
-       - Click **+ Add Product**
-       - **Product ID:** Paste the subscription ID from App Store Connect (following the pattern from the iOS Products guide)
-       - **Trial:** (Optional) Default is "None" - or choose a period (e.g., "1 week")
-          - *If trial selected:* **Trial Price** appears → Default is "Free" or set a price
-       - **Price:** Set to match the price in App Store Connect
-       - **Period:** Select **Month** for monthly or **Year** for yearly subscription
-       - **Entitlements:** Select `premium` for all subscription types
-       - Click **Save**
-  </Step>
-</Steps>
-
-## Next Steps
-
-Now that you've configured Superwall for iOS, you can:
-- Implement the SDK in your React Native app
-- Set up paywalls and features
-- Begin testing purchases in the sandbox environment
+- [Configure Superwall products for iOS](./superwall-products-ios) - Set up entitlements, products, and paywalls

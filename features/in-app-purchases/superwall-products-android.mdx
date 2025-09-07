@@ -1,0 +1,111 @@
+---
+title: "Products and paywalls"
+description: "Configure entitlements, products, and paywalls for in-app purchases"
+---
+
+## Prerequisites
+
+Before continuing, make sure you have:
+
+- Completed the [Superwall setup](./superwall-setup) guide
+- Configured [Superwall revenue tracking for Android](./superwall-revenue-tracking-android)
+- Created [Android products](./android-products) in Google Play Console
+
+## Configure entitlements
+
+<Steps>
+  <Step title="Create premium entitlement">
+    1. In Superwall dashboard, go to **Products** in the left sidebar
+    2. Select **Entitlements** in the top menu
+    3. Click **+ Add Entitlement**
+    4. **Identifier:** Enter `premium`
+    5. Click **Create**
+    
+    <Note>
+    This entitlement will be used by both iOS and Android products to identify premium status.
+    </Note>
+  </Step>
+</Steps>
+
+## Configure products
+
+<Steps>
+  <Step title="Gather product information">
+    Reference the product IDs and base plan IDs you created in the [Android Products](./android-products) guide.
+    
+    <Note>
+    Ensure your product IDs and base plan IDs are **100%** correct and match exactly what's in Google Play Console. Products must have a valid status to be used with Superwall.
+    </Note>
+  </Step>
+
+  <Step title="Add monthly and yearly subscriptions">
+    1. In Superwall dashboard, go to **Products** > **Products**
+    2. For each subscription type (Monthly and Yearly):
+      - Click **+ Add Product**
+      - **Product ID:** Enter your product ID following the `<app>_<entitlement>` pattern
+      - **Base Plan ID:** Enter the base plan ID (`monthly-autorenewing` for monthly or `annual-autorenewing` for yearly)
+      - **Automatically Pick Offer:** Toggle ON to let Superwall choose the best offer (prioritizes longest free trial, then cheapest price)
+      - **Price:** Select the exact price from Google Play
+      - **Period:** Select **Month** for monthly or **Year** for yearly subscription
+      - **Entitlements:** Select `premium` for both subscription types
+      - Click **Save**
+  </Step>
+</Steps>
+
+## Configure example paywall
+
+<Steps>
+  <Step title="Edit the example paywall">
+    1. In the left sidebar, click **Paywalls**
+    2. Click on the **Example Paywall** that is provided as an example for the new project
+    3. This will open the Paywall Editor
+    4. Choose **Products** in the left sidebar
+    5. Click on **primary** and pick the yearly subscription product
+    6. Pick the monthly subscription product for the **secondary** product
+    7. Delete the **tertiary** product (you can remove it entirely)
+    
+    <Check>
+    You have now added your products to a paywall.
+    </Check>
+  </Step>
+
+  <Step title="Enable feature gating">
+    1. In the paywall editor's left sidebar, pick **Settings**
+    2. Find **Feature Gating** and switch it to **Gated**
+    3. Press **Publish** in the top right corner
+    
+    <Check>
+    Your example paywall is now ready.
+    </Check>
+  </Step>
+
+  <Step title="Configure example campaign">
+    1. Go back to Superwall dashboard
+    2. In the left sidebar, pick **Campaigns**
+    3. Click the **Example Campaign** that is also provided as an example for your new project
+    4. You will see that you have **1 Paywall**, which is the "Example Paywall" we edited just now
+  </Step>
+
+  <Step title="Create custom placement">
+    1. Click the **+** symbol next to **Placements** on the left
+    2. You'll see some placements provided by default, but we want to make our own
+    3. Where it says **Select...**, type out `onboarding_complete`
+    4. Click **Add Placement**
+    
+    <Tip>
+    Great! Now you can make it so that this paywall shows right after the user finishes their onboarding flow after installing and launching the app for the first time.
+    </Tip>
+  </Step>
+</Steps>
+
+<Check>
+Your Superwall configuration for Android is now complete. You can test your paywall and subscription flow in your app.
+</Check>
+
+## Next steps
+
+After completing product configuration:
+
+- Test your paywall in your Android app using license testing
+- Customize your paywall design and messaging in the Superwall dashboard
+- Set up additional campaigns and placements as needed for your app's user flow

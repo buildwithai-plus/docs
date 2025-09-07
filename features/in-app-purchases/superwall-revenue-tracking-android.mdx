@@ -1,35 +1,35 @@
 ---
-title: "Configure Superwall"
-description: "Configure Superwall for Android in-app purchases"
+title: "Revenue tracking"
+description: "Configure revenue tracking with Google Play integration"
 ---
 
 ## Prerequisites
 
 Before continuing, make sure you have:
 
-- Completed the [Superwall Setup](./superwall-setup) guide
+- Completed the [Superwall setup](./superwall-setup) guide
 - Set up [Google Play Console](./google-play-console-setup)
 - Created [Android products](./android-products) in Google Play Console
 - Set up a Google Cloud project (or be ready to create one)
 
-## Configure Revenue Tracking
-
 <Warning>
-  **Important Information Before Starting:**
-  
-  - Google Play revenue tracking is currently in private beta with Superwall
-  - This integration is complex - follow all steps exactly as described
-  - After configuration, it may take up to 36 hours for the keys to start working
+**Important Information Before Starting:**
+
+- Google Play revenue tracking is currently in private beta with Superwall
+- This integration is complex - follow all steps exactly as described
+- After configuration, it may take up to 36 hours for the keys to start working
 </Warning>
 
+## Configure revenue tracking
+
 <Steps>
-  <Step title="Access or Create a Google Cloud Project">
+  <Step title="Access or create a Google Cloud project">
     1. Visit the [Google Cloud Console](https://console.cloud.google.com/)
     2. If you've already set up [Push Notifications](../push-setup) for Android, or [Google Authentication](../auth/google-auth), use that same project
     3. Otherwise, click **Create Project** and follow the prompts to create a new one
   </Step>
   
-  <Step title="Enable Required Google APIs">
+  <Step title="Enable required Google APIs">
     1. Enable [Google Play Android Developer API](https://console.cloud.google.com/apis/library/androidpublisher.googleapis.com)
     2. Enable [Cloud Pub/Sub API](https://console.cloud.google.com/apis/library/pubsub.googleapis.com)
     3. Verify both APIs show a blue **Manage** button next to the **Try this API** button and a green **API Enabled** check
@@ -39,8 +39,8 @@ Before continuing, make sure you have:
     1. Visit [Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new user
     2. Fill in the service account details (name, ID, description)
     3. For permissions, add:
-       - **Pub/Sub Admin** role
-       - **Monitoring Viewer** role
+      - **Pub/Sub Admin** role
+      - **Monitoring Viewer** role
     4. Skip the **Principals with access** step
   </Step>
 
@@ -72,9 +72,9 @@ Before continuing, make sure you have:
     4. Paste in the email address of the service account you created
     5. Select **Account Permissions**
     6. Add the following permissions:
-       - **View app information and download bulk reports**
-       - **View financial data, orders, and cancellation survey responses**
-       - **Manage orders and subscriptions**
+      - **View app information and download bulk reports**
+      - **View financial data, orders, and cancellation survey responses**
+      - **Manage orders and subscriptions**
     7. Click **Invite**
   </Step>
   
@@ -88,38 +88,12 @@ Before continuing, make sure you have:
   </Step>
 </Steps>
 
-## Configure Products
+<Check>
+Your Superwall revenue tracking is now configured for Android. Note that it may take up to 36 hours for the keys to start working properly.
+</Check>
 
-<Note>
-  This guide assumes you've already created the Premium entitlement in the [Superwall Setup](./superwall-setup) guide.
-</Note>
+## Next steps
 
-<Steps>
-  <Step title="Gather Product Information">
-    Reference the product IDs and base plan IDs you created in the [Android Products](./android-products) guide.
-    
-    <Note>
-      Ensure your product IDs and base plan IDs are **100%** correct and match exactly what's in Google Play Console. Products must have a valid status to be used with Superwall.
-    </Note>
-  </Step>
+After completing revenue tracking setup, continue with:
 
-  <Step title="Add Monthly and Yearly Subscriptions">
-    1. In Superwall dashboard, go to **Products** > **Products**
-    2. For each subscription type (Monthly and Yearly):
-       - Click **+ Add Product**
-       - **Product ID:** Enter your product ID following the `<app>_<entitlement>` pattern
-       - **Base Plan ID:** Enter the base plan ID (`monthly-autorenewing` for monthly or `annual-autorenewing` for yearly)
-       - **Automatically Pick Offer:** Toggle ON to let Superwall choose the best offer (prioritizes longest free trial, then cheapest price)
-       - **Price:** Select the exact price from Google Play
-       - **Period:** Select **Month** for monthly or **Year** for yearly subscription
-       - **Entitlements:** Select `premium` for both subscription types
-       - Click **Save**
-  </Step>
-</Steps>
-
-## Next Steps
-
-Now that you've configured Superwall for Android, you can:
-- Implement the SDK in your React Native app
-- Set up paywalls and features
-- Begin testing purchases with the Google Play test environment
+- [Configure Superwall products for Android](./superwall-products-android) - Set up entitlements, products, and paywalls

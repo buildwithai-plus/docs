@@ -1,23 +1,28 @@
 ---
-title: "Setup Google Play"
-description: "Create and configure your app in Google Play Console for in-app purchases"
+title: "Set up Google Play Console"
+description: "Create and configure your app in Google Play Console for in-app purchases and testing"
 ---
 
 ## Prerequisites
 
-Before setting up your app in Google Play Console, make sure you have:
+Before setting up your app in Google Play Console, ensure you have:
 
-- A Google Play Console developer account (25$ one-time payment)
+- A Google Play Console developer account ($25 one-time payment)
 - Your app's package name ready (from `app.json`)
+- Your app configured and ready for production builds
+
+<Info>
+You need a Google Play Console developer account to publish apps and test in-app purchases. The $25 registration fee is a one-time payment.
+</Info>
 
 ## Create your app in Google Play Console
 
 <Steps>
-  <Step title="Create New App">
+  <Step title="Create new app">
     1. Open [Google Play Console](https://play.google.com/console/)
     2. Select **All apps** > **Create app**
     
-    ### App Details
+    ### App details
     - Select a default language and add your app name as it should appear on Google Play
     - Specify whether your application is an app or a game
     - Specify whether your application is free or paid
@@ -28,13 +33,17 @@ Before setting up your app in Google Play Console, make sure you have:
     - Accept the Play App Signing Terms of Service
     
     3. Click **Create app**
+    
+    <Check>
+    You'll be redirected to your app's dashboard page after successful creation.
+    </Check>
   </Step>
 
-  <Step title="Complete App Setup">
+  <Step title="Complete app setup">
     When the app is created, you'll be taken to the app's **Dashboard** page.
 
     1. Click **View tasks** in the **Finish setting up your app** section
-    2. Complete all tasks in the checklist:
+    2. Complete all required tasks in the checklist:
 
     **Let us know about the content of your app:**
     - Set privacy policy
@@ -51,44 +60,84 @@ Before setting up your app in Google Play Console, make sure you have:
     - Select an app category and provide contact details
     - Set up your store listing
 
-    Once all tasks are completed, you can proceed with the next steps.
-  </Step>
-</Steps>
-
-## Create Production Build
-
-<Steps>
-  <Step title="Create EAS Production Build">
-    Before proceeding to closed testing, you'll need to create a production build:
+    <Warning>
+    You must complete all required tasks before you can upload your app or proceed with testing. Some tasks may take time to process.
+    </Warning>
     
-    1. Build your app for production:
-    ```bash
-    eas build -p android --profile production
-    ```
-
-    2. Track the build progress:
-       - Open the URL printed in the terminal, or
-       - Visit the [EAS dashboard](https://expo.dev/accounts/[YOUR_ACCOUNT]/projects/[YOUR_PROJECT]/builds)
-       - Select your newly created production build
-
-    3. When the build completes:
-       - Under **Build artifacts**, click **Download** to get the **.aab** file
-       - This file will be used to upload to Google Play Console
+    <Check>
+    All tasks should show as completed in your dashboard before proceeding to the next steps.
+    </Check>
   </Step>
 </Steps>
 
-## Configure License Testing
+## Configure license testing
+
+To test in-app purchases, you need to configure license testing for your development and testing accounts.
 
 <Steps>
-  <Step title="Set Up License Testing">
-    To test in-app purchases, you need to configure license testing:
-
+  <Step title="Access license testing settings">
     1. Open [Google Play Console](https://play.google.com/console/)
     2. In the sidebar, click **Settings**
     3. Scroll down to find **License testing** under **Monetization** and click it
-    4. **Choose license testers:** Add the email addresses you want to use for testing
-    5. Make sure the account you're using on your Android testing device is added to the testers list
-    6. **License response:** Select **RESPOND_NORMALLY**
-    7. Click **Save changes**
+  </Step>
+
+  <Step title="Configure test accounts">
+    1. **Choose license testers:** Add the email addresses you want to use for testing
+    2. Make sure the account you're using on your Android testing device is added to the testers list
+    3. **License response:** Select **RESPOND_NORMALLY**
+    4. Click **Save changes**
+    
+    <Tip>
+    Add multiple test accounts to test different scenarios. You can add up to 20 test accounts for license testing.
+    </Tip>
+    
+    <Check>
+    Your test accounts will receive purchase responses as if they were real purchases, allowing you to test the complete purchase flow.
+    </Check>
   </Step>
 </Steps>
+
+## Create production build
+
+Before proceeding to closed testing, you need to create a production build of your app.
+
+<Steps>
+  <Step title="Build for production">
+    Build your app for production using EAS Build:
+    
+    ```bash
+    eas build -p android --profile production
+    ```
+    
+    <Info>
+    This command creates a production-ready Android App Bundle (.aab) file that you'll upload to Google Play Console.
+    </Info>
+  </Step>
+
+  <Step title="Track build progress">
+    Monitor your build progress using one of these methods:
+    
+    - Open the URL printed in the terminal, or
+    - Visit the [EAS dashboard](https://expo.dev/accounts/[YOUR_ACCOUNT]/projects/[YOUR_PROJECT]/builds)
+    - Select your newly created production build
+    
+    <Note>
+    Production builds typically take 10-15 minutes to complete, depending on your app's complexity and current build queue.
+    </Note>
+  </Step>
+
+  <Step title="Download build artifacts">
+    When the build completes:
+    
+    1. Under **Build artifacts**, click **Download** to get the **.aab** file
+    2. Save the file to a secure location on your computer
+    
+    <Check>
+    You now have a production-ready Android App Bundle that you can upload to Google Play Console for closed testing.
+    </Check>
+  </Step>
+</Steps>
+
+<Tip>
+Keep your production build (.aab file) secure and don't share it publicly. This file contains your app's production configuration and should only be uploaded to Google Play Console.
+</Tip>

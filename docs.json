@@ -71,7 +71,7 @@
           },
           {
             "group": "Analytics & Monitoring",
-            "icon": "bar-chart",
+            "icon": "gauge",
             "pages": [
               "features/posthog-setup-v2",
               "features/sentry-setup"
@@ -95,7 +95,8 @@
                   "features/in-app-purchases/google-play-console-setup",
                   "features/in-app-purchases/closed-testing",
                   "features/in-app-purchases/android-products",
-                  "features/in-app-purchases/superwall-android"
+                  "features/in-app-purchases/superwall-revenue-tracking-android",
+                  "features/in-app-purchases/superwall-products-android"
                 ]
               },
               {
@@ -105,7 +106,8 @@
                   "features/in-app-purchases/app-store-connect-setup",
                   "features/in-app-purchases/ios-sandbox",
                   "features/in-app-purchases/ios-products",
-                  "features/in-app-purchases/superwall-ios"
+                  "features/in-app-purchases/superwall-revenue-tracking-ios",
+                  "features/in-app-purchases/superwall-products-ios"
                 ]
               }
             ]

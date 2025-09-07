@@ -1,31 +1,31 @@
 ---
-title: "Closed Testing"
+title: "Set up closed testing"
 description: "Set up closed testing for your Android app to test in-app purchases"
 ---
 
-## Open Closed testing in Google Play Console
+## Access closed testing in Google Play Console
 
 Once you've completed the app setup, you can access **Closed testing** from:
 - Your app's **Dashboard** page, or
 - **Test and release** > **Testing** > **Closed testing** in the left sidebar
 
 <Note>
-  You're setting up a <strong>Closed testing</strong> release to prepare your app for in‑app purchases. This step is required to enable Google Play Billing and internal testing. It <strong>does not</strong> publish your app to production or make it publicly available. You'll ship a production release when you're ready.
+You're setting up a **Closed testing** release to prepare your app for in-app purchases. This step is required to enable Google Play Billing and internal testing. It **does not** publish your app to production or make it publicly available. You'll ship a production release when you're ready.
 </Note>
 
 <Steps>
-  <Step title="Configure Closed Test Track">
+  <Step title="Configure closed test track">
     1. Navigate to the **Closed testing** section in Google Play Console
     2. You'll see a pre-created **Closed testing - Alpha** track
     3. Click **Manage track** on this track
 
-    ### Select Countries
+    ### Select countries
     1. Click the checkbox next to the countries you want to include
     2. Make sure to select the country where you'll be testing
     3. Or select all countries by clicking the checkbox next to **Country / region** at the top
     4. Click **Save**
 
-    ### Select Testers
+    ### Select testers
     1. Click **Create email list**
        - **List name:** Name it (e.g., "Testers")
        - **Add email addresses:** Add your testing email address (the one you're signed in with on your testing device)
@@ -34,35 +34,49 @@ Once you've completed the app setup, you can access **Closed testing** from:
     2. Enable the list you just created
     3. **Feedback URL or email address:** Add your email address for feedback
     4. Click **Save**
+    
+    <Check>
+    Your closed test track is now configured with the selected countries and testers.
+    </Check>
   </Step>
 
-  <Step title="Create and Release a Closed Test Build (required to enable in‑app purchases)">
-    ### Upload Your Build
+  <Step title="Create and release a closed test build">
+    <Info>
+    This step is required to enable Google Play Billing and in-app purchases. You'll upload the production build (.aab file) you created in the previous step.
+    </Info>
+
+    ### Upload your build
     1. **App bundles:** Click **Upload** and select the Android App Bundle (.aab file) from the previous step
     2. **Release name:** Name it (e.g., "First Test release")
     3. **Release notes:** (Optional) Add release notes inside the `<en-US></en-US>` tags
     4. Click **Next**
 
-    ### Preview and Confirm
+    ### Preview and confirm
     1. Review the release preview
     2. If everything looks good, click **Save**
     3. When the **Go to Publishing Overview** alert appears, click **Go to overview**
 
-    ### Send for Review (Closed test only)
-    This submits your release for the <strong>Closed testing</strong> track only and is required to enable Google Play Billing and in‑app purchases.
-    It is <strong>not</strong> a production submission.
+    ### Send for review (closed test only)
+    This submits your release for the **Closed testing** track only and is required to enable Google Play Billing and in-app purchases. It is **not** a production submission.
+    
     1. Google will run automatic checks for common issues
     2. If there are issues: View and fix them, then return to **Overview**
     3. If no issues: Click **Send X change(s) for review**
     4. Confirm by clicking **Send changes for review**
     
+    <Note>
     Reviews are typically completed within 7 days, but small releases are usually approved within a day.
+    </Note>
+    
+    <Check>
+    Once approved, your closed test will be live and you can test in-app purchases with your configured testers.
+    </Check>
   </Step>
 
 
 </Steps>
 
-## How Testers Join Your Closed Test
+## How testers join your closed test
 
 You can find the Opt-in URL in the closed track you created under **Testers** > **How testers join your test**:
 - Join on Android
@@ -72,4 +86,10 @@ Copy the URL and open it on your testing device (or any browser logged in with t
 
 Opening the link will show a Google Play page with a **BECOME A TESTER** button. Press that button and your user will be able to make testing purchases on your testing device.
 
+<Info>
 They will also be added as a tester in the closed testing track. You need 12 users testing your app for 14 days to be able to publish your app to the Play Store.
+</Info>
+
+<Tip>
+Share the opt-in URL with your testers via email or messaging. They need to click the link and become testers before they can download and test your app.
+</Tip>

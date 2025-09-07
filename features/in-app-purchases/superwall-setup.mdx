@@ -1,107 +1,97 @@
 ---
-title: "Superwall Setup"
-description: "Initial setup guide for Superwall integration"
+title: "Set up Superwall"
+description: "Initial setup guide for Superwall integration and configuration"
 icon: "store"
 ---
 
 ## Prerequisites
 
-Before setting up Superwall, make sure you have:
+Before setting up Superwall, ensure you have:
+- Your app's bundle identifier from `app.json`
+- Your app's package name from `app.json`
+- Access to your project's `.env` file
 
-- Set up your iOS or Android platform for in-app purchases
-  - For iOS: [App Store Connect](./app-store-connect-setup) and [iOS products](./ios-products)
-  - For Android: [Google Play Console](./google-play-console-setup) and [Android products](./android-products)
-
+<Info>
 Complete this setup guide first before moving on to the platform-specific configuration steps.
+</Info>
 
-## Create Superwall Account
+## Create Superwall account
 
-<Steps>
-  <Step title="Create Account and Project">
-    1. Create an account at [Superwall](https://superwall.com/)
-    2. Create a new project:
-       - **Platform:** React Native
-       - **App Name:** Your app name
-       - **iOS Bundle ID:** Your app's bundle ID from `app.json`
-       - **Android Bundle ID:** Your app's package name from `app.json`
-    3. Click **Create App**
-    
-    Superwall will create a new project with apps for both iOS and Android, and take you to the **Dashboard** page.
-  </Step>
+1. Create an account at [Superwall](https://superwall.com/)
+2. Create a new project with these details:
+   - **Platform:** React Native
+   - **Project Name:** Your project name (use your app name)
+   - **App Name:** Your app name
+   - **iOS Bundle ID:** Your app's bundle identifier from `app.json`
+   - **Android Bundle ID:** Your app's package name from `app.json`
+3. Click **Create App**
 
-  <Step title="Create Premium Entitlement">
-    1. In Superwall dashboard, go to **Products** in the left sidebar
-    2. Select **Entitlements** in the top menu
-    3. Click **+ Add Entitlement**
-    4. **Identifier:** Enter `premium`
-    5. Click **Save**
-    
-    This entitlement will be used by both iOS and Android products to identify premium status.
-  </Step>
-</Steps>
+<Check>
+Superwall will create a new project with apps for both iOS and Android, and take you to the dashboard page.
+</Check>
 
-## Enable Superwall in Your App
-
-Before proceeding to the platform-specific configuration, you need to implement Superwall in your application:
+## Enable Superwall in your app
 
 <Steps>
-  <Step title="Find Your API Keys">
-    For Superwall with React Native, you'll need separate API keys for iOS and Android.
+  <Step title="Find your API keys">
+    For React Native, you need separate API keys for iOS and Android.
     
     1. In the Superwall dashboard, go to **Settings** > **Keys**
     2. Use the platform icons in the top left to switch between your iOS and Android apps
-       - The Apple icon represents your iOS app
-       - The Google Play icon represents your Android app
-       - To create new apps, click the **+** button next to these icons
-    3. The page will stay on Settings > Keys as you switch apps
-    4. Copy the **Public API Key** (starts with `pk_`) for each platform
+    3. Copy the **Public API Key** (starts with `pk_`) for each platform
     
     <Note>
-      You need different API keys for iOS and Android. Make sure to save both keys.
+    You need different API keys for iOS and Android. Make sure to save both keys securely.
     </Note>
   </Step>
 
-  <Step title="Add API Keys to Environment Variables">
+  <Step title="Add API keys to environment variables">
     1. Open your project's `.env` file
     2. Add the following lines with your API keys:
     
-    ```
+    ```bash .env
     EXPO_PUBLIC_SUPERWALL_API_KEY_IOS=pk_...
     EXPO_PUBLIC_SUPERWALL_API_KEY_ANDROID=pk_...
     ```
     
-    3. Save the file and restart your development server if it's running
+    <Warning>
+    Never commit API keys to version control. The `.env` file should be in your `.gitignore`.
+    </Warning>
   </Step>
 
   <Step title="Implement Superwall SDK">
     <Warning>
-      **Important**: The detailed implementation steps are in the `integrations/superwall/README.md` file in your boilerplate codebase. You must follow these instructions carefully to properly activate Superwall.
+    **Important**: The detailed implementation steps are in the `integrations/superwall/README.md` file in your boilerplate codebase. You must follow these instructions carefully to properly activate Superwall.
     </Warning>
     
     The README.md contains specific guidance for:
-    
-    - Which files to activate/uncomment in your project
     - Which packages to install and their versions
     - Configuration specific to your boilerplate
     - How to set up the Superwall provider
     
-    Make sure to complete all the steps in the README.md before proceeding.
-    
-    <Note>
-      Superwall does **not** refetch its configuration during hot reloads. If you add products, edit a paywall, or make other changes in the Superwall dashboard, you'll need to restart your app to see those changes.
-    </Note>
+    <Info>
+    Make sure to complete all the steps in the README.md file before proceeding to platform-specific configuration.
+    </Info>
   </Step>
   
-  <Step title="Verify Basic Setup">
+  <Step title="Verify basic setup">
     1. Confirm the required dependencies are installed
     2. Ensure the Superwall provider is properly set up in your application
     3. Verify that your environment variables are being correctly accessed in the code
+    
+    <Check>
+    Your Superwall integration is ready when you can access the provider in your app and environment variables are loaded correctly.
+    </Check>
   </Step>
 </Steps>
 
-## Next Steps
+## Next steps
 
 After setting up Superwall in your codebase, continue with the platform-specific guides:
 
-- **iOS**: Start with [App Store Connect Setup](./app-store-connect-setup) and follow the guides in sequence
-- **Android**: Start with [Google Play Console Setup](./google-play-console-setup) and follow the guides in sequence
+- **iOS**: Start with [App Store Connect setup](./app-store-connect-setup) and follow the guides in sequence
+- **Android**: Start with [Google Play Console setup](./google-play-console-setup) and follow the guides in sequence
+
+<Tip>
+Make sure to complete the Superwall SDK implementation in the README.md file before proceeding to platform-specific configuration. This ensures your integration is properly set up before adding platform-specific features.
+</Tip>
